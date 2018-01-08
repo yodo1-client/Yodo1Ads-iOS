@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>back_decorate_list</key>
+	<array>
+		<string>decorate_1</string>
+		<string>decorate_2</string>
+	</array>
+	<key>back_decorate_pos</key>
+	<dict>
+		<key>decorate_1_x</key>
+		<integer>-46</integer>
+		<key>decorate_1_y</key>
+		<integer>-96</integer>
+		<key>decorate_2_x</key>
+		<integer>790</integer>
+		<key>decorate_2_y</key>
+		<integer>424</integer>
+	</dict>
+</dict>
+</plist>
