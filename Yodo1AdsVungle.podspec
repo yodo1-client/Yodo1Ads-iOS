@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = 'Yodo1Vungle'                   
+    tags               = "#{s.name}"                    
     s.homepage         = 'http://git.yodo1.cn'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
