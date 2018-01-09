@@ -1,0 +1,20 @@
+==================9==========================
+V1.0.4— 2017-09-11
+1.更新unityAds V2.1.1
+Fix network detection related crash
+Fix rare video progress timer related crashes
+
+=============================================
+V1.0.3— 2017-04-11
+1.更新unityAds V2.1.0
+
+=============================================
+V1.0.2— 2017-02-13
+1.更新unityAds V2.0.8 
+	1）Prevented potential rare memory leaks
+	2）Corrected some iOS version differences
+
+=============================================
+V1.0.1— 2016-12-23
+1.支持https
+UnityAds V2.0.7。
