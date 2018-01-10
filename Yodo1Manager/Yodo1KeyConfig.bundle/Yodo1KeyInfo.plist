@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AnalyticsInfo</key>
+	<dict>
+		<key>AdTrackingAppId</key>
+		<string>7157c1a19c164e9aa489556730df2797</string>
+		<key>UmengAnalytics</key>
+		<string>502381285270155658000008</string>
+		<key>TalkingDataAppId</key>
+		<string>00F1DD653B5A4AEFA96EEAFB45200B62</string>
+		<key>GameAnalyticsGameKey</key>
+		<string>8f5471f1b325732ba9fa1e9c9cf6430b</string>
+		<key>GameAnalyticsGameSecret</key>
+		<string>e51ecdac5b5fb638da554713d321cadd427754b0</string>
+	</dict>
+	<key>ShareInfo</key>
+	<dict>
+		<key>WechatAppId</key>
+		<string>wx85f3dcdb7e13035f</string>
+		<key>SinaCallbackUrl</key>
+		<string>https://api.weibo.com/oauth2/default.html</string>
+		<key>SinaAppId</key>
+		<string>481374103</string>
+		<key>QQAppId</key>
+		<string>101050318</string>
+		<key>TwitterConsumerKey</key>
+		<string>3LpIUfboCI52S65cQPFQDg4ty</string>
+		<key>TwitterConsumerSecret</key>
+		<string>Pm9iQfAPNu4406FKWEyLJwHDu556avY9ZcVrWCARCcoSe3822Z</string>
+	</dict>
+	<key>FacebookAppId</key>
+	<string></string>
+</dict>
+</plist>

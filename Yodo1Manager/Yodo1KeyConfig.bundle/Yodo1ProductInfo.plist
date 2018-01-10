@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ProductID_Coin10</key>
+	<dict>
+		<key>ProductName</key>
+		<string>Cash Cow</string>
+		<key>ChannelProductId</key>
+		<string>com.yodo1.TheGate.coins1</string>
+		<key>ProductDescription</key>
+		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
+		<key>ProductPrice</key>
+		<string>5.99</string>
+		<key>PriceDisplay</key>
+		<string>$5.99</string>
+		<key>Currency</key>
+		<string>USD</string>
+		<key>ProductType</key>
+		<string>0</string>
+	</dict>
+	<key>ProductID_Coin20</key>
+	<dict>
+		<key>ProductName</key>
+		<string>A Handful of Coins</string>
+		<key>ChannelProductId</key>
+		<string>com.yodo1.TheGate.coins2</string>
+		<key>ProductDescription</key>
+		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
+		<key>ProductPrice</key>
+		<string>0.99</string>
+		<key>PriceDisplay</key>
+		<string>$0.99</string>
+		<key>Currency</key>
+		<string>USD</string>
+		<key>ProductType</key>
+		<string>1</string>
+	</dict>
+	<key>ProductID_Coin50</key>
+	<dict>
+		<key>ProductName</key>
+		<string>A Pile of Coins</string>
+		<key>ChannelProductId</key>
+		<string>com.yodo1.TheGate.coins3</string>
+		<key>ProductDescription</key>
+		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
+		<key>PriceDisplay</key>
+		<string>$4.99</string>
+		<key>ProductPrice</key>
+		<string>4.99</string>
+		<key>Currency</key>
+		<string>USD</string>
+		<key>ProductType</key>
+		<string>1</string>
+	</dict>
+	<key>ProductID_Coin100</key>
+	<dict>
+		<key>ProductName</key>
+		<string>A Mountain of Coins</string>
+		<key>ChannelProductId</key>
+		<string>com.yodo1.TheGate.coins4</string>
+		<key>ProductDescription</key>
+		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
+		<key>ProductPrice</key>
+		<string>9.99</string>
+		<key>PriceDisplay</key>
+		<string>$9.99</string>
+		<key>Currency</key>
+		<string>USD</string>
+		<key>ProductType</key>
+		<string>1</string>
+	</dict>
+	<key>ProductID_Coin200</key>
+	<dict>
+		<key>ProductName</key>
+		<string>A Mountain of Coins</string>
+		<key>ChannelProductId</key>
+		<string>com.yodo1.TheGate.coins5</string>
+		<key>ProductDescription</key>
+		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
+		<key>PriceDisplay</key>
+		<string>$9.99</string>
+		<key>ProductPrice</key>
+		<string>9.99</string>
+		<key>Currency</key>
+		<string>USD</string>
+		<key>ProductType</key>
+		<string>1</string>
+	</dict>
+</dict>
+</plist>
