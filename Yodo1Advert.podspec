@@ -44,10 +44,11 @@ Pod::Spec.new do |s|
     s.libraries = 'sqlite3.0','z','stdc++'
 
 
-    s.subspec 'Yodo1_UnityConfig' do |ss|
+    s.subspec 'UnityConfig' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'UNITY_PROJECT'
         }
+        ss.dependency 'Yodo1Advert',"#{s.version}"
     end
     
     s.dependency 'Yodo1AdsConfig',      '1.0.0'
