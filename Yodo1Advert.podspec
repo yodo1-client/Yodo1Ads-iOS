@@ -19,39 +19,44 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = tags + '/*.h'
-
-    s.public_header_files = tags + '/*.h'
-
-    #s.resources = tags + '/*.*'
+    s.subspec 'Advert' do |ss|
+            ss.source_files = tags + '/*.h'
+            ss.public_header_files = tags + '/*.h'
+            #ss.resources = tags + '/*.*'
+            ss.preserve_path = 'ChangeLog.txt'
+            ss.vendored_libraries = tags + '/*.a'
+            ss.requires_arc = false
+            ss.xcconfig = {
+                'OTHER_LDFLAGS' => '-ObjC',
+                'ENABLE_BITCODE' => 'NO',
+                'ONLY_ACTIVE_ARCH' => 'NO'
+            }
+            ss.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+            ss.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+            ss.libraries = 'sqlite3.0','z','stdc++'
+            
+            ss.dependency 'Yodo1Banner','2.0.1'
+            ss.dependency 'Yodo1Video','2.0.1'
+            ss.dependency 'Yodo1Interstitial','2.0.1'
+    end
     
-    s.preserve_path = 'ChangeLog.txt'
-    
-    s.vendored_libraries = tags + '/*.a'
+     s.subspec 'Yodo1Advert_iOS' do |ss|
+        ss.xcconfig = {
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => 'NO',
+            'ONLY_ACTIVE_ARCH' => 'NO'
+        }
+        ss.dependency 'Yodo1Advert/Advert',"#{s.version}"
+    end
 
-    s.requires_arc = false
-
-    s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
-    }
-
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
-    s.libraries = 'sqlite3.0','z','stdc++'
-
-
-    s.subspec 'UnityConfig' do |ss|
+    s.subspec 'Yodo1Advert_Unity3d' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'UNITY_PROJECT'
         }
-        ss.dependency 'Yodo1Advert',"#{s.version}"
+        ss.dependency 'Yodo1Advert/Advert',"#{s.version}"
     end
     
-    s.dependency 'Yodo1AdsConfig',      '1.0.0'
+    # s.dependency 'Yodo1AdsConfig',      '1.0.0'
 
     ##Video
 
