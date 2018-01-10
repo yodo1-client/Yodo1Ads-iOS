@@ -46,10 +46,7 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_UnityConfig' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'UNITY_PROJECT',
-            "OTHER_LDFLAGS" => "-ObjC",
-            "ENABLE_BITCODE" => "NO",
-            "ONLY_ACTIVE_ARCH" => "NO"
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'UNITY_PROJECT'
         }
     end
     
