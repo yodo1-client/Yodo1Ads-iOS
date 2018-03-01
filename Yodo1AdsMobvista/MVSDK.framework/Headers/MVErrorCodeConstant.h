@@ -13,9 +13,15 @@ extern NSString * const kMVErrorDomain;
 
 typedef NS_ENUM (NSInteger, MVErrorCode) {
 
-    kMVErrorCodeRewardVideoFailedToLoadVideoData         = 129300061,
-    kMVErrorCodeRewardVideoFailedToLoadPlayable          = 129300062,
-    kMVErrorCodeRewardVideoFailedToLoadTemplateImage     = 129300063,
+    kMVErrorCodeRewardVideoFailedToLoadVideoData               = 129300061,
+    kMVErrorCodeRewardVideoFailedToLoadPlayable                = 129300062,
+    kMVErrorCodeRewardVideoFailedToLoadTemplateImage           = 129300063,
+    kMVErrorCodeRewardVideoFailedToLoadPlayableURLFailed       = 129300064,
+    kMVErrorCodeRewardVideoFailedToLoadPlayableURLReadyTimeOut = 129300065,
+    kMVErrorCodeRewardVideoFailedToLoadPlayableURLReadyNO      = 129300066,
+    kMVErrorCodeRewardVideoFailedToLoadPlayableURLInvalid      = 129300067,
+    kMVErrorCodeRewardVideoFailedToLoadMd5Invalid              = 129300068,
+
 };
 
 @interface MVErrorCodeConstant : NSObject

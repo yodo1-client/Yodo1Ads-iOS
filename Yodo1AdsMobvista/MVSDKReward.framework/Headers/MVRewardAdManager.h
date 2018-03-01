@@ -84,6 +84,12 @@
 
 @interface MVRewardAdManager : NSObject
 
+/**
+ * Play the video is mute in the beginning ,defult is NO
+ *
+ */
+@property (nonatomic, assign) BOOL  playVideoMute;
+
 
 /**
  * The shared instance of the video.

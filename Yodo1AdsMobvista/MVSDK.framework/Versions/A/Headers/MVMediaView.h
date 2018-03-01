@@ -23,15 +23,24 @@ the media source, can be set again to reuse this view.
 
 @property (nonatomic, weak, nullable) id<MVMediaViewDelegate> delegate;
 
+// Whether to allow full-screen playback, default YES
 @property (nonatomic, assign) BOOL  allowFullscreen;
 
+// Whether update to video from static image when video is ready to be played, default YES
 @property (nonatomic, assign) BOOL  videoRefresh;
 
+// Auto replay, default YES
 @property (nonatomic, assign) BOOL  autoLoopPlay;
 
 @property (nonatomic, strong, readonly) MVCampaign *campaign;
 
 @property (nonatomic, readonly) NSString *unitId;
+
+/**
+ After called 'setMediaSourceWithCampaign:(MVCampaign *)campaign unitId:(NSString*)unitId',
+ you can check this MediaView whether has video content via isVideoContent if needed;
+ */
+@property (nonatomic,readonly,getter = isVideoContent) BOOL videoContent;
 
 @end
 
