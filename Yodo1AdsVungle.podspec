@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '7.0'
 
-    s.source_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '*.{h,m}'
+    s.source_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '/*.{h,m}'
 
-    s.public_header_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '*.h'
+    s.public_header_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '/*.h'
 
     #s.resources = tags + '/Classes/VungleSDK.embeddedframework/Resources/*.*'
     
