@@ -34,6 +34,7 @@
 #import "ALAdViewEventDelegate.h"
 #import "ALIncentivizedInterstitialAd.h"
 #import "ALInterstitialAd.h"
+#import "ALMediationProvider.h"
 
 // Native Ads
 #import "ALNativeAd.h"
