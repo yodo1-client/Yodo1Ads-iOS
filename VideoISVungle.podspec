@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISVungle'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -39,5 +39,5 @@ Pod::Spec.new do |s|
     
     s.dependency 'VideoSupersonic','2.0.1'
 
-    s.dependency 'Yodo1AdsVungle','1.0.2'
+    s.dependency 'Yodo1AdsVungle','1.0.4'
 end
