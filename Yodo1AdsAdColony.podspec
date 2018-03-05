@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit','WatchConnectivity'
 
     s.libraries = 'sqlite3.0','z'
 
