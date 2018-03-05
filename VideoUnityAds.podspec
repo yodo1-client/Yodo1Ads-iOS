@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoUnityAds'
-    s.version          = '2.0.1'
-    s.summary          = '更新UnityAds V2.1.2'
+    s.version          = '2.0.2'
+    s.summary          = '更新UnityAds V2.2.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','2.0.1'
 
-    s.dependency 'Yodo1AdsUnityAds','1.0.1'
+    s.dependency 'Yodo1AdsUnityAds','1.0.2'
 end
