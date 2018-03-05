@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsVungle'
-    s.version          = '1.0.3'
+    s.version          = '1.0.4'
     s.summary          = '更新sdk v5.3.27'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -15,14 +15,16 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '7.0'
 
-    s.source_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '/*.{h,m}'
+    s.source_files = tags + '/VungleSDK.framework/Headers/*.h'
 
-    s.public_header_files = tags + '/VungleSDK.framework/Headers/*.h',tags + '/*.h'
+    s.public_header_files = tags + '/VungleSDK.framework/Headers/*.h'
 
     #s.resources = tags + '/Classes/VungleSDK.embeddedframework/Resources/*.*'
     
     s.preserve_path = 'ChangeLog.txt'
     
+    s.vendored_libraries = tags + '/*.a'
+
     s.vendored_frameworks = tags + '/VungleSDK.framework'
 
     s.requires_arc = true
