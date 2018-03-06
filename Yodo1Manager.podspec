@@ -410,6 +410,15 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
 
+    s.subspec 'Video_AdColony' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
+        }
+        ss.dependency 'VideoAdColony','2.0.0'
+        ss.dependency 'Yodo1Video', Yodo1VideoVersion
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
+    end
+
     ######## Supersonic Video ########
 
     s.subspec 'Video_ISApplovin' do |ss|
