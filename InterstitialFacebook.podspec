@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialFacebook'
-    s.version          = '1.0.1'
+    s.version          = '1.0.2'
     s.summary          = 'Interstitial Facebook'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.dependency 'Yodo1Interstitial','2.0.1'
-    s.dependency 'Yodo1AdsFacebook','1.0.0'
+    s.dependency 'Yodo1AdsFacebook','1.0.1'
 end
