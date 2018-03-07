@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
     s.dependency 'InterstitialAdmob',       '2.0.2'
     s.dependency 'InterstitialApplovin',    '2.0.2'
     s.dependency 'InterstitialSupersonic',  '1.0.2' 
-    s.dependency 'InterstitialGDTMob',      '2.0.1'
+    s.dependency 'InterstitialGDTMob',      '2.0.2'
     s.dependency 'InterstitialVungle',      '1.0.0'
     s.dependency 'InterstitialAdview',      '2.0.1'
 
