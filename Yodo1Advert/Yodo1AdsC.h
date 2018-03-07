@@ -5,7 +5,7 @@
 //  Created by yixian huang on 2017/9/13.
 //  Copyright © 2017年 yixian huang. All rights reserved.
 //
-//  v1.0.5
+//  v1.0.10
 //
 
 #ifndef Yodo1AdsC_h
