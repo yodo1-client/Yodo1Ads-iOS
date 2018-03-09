@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol WMSplashAdDelegate;
-
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol WMSplashAdDelegate;
 
 @interface WMSplashAdView : UIView
 /**
@@ -22,6 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
  允许最大的加载超时时间, 默认0.5s, 单位s
  */
 @property (nonatomic, assign) NSTimeInterval tolerateTimeout;
+
+
+/**
+ 隐藏跳过按钮, 默认NO， 隐藏跳过按钮之后， 需要自定义实现倒计时
+ */
+@property (nonatomic, assign) BOOL hideSkipButton;
 
 /**
  开屏启动的 状态回调
@@ -88,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  即将展示 开屏广告
  - Parameter spalshAd: 产生该事件的 SplashView 对象.
  */
-- (void)spalshAdWillVisible:(WMSplashAdView *_Nullable)spalshAd;
+- (void)spalshAdWillVisible:(WMSplashAdView *)spalshAd;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, readonly, nullable) UILabel *adLabel;
 
+/**
+ logoImageView 网盟广告标识，需要主动添加到 View
+ */
+@property (nonatomic, strong) UIImageView *logoImageView;
+
 - (void)registerViewForInteraction:(UIView *)view
                 withViewController:(UIViewController *)viewController;
 
@@ -47,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerViewForCustomInteraction:(UIView *)view
                       withViewController:(UIViewController *)viewController;
 
+- (void)didSelectWithViewController:(UIViewController *_Nullable)viewController;
+- (IBAction)dislikeAction:(id)sender;
 @end
 
 
@@ -60,13 +67,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param cell 当前的Cell
  @param view 被点击的视图
  */
-- (void)wmTableViewCellDidClick:(WMTableViewCell *_Nullable)cell withView:(UIView *_Nullable)view;
+- (void)wmTableViewCellDidClick:(WMTableViewCell *)cell withView:(UIView *_Nullable)view;
 
 /**
  当前Cell首次展示
  @param cell 当前的Cell
  */
-- (void)wmTableViewCellDidBecomeVisible:(WMTableViewCell *_Nullable)cell;
+- (void)wmTableViewCellDidBecomeVisible:(WMTableViewCell *)cell;
 
 /**
  用户点击 dislike功能

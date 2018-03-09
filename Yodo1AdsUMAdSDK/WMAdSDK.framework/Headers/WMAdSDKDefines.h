@@ -23,10 +23,7 @@ typedef NS_ENUM(NSInteger, WMAdSDKLogLevel) {
     WMAdSDKLogLevelDebug
 };
 
-@protocol WMAd <NSObject>
-@property (nonatomic, copy) NSString *AdID;
-@property (nonatomic, copy) NSString *extInfo;
-@end
+#define kWMTouchTrackerAssociatedKey @"kWMTouchTrackerAssociatedKey"
 
 @protocol WMToDictionary <NSObject>
 - (NSDictionary *)dictionaryValue;

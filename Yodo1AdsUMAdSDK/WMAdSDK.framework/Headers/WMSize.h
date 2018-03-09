@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, WMProposalSize) {
 
 @end
 
-
 @interface WMSize (WM_SizeFactory)
 + (instancetype)sizeBy:(WMProposalSize)proposalSize;
 @end

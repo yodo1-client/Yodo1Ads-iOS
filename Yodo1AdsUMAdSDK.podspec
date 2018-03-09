@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUMAdSDK'
-    s.version          = '1.0.0'
-    s.summary          = '头条sdk v1.2.0'
+    s.version          = '1.0.1'
+    s.summary          = '头条sdk v1.5.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
     s.source_files = tags + '/WMAdSDK.framework/Headers/*.h'
     s.public_header_files = tags + '/WMAdSDK.framework/Headers/*.h'
     s.resources = tags + '/*.bundle'
+    s.preserve_path = 'ChangeLog.txt'
     s.vendored_frameworks = tags + '/WMAdSDK.framework'
 
     s.xcconfig = {

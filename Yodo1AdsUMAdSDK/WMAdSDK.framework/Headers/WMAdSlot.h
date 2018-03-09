@@ -9,14 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "WMSize.h"
 
-// 1:Banner横幅，2:插屏，3:开屏，4:信息流，5:资讯联播
 typedef NS_ENUM(NSInteger, WMAdSlotAdType) {
-    WMAdSlotAdTypeUnknown,
-    WMAdSlotAdTypeBanner = 1,       // 横幅广告
-    WMAdSlotAdTypeInterstitial = 2, // 插屏广告
-    WMAdSlotAdTypeSplash = 3,       // 全屏广告
-    WMAdSlotAdTypeFeed = 4,         // 信息流广告
-    WMAdSlotAdTypeZixun = 5,        // 资讯联播
+    WMAdSlotAdTypeUnknown       = 0,
+    WMAdSlotAdTypeBanner        = 1,       // 横幅广告
+    WMAdSlotAdTypeInterstitial  = 2,       // 插屏广告
+    WMAdSlotAdTypeSplash        = 3,       // 全屏广告
+    WMAdSlotAdTypeSplash_Cache  = 4,       // 缓存开屏
+    WMAdSlotAdTypeFeed          = 5,       // 信息流
+    WMAdSlotAdTypePaster        = 6,       // 后贴片
+    WMAdSlotAdTypeRewardVideo   = 7,       // 激励视频
 };
 
 typedef NS_ENUM(NSInteger, WMAdSlotPosition) {

@@ -49,18 +49,25 @@ NS_ASSUME_NONNULL_BEGIN
                withInteractionType:(WMInteractionType)interactionType
                 withViewController:(UIViewController *)viewController;
 
-// 广告类与view相关联绑定，注册交互事件并使用默认内置的广告属性，行为由SDK控制
-- (void)registerViewForInteraction:(UIView *_Nullable)view
+/**
+ 定义原生广告视图中可以点击的 视图区域，行为由SDK控制
+ 
+ @param view 原生广告的视图，完整可点击区域
+ @param viewController 广告详情页的根视图
+ */
+- (void)registerViewForInteraction:(UIView *)view
                 withViewController:(UIViewController *_Nullable)viewController;
 
-// 广告类与一组可点击view相关联绑定，注册交互事件并使用默认内置的广告属性，行为由SDK控制，具体到view的子view
+/**
+ 定义原生广告视图中可以点击的 视图区域， 减少误点概率，提升用户体验
+ 
+ @param view 包含原生广告的视图
+ @param viewController 广告详情页的根视图
+ @param clickableViews 广告视图中可以被点击的响应对象
+ */
 - (void)registerViewForInteraction:(UIView *)view
                 withViewController:(UIViewController *_Nullable)viewController
                 withClickableViews:(NSArray<UIView *> *_Nullable)clickableViews;
-
-// 广告类与view相关联绑定，注册交互事件并在回调代理（一般是VC）中处理相应事件，行为由用户控制
-- (void)registerViewForCustomInteraction:(UIView *)view
-                      withViewController:(UIViewController *_Nullable)viewController;
 
 // 广告类解除和view的绑定
 - (void)unregisterView;
@@ -69,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  主动 请求广告数据
  */
 - (void)loadAdData;
+
 
 @end
 

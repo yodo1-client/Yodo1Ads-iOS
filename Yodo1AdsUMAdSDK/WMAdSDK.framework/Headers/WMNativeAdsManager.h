@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSArray<WMMaterialMeta *> *data;
 @property (nonatomic, weak, nullable) id<WMNativeAdsManagerDelegate> delegate;
 
-- (instancetype)initWithSlot:(WMAdSlot *)slot;
+- (instancetype)initWithSlot:(WMAdSlot * _Nullable) slot;
 
 - (void)registerTableView:(UITableView *)tableView
        withViewController:(UIViewController *)viewController;
@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)nativeAdsManagerDidLoad:(NSArray<WMMaterialMeta *> *_Nullable)nativeAd;
 
-- (void)nativeAdsManager:(WMNativeAdsManager *_Nullable)adsManager didFailWithError:(NSError *_Nullable)error;
+- (void)nativeAdsManager:(WMNativeAdsManager *)adsManager didFailWithError:(NSError *_Nullable)error;
 
 @end
 

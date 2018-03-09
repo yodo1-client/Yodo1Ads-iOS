@@ -18,9 +18,6 @@
 
 @property (nonatomic, copy) NSString *appid;
 
-//// 应用下载包名
-//@property (nonatomic, copy) NSString *packageName;
-
 // 应用下载URL，应用下载必须
 @property (nonatomic, copy) NSString *downloadURL;
 
@@ -30,8 +27,6 @@
 // 下载量或使用人数
 @property (nonatomic, assign) NSInteger userNumber;
 
-// deeplink信息
-@property (nonatomic, strong) WMDeepLink *deepLink;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;
 

@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
    即将展示 插屏广告
  - Parameter interstitialAd: 产生该事件的 WMInterstitialAd 对象.
  */
-- (void)interstitialAdWillVisible:(WMInterstitialAd *_Nullable)interstitialAd;
+- (void)interstitialAdWillVisible:(WMInterstitialAd *)interstitialAd;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 
 @interface WMAdSDKManager : NSObject
 
+@property (nonatomic, copy, readonly, class) NSString *SDKVersion;
+
 /**
   在请求广告联盟请求广告前，注册已经申请的App key
  @param appID 标识App的唯一标识
@@ -29,8 +31,6 @@
 + (void)setUserExtData:(NSString *)data;
 
 + (void)setIsPaidApp:(BOOL)isPaidApp;
-
-+ (NSString *)SDKVersion;
 
 + (NSString *)appID;
 + (BOOL)isPaidApp;

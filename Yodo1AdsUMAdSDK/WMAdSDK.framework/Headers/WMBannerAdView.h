@@ -20,16 +20,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<WMBannerAdViewDelegate> delegate;
 
 /**
+ 轮播间隔，单位秒，设置时间在 30~120s 范围内，初始化时传入。若不符合，则不轮播。
+ */
+@property (nonatomic, assign, readonly) NSInteger interval;
+
+/**
  dislikeButton 默认已添加到 BannerView 的右上角， 响应 dislike原因
  */
 @property (nonatomic, strong, readonly, nonnull) UIButton *dislikeButton;
 
 - (instancetype)initWithIdentifier:(NSString *)slotID rootViewController:(nullable UIViewController *)rootViewController adSize:(CGSize)adSize withShowPosition:(WMAdSlotPosition)showPosition WithIsSupportDeepLink:(BOOL)isSupportDeepLink;
 
+- (instancetype)initWithIdentifier:(NSString *)slotID rootViewController:(nullable UIViewController *)rootViewController adSize:(CGSize)adSize withShowPosition:(WMAdSlotPosition)showPosition WithIsSupportDeepLink:(BOOL)isSupportDeepLink interval:(NSInteger)interval;
+
 - (instancetype)initWithSlotID:(NSString *)slotID size:(WMSize *)expectSize rootViewController:(UIViewController *)rootViewController;
+
+- (instancetype)initWithSlotID:(NSString *)slotID size:(WMSize *)expectSize rootViewController:(UIViewController *)rootViewController interval:(NSInteger)interval;
 
 - (void)loadAdData;
 
+- (IBAction)dislikeAction:(id)sender;
 @end
 
 @protocol WMBannerAdViewDelegate <NSObject>
