@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoAdmob'
-    s.version          = '2.0.0'
-    s.summary          = 'VideoAdmob V2.0.0'
+    s.version          = '2.0.1'
+    s.summary          = 'VideoAdmob V2.0.1'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.1'
+    s.dependency 'Yodo1Video','2.0.2'
 
     s.dependency 'Yodo1AdsAdmob','1.0.6'
 end
