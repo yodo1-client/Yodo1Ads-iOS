@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoYouMi'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = '2017-12-14 更新有米sdk v4.1.6'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1Video','2.0.1'
+    s.dependency 'Yodo1Video','2.0.2'
     s.dependency 'Yodo1AdsYouMi', '1.0.4'
 
 end
