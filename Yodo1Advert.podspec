@@ -88,7 +88,7 @@ Pod::Spec.new do |s|
 
     ##Interstitial
     s.dependency 'InterstitialAdmob',       '2.0.3'
-    s.dependency 'InterstitialApplovin',    '2.0.3'
+    s.dependency 'InterstitialApplovin',    '2.0.4'
     s.dependency 'InterstitialSupersonic',  '1.0.3' 
     s.dependency 'InterstitialGDTMob',      '2.0.3'
     s.dependency 'InterstitialVungle',      '1.0.1'
