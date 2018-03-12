@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '2.0.1'
-    s.summary          = '2.0.1'
+    s.version          = '2.0.2'
+    s.summary          = '2.0.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -46,6 +46,6 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1WeiboSDK','1.0.2'
     s.dependency 'Yodo1QQSDK','1.0.2'
     s.dependency 'Yodo1AFNetworking','2.0.4'
-    s.dependency 'Yodo1Reachability','1.0.1'
+    s.dependency 'Yodo1Reachability','1.0.2'
     s.dependency 'Yodo1KeyInfo','2.0.1'
 end
