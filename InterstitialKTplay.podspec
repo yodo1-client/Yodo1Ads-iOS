@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialKTplay'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = 'A short description of InterstitialKTplay.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Interstitial','2.0.1'
+    s.dependency 'Yodo1Interstitial','2.0.2'
     s.dependency 'Yodo1AdsKTplay','1.0.0'
 end
