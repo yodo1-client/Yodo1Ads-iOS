@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoKTplay'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = 'A short description of VideoKTplay.'
 
     s.description      = <<-DESC
@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1Video','2.0.1'
+    s.dependency 'Yodo1Video','2.0.2'
     s.dependency 'Yodo1AdsKTplay', '1.0.0'
 end
