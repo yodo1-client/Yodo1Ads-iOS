@@ -168,7 +168,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerWmad','2.0.2'
+        ss.dependency 'BannerWmad','2.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
     s.subspec 'Banner_Inmobi' do |ss|
