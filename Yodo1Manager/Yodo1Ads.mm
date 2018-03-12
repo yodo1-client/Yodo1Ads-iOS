@@ -45,7 +45,7 @@ static VideoCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"1.0.6";
+NSString* const kYodo1AdsVersion       = @"1.0.11";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -452,6 +452,7 @@ extern "C" {
             kYodo1AdsGameObject = m_gameObject;
         }
         NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
+        
         [Yodo1Ads initWithAppKey:m_appKey];
     }
     
