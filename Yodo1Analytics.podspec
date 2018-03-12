@@ -41,6 +41,7 @@ TODO: Add long description of the pod here.
     
     s.dependency 'Yodo1YYCache','2.0.1'
     s.dependency 'Yodo1AFNetworking','2.0.4'
+    s.dependency 'Yodo1Reachability','1.0.2'
     s.dependency 'Yodo1OnlineParameter','1.0.5'
 
 end
