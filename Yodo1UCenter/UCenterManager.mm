@@ -14,7 +14,7 @@
 #import "UCSNS.h"
 #import "SubscriptionInfo.h"
 #import "Yodo1Adapter.h"
-#import "Reachability.h"
+#import "Yodo1Reachability.h"
 #import "Yodo1KeyInfo.h"
 
 #define YODO1_REALEASE(obj) \
@@ -106,9 +106,7 @@ static UCenterManager* _instance = nil;
 }
 
 + (BOOL)checkNetwork:(id<UIAlertViewDelegate>)delegate {
-    Reachability* reachable = [Reachability reachabilityForInternetConnection];
-    int currentStatus = [reachable currentReachabilityStatus];
-    if (currentStatus == NotReachable) {
+    if ([Yodo1Reachability reachability].reachable) {
         if (delegate) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"对不起，您的网络连接不可用！"
                                                            delegate:nil cancelButtonTitle:@"确定"
