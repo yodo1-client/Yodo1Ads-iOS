@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoMobvista'
-    s.version          = '2.0.2'
+    s.version          = '2.0.3'
     s.summary          = 'A short description of VideoMobvista.'
 
     s.description      = <<-DESC
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.1'
+    s.dependency 'Yodo1Video','2.0.2'
 
     s.dependency 'Yodo1AdsMobvista','1.0.2'
 end
