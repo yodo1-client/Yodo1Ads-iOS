@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoInmobi'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = '更新Inmobi SDK 7.0 最低支持8.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.1'
+    s.dependency 'Yodo1Video','2.0.2'
 
     s.dependency 'Yodo1AdsInmobi','1.0.1'
 
