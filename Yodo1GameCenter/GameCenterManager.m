@@ -6,7 +6,7 @@
 //
 
 #import "GameCenterManager.h"
-#import <Yodo1Reachability/Reachability.h>
+#import "Yodo1Reachability.h"
 
 //------------------------------------------------------------------------------------------------------------//
 //------- GameCenter Manager Singleton -----------------------------------------------------------------------//
@@ -219,10 +219,7 @@
 
 // Check for internet with Reachability
 - (BOOL)isInternetAvailable {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-    
-    if (internetStatus == NotReachable) {
+    if (![Yodo1Reachability reachability].reachable) {
         NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Internet unavailable - could not connect to the internet. Connect to WiFi or a Cellular Network to upload data to GameCenter."] code:GCMErrorInternetNotAvailable userInfo:nil];
         
         dispatch_async(dispatch_get_main_queue(), ^{
