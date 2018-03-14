@@ -106,7 +106,7 @@ static UCenterManager* _instance = nil;
 }
 
 + (BOOL)checkNetwork:(id<UIAlertViewDelegate>)delegate {
-    if ([Yodo1Reachability reachability].reachable) {
+    if (![Yodo1Reachability reachability].reachable) {
         if (delegate) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"对不起，您的网络连接不可用！"
                                                            delegate:nil cancelButtonTitle:@"确定"
