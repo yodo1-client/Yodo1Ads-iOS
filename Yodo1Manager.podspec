@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.4'
-    s.summary          = 'v2.0.4- 2018-03-12
-                          1、更新广告SDK
+    s.version          = '2.0.5'
+    s.summary          = 'v2.0.5- 2018-03-14
+                          1、修复UC网络bug
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -67,7 +67,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','2.0.2'
+        ss.dependency 'Yodo1UCenter','2.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
     
