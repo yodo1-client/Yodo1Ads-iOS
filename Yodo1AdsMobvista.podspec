@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMobvista'
-    s.version          = '1.0.2'
+    s.version          = '1.0.3'
     s.summary          = 'A short description of Yodo1Mobvista.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -19,6 +19,8 @@ Pod::Spec.new do |s|
 
     s.public_header_files = tags + '/MVSDK.framework/Versions/A/Headers/*.h',tags + '/MVSDKReward.framework/Versions/A/Headers/*.h'
     
+    s.vendored_libraries = tags + '/*.a'
+
     s.preserve_path = 'ChangeLog.txt'
 
     s.vendored_frameworks = tags + '/MVSDK.framework',tags + '/MVSDKReward.framework'
