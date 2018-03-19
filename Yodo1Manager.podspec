@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.5'
-    s.summary          = 'v2.0.5- 2018-03-14
-                          1、修复UC网络bug
+    s.version          = '2.0.6'
+    s.summary          = 'v2.0.6- 2018-03-19
+                          1、添加Mobvista插屏广告
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -274,6 +274,14 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
 
+    s.subspec 'Interstitial_Mobvista' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+        }
+        ss.dependency 'InterstitialMobvista','1.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
+    end
+
     ################# Video ##############
     s.subspec 'Video_Chance' do |ss|
         ss.xcconfig = {
@@ -333,7 +341,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoMobvista','2.0.3'
+        ss.dependency 'VideoMobvista','2.0.4'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
