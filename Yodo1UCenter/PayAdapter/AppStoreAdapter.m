@@ -12,6 +12,7 @@
 #import "AppStoreProduct.h"
 #import "Yodo1Commons.h"
 #import "SubscriptionInfo.h"
+#import "Yodo1AnalyticsManager.h"
 
 #define APPSTORE_REQUEST_LIST @"appstore_request_list"
 #define VERIFYING_REQUEST_LIST @"verifing_request_list"
@@ -748,59 +749,65 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     if ([[[UIDevice currentDevice]systemVersion]floatValue] < 7.0) {
         [UCenterManager sharedInstance].paymentCompletionBlock(self.currentUniformProductId,PaymentSuccess,@"支付成功",[UCenterManager sharedInstance].extra);
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    }else{
-    // 移除防止苹果漏单的购买记录
-    NSString* gameUserId = nil;
-    if (![UCenterManager sharedInstance].gameUserId) {
-        gameUserId = [Yodo1Commons idfvString];
-    }else{
-        gameUserId = [UCenterManager sharedInstance].gameUserId;
-    }
-
-    PaymentProduct* paymentProduct = [self removeAppstoreRequestListWithProductId:transaction.payment.productIdentifier withUserId:gameUserId isSaveVerifyList:transaction];
-     NSLog(@"%@",paymentProduct.uniformProductId);
-    if ([UCenterManager sharedInstance].paymentCompletionBlock && paymentProduct) {
-        
-        if (paymentProduct.gameUserId == nil) {
-            NSLog(@"gameUserId is not nil...");
-            return;
+    } else {
+        // 移除防止苹果漏单的购买记录
+        NSString* gameUserId = nil;
+        if (![UCenterManager sharedInstance].gameUserId) {
+            gameUserId = [Yodo1Commons idfvString];
+        }else{
+            gameUserId = [UCenterManager sharedInstance].gameUserId;
         }
-        [[Yodo1OGPayment sharedInstance] verifyAppStoreIAPOrder:paymentProduct.gameUserId
-                                                       nickname:paymentProduct.gameNickname
-                                                          ucuid:paymentProduct.ucuid
-                                                       deviceid:[Yodo1Commons idfvString]
-                                                        orderId:transaction.transactionIdentifier
-                                                       itemCode:transaction.payment.productIdentifier
-                                                         amount:paymentProduct.price
-                                                   currencyCode:paymentProduct.currency
-                                                     trxReceipt:paymentProduct.trxReceipt
-                                                          extra:paymentProduct.extra
-                                                         appkey:[UCenterManager sharedInstance].appKey
-                                                      channelId:paymentProduct.channelId
-                                                 gameRegionCode:paymentProduct.gameRegionCode
-                                                    productType:paymentProduct.productType
-                                                completionBlock:^(BOOL success, Yodo1OGPaymentError *error, NSString *response) {
-                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                        if (success) {
-                                                            if ([self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier]) {
-                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentSuccess,response,[UCenterManager sharedInstance].extra);
+
+        PaymentProduct* paymentProduct = [self removeAppstoreRequestListWithProductId:transaction.payment.productIdentifier
+                                                                           withUserId:gameUserId
+                                                                     isSaveVerifyList:transaction];
+        //AppsFlyer 数据统计
+        [[Yodo1AnalyticsManager sharedInstance]validateAndTrackInAppPurchase:transaction.payment.productIdentifier
+                                                                       price:paymentProduct.price
+                                                                    currency:paymentProduct.currency
+                                                               transactionId:transaction.transactionIdentifier];
+        NSLog(@"%@",paymentProduct.uniformProductId);
+        if ([UCenterManager sharedInstance].paymentCompletionBlock && paymentProduct) {
+            
+            if (paymentProduct.gameUserId == nil) {
+                NSLog(@"gameUserId is not nil...");
+                return;
+            }
+            [[Yodo1OGPayment sharedInstance] verifyAppStoreIAPOrder:paymentProduct.gameUserId
+                                                           nickname:paymentProduct.gameNickname
+                                                              ucuid:paymentProduct.ucuid
+                                                           deviceid:[Yodo1Commons idfvString]
+                                                            orderId:transaction.transactionIdentifier
+                                                           itemCode:transaction.payment.productIdentifier
+                                                             amount:paymentProduct.price
+                                                       currencyCode:paymentProduct.currency
+                                                         trxReceipt:paymentProduct.trxReceipt
+                                                              extra:paymentProduct.extra
+                                                             appkey:[UCenterManager sharedInstance].appKey
+                                                          channelId:paymentProduct.channelId
+                                                     gameRegionCode:paymentProduct.gameRegionCode
+                                                        productType:paymentProduct.productType
+                                                    completionBlock:^(BOOL success, Yodo1OGPaymentError *error, NSString *response) {
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                            if (success) {
+                                                                if ([self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier]) {
+                                                                    [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentSuccess,response,[UCenterManager sharedInstance].extra);
+                                                                }else{
+                                                                    [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,response,[UCenterManager sharedInstance].extra);
+                                                                }
+                                                                
                                                             }else{
-                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,response,[UCenterManager sharedInstance].extra);
+                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentFail,response,[UCenterManager sharedInstance].extra);
+                                                                if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
+                                                                    [self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier];
+                                                                }
                                                             }
-                                                            
-                                                        }else{
-                                                            [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentFail,response,[UCenterManager sharedInstance].extra);
-                                                            if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
-                                                                [self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier];
-                                                            }
-                                                        }
-                                                    });
-                                                }];
-        
+                                                        });
+                                                    }];
+            
+        }
+        [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     }
-    
-	[[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-}
 }
 
 /*
