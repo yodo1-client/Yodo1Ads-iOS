@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.6'
-    s.summary          = 'v2.0.6- 2018-03-19
-                          1、添加Mobvista插屏广告
+    s.version          = '2.0.7'
+    s.summary          = 'v2.0.7- 2018-03-21
+                          1、添加AppsFlyer 内付费验证和事件统计
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1ZipArchive','1.0.2'
         ss.dependency 'Yodo1YYModel', '2.0.2'
         ss.dependency 'Yodo1Analytics','2.0.2'
-        ss.dependency 'ThirdsAnalytics','1.0.0'
+#        ss.dependency 'Yodo1ThirdsAnalytics','1.0.0'
         ss.dependency 'Yodo1AdsConfig','1.0.0'
 
     end
@@ -67,7 +67,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','2.0.3'
+        ss.dependency 'Yodo1UCenter','2.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
     
@@ -83,7 +83,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'ThirdsAnalytics','1.0.0'
+        ss.dependency 'Yodo1ThirdsAnalytics','1.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
 

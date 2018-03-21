@@ -14,6 +14,10 @@
 		<string>8f5471f1b325732ba9fa1e9c9cf6430b</string>
 		<key>GameAnalyticsGameSecret</key>
 		<string>e51ecdac5b5fb638da554713d321cadd427754b0</string>
+		<key>AppsFlyerDevKey</key>
+		<string>xFXairyqEQ3kBBZZ7Wythi</string>
+		<key>AppleAppId</key>
+		<string>1048559057</string>
 	</dict>
 	<key>ShareInfo</key>
 	<dict>
