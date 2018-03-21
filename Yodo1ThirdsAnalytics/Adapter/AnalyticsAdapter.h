@@ -60,4 +60,10 @@
 
 - (void)setGACustomDimension03:(NSString*)dimension03;
 
+//AppsFlyer
+- (void)validateAndTrackInAppPurchase:(NSString*)productIdentifier
+                                price:(NSString*)price
+                             currency:(NSString*)currency
+                        transactionId:(NSString*)transactionId;
+
 @end

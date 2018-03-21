@@ -19,7 +19,8 @@
 typedef NS_ENUM(NSInteger, AnalyticsType) {
     AnalyticsTypeUmeng,         //友盟数据统计
     AnalyticsTypeTalkingData,   //TalkingData数据统计
-    AnalyticsTypeGameAnalytics //GameAnalytics数据统计
+    AnalyticsTypeGameAnalytics, //GameAnalytics数据统计
+    AnalyticsTypeAppsFlyer      //AppsFlyer 数据统计
 };
 
 @interface Yodo1AnalyticsManager : NSObject
@@ -193,15 +194,15 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
 /**
  *
  * 从dplus专用文件中删除指定key-value
- @param propertyName
+ @param propertyName 属性名
  */
 - (void)unregisterSuperProperty:(NSString *)propertyName;
 
 /**
  *
  * 返回dplus专用文件中key对应的value；如果不存在，则返回空。
- @param propertyName
- @return void
+ @param propertyName 属性名
+ @return NSString
  */
 - (NSString *)getSuperProperty:(NSString *)propertyName;
 
@@ -229,5 +230,13 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  *  GameAnalytics 设置维度03类型
  **/
 - (void)setGACustomDimension03:(NSString*)dimension03;
+
+/**
+ *  AppsFlyer Apple 内付费验证和事件统计
+ */
+- (void)validateAndTrackInAppPurchase:(NSString*)productIdentifier
+                                price:(NSString*)price
+                             currency:(NSString*)currency
+                        transactionId:(NSString*)transactionId;
 
 @end

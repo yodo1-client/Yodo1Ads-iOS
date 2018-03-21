@@ -34,6 +34,9 @@ NSString* const kAnalyticsChannelId = @"AppStore";
     self = [super init];
     if (self) {
         NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:kYodo1AnalyticsTallingDataAppKey];
+        
+        NSAssert(appKey != nil, @"Talking Data appKey 没有设置");
+        
         [TalkingDataGA onStart:appKey withChannelId:kAnalyticsChannelId];
         [TDGAAccount setAccount:[Yodo1Commons idfvString]];
     }

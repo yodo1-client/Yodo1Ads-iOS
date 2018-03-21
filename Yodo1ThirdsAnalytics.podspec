@@ -45,5 +45,6 @@ TODO: Add long description of the pod here.
     s.dependency 'Yodo1GameAnalytics','1.0.1'
     s.dependency 'Yodo1KeyInfo','2.0.1'
     s.dependency 'Yodo1OnlineParameter','1.0.5'
+    s.dependency 'Yodo1AppsFlyer','1.0.0'
 
 end

@@ -58,8 +58,13 @@ NSString* const kGameAnalyticsChargeRequstAnalytics = @"kGameAnalyticsChargeRequ
         if ([initConfig.gaResourceItemTypes count] > 0 ) {
             [GameAnalytics configureAvailableResourceItemTypes:initConfig.gaResourceItemTypes];
         }
-        [GameAnalytics initializeWithGameKey:[[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_GAMEANALYTICS_GAME_KEY]
-                                  gameSecret:[[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_GAMEANALYTICS_GAME_SECRET]];
+        
+        NSString* gamekey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_GAMEANALYTICS_GAME_KEY];
+        NSString* gameSecret = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_GAMEANALYTICS_GAME_SECRET];
+        
+        NSAssert(gamekey != nil||gameSecret != nil, @"GameAnalytics gamekey 没有设置");
+        
+        [GameAnalytics initializeWithGameKey:gamekey gameSecret:gameSecret];
     }
     return self;
 }

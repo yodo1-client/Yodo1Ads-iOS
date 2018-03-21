@@ -40,7 +40,10 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 #ifdef DEBUG
         [MobClick setLogEnabled:YES];
 #endif
-        UMConfigInstance.appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
+        NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
+        NSAssert(appKey != nil, @"友盟 appKey 没有设置");
+        
+        UMConfigInstance.appKey = appKey;
         UMConfigInstance.channelId = @"AppStore";
         UMConfigInstance.ePolicy = SEND_INTERVAL;
         UMConfigInstance.eSType = E_UM_GAME;

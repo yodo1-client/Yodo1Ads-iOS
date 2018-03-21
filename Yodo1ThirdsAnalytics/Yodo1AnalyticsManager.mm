@@ -450,6 +450,22 @@
     }
 }
 
+- (void)validateAndTrackInAppPurchase:(NSString*)productIdentifier
+                                price:(NSString*)price
+                             currency:(NSString*)currency
+                        transactionId:(NSString*)transactionId {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeAppsFlyer){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter validateAndTrackInAppPurchase:productIdentifier
+                                             price:price
+                                          currency:currency
+                                     transactionId:transactionId];
+            break;
+        }
+    }
+}
+
 - (void)dealloc
 {
     self.analyticsDict = nil;
@@ -645,6 +661,16 @@ extern "C" {
     {
         NSString* dimension =  Yodo1CreateNSString(dimension03);
         [[Yodo1AnalyticsManager sharedInstance]setGACustomDimension03:dimension];
+    }
+    
+    void UnityValidateAndTrackInAppPurchase(const char*productIdentifier,
+                                            const char*price,
+                                            const char*currency,
+                                            const char*transactionId){
+        [[Yodo1AnalyticsManager sharedInstance]validateAndTrackInAppPurchase:Yodo1CreateNSString(productIdentifier)
+                                                                       price:Yodo1CreateNSString(price)
+                                                                    currency:Yodo1CreateNSString(currency)
+                                                               transactionId:Yodo1CreateNSString(transactionId)];
     }
 }
 
