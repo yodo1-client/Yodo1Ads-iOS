@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
     
     s.vendored_frameworks = tags + '/AppsFlyerLib.framework'
     
-    s.preserve_paths = 'ChangeLog.txt'
+    s.preserve_paths = tags +'/ChangeLog.txt'
     
     s.requires_arc = true
     
