@@ -24,6 +24,7 @@
     BOOL bUmengOpen;
     BOOL bTalkingDataOpen;
     BOOL bGameAnalyticsOpen;
+    BOOL bAppsFlyerOpen;
 }
 
 @property (nonatomic, strong) NSMutableDictionary* analyticsDict;
@@ -78,6 +79,13 @@
         bUmengOpen = YES;
     }
     
+    NSString* appsFlyerEvent = [Yodo1OnlineParameter stringParams:@"AppsFlyerEvent" defaultValue:@"on"];
+    if ([appsFlyerEvent isEqualToString:@"off"]) {//默认是开着
+        bAppsFlyerOpen = NO;
+    }else{
+        bAppsFlyerOpen = YES;
+    }
+    
     NSDictionary* dic = [[Yodo1Registry sharedRegistry] getClassesStatusType:@"analyticsType"
                                                               replacedString:@"AnalyticsAdapter"
                                                                replaceString:@"AnalyticsType"];
@@ -91,6 +99,9 @@
                 continue;
             }
             if (!bUmengOpen && [key integerValue] == AnalyticsTypeUmeng) {
+                continue;
+            }
+            if (!bAppsFlyerOpen && [key integerValue] == AnalyticsTypeAppsFlyer) {
                 continue;
             }
             

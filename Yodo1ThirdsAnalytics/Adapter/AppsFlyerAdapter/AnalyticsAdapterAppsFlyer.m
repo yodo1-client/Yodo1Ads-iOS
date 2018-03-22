@@ -15,18 +15,8 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 
 
 @implementation AnalyticsAdapterAppsFlyer
-{
-    double _currencyAmount;//现金金额
-    double _virtualCurrencyAmount;//虚拟币金额
-    NSString* _itemId;//物品id
-    NSString* _iapId;//产品ID
-    NSString* _currencyType;//货币类型USD,RMB等等
-    NSString* _paymentType;//支付类型
-    
-}
 
-+ (AnalyticsType)analyticsType
-{
++ (AnalyticsType)analyticsType {
     return AnalyticsTypeAppsFlyer;
 }
 
