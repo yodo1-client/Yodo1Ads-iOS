@@ -38,7 +38,6 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
         
         [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
         [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
-        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
     }
     return self;
 }
