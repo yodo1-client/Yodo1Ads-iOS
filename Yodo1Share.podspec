@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '2.0.2'
-    s.summary          = 'A short description of Yodo1Share.'
+    s.version          = '2.0.3'
+    s.summary          = '添加Instagram 分享功能.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

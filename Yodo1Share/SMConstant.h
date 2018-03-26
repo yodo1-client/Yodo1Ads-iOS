@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, Yodo1SNSType) {
     Yodo1SNSTypeSinaWeibo       = 1 << 3,/**< 新浪微博 >*/
     Yodo1SNSTypeFacebook        = 1 << 4,/**< Facebook >*/
     Yodo1SNSTypeTwitter         = 1 << 5,/**< Twitter >*/
-    Yodo1SNSTypeAll             = 1 << 6
+    Yodo1SNSTypeInstagram       = 1 << 6,/**< Instagram >*/
+    Yodo1SNSTypeAll             = 1 << 7
 };
 
 typedef void (^SNSShareCompletionBlock) (Yodo1SNSType snsType,Yodo1ShareContentState state,NSError *error);
