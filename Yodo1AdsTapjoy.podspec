@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsTapjoy'
-    s.version          = '1.0.2'
+    s.version          = '1.0.3'
     s.summary          = '2017.6.29更新Tapjoy V11.11.1,解决屏幕适配的问题（UnityAds冲突）'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -21,6 +21,8 @@ Pod::Spec.new do |s|
 
     s.resources = tags + '/Resources/*.*'
     
+    s.vendored_libraries = tags + '/*.a'
+
     s.preserve_path = 'ChangeLog.txt'
     
     s.vendored_frameworks = tags + '/Tapjoy.framework'
