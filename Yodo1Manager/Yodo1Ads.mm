@@ -27,6 +27,10 @@
 #import "Yodo1BannerDelegate.h"
 #endif
 
+#ifdef YODO1_ANALYTICS
+#import "AppsFlyerTracker.h"
+#endif
+
 ///C++
 static Banner_callback s_banner_callback;
 
@@ -230,6 +234,10 @@ typedef enum {
     }
     
     [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClose];
+    
+#ifdef YODO1_ANALYTICS
+    [[AppsFlyerTracker sharedTracker]trackEvent:@"APPSFLYER_INTERSTITIAL" withValues:@{}];
+#endif
 }
 
 - (void)didClickInterstitial {
@@ -314,7 +322,8 @@ typedef enum {
 
 #endif
 
-///OC实现
+
+#pragma mark- ///OC实现
 
 @implementation Yodo1Ads
 
@@ -431,13 +440,17 @@ typedef enum {
                                               if (s_videoCallback) {
                                                   s_videoCallback(finished);
                                               }
+#ifdef YODO1_ANALYTICS
+                                              [[AppsFlyerTracker sharedTracker]trackEvent:@"APPSFLYER_VIDEO" withValues:@{}];
+#endif
     }];
 #endif
 }
 
 @end
 
-///Unity3d
+
+#pragma mark- ///Unity3d
 
 #ifdef __cplusplus
 
@@ -454,42 +467,41 @@ extern "C" {
         NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
         
         [Yodo1Ads initWithAppKey:m_appKey];
+        
+        [Yodo1Ads setVideoCallback:^(BOOL finished) {
+            Yodo1AdsEvent adsEvent = Yodo1AdsEventClose;
+            if (finished) {
+                adsEvent = Yodo1AdsEventFinish;
+            }
+            [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:adsEvent];
+        }];
     }
     
     void Unity3dSetLogEnable(BOOL enable)
     {
-        [Yodo1OnlineParameter setDebugMode:enable];
-        [[Yodo1Analytics instance]setDebugMode:enable];
+        [Yodo1Ads setLogEnable:enable];
     }
 
 #pragma mark - Unity3dBanner
     
     void Unity3dSetBannerAlign(Yodo1AdsCBannerAdAlign align)
     {
-#ifdef YODO1_ADS_BANNER
-        [[Yodo1BannerManager sharedInstance]setBannerAlign:(BannerAlign)align];
-#endif
+        [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
     }
     
     void UnityShowBanner()
     {
-#ifdef YODO1_ADS_BANNER
-        [[Yodo1BannerManager sharedInstance]showBanner];
-#endif
+        [Yodo1Ads showBanner];
     }
     
     void Unity3dHideBanner()
     {
-#ifdef YODO1_ADS_BANNER
-        [[Yodo1BannerManager sharedInstance]hideBanner];
-#endif
+        [Yodo1Ads hideBanner];
     }
     
     void Unity3dRemoveBanner()
     {
-#ifdef YODO1_ADS_BANNER
-        [[Yodo1BannerManager sharedInstance]removeBanner];
-#endif
+        [Yodo1Ads removeBanner];
     }
 
 
@@ -497,19 +509,14 @@ extern "C" {
     
     bool Unity3dInterstitialIsReady()
     {
-#ifdef YODO1_ADS_INTERSTITIAL
-        return [[Yodo1InterstitialAdManager sharedInstance]interstitialAdReady];
-#else
-        return NO;
-#endif
+        return [Yodo1Ads interstitialIsReady];
+
     }
     
     
     void Unity3dShowInterstitial()
     {
-#ifdef YODO1_ADS_INTERSTITIAL
-        [[Yodo1InterstitialAdManager sharedInstance]showAd];
-#endif
+        [Yodo1Ads showInterstitial];
     }
     
 
@@ -517,32 +524,19 @@ extern "C" {
     
     bool Unity3dVideoIsReady()
     {
-#ifdef YODO1_ADS_VIDEO
-        return [[Yodo1AdVideoManager sharedInstance]hasAdVideo];
-#else
-        return NO;
-#endif
+        return [Yodo1Ads videoIsReady];
     }
     
     void Unity3dShowVideo()
     {
-#ifdef YODO1_ADS_VIDEO
-        [[Yodo1AdVideoManager sharedInstance]showAdVideo:[Yodo1AdsDelegate getRootViewController]
-                                              awardBlock:^(bool finished)
-         {
-             Yodo1AdsEvent adsEvent = Yodo1AdsEventClose;
-             if (finished) {
-                 adsEvent = Yodo1AdsEventFinish;
-             }
-             [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:adsEvent];
-         }];
-#endif
+        [Yodo1Ads showVideo];
     }
 }
 
 #endif
 
-///C++实现
+
+#pragma mark- ///C++实现
 
 void Yodo1AdsC::InitWithAppKey(const char *appKey)
 {
@@ -553,46 +547,38 @@ void Yodo1AdsC::InitWithAppKey(const char *appKey)
 
 void Yodo1AdsC::SetLogEnable(bool enable)
 {
-    [Yodo1OnlineParameter setDebugMode:enable];
-    [[Yodo1Analytics instance]setDebugMode:enable];
+    [Yodo1Ads setLogEnable:enable];
 }
 
 #pragma mark - C++Banner
 
 void Yodo1AdsC::SetBannerCallback(Banner_callback callback)
 {
-    s_banner_callback = callback;
     if(callback == NULL){
         NSLog(@"Banner callback is null");
+        return;
     }
+    s_banner_callback = callback;
 }
 
 void Yodo1AdsC::SetBannerAlign(Yodo1AdsCBannerAdAlign align)
 {
-#ifdef YODO1_ADS_BANNER
-    [[Yodo1BannerManager sharedInstance]setBannerAlign:(BannerAlign)align];
-#endif
+    [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
 }
 
 void Yodo1AdsC::ShowBanner()
 {
-#ifdef YODO1_ADS_BANNER
-    [[Yodo1BannerManager sharedInstance]showBanner];
-#endif
+    [Yodo1Ads showBanner];
 }
 
 void Yodo1AdsC::HideBanner()
 {
-#ifdef YODO1_ADS_BANNER
-    [[Yodo1BannerManager sharedInstance]hideBanner];
-#endif
+    [Yodo1Ads hideBanner];
 }
 
 void Yodo1AdsC::RemoveBanner()
 {
-#ifdef YODO1_ADS_BANNER
-    [[Yodo1BannerManager sharedInstance]removeBanner];
-#endif
+    [Yodo1Ads removeBanner];
 }
 
 #pragma mark - C++Interstitial
@@ -601,6 +587,7 @@ void Yodo1AdsC::SetInterstitialCallback(Interstitial_callback callback)
 {
     if(callback == NULL){
         NSLog(@"interstitial callback is null");
+        return;
     }
     s_interstitial_callback = callback;
 }
@@ -608,19 +595,13 @@ void Yodo1AdsC::SetInterstitialCallback(Interstitial_callback callback)
 
 bool Yodo1AdsC::InterstitialIsReady()
 {
-#ifdef YODO1_ADS_INTERSTITIAL
-    return [[Yodo1InterstitialAdManager sharedInstance]interstitialAdReady];
-#else
-    return NO;
-#endif
+    return [Yodo1Ads interstitialIsReady];
 }
 
 
 void Yodo1AdsC:: ShowInterstitial()
 {
-#ifdef YODO1_ADS_INTERSTITIAL
-    [[Yodo1InterstitialAdManager sharedInstance]showAd];
-#endif
+    [Yodo1Ads showInterstitial];
 }
 
 #pragma mark - C++Video
@@ -631,28 +612,21 @@ void Yodo1AdsC::SetVideoCallback(Video_callback callback)
         NSLog(@"video callback is null");
     }
     s_video_callback = callback;
+    [Yodo1Ads setVideoCallback:^(BOOL finished) {
+        if (s_video_callback) {
+            s_video_callback(finished);
+        }
+    }];
+  
 }
 
 bool Yodo1AdsC::VideoIsReady()
 {
-#ifdef YODO1_ADS_VIDEO
-    return [[Yodo1AdVideoManager sharedInstance]hasAdVideo];
-#else
-    return NO;
-#endif
+    return [Yodo1Ads videoIsReady];
 }
 
 void Yodo1AdsC::ShowVideo()
 {
-#ifdef YODO1_ADS_VIDEO
-    [[Yodo1AdVideoManager sharedInstance]showAdVideo:[Yodo1AdsDelegate getRootViewController]
-                                          awardBlock:^(bool finished)
-     {
-         if (s_video_callback) {
-             s_video_callback(finished);
-         }
-     }];
-    
-#endif
+    [Yodo1Ads showVideo];
 }
 
