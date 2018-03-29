@@ -1,8 +1,10 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.7'
-    s.summary          = 'v2.0.7- 2018-03-21
-                          1、添加AppsFlyer 内付费验证和事件统计
+    s.version          = '2.0.8'
+    s.summary          = 'v2.0.8- 2018-03-29
+                          1、添加视频与插屏事件到AppsFlyer
+                          2、更新Tapjoy适配广告
+                          3、添加Instagram 分享
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -99,7 +101,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS'
         }
-        ss.dependency 'Yodo1Share','2.0.2'
+        ss.dependency 'Yodo1Share','2.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
 
@@ -214,7 +216,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialTapjoy','1.0.2'
+        ss.dependency 'InterstitialTapjoy','1.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
     
@@ -350,7 +352,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoTapjoy','2.0.2'
+        ss.dependency 'VideoTapjoy','2.0.3'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
