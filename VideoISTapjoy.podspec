@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISTapjoy'
-    s.version          = '2.0.3'
+    s.version          = '2.0.4'
     s.summary          = 'Adapter和SDK分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -41,6 +41,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'VideoSupersonic','2.0.3'
 
-    s.dependency 'Yodo1AdsTapjoy', '1.0.2'
+    s.dependency 'Yodo1AdsTapjoy', '1.0.3'
 
 end
