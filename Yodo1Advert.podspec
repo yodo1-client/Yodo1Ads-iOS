@@ -61,7 +61,7 @@ Pod::Spec.new do |s|
     ##Video
 
     s.dependency 'VideoUnityAds',       '2.0.3'
-    s.dependency 'VideoMobvista',       '2.0.3'
+    s.dependency 'VideoMobvista',       '2.0.6'
     s.dependency 'VideoSupersonic',     '2.0.3'
     s.dependency 'VideoApplovin',       '2.0.3'
     s.dependency 'VideoVungle',         '2.0.5'
