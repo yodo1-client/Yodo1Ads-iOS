@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Advert'
-    s.version          = '1.0.11'
-    s.summary          = '2018.03.07 3月份list
-                            Yodo1Ads v1.0.11'
+    s.version          = '1.0.12'
+    s.summary          = '2018.03.30 3月份list更新版本
+                            Yodo1Ads v1.0.12'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -64,19 +64,21 @@ Pod::Spec.new do |s|
     s.dependency 'VideoMobvista',       '2.0.3'
     s.dependency 'VideoSupersonic',     '2.0.3'
     s.dependency 'VideoApplovin',       '2.0.3'
-    s.dependency 'VideoVungle',         '2.0.4'
+    s.dependency 'VideoVungle',         '2.0.5'
     s.dependency 'VideoAdColony',       '2.0.1'
     s.dependency 'VideoAdmob',          '2.0.1'
+    s.dependency 'VideoWmad',           '2.0.2'
+    s.dependency 'VideoTapjoy',         '2.0.3'
 
-    #s.dependency 'VideoCentrixlink',    '2.0.1'
+    # s.dependency 'VideoCentrixlink',    '2.0.1'
     # s.dependency 'VideoChance',         '2.0.1'
     # s.dependency 'VideoChartboost',     '2.0.1'
     # s.dependency 'VideoDomob',          '2.0.1'
     # s.dependency 'VideoFacebook',       '2.0.1'
     # s.dependency 'VideoInmobi',         '2.0.1'
     # s.dependency 'VideoKTplay',         '2.0.1'
-    # s.dependency 'VideoTapjoy',         '2.0.1'
-    # # s.dependency 'VideoYouMi',          '2.0.1'
+
+    # s.dependency 'VideoYouMi',          '2.0.1'
 
     s.dependency 'VideoISAdColony',     '2.0.3'
     s.dependency 'VideoISUnityAds',     '2.0.3'
@@ -90,20 +92,21 @@ Pod::Spec.new do |s|
     s.dependency 'InterstitialAdmob',       '2.0.3'
     s.dependency 'InterstitialApplovin',    '2.0.4'
     s.dependency 'InterstitialSupersonic',  '1.0.3' 
-    s.dependency 'InterstitialGDTMob',      '2.0.3'
-    s.dependency 'InterstitialVungle',      '1.0.1'
-    s.dependency 'InterstitialAdview',      '2.0.2'
+    # s.dependency 'InterstitialGDTMob',      '2.0.3'
+    s.dependency 'InterstitialVungle',      '1.0.2'
+    # s.dependency 'InterstitialAdview',      '2.0.2'
+    s.dependency 'InterstitialMobvista',    '1.0.2'
 
-    # s.dependency 'InterstitialTapjoy',      '1.0.1' 
+    s.dependency 'InterstitialTapjoy',      '1.0.3' 
     # s.dependency 'InterstitialFacebook',    '1.0.1'
-    # s.dependency 'InterstitialKTplay',      '2.0.1'
+
     # s.dependency 'InterstitialWmad',        '2.0.1'
 
     ##Banner
     s.dependency 'BannerAdmob',         '2.0.3'
     s.dependency 'BannerAdview',        '1.0.2'
     s.dependency 'BannerApplovin',      '1.0.3'
-    s.dependency 'BannerGDTMob',        '1.0.3'
+    # s.dependency 'BannerGDTMob',        '1.0.3'
     s.dependency 'BannerInmobi',        '1.0.2'
 
     # s.dependency 'BannerWmad',          '2.0.1'
