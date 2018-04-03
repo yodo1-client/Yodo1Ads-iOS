@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoTapjoy'
-    s.version          = '2.0.3'
-    s.summary          = '更新Tapjoy sdk 11.11.1'
+    s.version          = '2.0.4'
+    s.summary          = '更新Tapjoy sdk 11.12.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','2.0.2'
 
-    s.dependency 'Yodo1AdsTapjoy','1.0.3'
+    s.dependency 'Yodo1AdsTapjoy','1.0.4'
 end
