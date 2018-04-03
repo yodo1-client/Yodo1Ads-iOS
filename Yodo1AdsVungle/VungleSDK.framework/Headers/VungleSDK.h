@@ -1,7 +1,7 @@
 //
 //  VungleSDK.h
 //  Vungle iOS SDK
-//  SDK Version: 5.3.0
+//  SDK Version: 5.4.0
 //
 //  Copyright (c) 2013-Present Vungle Inc. All rights reserved.
 //
@@ -54,6 +54,8 @@ extern NSString *VunglePlayAdOptionKeyExtra6;
 extern NSString *VunglePlayAdOptionKeyExtra7;
 extern NSString *VunglePlayAdOptionKeyExtra8;
 extern NSString *VunglePlayAdOptionKeyLargeButtons;
+extern NSString *VunglePlayAdOptionKeyOrdinal;
+extern NSString *VunglePlayAdOptionKeyFlexViewAutoDismissSeconds;
 
 typedef enum {
     VungleSDKErrorInvalidPlayAdOption = 1,
@@ -69,7 +71,9 @@ typedef enum {
     VungleSDKErrorInvalidiOSVersion,
     VungleSDKErrorTopMostViewControllerMismatch,
     VungleSDKErrorUnknownPlacementID,
-    VungleSDKErrorSDKNotInitialized
+    VungleSDKErrorSDKNotInitialized,
+    VungleSDKErrorSleepingPlacement,
+    VungleSDKErrorNoAdsAvailable,
 } VungleSDKErrorCode;
 
 @protocol VungleSDKLogger <NSObject>
@@ -89,8 +93,11 @@ typedef enum {
  * opted-out of our Exchange, you might be able to get a streaming ad if you call `play`.
  * @param isAdPlayable A boolean indicating if an ad is currently in a playable state
  * @param placementID The ID of a placement which is ready to be played
+ * @param error The error that was encountered.  This is only sent when the placementID is nil.
  */
-- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(nullable NSString *)placementID;
+- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(nullable NSString *)placementID error:(nullable NSError *)error;
+
+- (void)vungleAdPlayabilityUpdate:(BOOL)isAdPlayable placementID:(nullable NSString *)placementID __attribute__((deprecated("Use vungleAdPlayabilityUpdate:isAdPlayable:plaementID:error: instead.")));
 /**
  * If implemented, this will get called when the SDK is about to show an ad. This point
  * might be a good time to pause your game, and turn off any sound you might be playing.
@@ -154,6 +161,7 @@ typedef enum {
 
 /**
  * Will play Ad Unit presenting it over the `controller` parameter
+ * @note This method should only be called using placements with `fullscreen` or `flexview` template types
  * @param controller A subclass of UIViewController. Should correspond to the ViewControler at the top of the ViewController hierarchy
  * @param options A reference to an instance of NSDictionary with customized ad playback options
  * @param placementID The placement defined on the Vungle dashboard
@@ -163,8 +171,10 @@ typedef enum {
  */
 - (BOOL)playAd:(UIViewController *)controller options:(nullable NSDictionary *)options placementID:(nullable NSString *)placementID error:( NSError *__autoreleasing _Nullable *_Nullable)error;
 
+#pragma mark - Flex Feed
 /**
  * Pass in an UIView which acts as a container for the ad experience. This view container may be placed in random positions.
+ * @note This method should only be called using placements that have the `flexfeed` template type.
  * @param publisherView container view in which an ad will be displayed
  * @param options A reference to an instance of NSDictionary with customized ad playback options
  * @param placementID The placement defined on the Vungle dashboard
@@ -174,9 +184,11 @@ typedef enum {
 - (BOOL)addAdViewToView:(UIView *)publisherView withOptions:(nullable NSDictionary *)options placementID:(nullable NSString *)placementID error:( NSError *__autoreleasing _Nullable *_Nullable)error;
 
 /**
- * This method must be called when the publisher is confident that they are finished displaying the ad unit.
- * This signals to the SDK that a new ad may be fetched or a different ad may be displayed. This will
- * be called in conjunction with `addViewToView:containedInViewController:withOptions:placementID:error:`
+ * This method will dismiss the currently playing Flex View or Flex Feed advertisement. If you have added an advertisement with `addAdViewToView:`
+ * or you are playing a placement that has been configured as a Flex View placement, then this method will remove the advertisement
+ * from the screen and perform any necessary clean up steps.
+ *
+ * This method will call the existing delegate callbacks as part of the lifecycle.
  */
 - (void)finishedDisplayingAd;
 
