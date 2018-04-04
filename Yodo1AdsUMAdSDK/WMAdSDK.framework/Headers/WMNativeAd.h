@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WMNativeAd : NSObject
 
 /**
- 广告位的描述说明， 目前Native广告支持信息流 插屏 Banner广告位，暂不支持开屏
+ 广告位的描述说明， 目前Native广告支持信息流 插屏 Banner广告位 开屏广告位
  */
 @property (nonatomic, strong, readwrite, nullable) WMAdSlot *adslot;
 
@@ -38,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  创建一个Native广告的推荐构造函数
-
  @param slot 广告位描述信息
  @return Native广告位
  */
@@ -47,36 +46,33 @@ NS_ASSUME_NONNULL_BEGIN
 // 广告类与view相关联绑定，注册具体事件，比如跳转页面、打电话、下载，行为由SDK控制，不建议使用，比如有可能注册电话事件但实际没有电话信息
 - (void)registerViewForInteraction:(UIView *)view
                withInteractionType:(WMInteractionType)interactionType
-                withViewController:(UIViewController *)viewController;
+                          delegate:(id <WMNativeAdDelegate>)delegate;
 
 /**
  定义原生广告视图中可以点击的 视图区域，行为由SDK控制
- 
  @param view 原生广告的视图，完整可点击区域
- @param viewController 广告详情页的根视图
+ @param delegate 广告详情页的根视图
  */
 - (void)registerViewForInteraction:(UIView *)view
-                withViewController:(UIViewController *_Nullable)viewController;
+                          delegate:(id <WMNativeAdDelegate>)delegate;
 
 /**
  定义原生广告视图中可以点击的 视图区域， 减少误点概率，提升用户体验
- 
  @param view 包含原生广告的视图
- @param viewController 广告详情页的根视图
+ @param delegate 广告详情页的根视图
  @param clickableViews 广告视图中可以被点击的响应对象
  */
 - (void)registerViewForInteraction:(UIView *)view
-                withViewController:(UIViewController *_Nullable)viewController
+                          delegate:(id <WMNativeAdDelegate>)delegate
                 withClickableViews:(NSArray<UIView *> *_Nullable)clickableViews;
 
-// 广告类解除和view的绑定
+/// 广告类解除和view的绑定
 - (void)unregisterView;
 
 /**
  主动 请求广告数据
  */
 - (void)loadAdData;
-
 
 @end
 
@@ -99,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)nativeAd:(WMNativeAd *)nativeAd didFailWithError:(NSError *_Nullable)error;
 
 /**
- nativeAd 即将进入可是区域
+ nativeAd 即将进入可视区域
  @param nativeAd 广告位即将出现在可视区域
  */
 - (void)nativeAdDidBecomeVisible:(WMNativeAd *)nativeAd;

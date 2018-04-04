@@ -29,13 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, readonly, nonnull) UIButton *dislikeButton;
 
-- (instancetype)initWithIdentifier:(NSString *)slotID rootViewController:(nullable UIViewController *)rootViewController adSize:(CGSize)adSize withShowPosition:(WMAdSlotPosition)showPosition WithIsSupportDeepLink:(BOOL)isSupportDeepLink;
+- (instancetype)initWithIdentifier:(NSString *)slotID
+                rootViewController:(nullable UIViewController *)rootViewController
+                            adSize:(CGSize)adSize
+                  withShowPosition:(WMAdSlotPosition)showPosition
+             WithIsSupportDeepLink:(BOOL)isSupportDeepLink;
 
-- (instancetype)initWithIdentifier:(NSString *)slotID rootViewController:(nullable UIViewController *)rootViewController adSize:(CGSize)adSize withShowPosition:(WMAdSlotPosition)showPosition WithIsSupportDeepLink:(BOOL)isSupportDeepLink interval:(NSInteger)interval;
+- (instancetype)initWithIdentifier:(NSString *)slotID
+                rootViewController:(nullable UIViewController *)rootViewController
+                            adSize:(CGSize)adSize
+                  withShowPosition:(WMAdSlotPosition)showPosition
+             WithIsSupportDeepLink:(BOOL)isSupportDeepLink
+                          interval:(NSInteger)interval;
 
-- (instancetype)initWithSlotID:(NSString *)slotID size:(WMSize *)expectSize rootViewController:(UIViewController *)rootViewController;
+- (instancetype)initWithSlotID:(NSString *)slotID
+                          size:(WMSize *)expectSize
+            rootViewController:(UIViewController *)rootViewController;
 
-- (instancetype)initWithSlotID:(NSString *)slotID size:(WMSize *)expectSize rootViewController:(UIViewController *)rootViewController interval:(NSInteger)interval;
+- (instancetype)initWithSlotID:(NSString *)slotID
+                          size:(WMSize *)expectSize
+            rootViewController:(UIViewController *)rootViewController
+                      interval:(NSInteger)interval;
 
 - (void)loadAdData;
 

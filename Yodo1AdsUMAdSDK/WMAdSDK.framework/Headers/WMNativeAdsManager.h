@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSlot:(WMAdSlot * _Nullable) slot;
 
 - (void)registerTableView:(UITableView *)tableView
-       withViewController:(UIViewController *)viewController;
+                 delegate:(id<WMNativeAdsManagerDelegate> )delegate;
 
 - (void)unregisterTableView;
 

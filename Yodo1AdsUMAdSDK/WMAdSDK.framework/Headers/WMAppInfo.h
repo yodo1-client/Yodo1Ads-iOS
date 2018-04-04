@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WMDeepLink.h"
 #import "WMActionServiceDefine.h"
 
 
@@ -27,6 +26,11 @@
 // 下载量或使用人数
 @property (nonatomic, assign) NSInteger userNumber;
 
+/// 广告星级
+@property (nonatomic, assign) int score;
+
+///评分人数
+@property (nonatomic, assign) int commentNum;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError * __autoreleasing *)error;
 

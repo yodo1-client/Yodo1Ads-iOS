@@ -39,21 +39,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *logoImageView;
 
 - (void)registerViewForInteraction:(UIView *)view
-                withViewController:(UIViewController *)viewController;
+                          delegate:(id<WMTableViewCellDelegate>)delegate;
 
 - (void)registerViewForInteraction:(UIView *)view
                withInteractionType:(WMInteractionType)interactionType
-                withViewController:(UIViewController *)viewController;
+                          delegate:(id<WMTableViewCellDelegate>)delegate;
 
 - (void)registerViewForInteraction:(UIView *)view
-                withViewController:(UIViewController *)viewController
+                          delegate:(id<WMTableViewCellDelegate>)delegate
                 withClickableViews:(NSArray<UIView *> *_Nullable)clickableViews;
 
 - (void)registerViewForCustomInteraction:(UIView *)view
-                      withViewController:(UIViewController *)viewController;
+                                delegate:(id<WMTableViewCellDelegate>)delegate;
 
-- (void)didSelectWithViewController:(UIViewController *_Nullable)viewController;
-- (IBAction)dislikeAction:(id)sender;
+- (void)didSelectWithDelegate:(id<WMTableViewCellDelegate>)delegate;
+- (void)dislikeAction:(id)sender;
 @end
 
 

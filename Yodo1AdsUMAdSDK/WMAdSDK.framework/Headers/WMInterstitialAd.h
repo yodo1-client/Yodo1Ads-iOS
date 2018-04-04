@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 /**
-    点击插屏广告 回调该函数， 期间可能吊旗 AppStore ThirdApp WebView etc.
+    点击插屏广告 回调该函数， 期间可能调起 AppStore ThirdApp WebView etc.
  - Parameter interstitialAd: 产生该事件的 WMInterstitialAd 对象.
  */
 - (void)interstitialAdDidClick:(WMInterstitialAd *)interstitialAd;
