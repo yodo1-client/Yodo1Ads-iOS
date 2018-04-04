@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Advert'
-    s.version          = '1.0.12'
-    s.summary          = '2018.03.30 3月份list更新版本
-                            Yodo1Ads v1.0.12'
+    s.version          = '1.0.13'
+    s.summary          = '2018.04.04 4月份list更新版本
+                            Yodo1Ads v1.0.13'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -62,13 +62,13 @@ Pod::Spec.new do |s|
 
     s.dependency 'VideoUnityAds',       '2.0.3'
     s.dependency 'VideoMobvista',       '2.0.6'
-    s.dependency 'VideoSupersonic',     '2.0.3'
-    s.dependency 'VideoApplovin',       '2.0.3'
-    s.dependency 'VideoVungle',         '2.0.5'
+    s.dependency 'VideoSupersonic',     '2.0.4'
+    s.dependency 'VideoApplovin',       '2.0.4'
+    s.dependency 'VideoVungle',         '2.0.6'
     s.dependency 'VideoAdColony',       '2.0.1'
-    s.dependency 'VideoAdmob',          '2.0.1'
-    s.dependency 'VideoWmad',           '2.0.2'
-    s.dependency 'VideoTapjoy',         '2.0.3'
+    s.dependency 'VideoAdmob',          '2.0.2'
+    s.dependency 'VideoWmad',           '2.0.3'
+    s.dependency 'VideoTapjoy',         '2.0.4'
 
     # s.dependency 'VideoCentrixlink',    '2.0.1'
     # s.dependency 'VideoChance',         '2.0.1'
@@ -80,32 +80,32 @@ Pod::Spec.new do |s|
 
     # s.dependency 'VideoYouMi',          '2.0.1'
 
-    s.dependency 'VideoISAdColony',     '2.0.3'
-    s.dependency 'VideoISUnityAds',     '2.0.3'
-    s.dependency 'VideoISAppLovin',     '2.0.3'
-    s.dependency 'VideoISChartboost',   '2.0.3'
-    s.dependency 'VideoISFacebook',     '2.0.3'
-    # s.dependency 'VideoISTapjoy',       '2.0.1'
-    s.dependency 'VideoISVungle',       '2.0.3'
+    s.dependency 'VideoISAdColony',     '2.0.4'
+    s.dependency 'VideoISUnityAds',     '2.0.4'
+    s.dependency 'VideoISAppLovin',     '2.0.4'
+    s.dependency 'VideoISChartboost',   '2.0.4'
+    s.dependency 'VideoISFacebook',     '2.0.4'
+    # s.dependency 'VideoISTapjoy',       '2.0.6'
+    s.dependency 'VideoISVungle',       '2.0.4'
 
     ##Interstitial
-    s.dependency 'InterstitialAdmob',       '2.0.3'
-    s.dependency 'InterstitialApplovin',    '2.0.4'
-    s.dependency 'InterstitialSupersonic',  '1.0.3' 
+    s.dependency 'InterstitialAdmob',       '2.0.4'
+    s.dependency 'InterstitialApplovin',    '2.0.5'
+    s.dependency 'InterstitialSupersonic',  '1.0.4' 
     # s.dependency 'InterstitialGDTMob',      '2.0.3'
-    s.dependency 'InterstitialVungle',      '1.0.2'
+    s.dependency 'InterstitialVungle',      '1.0.3'
     # s.dependency 'InterstitialAdview',      '2.0.2'
     s.dependency 'InterstitialMobvista',    '1.0.2'
 
-    s.dependency 'InterstitialTapjoy',      '1.0.3' 
+    s.dependency 'InterstitialTapjoy',      '1.0.4' 
     # s.dependency 'InterstitialFacebook',    '1.0.1'
 
     # s.dependency 'InterstitialWmad',        '2.0.1'
 
     ##Banner
-    s.dependency 'BannerAdmob',         '2.0.3'
+    s.dependency 'BannerAdmob',         '2.0.4'
     s.dependency 'BannerAdview',        '1.0.2'
-    s.dependency 'BannerApplovin',      '1.0.3'
+    s.dependency 'BannerApplovin',      '1.0.4'
     # s.dependency 'BannerGDTMob',        '1.0.3'
     s.dependency 'BannerInmobi',        '1.0.2'
 
