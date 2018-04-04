@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoSupersonic'
-    s.version          = '2.0.3'
+    s.version          = '2.0.4'
     s.summary          = 'A short description of VideoSupersonic.'
 
     s.description      = <<-DESC
@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','2.0.2'
 
-    s.dependency 'Yodo1AdsSupersonic','1.0.1'
+    s.dependency 'Yodo1AdsSupersonic','1.0.2'
 end
