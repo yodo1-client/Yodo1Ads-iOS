@@ -77,7 +77,6 @@ Pod::Spec.new do |s|
     # s.dependency 'VideoFacebook',       '2.0.1'
     # s.dependency 'VideoInmobi',         '2.0.1'
     # s.dependency 'VideoKTplay',         '2.0.1'
-
     # s.dependency 'VideoYouMi',          '2.0.1'
 
     s.dependency 'VideoISAdColony',     '2.0.4'
@@ -85,8 +84,9 @@ Pod::Spec.new do |s|
     s.dependency 'VideoISAppLovin',     '2.0.4'
     s.dependency 'VideoISChartboost',   '2.0.4'
     s.dependency 'VideoISFacebook',     '2.0.4'
+    s.dependency 'VideoISVungle',       '2.0.5'
+
     # s.dependency 'VideoISTapjoy',       '2.0.6'
-    s.dependency 'VideoISVungle',       '2.0.4'
 
     ##Interstitial
     s.dependency 'InterstitialAdmob',       '2.0.4'
