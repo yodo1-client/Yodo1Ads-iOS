@@ -25,12 +25,18 @@
     BOOL bTalkingDataOpen;
     BOOL bGameAnalyticsOpen;
     BOOL bAppsFlyerOpen;
+    BOOL switchAppsFlyer;
 }
 
 @property (nonatomic, strong) NSMutableDictionary* analyticsDict;
 @property (nonatomic, strong) NSMutableDictionary* trackPropertys;
 
 - (NSString*)talkingDataDeviceId;
+
+///获取一个随机整数范围在[from,to]
+- (int)randomNumber:(int)from to:(int)to;
+
+- (BOOL)isAppsFlyerInstalled;
 
 @end
 
@@ -56,35 +62,62 @@
     return self;
 }
 
-- (void)initializeAnalyticsWithConfig:(AnalyticsInitConfig*)initConfig
+- (int)randomNumber:(int)from to:(int)to {
+    return (int)(from + (arc4random() % (to - from + 1)));
+}
+
+- (BOOL)isAppsFlyerInstalled {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isInstalled = [defaults boolForKey:@"YODO1_APPSFLYER"];
+    if (!isInstalled) {
+        NSInteger tempRandom = [self randomNumber:0 to:100];
+        [defaults setInteger:tempRandom forKey:@"YODO1_APPSFLYER_RANDOM"];
+        [defaults setBool:YES forKey:@"YODO1_APPSFLYER"];
+        [defaults synchronize];
+    }
+    BOOL appsFlyerInstalled = NO;
+    NSInteger random = [defaults integerForKey:@"YODO1_APPSFLYER_RANDOM"];
+    
+    NSString* randomAppsFlyer = [Yodo1OnlineParameter stringParams:@"AppsFlyerRandom" defaultValue:@"0"];
+    NSInteger onlineNums = [randomAppsFlyer integerValue];
+    
+    if (random > 0 && random <= onlineNums) { //randomAppsFlyer 为0的时候关闭
+        appsFlyerInstalled = YES;
+    }
+    return appsFlyerInstalled;
+}
+
+- (void)initializeAnalyticsWithConfig:(AnalyticsInitConfig*)initConfig  
 {
-    NSString* talkingDataEvent = [Yodo1OnlineParameter stringParams:@"TalkingDataEvent" defaultValue:@"on"];
+    NSString* talkingDataEvent = [Yodo1OnlineParameter stringParams:@"switchTalkingDataEvent" defaultValue:@"on"];
     if ([talkingDataEvent isEqualToString:@"off"]) {//默认是开着
         bTalkingDataOpen = NO;
     }else{
         bTalkingDataOpen = YES;
     }
     
-    NSString* gameAnalyticsEvent = [Yodo1OnlineParameter stringParams:@"GameAnalyticsEvent" defaultValue:@"on"];
+    NSString* gameAnalyticsEvent = [Yodo1OnlineParameter stringParams:@"switchGameAnalyticsEvent" defaultValue:@"on"];
     if ([gameAnalyticsEvent isEqualToString:@"off"]) {//默认是开着
         bGameAnalyticsOpen = NO;
     }else{
         bGameAnalyticsOpen = YES;
     }
     
-    NSString* umengEvent = [Yodo1OnlineParameter stringParams:@"UmengEvent" defaultValue:@"on"];
+    NSString* umengEvent = [Yodo1OnlineParameter stringParams:@"switchUmengEvent" defaultValue:@"on"];
     if ([umengEvent isEqualToString:@"off"]) {//默认是开着
         bUmengOpen = NO;
     }else{
         bUmengOpen = YES;
     }
     
-    NSString* appsFlyerEvent = [Yodo1OnlineParameter stringParams:@"AppsFlyerEvent" defaultValue:@"on"];
+    NSString* appsFlyerEvent = [Yodo1OnlineParameter stringParams:@"switchAppsFlyerEvent" defaultValue:@"on"];
     if ([appsFlyerEvent isEqualToString:@"off"]) {//默认是开着
         bAppsFlyerOpen = NO;
     }else{
         bAppsFlyerOpen = YES;
     }
+    
+    switchAppsFlyer = [self isAppsFlyerInstalled];
     
     NSDictionary* dic = [[Yodo1Registry sharedRegistry] getClassesStatusType:@"analyticsType"
                                                               replacedString:@"AnalyticsAdapter"
@@ -101,7 +134,7 @@
             if (!bUmengOpen && [key integerValue] == AnalyticsTypeUmeng) {
                 continue;
             }
-            if (!bAppsFlyerOpen && [key integerValue] == AnalyticsTypeAppsFlyer) {
+            if (!bAppsFlyerOpen && !switchAppsFlyer && [key integerValue] == AnalyticsTypeAppsFlyer) {
                 continue;
             }
             
