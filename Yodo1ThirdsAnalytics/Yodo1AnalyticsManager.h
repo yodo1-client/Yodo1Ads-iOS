@@ -38,6 +38,11 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  */
 - (void)initializeAnalyticsWithConfig:(AnalyticsInitConfig*)initConfig;
 
+/*
+ * appsFlyer安装判断
+ */
+- (BOOL)isAppsFlyerInstalled;
+
 /**
  *  使用之前，先初始化initWithAnalytics
  *

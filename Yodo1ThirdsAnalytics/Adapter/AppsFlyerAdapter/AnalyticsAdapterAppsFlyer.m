@@ -10,7 +10,7 @@
 #import <AppsFlyerLib/AppsFlyerTracker.h>
 #import "Yodo1Commons.h"
 
-NSString* const YODO1_ANALYTICS_APPSFLYER_DEV_KEY      = @"AppsFlyerDevKey";
+NSString* const YODO1_ANALYTICS_APPSFLYER_DEV_KEY       = @"AppsFlyerDevKey";
 NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 
 
@@ -28,16 +28,18 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 - (id)initWithAnalytics:(AnalyticsInitConfig *)initConfig {
     self = [super init];
     if (self) {
-        NSString* devkey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_DEV_KEY];
-        NSString* appleAppId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_APPLE_APPID];
-        NSAssert(devkey != nil||appleAppId != nil, @"AppsFlyer devKey 没有设置");
-        [[NSNotificationCenter defaultCenter]addObserver:self
-                                                selector:@selector(applicationDidBecomeActive:)//前台进入后台
-                                                    name:UIApplicationDidBecomeActiveNotification
-                                                  object:nil];
-        
-        [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
-        [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
+        if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
+            NSString* devkey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_DEV_KEY];
+            NSString* appleAppId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_APPLE_APPID];
+            NSAssert(devkey != nil||appleAppId != nil, @"AppsFlyer devKey 没有设置");
+            [[NSNotificationCenter defaultCenter]addObserver:self
+                                                    selector:@selector(applicationDidBecomeActive:)//前台进入后台
+                                                        name:UIApplicationDidBecomeActiveNotification
+                                                      object:nil];
+            
+            [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
+            [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
+        }
     }
     return self;
 }
@@ -49,7 +51,6 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
                           eventData:(NSDictionary *)eventData
 {
-    [[AppsFlyerTracker sharedTracker] trackEvent:eventName withValues:eventData];
 
 }
 
@@ -57,23 +58,26 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
                                 price:(NSString*)price
                              currency:(NSString*)currency
                         transactionId:(NSString*)transactionId {
-    
-    [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifier
-                                                              price:price
-                                                           currency:currency
-                                                      transactionId:transactionId
-                                               additionalParameters:@{}
-                                                            success:^(NSDictionary *result){
-                                                                NSLog(@"Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
-                                                            } failure:^(NSError *error, id response) {
-                                                                NSLog(@"response = %@", response);
-                                                            }];
+    if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
+        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifier
+                                                                  price:price
+                                                               currency:currency
+                                                          transactionId:transactionId
+                                                   additionalParameters:@{}
+                                                                success:^(NSDictionary *result){
+                                                                    NSLog(@"Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
+                                                                } failure:^(NSError *error, id response) {
+                                                                    NSLog(@"response = %@", response);
+                                                                }];
+    }
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter]removeObserver:self
-                                                   name:UIApplicationDidBecomeActiveNotification
-                                                 object:nil];
+     if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
+        [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                       name:UIApplicationDidBecomeActiveNotification
+                                                     object:nil];
+     }
 }
 
 @end
