@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '2.0.4'
-    s.summary          = 'v2.0.4,添加AppsFlyer 内付费验证和事件统计'
+    s.version          = '2.0.5'
+    s.summary          = 'v2.0.5,添加AppsFlyer 内付费验证和事件统计,添加内付费返回参数ops 验证失败'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -48,5 +48,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','2.0.4'
     s.dependency 'Yodo1Reachability','1.0.2'
     s.dependency 'Yodo1KeyInfo','2.0.1'
-    s.dependency 'Yodo1ThirdsAnalytics','1.0.0'
+    s.dependency 'Yodo1ThirdsAnalytics','1.0.1'
 end

@@ -761,11 +761,14 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         PaymentProduct* paymentProduct = [self removeAppstoreRequestListWithProductId:transaction.payment.productIdentifier
                                                                            withUserId:gameUserId
                                                                      isSaveVerifyList:transaction];
-        //AppsFlyer 数据统计
-        [[Yodo1AnalyticsManager sharedInstance]validateAndTrackInAppPurchase:transaction.payment.productIdentifier
-                                                                       price:paymentProduct.price
-                                                                    currency:paymentProduct.currency
-                                                               transactionId:transaction.transactionIdentifier];
+        [self productInfoWithProductId:paymentProduct.uniformProductId
+                              callback:^(NSString *uniformProductId, ProductInfo *productInfo) {
+            //AppsFlyer 数据统计
+            [[Yodo1AnalyticsManager sharedInstance]validateAndTrackInAppPurchase:transaction.payment.productIdentifier
+                                                                           price:productInfo.productPrice
+                                                                        currency:productInfo.currency
+                                                                   transactionId:transaction.transactionIdentifier];
+        }];
         NSLog(@"%@",paymentProduct.uniformProductId);
         if ([UCenterManager sharedInstance].paymentCompletionBlock && paymentProduct) {
             
@@ -795,9 +798,8 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                                 }else{
                                                                     [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,response,[UCenterManager sharedInstance].extra);
                                                                 }
-                                                                
                                                             }else{
-                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentFail,response,[UCenterManager sharedInstance].extra);
+                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentValidationFail,response,[UCenterManager sharedInstance].extra);
                                                                 if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
                                                                     [self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier];
                                                                 }

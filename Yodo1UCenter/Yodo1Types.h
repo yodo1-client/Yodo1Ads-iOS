@@ -39,6 +39,7 @@ typedef enum {
     PaymentCannel = 0,      //取消支付
     PaymentSuccess,         //支付成功
     PaymentFail,            //支付失败
+    PaymentValidationFail   //ops 验证失败
 }PaymentState;
 
 typedef enum {
