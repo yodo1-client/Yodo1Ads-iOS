@@ -119,7 +119,7 @@ static SDKConfig* kYodo1Config = nil;
 #endif
 }
 
-- (void)onlineParameterPaNotifi:(NSNotification *)notif {
++ (void)onlineParameterPaNotifi:(NSNotification *)notif {
     AnalyticsInitConfig * config = [[AnalyticsInitConfig alloc]init];
     config.gaCustomDimensions01 = kYodo1Config.gaCustomDimensions01;
     config.gaCustomDimensions02 = kYodo1Config.gaCustomDimensions02;
