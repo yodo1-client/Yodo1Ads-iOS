@@ -43,6 +43,8 @@ NSString* const kYodo1ChannelId     = @"AppStore";
 
 @end
 
+static SDKConfig* kYodo1Config = nil;
+
 @interface Yodo1Manager ()
 
 @end
@@ -59,14 +61,11 @@ NSString* const kYodo1ChannelId     = @"AppStore";
 #endif
     
 #ifdef YODO1_ANALYTICS
-    AnalyticsInitConfig * config = [[AnalyticsInitConfig alloc]init];
-    config.gaCustomDimensions01 = sdkConfig.gaCustomDimensions01;
-    config.gaCustomDimensions02 = sdkConfig.gaCustomDimensions02;
-    config.gaCustomDimensions03 = sdkConfig.gaCustomDimensions03;
-    config.gaResourceCurrencies = sdkConfig.gaResourceCurrencies;
-    config.gaResourceItemTypes = sdkConfig.gaResourceItemTypes;
-    [[Yodo1AnalyticsManager sharedInstance]initializeAnalyticsWithConfig:config];
-    
+    kYodo1Config = sdkConfig;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onlineParameterPaNotifi:)
+                                                 name:kYodo1OnlineConfigFinishedNotification
+                                               object:nil];
     //初始化Yodo1Track
     NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
     [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
@@ -120,8 +119,23 @@ NSString* const kYodo1ChannelId     = @"AppStore";
 #endif
 }
 
+- (void)onlineParameterPaNotifi:(NSNotification *)notif {
+    AnalyticsInitConfig * config = [[AnalyticsInitConfig alloc]init];
+    config.gaCustomDimensions01 = kYodo1Config.gaCustomDimensions01;
+    config.gaCustomDimensions02 = kYodo1Config.gaCustomDimensions02;
+    config.gaCustomDimensions03 = kYodo1Config.gaCustomDimensions03;
+    config.gaResourceCurrencies = kYodo1Config.gaResourceCurrencies;
+    config.gaResourceItemTypes = kYodo1Config.gaResourceItemTypes;
+    [[Yodo1AnalyticsManager sharedInstance]initializeAnalyticsWithConfig:config];
+}
+
 - (void)dealloc {
-    
+#ifdef YODO1_ANALYTICS
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:kYodo1OnlineConfigFinishedNotification
+                                                 object:nil];
+    kYodo1Config = nil;
+#endif
 }
 
 + (void)handleOpenURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication {
