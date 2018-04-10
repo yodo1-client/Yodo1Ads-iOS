@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v1.0.12
+//  v1.0.13
 //
 
 FOUNDATION_EXPORT NSString* const kYodo1AdsVersion;
