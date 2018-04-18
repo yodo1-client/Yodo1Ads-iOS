@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Commons','2.0.1'
     s.dependency 'Yodo1OnlineParameter','1.0.6'
-    s.dependency 'Yodo1Analytics','2.0.2'
+    s.dependency 'Yodo1Analytics','2.0.3'
     s.dependency 'Yodo1AdsConfig','1.0.0'
     s.dependency 'Yodo1GDCTimer','1.0.0'
 end
