@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Banner'
-    s.version          = '2.0.2'
+    s.version          = '2.0.3'
     s.summary          = 'A short description of Yodo1Banner.'
 
     s.description      = <<-DESC
@@ -35,7 +35,8 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
 
     s.dependency 'Yodo1Commons','2.0.1'
-    s.dependency 'Yodo1OnlineParameter','1.0.5'
+    s.dependency 'Yodo1OnlineParameter','1.0.6'
     s.dependency 'Yodo1Analytics','2.0.2'
     s.dependency 'Yodo1AdsConfig','1.0.0'
+    s.dependency 'Yodo1GDCTimer','1.0.0'
 end
