@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '1.0.1'
+    s.version          = '1.0.2'
     s.summary          = 'A short description of Yodo1ThirdsAnalytics.'
 
     s.description      = <<-DESC
@@ -44,7 +44,7 @@ TODO: Add long description of the pod here.
     s.dependency 'Yodo1MobClick','1.0.1'
     s.dependency 'Yodo1GameAnalytics','1.0.1'
     s.dependency 'Yodo1KeyInfo','2.0.1'
-    s.dependency 'Yodo1OnlineParameter','1.0.5'
+    s.dependency 'Yodo1OnlineParameter','1.0.6'
     s.dependency 'Yodo1AppsFlyer','1.0.0'
 
 end
