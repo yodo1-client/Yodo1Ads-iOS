@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '1.0.5'
+    s.version          = '1.0.6'
     s.summary          = '游道易 在线参数sdk.'
 
     s.description      = <<-DESC
