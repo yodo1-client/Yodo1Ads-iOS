@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoFacebook'
-    s.version          = '2.0.3'
+    s.version          = '2.0.4'
     s.summary          = 'FBAudienceNetwork SDK V4.27.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.2'
+    s.dependency 'Yodo1Video','2.0.3'
 
     s.dependency 'Yodo1AdsFacebook','1.0.1'
 end
