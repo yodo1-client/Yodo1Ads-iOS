@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialSupersonic'
-    s.version          = '1.0.4'
+    s.version          = '1.0.5'
     s.summary          = 'Interstitial Supersonic'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'Yodo1Interstitial','2.0.2'
+    s.dependency 'Yodo1Interstitial','2.0.3'
     s.dependency 'Yodo1AdsSupersonic','1.0.2'
 
 end
