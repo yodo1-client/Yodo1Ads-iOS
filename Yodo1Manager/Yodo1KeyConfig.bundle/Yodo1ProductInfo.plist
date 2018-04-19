@@ -7,7 +7,7 @@
 		<key>ProductName</key>
 		<string>Cash Cow</string>
 		<key>ChannelProductId</key>
-		<string>com.yodo1.TheGate.coins1</string>
+		<string>com.yodo1.rod.coins1</string>
 		<key>ProductDescription</key>
 		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
 		<key>ProductPrice</key>
@@ -24,7 +24,7 @@
 		<key>ProductName</key>
 		<string>A Handful of Coins</string>
 		<key>ChannelProductId</key>
-		<string>com.yodo1.TheGate.coins2</string>
+		<string>com.yodo1.rod.coins2</string>
 		<key>ProductDescription</key>
 		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
 		<key>ProductPrice</key>
@@ -41,7 +41,7 @@
 		<key>ProductName</key>
 		<string>A Pile of Coins</string>
 		<key>ChannelProductId</key>
-		<string>com.yodo1.TheGate.coins3</string>
+		<string>com.yodo1.rod.coins3</string>
 		<key>ProductDescription</key>
 		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
 		<key>PriceDisplay</key>
@@ -58,7 +58,7 @@
 		<key>ProductName</key>
 		<string>A Mountain of Coins</string>
 		<key>ChannelProductId</key>
-		<string>com.yodo1.TheGate.coins4</string>
+		<string>com.yodo1.rod.coins4</string>
 		<key>ProductDescription</key>
 		<string>购买几个金币，金币可以用来召唤使徒，升级技能，复活等</string>
 		<key>ProductPrice</key>

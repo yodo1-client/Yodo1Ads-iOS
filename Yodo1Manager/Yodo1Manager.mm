@@ -119,7 +119,8 @@ static SDKConfig* kYodo1Config = nil;
 #endif
 }
 
-- (void)onlineParameterPaNotifi:(NSNotification *)notif {
+#ifdef YODO1_ANALYTICS
++ (void)onlineParameterPaNotifi:(NSNotification *)notif {
     AnalyticsInitConfig * config = [[AnalyticsInitConfig alloc]init];
     config.gaCustomDimensions01 = kYodo1Config.gaCustomDimensions01;
     config.gaCustomDimensions02 = kYodo1Config.gaCustomDimensions02;
@@ -128,6 +129,7 @@ static SDKConfig* kYodo1Config = nil;
     config.gaResourceItemTypes = kYodo1Config.gaResourceItemTypes;
     [[Yodo1AnalyticsManager sharedInstance]initializeAnalyticsWithConfig:config];
 }
+#endif
 
 - (void)dealloc {
 #ifdef YODO1_ANALYTICS
