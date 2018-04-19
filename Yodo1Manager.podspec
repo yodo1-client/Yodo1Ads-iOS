@@ -271,7 +271,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialVungle','1.0.5'
+        ss.dependency 'InterstitialVungle','1.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
 
