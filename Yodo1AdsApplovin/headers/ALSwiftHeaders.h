@@ -35,6 +35,7 @@
 #import "ALIncentivizedInterstitialAd.h"
 #import "ALInterstitialAd.h"
 #import "ALMediationProvider.h"
+#import "ALPrivacySettings.h"
 
 // Native Ads
 #import "ALNativeAd.h"
