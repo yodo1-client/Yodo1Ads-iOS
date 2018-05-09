@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2015 Tapjoy, Inc.
+// Copyright (c) 2015 - 2018 Tapjoy, Inc.
 // All rights reserved.
 //
 

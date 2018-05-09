@@ -1,4 +1,4 @@
-// Copyright (C) 2014 by Tapjoy Inc.
+// Copyright (C) 2014 - 2018 by Tapjoy Inc.
 //
 // This file is part of the Tapjoy SDK.
 //
@@ -93,8 +93,6 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  *
  * TJC_OPTION_DISABLE_GENERIC_ERROR_ALERT : BOOL to disable our default error dialogs
  * 
- * TJC_OPTION_MEDIATION_TIMEOUT: int used to set custom timeout interval for mediated requests (seconds)
- *
  * @return n/a
  */
 + (void)connect:(NSString *)sdkKey options:(NSDictionary *)optionsDict;
