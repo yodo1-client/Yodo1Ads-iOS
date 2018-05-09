@@ -3,7 +3,7 @@
 //
 //  Created by yixian huang on 2017/7/26.
 //
-//  sdk version 1.0.6
+//  sdk version 1.0.7
 //
 
 #ifndef Yodo1Analytics_h
