@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '1.0.6'
-    s.summary          = '游道易 在线参数sdk.'
+    s.version          = '1.0.7'
+    s.summary          = '修复和Inmobi命名冲突'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
