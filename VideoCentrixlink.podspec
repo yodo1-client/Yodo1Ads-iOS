@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoCentrixlink'
-    s.version          = '2.0.4'
+    s.version          = '2.0.5'
     s.summary          = 'A short description of VideoCentrixlink.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.3'
+    s.dependency 'Yodo1Video','2.0.4'
     s.dependency 'Yodo1AdsCentrixlink','1.0.1'
 
 end
