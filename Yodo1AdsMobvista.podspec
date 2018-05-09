@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMobvista'
-    s.version          = '1.0.5'
-    s.summary          = '更新Yodo1MobvistaManager.'
+    s.version          = '1.0.6'
+    s.summary          = 'Mobvista v3.8.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
