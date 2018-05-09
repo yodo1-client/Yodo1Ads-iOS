@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialApplovin'
-    s.version          = '2.0.6'
+    s.version          = '2.0.7'
     s.summary          = 'A short description of InterstitialApplovin.'
 
     s.description      = <<-DESC
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
 
-    s.dependency 'Yodo1Interstitial','2.0.3'
-    s.dependency 'Yodo1AdsApplovin','1.0.3'
+    s.dependency 'Yodo1Interstitial','2.0.4'
+    s.dependency 'Yodo1AdsApplovin','1.0.4'
 
 end
