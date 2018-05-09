@@ -1,4 +1,29 @@
 =============================================
+V1.0.9— 2018-05-03
+1.更新 7.1.1
+- Fixed a remote crash which can happen due to config update.
+
+=============================================
+V1.0.8— 2018-04-23
+1.更新 7.1.0
+Requirements:
+- An InMobi account ID and placement ID.
+- Xcode 9.0 or later.
+- Runtime of iOS 8.0 or later.
+- Added support for GDPR compliance
+- Added skip callback to Native Ads
+- Removed support for iOS 7 devices. SDK will not initialise if the device is below iOS 8 [iOS 8 is deprecated as of v7.0.0]
+- Fixed a crash in carousel ads
+- Performance improvement by offloading certain tasks to the background threads
+- Bug Fixes
+
+=============================================
+V1.0.7— 2018-01-26
+1.更新 7.0.4
+- Support for iPhone X
+- Bug Fixes
+
+=============================================
 V1.0.6— 2017-12-01
 1.更新 7.0.1
 
