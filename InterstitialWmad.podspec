@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialWmad'
-    s.version          = '2.0.6'
+    s.version          = '2.0.7'
     s.summary          = '今日头条插屏广告'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,8 +33,8 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Interstitial','2.0.3'
-    s.dependency 'Yodo1AdsUMAdSDK','1.0.3'
+    s.dependency 'Yodo1Interstitial','2.0.4'
+    s.dependency 'Yodo1AdsUMAdSDK','1.0.4'
 
 end
 
