@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsGDTMob'
-    s.version          = '1.0.1'
-    s.summary          = '广点通sdk v4.7.0'
+    s.version          = '1.0.2'
+    s.summary          = '广点通sdk v4.7.4'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

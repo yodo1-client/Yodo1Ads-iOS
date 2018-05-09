@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
+#import "GDTSDKDefines.h"
 
 extern NSString* const GDTNativeAdDataKeyTitle;
 extern NSString* const GDTNativeAdDataKeyDesc;
@@ -94,9 +95,10 @@ extern NSString* const GDTNativeAdDataKeyImgList;
 
 /**
  *  构造方法
- *  详解：appkey是应用id, placementId是广告位id
+ *  详解：appId - 媒体 ID
+ *       placementId - 广告位 ID
  */
--(instancetype)initWithAppkey:(NSString *)appkey placementId:(NSString *)placementId;
+- (instancetype)initWithAppId:(NSString *)appId placementId:(NSString *)placementId;
 
 /**
  *  广告发起请求方法
@@ -120,5 +122,8 @@ extern NSString* const GDTNativeAdDataKeyImgList;
  *      @param nativeAdData 用户点击的广告数据对象
  */
 -(void)clickAd:(GDTNativeAdData *)nativeAdData;
+
+#pragma mark - DEPRECATED
+- (instancetype)initWithAppkey:(NSString *)appkey placementId:(NSString *)placementId GDT_DEPRECATED_MSG_ATTRIBUTE("use initWithAppId:placementId: instead.");
 
 @end

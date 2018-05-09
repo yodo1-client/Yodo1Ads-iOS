@@ -26,5 +26,10 @@
  */
 + (void) setHttpsOn;
 
+/**
+ * 获取 SDK 版本
+ */
+
++ (NSString *)sdkVersion;
 
 @end
