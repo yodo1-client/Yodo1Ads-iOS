@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISTapjoy'
-    s.version          = '2.0.7'
+    s.version          = '2.0.8'
     s.summary          = 'Adapter和SDK分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -39,8 +39,8 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3.0','z','stdc++'
 
-    s.dependency 'VideoSupersonic','2.0.5'
+    s.dependency 'VideoSupersonic','2.0.6'
 
-    s.dependency 'Yodo1AdsTapjoy', '1.0.4'
+    s.dependency 'Yodo1AdsTapjoy', '1.0.5'
 
 end
