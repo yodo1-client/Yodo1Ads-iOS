@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.11'
-    s.summary          = 'v2.0.11- 2018-05-10
+    s.version          = '2.0.12'
+    s.summary          = 'v2.0.12- 2018-05-14
                           1、修复数据统计BUG
                           2、更新Mobvista v3.8.0,Vungle v6.2.0,
                           Applovin v5.0.1,UnityAds v2.2.1,Inmobi v7.1.1,
