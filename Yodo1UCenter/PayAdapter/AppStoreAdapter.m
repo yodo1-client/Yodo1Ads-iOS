@@ -167,7 +167,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         
         NSString  *path=[[NSBundle mainBundle] pathForResource:@"Yodo1KeyConfig.bundle/Yodo1ProductInfo" ofType:@"plist"];
         _productIdDic =[NSMutableDictionary dictionaryWithContentsOfFile:path];
-        NSAssert([_productIdDic count] > 1, @"Yodo1ProductInfo.plist 没有配置产品ID!");
+        NSAssert([_productIdDic count] > 0, @"Yodo1ProductInfo.plist 没有配置产品ID!");
         if(_productIdDic != nil){
             for (id key in _productIdDic){
                 NSDictionary* pay = [_productIdDic objectForKey:key];

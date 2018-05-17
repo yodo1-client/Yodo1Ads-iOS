@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '2.0.7'
-    s.summary          = 'v2.0.5,添加AppsFlyer 内付费验证和事件统计,添加内付费返回参数ops 验证失败'
+    s.version          = '2.0.8'
+    s.summary          = 'fix bug'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
