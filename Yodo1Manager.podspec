@@ -1,11 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '2.0.12'
-    s.summary          = 'v2.0.12- 2018-05-14
-                          1、修复数据统计BUG
-                          2、更新Mobvista v3.8.0,Vungle v6.2.0,
-                          Applovin v5.0.1,UnityAds v2.2.1,Inmobi v7.1.1,
-                          GDTMob v4.7.4,Tapjoy v11.12.1
+    s.version          = '2.0.13'
+    s.summary          = 'v2.0.13- 2018-05-17
+                          1、fix Yodo1UCenter bug
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -70,7 +67,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','2.0.7'
+        ss.dependency 'Yodo1UCenter','2.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
     
