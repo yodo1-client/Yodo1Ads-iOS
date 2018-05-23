@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Advert'
-    s.version          = '1.0.15'
-    s.summary          = '2018.05.010 5月份list更新版本
-                            Yodo1Ads v1.0.15'
+    s.version          = '1.0.16'
+    s.summary          = '2018.05.23 5月份list更新版本
+                            Yodo1Ads v1.0.16'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -63,7 +63,7 @@ Pod::Spec.new do |s|
     s.dependency 'VideoUnityAds',       '2.0.5'
     s.dependency 'VideoMobvista',       '2.0.8'
     # s.dependency 'VideoSupersonic',     '2.0.6'
-    s.dependency 'VideoApplovin',       '2.0.6'
+    #s.dependency 'VideoApplovin',       '2.0.6'
     s.dependency 'VideoVungle',         '2.0.8'
     # s.dependency 'VideoAdColony',       '2.0.3'
     s.dependency 'VideoAdmob',          '2.0.4'
@@ -97,7 +97,7 @@ Pod::Spec.new do |s|
     # s.dependency 'InterstitialAdview',      '2.0.2'
     s.dependency 'InterstitialMobvista',    '1.0.4'
 
-    # s.dependency 'InterstitialTapjoy',      '1.0.6' 
+    s.dependency 'InterstitialTapjoy',      '1.0.6' 
     # s.dependency 'InterstitialFacebook',    '1.0.1'
 
     # s.dependency 'InterstitialWmad',        '2.0.1'
