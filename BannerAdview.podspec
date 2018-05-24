@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerAdview'
-    s.version          = '1.0.4'
+    s.version          = '1.0.5'
     s.summary          = 'Adview Banner'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -34,6 +34,6 @@ Pod::Spec.new do |s|
     }
 
     s.frameworks = 'UIKit'
-    s.dependency 'Yodo1Banner','2.0.4'
+    s.dependency 'Yodo1Banner','2.0.5'
     s.dependency 'Yodo1AdsAdview','1.0.1'
 end
