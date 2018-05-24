@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '1.0.7'
-    s.summary          = '修复和Inmobi命名冲突'
+    s.version          = '2.0.0'
+    s.summary          = '配合最新广告后台管理使用'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

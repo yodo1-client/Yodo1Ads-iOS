@@ -3,7 +3,7 @@
 //
 //  Created by yixian huang on 2017/7/24.
 //
-//  sdk version 1.0.6
+//  sdk version 2.0.0
 //
 
 #ifndef Yodo1OnlineParameter_h
