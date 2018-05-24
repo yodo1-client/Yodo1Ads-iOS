@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Video'
-    s.version          = '2.0.4'
+    s.version          = '2.0.5'
     s.summary          = '2018.1.3 Github'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'Foundation', 'UIKit'
 
     s.dependency 'Yodo1Commons','2.0.1'
-    s.dependency 'Yodo1OnlineParameter','1.0.7'
-    s.dependency 'Yodo1Analytics','2.0.4'
-    s.dependency 'Yodo1AdsConfig','1.0.2'
+    s.dependency 'Yodo1OnlineParameter','2.0.0'
+    s.dependency 'Yodo1Analytics','2.0.5'
+    s.dependency 'Yodo1AdsConfig','1.0.3'
 end
