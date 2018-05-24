@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialAdview'
-    s.version          = '2.0.4'
+    s.version          = '2.0.5'
     s.summary          = 'Adview竞价广告'
 
     s.description      = <<-DESC
@@ -34,6 +34,6 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
 
-    s.dependency 'Yodo1Interstitial','2.0.4'
+    s.dependency 'Yodo1Interstitial','2.0.5'
     s.dependency 'Yodo1AdsAdview','1.0.1'
 end
