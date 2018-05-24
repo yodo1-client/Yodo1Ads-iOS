@@ -314,7 +314,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoChartboost','2.0.6'
+        ss.dependency 'VideoChartboost','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -332,7 +332,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoFacebook','2.0.5'
+        ss.dependency 'VideoFacebook','2.0.6'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -341,7 +341,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoMobvista','2.0.8'
+        ss.dependency 'VideoMobvista','2.0.9'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -350,7 +350,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoTapjoy','2.0.6'
+        ss.dependency 'VideoTapjoy','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -359,7 +359,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoUnityAds','2.0.5'
+        ss.dependency 'VideoUnityAds','2.0.6'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -368,7 +368,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoVungle','2.0.8'
+        ss.dependency 'VideoVungle','2.0.9'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -386,7 +386,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoInmobi','2.0.4'
+        ss.dependency 'VideoInmobi','2.0.5'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -395,7 +395,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoSupersonic','2.0.6'
+        ss.dependency 'VideoSupersonic','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -413,7 +413,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoAdmob','2.0.4'
+        ss.dependency 'VideoAdmob','2.0.5'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -422,7 +422,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoAdColony','2.0.3'
+        ss.dependency 'VideoAdColony','2.0.4'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -431,7 +431,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoWmad','2.0.5'
+        ss.dependency 'VideoWmad','2.0.6'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -442,7 +442,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISAppLovin','2.0.6'
+        ss.dependency 'VideoISAppLovin','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -451,7 +451,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISChartboost','2.0.6'
+        ss.dependency 'VideoISChartboost','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -460,7 +460,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISUnityAds','2.0.6'
+        ss.dependency 'VideoISUnityAds','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -469,7 +469,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISVungle','2.0.7'
+        ss.dependency 'VideoISVungle','2.0.8'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -478,7 +478,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISTapjoy','2.0.8'
+        ss.dependency 'VideoISTapjoy','2.0.9'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -487,7 +487,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISFacebook','2.0.6'
+        ss.dependency 'VideoISFacebook','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
@@ -496,7 +496,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISAdColony','2.0.6'
+        ss.dependency 'VideoISAdColony','2.0.7'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',versions
     end
