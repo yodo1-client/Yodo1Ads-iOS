@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoTapjoy'
-    s.version          = '2.0.6'
+    s.version          = '2.0.7'
     s.summary          = '更新Tapjoy sdk 11.12.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','2.0.4'
+    s.dependency 'Yodo1Video','2.0.5'
 
     s.dependency 'Yodo1AdsTapjoy','1.0.5'
 end
