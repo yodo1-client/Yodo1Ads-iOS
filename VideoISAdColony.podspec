@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdColony'
-    s.version          = '2.0.6'
+    s.version          = '2.0.7'
     s.summary          = 'Adcolony SDK 和 adapter 分离(更新Adcolony 3.2.1)'
 
     s.description      = <<-DESC
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'VideoSupersonic','2.0.6'
+    s.dependency 'VideoSupersonic','2.0.7'
 
     s.dependency 'Yodo1AdsAdColony','1.0.1'
     
