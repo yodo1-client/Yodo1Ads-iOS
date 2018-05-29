@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1GameAnalytics'
-    s.version          = '1.0.1'
-    s.summary          = 'GameAnalytics V2.2.7'
+    s.version          = '1.0.2'
+    s.summary          = 'GameAnalytics V2.2.18'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
