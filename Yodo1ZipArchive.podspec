@@ -1,23 +1,22 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ZipArchive'
-    s.version          = '1.0.2'
+    s.version          = '3.0.0'
     s.summary          = 'A short description of ZipArchive.'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = "#{s.name}"                  
-    s.homepage         = 'http://git.yodo1.cn/'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '7.0'
 
-    s.source_files = tags + '/*.{h,m}',tags + '/minizip/crypt.h',tags + '/minizip/ioapi.{c,h}',tags + '/minizip/mztools.{c,h}',tags + '/minizip/unzip.{c,h}',tags + '/minizip/zip.{c,h}'
-    s.public_header_files = tags + '/*.h',tags + '/minizip/crypt.h', tags + '/minizip/ioapi.h', tags + '/minizip/mztools.h', tags + '/minizip/unzip.h', tags + '/minizip/zip.h'
+    s.source_files = "#{s.version}" + '/*.{h,m}',"#{s.version}" + '/minizip/crypt.h',"#{s.version}" + '/minizip/ioapi.{c,h}',"#{s.version}" + '/minizip/mztools.{c,h}',"#{s.version}" + '/minizip/unzip.{c,h}',"#{s.version}" + '/minizip/zip.{c,h}'
+    s.public_header_files = "#{s.version}" + '/*.h',"#{s.version}" + '/minizip/crypt.h', "#{s.version}" + '/minizip/ioapi.h', "#{s.version}" + '/minizip/mztools.h', "#{s.version}" + '/minizip/unzip.h', "#{s.version}" + '/minizip/zip.h'
 
     s.libraries = 'z'
     s.requires_arc = true
