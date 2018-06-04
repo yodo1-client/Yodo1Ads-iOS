@@ -1,31 +1,30 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsVungle'
-    s.version          = '1.0.6'
+    s.version          = '3.0.0'
     s.summary          = '更新sdk v6.2.0,支持DGPR'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = "#{s.name}"                    
-    s.homepage         = 'http://git.yodo1.cn'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '7.0'
 
-    s.source_files = tags + '/VungleSDK.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/VungleSDK.framework/Headers/*.h'
 
-    s.public_header_files = tags + '/VungleSDK.framework/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/VungleSDK.framework/Headers/*.h'
 
-    #s.resources = tags + '/Classes/VungleSDK.embeddedframework/Resources/*.*'
+    #s.resources = "#{s.version}" + '/Classes/VungleSDK.embeddedframework/Resources/*.*'
     
-    s.preserve_path = 'ChangeLog.txt'
+    s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
-    s.vendored_frameworks = tags + '/VungleSDK.framework'
+    s.vendored_frameworks = "#{s.version}" + '/VungleSDK.framework'
 
     s.requires_arc = true
 
