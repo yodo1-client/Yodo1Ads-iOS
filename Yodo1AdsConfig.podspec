@@ -1,27 +1,26 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsConfig'
-    s.version          = '1.0.3'
+    s.version          = '3.0.0'
     s.summary          = 'Yodo1AdsConfig'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = "#{s.name}"
     s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
 
-    #s.source_files = tags + '/*.h'
+    #s.source_files = "#{s.version}" + '/*.h'
 
-    #s.public_header_files = tags + '/*.h'
+    #s.public_header_files = "#{s.version}" + '/*.h'
 
-    s.preserve_path = 'ChangeLog.txt'
+    s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = false
 
@@ -37,6 +36,6 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3.0','z','stdc++'
     
-    s.dependency 'Yodo1OnlineParameter','2.0.0'
+    s.dependency 'Yodo1OnlineParameter','3.0.0'
 
 end
