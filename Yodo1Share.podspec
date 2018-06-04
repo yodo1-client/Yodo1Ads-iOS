@@ -1,32 +1,29 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '2.0.3'
+    s.version          = '3.0.0'
     s.summary          = '添加Instagram 分享功能.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
 
-
-    tags               = "#{s.name}" 
-
-    s.homepage         = 'http://git.yodo1.cn/'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = tags + '/*.h'
+    s.source_files = "#{s.version}" + '/*.h'
 
-    s.public_header_files = tags + '/*.h'
+    s.public_header_files = "#{s.version}" + '/*.h'
 
-    s.preserve_path = 'ChangeLog.txt'
+    s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    s.resources = tags + '/*.bundle'
+    s.resources = "#{s.version}" + '/*.bundle'
 
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
@@ -44,14 +41,14 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Commons','2.0.1'
-    s.dependency 'Yodo1YYModel','2.0.2'
-    s.dependency 'Yodo1Reachability', '1.0.2'
-    s.dependency 'Yodo1Qrencode', '1.0.1'
+    s.dependency 'Yodo1Commons','3.0.0'
+    s.dependency 'Yodo1YYModel','3.0.0'
+    s.dependency 'Yodo1Reachability', '3.0.0'
+    s.dependency 'Yodo1Qrencode', '3.0.0'
 
-    s.dependency 'Yodo1QQSDK','1.0.2'
-    s.dependency 'Yodo1WeChatSDK','1.0.3'
-    s.dependency 'Yodo1WeiboSDK','1.0.2'
-    s.dependency 'Yodo1FBSDKCoreKit','1.0.2'
-    s.dependency 'Yodo1TwitterKit','1.0.2'
+    s.dependency 'Yodo1QQSDK','3.0.0'
+    s.dependency 'Yodo1WeChatSDK','3.0.0'
+    s.dependency 'Yodo1WeiboSDK','3.0.0'
+    s.dependency 'Yodo1FBSDKCoreKit','3.0.0'
+    s.dependency 'Yodo1TwitterKit','3.0.0'
 end
