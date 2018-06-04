@@ -1,25 +1,24 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerWmad'
-    s.version          = '2.0.8'
+    s.version          = '3.0.0'
     s.summary          = 'A short description of BannerWmad.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = "#{s.name}"
-    s.homepage         = 'https://github.com/yixian huang/BannerWmad'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/banner/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
 
-   #s.source_files = tags + '/*.{h,m}'
+   #s.source_files = "#{s.version}" + '/*.{h,m}'
 
-    #s.public_header_files = tags + '/*.h'
+    #s.public_header_files = "#{s.version}" + '/*.h'
 
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = true
 
@@ -32,7 +31,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1Banner','2.0.5'
-    s.dependency 'Yodo1AdsUMAdSDK','1.0.4'
+    s.dependency 'Yodo1Banner','3.0.0'
+    s.dependency 'Yodo1AdsUMAdSDK','3.0.0'
 
 end
