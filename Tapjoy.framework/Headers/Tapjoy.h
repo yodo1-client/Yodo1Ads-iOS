@@ -15,7 +15,6 @@
 #import "TapjoyConnectConstants.h"
 #import "TJPlacement.h"
 
-
 #define TJC_DEPRECATION_WARNING(VERSION) __attribute__((deprecated("Go to dev.tapjoy.com for instructions on how to fix this warning")))
 #define TJ_DEPRECATED_CLASS     __attribute__((deprecated("TapjoyConnect Class is deprecated, use Tapjoy Class")))
 #define TJC_HIGHEST_UNSUPPORTED_SYSTEM_VERISON	@"4.3.5"
@@ -445,6 +444,25 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  * @return n/a
  */
 + (void)showDefaultEarnedCurrencyAlert;
+
+/**
+ * This is used for sending User's consent to behavioral advertising such as in the context of GDPR
+ * The consent value can be "0" (User has not provided consent), "1" (User has provided consent) or
+ * a daisybit string as suggested in IAB's Transparency and Consent Framework
+ *
+ * @param value "0" (User has not provided consent), "1" (User has provided consent) or a daisybit string as suggested in IAB's Transparency and Consent Framework
+ **/
++ (void)setUserConsent:(NSString*) value;
+
+/**
+ * This can be used by the integrating App to indicate if the user falls in any of the GDPR applicable countries
+ * (European Economic Area). The value should be set to YES when User (Subject) is applicable to GDPR regulations
+ * and NO when User is not applicable to GDPR regulations. In the absence of this call, Tapjoy server makes the
+ * determination of GDPR applicability.
+ *
+ * @param gdprApplicability YES if the user is affected by GDPR, NO if they are not.
+ */
++(void)subjectToGDPR:(BOOL) gdprApplicability;
 
 @end
 
