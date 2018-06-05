@@ -13,9 +13,9 @@
 @protocol ISAppLovinInterstitialDelegate <NSObject>
 - (void)adUnitISDidLoadWithAd:(ALAd*)ad;
 - (void)adUnitISDidFailToLoadWithError:(int)code;
-- (void)adunitISWasDisplayed;
-- (void)adunitISWasHidden;
-- (void)adunitISWasClicked;
+- (void)adunitISWasDisplayed:(ALAd*)ad;
+- (void)adunitISWasHidden:(ALAd*)ad;
+- (void)adunitISWasClicked:(ALAd*)ad;
 @end
 
 @interface ISAppLovinInterstitialListener : NSObject <ALAdLoadDelegate, ALAdDisplayDelegate>

@@ -8,14 +8,13 @@
 //System Frameworks For Applovin Adapter
 
 @import AdSupport;
-@import MediaPlayer;
-@import UIKit;
 @import AVFoundation;
-@import CoreTelephony;
 @import CoreGraphics;
 @import CoreMedia;
+@import CoreTelephony;
 @import StoreKit;
 @import SystemConfiguration;
+@import UIKit;
 @import WebKit;
 
 @interface ISAppLovinAdapter : ISBaseAdapter

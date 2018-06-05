@@ -12,15 +12,15 @@
 #import "ALIncentivizedInterstitialAd.h"
 
 @protocol ISAppLovinRewardedVideoDelegate  <NSObject>
-- (void)adUnitRVDidLoad;
+- (void)adUnitRVDidLoad:(ALAd *)ad;
 - (void)adUnitRVDidFailToLoadWithError:(int)code;
-- (void)adUnitRVFullyWatched;
-- (void)adUnitRVRewardValidationRequestDidFailedWithError:(int)code;
-- (void)adUnitRVStarted;
-- (void)adUnitRVEnded;
-- (void)adunitRVWasDisplayed;
-- (void)adunitRVWasHidden;
-- (void)adunitRVWasClicked;
+- (void)adUnitRVFullyWatched:(ALAd *)ad;
+- (void)adUnitRVRewardValidationRequestDidFailedWithError:(int)code ad:(ALAd *)ad;
+- (void)adUnitRVStarted:(ALAd *)ad;
+- (void)adUnitRVEnded:(ALAd *)ad;
+- (void)adunitRVWasDisplayed:(ALAd *)ad;
+- (void)adunitRVWasHidden:(ALAd *)ad;
+- (void)adunitRVWasClicked:(ALAd *)ad;
 @end
 
 @interface ISAppLovinRewardedVideoListener : NSObject <ALAdLoadDelegate, ALAdDisplayDelegate, ALAdRewardDelegate, ALAdVideoPlaybackDelegate>
