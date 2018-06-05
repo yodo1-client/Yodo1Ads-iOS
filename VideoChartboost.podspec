@@ -1,19 +1,17 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoChartboost'
-    s.version          = '2.0.7'
+    s.version          = '3.0.0'
     s.summary          = '更新Chartboost sdk 7.1.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
 
 
-    tags               = "#{s.name}"
-
-    s.homepage         = 'http://git.yodo1.cn/'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/video/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -22,7 +20,7 @@ Pod::Spec.new do |s|
 
     #s.public_header_files =  tags +'/*.h'
     
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = true
 
@@ -37,7 +35,7 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
 
-    s.dependency 'Yodo1Video','2.0.5'
+    s.dependency 'Yodo1Video','3.0.0'
 
-    s.dependency 'Yodo1AdsChartboost','1.0.2'
+    s.dependency 'Yodo1AdsChartboost','3.0.0'
 end
