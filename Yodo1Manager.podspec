@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     s.subspec 'Yodo1_Manager' do |ss|
         ss.source_files = "#{s.version}" + '/*.{h,mm}'
         ss.public_header_files = "#{s.version}" + '/*.h'
-        ss.preserve_path = 'ChangeLog.txt'
+        ss.preserve_path = "#{s.version}" + '/ChangeLog.txt'
         ss.requires_arc = true
         ss.xcconfig = {
             "OTHER_LDFLAGS" => "-ObjC",
