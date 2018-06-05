@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class WMRewardedVideoModel;
 
 @interface WMRewardedVideoAd : NSObject
-
+@property (nonatomic, strong) WMRewardedVideoModel *rewardedVideoModel;
 @property (nonatomic, weak, nullable) id<WMRewardedVideoAdDelegate> delegate;
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 
