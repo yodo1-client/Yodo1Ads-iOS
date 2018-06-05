@@ -298,14 +298,14 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
-    # s.subspec 'Video_Centrixlink' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
-    #     }
-    #     ss.dependency 'VideoCentrixlink','3.0.0'
-    #     ss.dependency 'Yodo1Video', Yodo1VideoVersion
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'Video_Centrixlink' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
+        }
+        ss.dependency 'VideoCentrixlink','3.0.0'
+        ss.dependency 'Yodo1Video', Yodo1VideoVersion
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
 
     s.subspec 'Video_Chartboost' do |ss|
         ss.xcconfig = {
