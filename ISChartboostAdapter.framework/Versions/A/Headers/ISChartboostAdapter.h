@@ -10,7 +10,9 @@
 @import Foundation;
 @import CoreGraphics;
 @import StoreKit;
-
+@import UIKit;
+@import WebKit;
+@import AVFoundation;
 
 @interface ISChartboostAdapter : ISBaseAdapter
 
