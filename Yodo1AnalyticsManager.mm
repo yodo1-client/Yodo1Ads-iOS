@@ -25,7 +25,6 @@
     BOOL bTalkingDataOpen;
     BOOL bGameAnalyticsOpen;
     BOOL bAppsFlyerOpen;
-    BOOL switchAppsFlyer;
 }
 
 @property (nonatomic, strong) NSMutableDictionary* analyticsDict;
@@ -117,8 +116,6 @@
         bAppsFlyerOpen = YES;
     }
     
-    switchAppsFlyer = [self isAppsFlyerInstalled];
-    
     NSDictionary* dic = [[Yodo1Registry sharedRegistry] getClassesStatusType:@"analyticsType"
                                                               replacedString:@"AnalyticsAdapter"
                                                                replaceString:@"AnalyticsType"];
@@ -134,7 +131,7 @@
             if (!bUmengOpen && [key integerValue] == AnalyticsTypeUmeng) {
                 continue;
             }
-            if (!bAppsFlyerOpen && !switchAppsFlyer && [key integerValue] == AnalyticsTypeAppsFlyer) {
+            if (!bAppsFlyerOpen && [key integerValue] == AnalyticsTypeAppsFlyer) {
                 continue;
             }
             
