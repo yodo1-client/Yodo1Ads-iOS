@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Analytics'
-    s.version          = '3.0.0'
-    s.summary          = '修复有时候数组插入nil的BUG'
+    s.version          = '3.0.1'
+    s.summary          = 'v1.0.8 添加版本和release一样'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
