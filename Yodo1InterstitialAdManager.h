@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol InterstitialAdDelegate <NSObject>
 
@@ -64,7 +65,7 @@
 - (void)initInterstitalSDK:(id<InterstitialAdDelegate>)delegate;
 
 ///显示插屏广告
-- (void)showAd;
+- (void)showAd:(UIViewController*)viewcontroller;
 
 ///插屏广告是否已经准备好
 - (BOOL)interstitialAdReady;
