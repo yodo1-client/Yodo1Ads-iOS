@@ -3,6 +3,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import "Yodo1BannerDelegate.h"
 
 typedef enum {
@@ -23,7 +25,11 @@ typedef enum {
 - (void)initBannerSDK:(id<Yodo1BannerDelegate>)delegate;
 
 ///设置广告显示位置 @param align banner广告位置
-- (void)setBannerAlign:(BannerAlign)align;
+- (void)setBannerAlign:(BannerAlign)align
+        viewcontroller:(UIViewController *)viewcontroller;
+
+///设置Banner偏移
+- (void)setBannerOffset:(CGPoint)point;
 
 ///显示Banner广告
 - (void)showBanner;
