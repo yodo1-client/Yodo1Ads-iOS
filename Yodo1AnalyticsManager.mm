@@ -35,8 +35,6 @@
 ///获取一个随机整数范围在[from,to]
 - (int)randomNumber:(int)from to:(int)to;
 
-- (BOOL)isAppsFlyerInstalled;
-
 @end
 
 @implementation Yodo1AnalyticsManager
@@ -66,24 +64,25 @@
 }
 
 - (BOOL)isAppsFlyerInstalled {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isInstalled = [defaults boolForKey:@"YODO1_APPSFLYER"];
-    if (!isInstalled) {
-        NSInteger tempRandom = [self randomNumber:0 to:100];
-        [defaults setInteger:tempRandom forKey:@"YODO1_APPSFLYER_RANDOM"];
-        [defaults setBool:YES forKey:@"YODO1_APPSFLYER"];
-        [defaults synchronize];
-    }
-    BOOL appsFlyerInstalled = NO;
-    NSInteger random = [defaults integerForKey:@"YODO1_APPSFLYER_RANDOM"];
+    return YES;
+    // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // BOOL isInstalled = [defaults boolForKey:@"YODO1_APPSFLYER"];
+    // if (!isInstalled) {
+    //     NSInteger tempRandom = [self randomNumber:0 to:100];
+    //     [defaults setInteger:tempRandom forKey:@"YODO1_APPSFLYER_RANDOM"];
+    //     [defaults setBool:YES forKey:@"YODO1_APPSFLYER"];
+    //     [defaults synchronize];
+    // }
+    // BOOL appsFlyerInstalled = NO;
+    // NSInteger random = [defaults integerForKey:@"YODO1_APPSFLYER_RANDOM"];
     
-    NSString* randomAppsFlyer = [Yodo1OnlineParameter stringParams:@"AppsFlyerRandom" defaultValue:@"0"];
-    NSInteger onlineNums = [randomAppsFlyer integerValue];
+    // NSString* randomAppsFlyer = [Yodo1OnlineParameter stringParams:@"AppsFlyerRandom" defaultValue:@"0"];
+    // NSInteger onlineNums = [randomAppsFlyer integerValue];
     
-    if (random > 0 && random <= onlineNums) { //randomAppsFlyer 为0的时候关闭
-        appsFlyerInstalled = YES;
-    }
-    return appsFlyerInstalled;
+    // if (random > 0 && random <= onlineNums) { //randomAppsFlyer 为0的时候关闭
+    //     appsFlyerInstalled = YES;
+    // }
+    // return appsFlyerInstalled;
 }
 
 - (void)initializeAnalyticsWithConfig:(AnalyticsInitConfig*)initConfig  
