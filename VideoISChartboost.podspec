@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISChartboost'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'A short description of VideoSUChartboost.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'VideoSupersonic','3.0.0'
+    s.dependency 'VideoSupersonic','3.0.1'
 
     s.dependency 'Yodo1AdsChartboost','3.0.0'
 end
