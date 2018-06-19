@@ -50,7 +50,7 @@ static VideoCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"1.0.17";
+NSString* const kYodo1AdsVersion       = @"3.0.1";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -368,9 +368,17 @@ typedef enum {
     s_bannerCallback = callback;
 }
 
-+ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align {
++ (void)setBannerOffset:(CGPoint)point {
 #ifdef YODO1_ADS_BANNER
-    [[Yodo1BannerManager sharedInstance]setBannerAlign:(BannerAlign)align];
+    [[Yodo1BannerManager sharedInstance]setBannerOffset:point];
+#endif
+}
+
++ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align
+        viewcontroller:(UIViewController *)viewcontroller {
+#ifdef YODO1_ADS_BANNER
+    [[Yodo1BannerManager sharedInstance]setBannerAlign:(BannerAlign)align
+                                        viewcontroller:viewcontroller];
 #endif
 }
 
@@ -412,9 +420,9 @@ typedef enum {
 #endif
 }
 
-+ (void)showInterstitial {
++ (void)showInterstitial:(UIViewController*)viewcontroller {
 #ifdef YODO1_ADS_INTERSTITIAL
-    [[Yodo1InterstitialAdManager sharedInstance]showAd];
+    [[Yodo1InterstitialAdManager sharedInstance]showAd:viewcontroller];
 #endif
 }
 
@@ -439,9 +447,9 @@ typedef enum {
 #endif
 }
 
-+ (void)showVideo {
++ (void)showVideo:(UIViewController*)viewcontroller {
 #ifdef YODO1_ADS_VIDEO
-    [[Yodo1AdVideoManager sharedInstance]showAdVideo:[Yodo1AdsDelegate getRootViewController]
+    [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]
                                           awardBlock:^(bool finished) {
                                               if (s_videoCallback) {
                                                   s_videoCallback(finished);
@@ -494,7 +502,8 @@ extern "C" {
     
     void Unity3dSetBannerAlign(Yodo1AdsCBannerAdAlign align)
     {
-        [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
+        [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align
+                  viewcontroller:nil];
     }
     
     void UnityShowBanner()
@@ -524,7 +533,7 @@ extern "C" {
     
     void Unity3dShowInterstitial()
     {
-        [Yodo1Ads showInterstitial];
+        [Yodo1Ads showInterstitial:nil];
     }
     
 
@@ -537,7 +546,7 @@ extern "C" {
     
     void Unity3dShowVideo()
     {
-        [Yodo1Ads showVideo];
+        [Yodo1Ads showVideo:nil];
     }
 }
 
@@ -571,7 +580,13 @@ void Yodo1AdsC::SetBannerCallback(Banner_callback callback)
 
 void Yodo1AdsC::SetBannerAlign(Yodo1AdsCBannerAdAlign align)
 {
-    [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
+    [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align
+              viewcontroller:nil];
+}
+
+void Yodo1AdsC::SetBannerOffset(float x, float y)
+{
+    [Yodo1Ads setBannerOffset:CGPointMake(x, y)];
 }
 
 void Yodo1AdsC::ShowBanner()
@@ -609,7 +624,7 @@ bool Yodo1AdsC::InterstitialIsReady()
 
 void Yodo1AdsC:: ShowInterstitial()
 {
-    [Yodo1Ads showInterstitial];
+    [Yodo1Ads showInterstitial:nil];
 }
 
 #pragma mark - C++Video
@@ -635,6 +650,6 @@ bool Yodo1AdsC::VideoIsReady()
 
 void Yodo1AdsC::ShowVideo()
 {
-    [Yodo1Ads showVideo];
+    [Yodo1Ads showVideo:nil];
 }
 

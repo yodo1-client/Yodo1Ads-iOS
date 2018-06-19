@@ -5,7 +5,7 @@
 //  Created by shon wang on 13-8-13.
 //  Copyright (c) 2013年 游道易. All rights reserved.
 //
-//  v2.1.0
+//  v3.0.1
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
