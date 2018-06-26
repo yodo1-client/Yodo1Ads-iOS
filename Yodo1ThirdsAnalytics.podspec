@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '3.0.1'
-    s.summary          = 'A short description of Yodo1ThirdsAnalytics.'
+    s.version          = '3.0.2'
+    s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -16,11 +16,11 @@ TODO: Add long description of the pod here.
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files  = "#{s.version}" + '/*.{h,mm}',"#{s.version}" + '/Adapter/**/*.{h,m}'
+    s.source_files  = "#{s.version}" + '/*.{h,mm,m}'
     
-    s.public_header_files = "#{s.version}" + '/*.h',"#{s.version}" + '/Adapter/**/*.h'
+    s.public_header_files = "#{s.version}" + '/*.h'
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
     
     s.preserve_paths = "#{s.version}" + '/ChangeLog.txt'
     
@@ -38,11 +38,7 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1Commons','3.0.0'
-    s.dependency 'Yodo1TalkingData','3.0.0'
-    s.dependency 'Yodo1MobClick','3.0.0'
-    s.dependency 'Yodo1GameAnalytics','3.0.0'
     s.dependency 'Yodo1KeyInfo','3.0.0'
     s.dependency 'Yodo1OnlineParameter','3.0.0'
-    s.dependency 'Yodo1AppsFlyer','3.0.0'
 
 end
