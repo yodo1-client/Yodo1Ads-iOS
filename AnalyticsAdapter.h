@@ -7,7 +7,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Yodo1AnalyticsManager.h"
-#import "Yodo1KeyInfo.h"
 
 @interface AnalyticsAdapter : NSObject
 
