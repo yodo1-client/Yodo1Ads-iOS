@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsConfig'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'Yodo1AdsConfig'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    #s.source_files = "#{s.version}" + '/*.h'
+    s.source_files = "#{s.version}" + '/*.h'
 
-    #s.public_header_files = "#{s.version}" + '/*.h'
+    s.public_header_files = "#{s.version}" + '/*.h'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
