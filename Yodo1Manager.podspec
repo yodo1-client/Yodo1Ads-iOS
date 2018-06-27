@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1ZipArchive','3.0.0'
         ss.dependency 'Yodo1YYModel', '3.0.0'
         ss.dependency 'Yodo1Analytics','3.0.1'
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.2'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.3'
         ss.dependency 'Yodo1AdsConfig','3.0.1'
 
     end
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.2'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -149,7 +149,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.0'
+        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -157,7 +157,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterGameAnalytics','3.0.0'
+        ss.dependency 'AnalyticsAdapterGameAnalytics','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -165,7 +165,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterTalkingData','3.0.0'
+        ss.dependency 'AnalyticsAdapterTalkingData','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -173,7 +173,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterUmeng','3.0.0'
+        ss.dependency 'AnalyticsAdapterUmeng','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
