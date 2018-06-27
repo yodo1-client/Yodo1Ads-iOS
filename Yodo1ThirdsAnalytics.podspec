@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
@@ -16,7 +16,7 @@ TODO: Add long description of the pod here.
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files  = "#{s.version}" + '/*.{h,mm,m}'
+    s.source_files  = "#{s.version}" + "/*.{h,m}","#{s.version}" + "/*.{h,mm}"
     
     s.public_header_files = "#{s.version}" + '/*.h'
     
