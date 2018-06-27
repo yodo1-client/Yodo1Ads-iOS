@@ -1,4 +1,9 @@
 =============================================
+v3.0.2- 2018-06-27
+  1、添加AppsFlyer 事件统计.
+  2、数据统计分模块 Analytics_AppsFlyer，Analytics_GameAnalytics，Analytics_TalkingData，Analytics_Umeng
+
+=============================================
 v3.0.1- 2018-06-19
   1、去掉Adview 插屏和Banner 
   2、修改iPhone X 底部banner 在Safe Area里面
