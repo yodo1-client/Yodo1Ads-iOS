@@ -12,6 +12,7 @@
 #import "Yodo1AnalyticsManager.h"
 #import "Yodo1Registry.h"
 #import <Yodo1Commons.h>
+#import "Yodo1KeyInfo.h"
 
 NSString* const YODO1_ANALYTICS_UMENG_APPKEY  = @"UmengAnalytics";
 NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
