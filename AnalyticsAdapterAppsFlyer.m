@@ -9,6 +9,7 @@
 #import "Yodo1Registry.h"
 #import <AppsFlyerLib/AppsFlyerTracker.h>
 #import "Yodo1Commons.h"
+#import "Yodo1KeyInfo.h"
 
 NSString* const YODO1_ANALYTICS_APPSFLYER_DEV_KEY       = @"AppsFlyerDevKey";
 NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
