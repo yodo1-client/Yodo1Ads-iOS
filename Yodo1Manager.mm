@@ -11,10 +11,11 @@
 #import "Yodo1KeyInfo.h"
 #import "Yodo1UnityTool.h"
 #import "Yodo1OnlineParameter.h"
+#import "AnalyticsYodo1Track.h"
+
 #import "Yodo1Ads.h"
 
 #ifdef YODO1_ANALYTICS
-#import "AnalyticsYodo1Track.h"
 #import "Yodo1AnalyticsManager.h"
 #endif
 
@@ -54,7 +55,12 @@ static SDKConfig* kYodo1Config = nil;
 + (void)initSDKWithConfig:(SDKConfig*)sdkConfig {
     
     NSAssert(sdkConfig.appKey != nil, @"appKey is not set!");
-
+    
+    //初始化Yodo1Track
+    NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
+    [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
+    [AnalyticsYodo1Track initAdTrackingWithAppId:trackAppId
+                                       channelId:kYodo1ChannelId];
 #ifndef UNITY_PROJECT
     //初始化广告，在线参数
     [Yodo1Ads initWithAppKey:sdkConfig.appKey];
@@ -66,11 +72,6 @@ static SDKConfig* kYodo1Config = nil;
                                              selector:@selector(onlineParameterPaNotifi:)
                                                  name:kYodo1OnlineConfigFinishedNotification
                                                object:nil];
-    //初始化Yodo1Track
-    NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
-    [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
-    [AnalyticsYodo1Track initAdTrackingWithAppId:trackAppId
-                                       channelId:kYodo1ChannelId];
 #endif
 
 #ifdef YODO1_SNS

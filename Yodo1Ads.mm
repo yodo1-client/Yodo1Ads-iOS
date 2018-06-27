@@ -28,7 +28,6 @@
 #endif
 
 #ifdef YODO1_ANALYTICS
-#import "AppsFlyerTracker.h"
 #import "Yodo1AnalyticsManager.h"
 #endif
 
@@ -235,12 +234,7 @@ typedef enum {
     }
     
     [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClose];
-    
-#ifdef YODO1_ANALYTICS
-    if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
-        [[AppsFlyerTracker sharedTracker]trackEvent:@"APPSFLYER_INTERSTITIAL" withValues:@{}];
-    }
-#endif
+
 }
 
 - (void)didClickInterstitial {
@@ -454,11 +448,6 @@ typedef enum {
                                               if (s_videoCallback) {
                                                   s_videoCallback(finished);
                                               }
-#ifdef YODO1_ANALYTICS
-                                               if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
-                                                   [[AppsFlyerTracker sharedTracker]trackEvent:@"APPSFLYER_VIDEO" withValues:@{}];
-                                               }
-#endif
     }];
 #endif
 }
