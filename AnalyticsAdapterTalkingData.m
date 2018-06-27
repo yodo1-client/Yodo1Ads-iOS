@@ -10,6 +10,7 @@
 #import "TalkingDataGA.h"
 #import "TalkingDataAppCpa.h"
 #import "Yodo1Commons.h"
+#import "Yodo1KeyInfo.h"
 
 NSString* const kYodo1AnalyticsTallingDataAppKey   =  @"TalkingDataAppId";
 NSString* const kAnalyticsChannelId = @"AppStore";
