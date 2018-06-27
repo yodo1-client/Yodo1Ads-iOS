@@ -9,6 +9,7 @@
 #import "Yodo1Registry.h"
 #import <GameAnalytics/GameAnalytics.h>
 #import "Yodo1Commons.h"
+#import "Yodo1KeyInfo.h"
 
 NSString* const YODO1_ANALYTICS_GAMEANALYTICS_GAME_KEY      = @"GameAnalyticsGameKey";
 NSString* const YODO1_ANALYTICS_GAMEANALYTICS_GAME_SECRET   = @"GameAnalyticsGameSecret";
