@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoWmad'
-    s.version          = '3.0.2'
-    s.summary          = 'UMAdSDK V1.9.0'
+    s.version          = '3.0.3'
+    s.summary          = 'UMAdSDK V1.9.2'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
