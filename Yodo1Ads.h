@@ -3,8 +3,10 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v1.0.16
+//  v3.0.3
 //
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString* const kYodo1AdsVersion;
 
@@ -59,6 +61,13 @@ typedef void (^VideoCallback)(BOOL finished);
 //Set banner's align
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align;
 
+//Set banner's align,User-controlled viewcontroller
++ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align
+        viewcontroller:(UIViewController*)viewcontroller;
+
+//Set banner's offset
++ (void)setBannerOffset:(CGPoint)point;
+
 //Show banner
 + (void)showBanner;
 
@@ -79,6 +88,9 @@ typedef void (^VideoCallback)(BOOL finished);
 //Show interstitial
 + (void)showInterstitial;
 
+//Show interstitial,User-controlled viewcontroller
++ (void)showInterstitial:(UIViewController*)viewcontroller;
+
 #pragma mark- Video
 
 //Set video callback
@@ -89,5 +101,8 @@ typedef void (^VideoCallback)(BOOL finished);
 
 //Play video ad
 + (void)showVideo;
+
+//Play video ad,User-controlled viewcontroller
++ (void)showVideo:(UIViewController*)viewcontroller;
 
 @end

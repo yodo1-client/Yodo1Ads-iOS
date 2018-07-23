@@ -59,6 +59,11 @@ public:
     static void SetBannerCallback(Banner_callback callback);
     
     /**
+     *  Set banner's offset
+     */
+    static void SetBannerOffset(float x,float y);
+    
+    /**
      *  Show banner
      */
     static void ShowBanner();

@@ -1,30 +1,27 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Advert'
-    s.version          = '1.0.16'
-    s.summary          = '2018.05.23 5月份list更新版本
-                            Yodo1Ads v1.0.16'
+    s.version          = '3.0.3'
+    s.summary          = '2018.07.23 7月份list更新版本
+                            Yodo1Ads v3.0.3'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    
-    tags               = "#{s.name}"
 
     s.homepage         = 'https://github.com/'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
 
     s.subspec 'Advert' do |ss|
-            ss.source_files = tags + '/*.h'
-            ss.public_header_files = tags + '/*.h'
-            #ss.resources = tags + '/*.*'
-            ss.preserve_path = 'ChangeLog.txt',tags + '/VERSION'
-            ss.vendored_libraries = tags + '/*.a'
+            ss.source_files = "#{s.version}" + '/*.h'
+            ss.public_header_files = "#{s.version}" + '/*.h'
+            ss.preserve_path = "#{s.version}" + '/ChangeLog.txt',"#{s.version}" + '/VERSION'
+            ss.vendored_libraries = "#{s.version}" + '/*.a'
             ss.requires_arc = false
             ss.xcconfig = {
                 'OTHER_LDFLAGS' => '-ObjC',
@@ -35,9 +32,9 @@ Pod::Spec.new do |s|
             ss.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
             ss.libraries = 'sqlite3.0','z','stdc++'
             
-            ss.dependency 'Yodo1Banner','2.0.4'
-            ss.dependency 'Yodo1Video','2.0.4'
-            ss.dependency 'Yodo1Interstitial','2.0.4'
+            ss.dependency 'Yodo1Banner','3.0.2'
+            ss.dependency 'Yodo1Video','3.0.2'
+            ss.dependency 'Yodo1Interstitial','3.0.2'
     end
     
      s.subspec 'Yodo1Advert_iOS' do |ss|
@@ -60,15 +57,15 @@ Pod::Spec.new do |s|
 
     ##Video
 
-    s.dependency 'VideoUnityAds',       '2.0.5'
-    s.dependency 'VideoMobvista',       '2.0.8'
+    s.dependency 'VideoUnityAds',       '3.0.2'
+    s.dependency 'VideoMobvista',       '3.0.2'
+    s.dependency 'VideoVungle',         '3.0.2'
+    s.dependency 'VideoAdmob',          '3.0.2'
+    s.dependency 'VideoWmad',           '3.0.3'
+    s.dependency 'VideoTapjoy',         '3.0.2'
+    # s.dependency 'VideoAdColony',       '2.0.3'
     # s.dependency 'VideoSupersonic',     '2.0.6'
     #s.dependency 'VideoApplovin',       '2.0.6'
-    s.dependency 'VideoVungle',         '2.0.8'
-    # s.dependency 'VideoAdColony',       '2.0.3'
-    s.dependency 'VideoAdmob',          '2.0.4'
-    s.dependency 'VideoWmad',           '2.0.5'
-    s.dependency 'VideoTapjoy',         '2.0.6'
 
     # s.dependency 'VideoCentrixlink',    '2.0.1'
     # s.dependency 'VideoChance',         '2.0.1'
@@ -89,25 +86,25 @@ Pod::Spec.new do |s|
     # s.dependency 'VideoISTapjoy',       '2.0.6'
 
     ##Interstitial
-    s.dependency 'InterstitialAdmob',       '2.0.6'
+    s.dependency 'InterstitialAdmob',       '3.0.2'
+    s.dependency 'InterstitialVungle',      '3.0.2'
+    s.dependency 'InterstitialMobvista',    '3.0.2'
+    s.dependency 'InterstitialTapjoy',      '3.0.2' 
     # s.dependency 'InterstitialApplovin',    '2.0.7'
     # s.dependency 'InterstitialSupersonic',  '1.0.6' 
     # s.dependency 'InterstitialGDTMob',      '2.0.3'
-    s.dependency 'InterstitialVungle',      '1.0.5'
     # s.dependency 'InterstitialAdview',      '2.0.2'
-    s.dependency 'InterstitialMobvista',    '1.0.4'
 
-    s.dependency 'InterstitialTapjoy',      '1.0.6' 
     # s.dependency 'InterstitialFacebook',    '1.0.1'
 
     # s.dependency 'InterstitialWmad',        '2.0.1'
 
     ##Banner
-    s.dependency 'BannerAdmob',         '2.0.6'
+    s.dependency 'BannerAdmob',         '3.0.2'
     # s.dependency 'BannerAdview',        '1.0.4'
-    s.dependency 'BannerApplovin',      '1.0.6'
-    s.dependency 'BannerGDTMob',        '1.0.5'
-    s.dependency 'BannerInmobi',        '1.0.4'
-    s.dependency 'BannerWmad',          '2.0.7'
+    s.dependency 'BannerApplovin',      '3.0.2'
+    s.dependency 'BannerGDTMob',        '3.0.2'
+    s.dependency 'BannerInmobi',        '3.0.2'
+    s.dependency 'BannerWmad',          '3.0.3'
 
 end
