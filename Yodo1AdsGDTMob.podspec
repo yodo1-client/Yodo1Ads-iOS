@@ -1,27 +1,26 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsGDTMob'
-    s.version          = '1.0.2'
-    s.summary          = '广点通sdk v4.7.4'
+    s.version          = '3.0.1'
+    s.summary          = '广点通sdk v4.7.7,支持https'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
-    tags               = "#{s.name}"
-    s.homepage         = 'https://github.com/yixian huang/Yodo1GDTMob'
+    s.homepage         = 'https://github.com'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :git => "https://github.com/Yodo1/Yodo1Ads-iOS.git", :tag => tags + "#{s.version}" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '7.0'
 
-    s.source_files = tags + '/*.h'
+    s.source_files = "#{s.version}" + '/*.h'
 
-    s.public_header_files = tags + '/*.h'
+    s.public_header_files = "#{s.version}" + '/*.h'
 
-    s.preserve_path = 'ChangeLog.txt'
+    s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
-    s.vendored_libraries = tags + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
