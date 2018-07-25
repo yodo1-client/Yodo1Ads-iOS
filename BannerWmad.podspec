@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerWmad'
-    s.version          = '3.0.3'
-    s.summary          = 'A short description of BannerWmad.'
+    s.version          = '3.0.4'
+    s.summary          = 'fix banner bug!'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
