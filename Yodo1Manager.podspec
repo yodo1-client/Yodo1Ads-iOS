@@ -1,8 +1,10 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.0.3'
-    s.summary          = 'v3.0.3- 2018-07-13
-                          1、更新今日头条skd v1.9.3.1
+    s.version          = '3.0.4'
+    s.summary          = 'v3.0.4- 2018-07-25
+                            1、修复今日头条Banner轮播的BUG
+                            2、更新UnityAds SDK v2.3.0
+                            3、更新广点通SDK v4.7.7，支持https
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -198,7 +200,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerWmad','3.0.3'
+        ss.dependency 'BannerWmad','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Banner_Inmobi' do |ss|
@@ -212,7 +214,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerGDTMob','3.0.2'
+        ss.dependency 'BannerGDTMob','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Banner_Applovin' do |ss|
@@ -284,7 +286,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialGDTMob','3.0.2'
+        ss.dependency 'InterstitialGDTMob','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -419,7 +421,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoUnityAds','3.0.2'
+        ss.dependency 'VideoUnityAds','3.0.3'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
@@ -520,7 +522,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISUnityAds','3.0.2'
+        ss.dependency 'VideoISUnityAds','3.0.3'
         ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
