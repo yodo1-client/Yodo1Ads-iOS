@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v3.0.2
+//  v3.0.5
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -59,11 +59,18 @@ typedef void (^VideoCallback)(BOOL finished);
 + (void)setBannerCallback:(BannerCallback)callback;
 
 //Set banner's align
++ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align;
+
+//Set banner's align,User-controlled viewcontroller
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align
         viewcontroller:(UIViewController*)viewcontroller;
 
 //Set banner's offset
 + (void)setBannerOffset:(CGPoint)point;
+
+//Set the Banner Scale scaling factor x axis direction
+//multiple sx,y axis direction multiple sy
++ (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy;
 
 //Show banner
 + (void)showBanner;
@@ -83,6 +90,9 @@ typedef void (^VideoCallback)(BOOL finished);
 + (BOOL)interstitialIsReady;
 
 //Show interstitial
++ (void)showInterstitial;
+
+//Show interstitial,User-controlled viewcontroller
 + (void)showInterstitial:(UIViewController*)viewcontroller;
 
 #pragma mark- Video
@@ -94,6 +104,9 @@ typedef void (^VideoCallback)(BOOL finished);
 + (BOOL)videoIsReady;
 
 //Play video ad
++ (void)showVideo;
+
+//Play video ad,User-controlled viewcontroller
 + (void)showVideo:(UIViewController*)viewcontroller;
 
 @end

@@ -64,6 +64,12 @@ public:
     static void SetBannerOffset(float x,float y);
     
     /**
+     *  Set the Banner Scale scaling factor x axis direction
+     *  multiple sx,y axis direction multiple sy
+     */
+    static void SetBannerScale(float sx,float sy);
+    
+    /**
      *  Show banner
      */
     static void ShowBanner();
