@@ -517,6 +517,16 @@ extern "C" {
         [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
     }
     
+    void Unity3dSetBannerOffset(float x,float y)
+    {
+        [Yodo1Ads setBannerOffset:CGPointMake(x,y)];
+    }
+    
+    void Unity3dSetBannerScale(float sx,float sy)
+    {
+        [Yodo1Ads setBannerScale:sx sy:sy];
+    }
+    
     void UnityShowBanner()
     {
         [Yodo1Ads showBanner];
