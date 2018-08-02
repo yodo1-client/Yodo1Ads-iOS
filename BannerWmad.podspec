@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerWmad'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'fix banner bug!'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1Banner','3.0.2'
+    s.dependency 'Yodo1Banner','3.0.3'
     s.dependency 'Yodo1AdsUMAdSDK','3.0.1'
 
 end
