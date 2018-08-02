@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerGDTMob'
     s.version          = '3.0.4'
-    s.summary          = 'GDTMob Banner'
+    s.summary          = 'GDTMob Banner '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
