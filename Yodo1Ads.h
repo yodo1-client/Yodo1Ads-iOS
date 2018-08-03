@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v3.0.3
+//  v3.0.5
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -67,6 +67,10 @@ typedef void (^VideoCallback)(BOOL finished);
 
 //Set banner's offset
 + (void)setBannerOffset:(CGPoint)point;
+
+//Set the Banner Scale scaling factor x axis direction
+//multiple sx,y axis direction multiple sy
++ (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy;
 
 //Show banner
 + (void)showBanner;
