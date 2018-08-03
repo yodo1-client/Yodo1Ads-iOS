@@ -100,9 +100,9 @@ Pod::Spec.new do |s|
 
 
     ##Banner
-    s.dependency 'BannerAdmob',         '3.0.2'
-    s.dependency 'BannerWmad',          '3.0.3'
-    s.dependency 'BannerGDTMob',        '3.0.2'
+    s.dependency 'BannerAdmob',         '3.0.3'
+    s.dependency 'BannerWmad',          '3.0.5'
+    s.dependency 'BannerGDTMob',        '3.0.4'
     # s.dependency 'BannerAdview',        '1.0.4'
     # s.dependency 'BannerApplovin',      '3.0.2'
     # s.dependency 'BannerInmobi',        '3.0.2'
