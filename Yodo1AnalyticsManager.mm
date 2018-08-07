@@ -156,6 +156,22 @@
     }
 }
 
+- (void)eventAdAnalyticsWithName:(NSString *)eventName 
+                       eventData:(NSDictionary *)eventData 
+{
+  if (eventName == nil) {
+        NSAssert(eventName != nil, @"eventName cannot nil!");
+    }
+    
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeAppsFlyer){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter eventAdAnalyticsWithName:eventName eventData:eventData];
+            break;
+        }
+    }
+}
+
 - (void)startLevelAnalytics:(NSString*)level
 {
     if (!level) {

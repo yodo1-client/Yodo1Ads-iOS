@@ -47,11 +47,18 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  *  使用之前，先初始化initWithAnalytics
  *
  *  @param eventName  事件id(必须)
- *  @param eventData  事件数据熟悉(必须)
+ *  @param eventData  事件数据(必须)
  */
 - (void)eventAnalytics:(NSString*)eventName
              eventData:(NSDictionary*)eventData;
 
+/**
+ *  使用appsflyer 自定义事件
+ *  @param eventName  事件id(必须)
+ *  @param eventData  事件数据(必须)
+ */
+- (void)eventAdAnalyticsWithName:(NSString *)eventName 
+                       eventData:(NSDictionary *)eventData;
 /**
  *  进入关卡/任务
  *

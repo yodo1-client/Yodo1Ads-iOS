@@ -15,6 +15,9 @@
 - (void)eventWithAnalyticsEventName:(NSString*)eventName
                      eventData:(NSDictionary*)eventData;
 
+- (void)eventAdAnalyticsWithName:(NSString *)eventName
+					   eventData:(NSDictionary *)eventData;
+
 - (void)startLevelAnalytics:(NSString*)level;
 
 - (void)finishLevelAnalytics:(NSString*)level;
