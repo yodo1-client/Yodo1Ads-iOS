@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoAdmob'
-    s.version          = '3.0.3'
+    s.version          = '3.0.4'
     s.summary          = 'VideoAdmob V2.0.2'
 
     s.description      = <<-DESC
