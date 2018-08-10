@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoAdColony'
-    s.version          = '3.0.3'
+    s.version          = '3.0.4'
     s.summary          = 'AdColony'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
