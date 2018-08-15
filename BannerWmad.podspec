@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1Banner','3.0.3'
+    s.dependency 'Yodo1Banner','3.0.4'
     s.dependency 'Yodo1AdsUMAdSDK','3.0.2'
 
 end
