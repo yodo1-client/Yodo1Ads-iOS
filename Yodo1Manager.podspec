@@ -321,11 +321,11 @@ Pod::Spec.new do |s|
         ss.dependency 'InterstitialAdmobFacebook','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
-    s.subspec 'Interstitial_AdmobSupersonic' do |ss|
+    s.subspec 'Interstitial_AdmobIronSource' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmobSupersonic','3.0.4'
+        ss.dependency 'InterstitialAdmobIronSource','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_AdmobTapjoy' do |ss|
