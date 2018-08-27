@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialVungle'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'Interstitial Vungle'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     }
 
     s.dependency 'Yodo1Interstitial','3.0.3'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.5'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.6'
     s.dependency 'Yodo1AdsVungle','3.0.0'
 
 end
