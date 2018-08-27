@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.0.8'
-    s.summary          = 'v3.0.8- 2018-08-23
-                             1、Mobvista 修改为Mintegral (在线参数获取key修改)
-                             2、Supersion 修改为InroSource
+    s.version          = '3.0.9'
+    s.summary          = 'v3.0.9- 2018-08-27
+                             1、添加AppsFlyer 自定义UserId 字段
+                             2、添加AppsFlyer 自定义事件 Unity3d 接口
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1ZipArchive','3.0.0'
         ss.dependency 'Yodo1YYModel', '3.0.0'
         ss.dependency 'Yodo1Analytics','3.0.2'
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.5'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.6'
         ss.dependency 'Yodo1AdsConfig','3.0.2'
         ss.dependency 'Yodo1Track','3.0.0'
 
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.5'
+        ss.dependency 'Yodo1UCenter','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.5'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -151,7 +151,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.3'
+        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
