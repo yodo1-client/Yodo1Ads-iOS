@@ -13,13 +13,13 @@
 @interface SDKConfig : NSObject
 
 @property (nonatomic,copy) NSString* appKey;
-@property (nonatomic,copy) NSString* regionCode;
+@property (nonatomic,copy) NSString* regionCode;//可以传入@"",不能传入nil
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions01;//GA统计自定义维度
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions02;
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions03;
 @property (nonatomic,strong) NSMutableArray *gaResourceCurrencies;
 @property (nonatomic,strong) NSMutableArray *gaResourceItemTypes;
-
+@property (nonatomic,strong) NSString *appsflyerCustomUserId;//AppsFlyer自定义UserId
 @end
 
 @interface Yodo1Manager : NSObject

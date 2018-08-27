@@ -128,6 +128,7 @@ static SDKConfig* kYodo1Config = nil;
     config.gaCustomDimensions03 = kYodo1Config.gaCustomDimensions03;
     config.gaResourceCurrencies = kYodo1Config.gaResourceCurrencies;
     config.gaResourceItemTypes = kYodo1Config.gaResourceItemTypes;
+    config.appsflyerCustomUserId = kYodo1Config.appsflyerCustomUserId;
     [[Yodo1AnalyticsManager sharedInstance]initializeAnalyticsWithConfig:config];
 }
 #endif
