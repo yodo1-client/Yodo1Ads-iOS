@@ -14,6 +14,7 @@
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions03;
 @property (nonatomic,strong) NSMutableArray *gaResourceCurrencies;
 @property (nonatomic,strong) NSMutableArray *gaResourceItemTypes;
+@property (nonatomic,strong) NSString *appsflyerCustomUserId;//AppsFlyer自定义UserId
 @end
 
 typedef NS_ENUM(NSInteger, AnalyticsType) {

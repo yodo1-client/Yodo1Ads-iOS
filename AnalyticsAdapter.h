@@ -15,7 +15,7 @@
 - (void)eventWithAnalyticsEventName:(NSString*)eventName
                      eventData:(NSDictionary*)eventData;
 
-//AppsFlyer
+//AppsFlyer Event
 - (void)eventAdAnalyticsWithName:(NSString *)eventName
 					   eventData:(NSDictionary *)eventData;
 

@@ -162,7 +162,6 @@
   if (eventName == nil) {
         NSAssert(eventName != nil, @"eventName cannot nil!");
     }
-    
     for (id key in [self.analyticsDict allKeys]) {
         if ([key integerValue]==AnalyticsTypeAppsFlyer){
             AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
@@ -719,6 +718,7 @@ extern "C" {
         [[Yodo1AnalyticsManager sharedInstance]setGACustomDimension03:dimension];
     }
     
+    // AppsFlyer
     void UnityValidateAndTrackInAppPurchase(const char*productIdentifier,
                                             const char*price,
                                             const char*currency,
@@ -728,6 +728,14 @@ extern "C" {
                                                                     currency:Yodo1CreateNSString(currency)
                                                                transactionId:Yodo1CreateNSString(transactionId)];
     }
+    // AppsFlyer Event
+    void UnityEventAdAnalyticsWithName(const char*eventName, const char* jsonData) {
+        NSString* m_EventName = Yodo1CreateNSString(eventName);
+        NSString* eventData = Yodo1CreateNSString(jsonData);
+        NSDictionary *eventDataDic = [Yodo1Commons JSONObjectWithString:eventData error:nil];
+        [[Yodo1AnalyticsManager sharedInstance]eventAdAnalyticsWithName:m_EventName eventData:eventDataDic];
+    }
+    
 }
 
 #endif
