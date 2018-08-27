@@ -40,6 +40,9 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
             
             [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
             [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
+            if (initConfig.appsflyerCustomUserId && initConfig.appsflyerCustomUserId.length > 0) {
+                [AppsFlyerTracker sharedTracker].customerUserID = initConfig.appsflyerCustomUserId;
+            }
         }
     }
     return self;
