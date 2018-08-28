@@ -49,12 +49,12 @@ static VideoCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.0.8";
+NSString* const kYodo1AdsVersion       = @"3.0.9";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
-    Yodo1AdsTypeVideo           = 1002,//Video
-    Yodo1AdsTypeInterstitial    = 1003//Interstitial
+    Yodo1AdsTypeInterstitial    = 1002,//Interstitial
+    Yodo1AdsTypeVideo           = 1003,//Video
 }Yodo1AdsType;
 
 @interface Yodo1AdsDelegate : NSObject
@@ -69,7 +69,7 @@ typedef enum {
 
 + (id)JSONObjectWithString:(NSString*)str error:(NSError**)error;
 
-+ (void)unitySendMessageResulTypeWithCode:(Yodo1AdsType)type code:(int)code;
++ (void)unitySendMessageResulTypeWithCode:(Yodo1AdsType)type code:(int)code error:(NSString*)errorMsg;
 
 @end
 
@@ -156,7 +156,7 @@ typedef enum {
     return nil;
 }
 
-+ (void)unitySendMessageResulTypeWithCode:(Yodo1AdsType)type code:(int)code
++ (void)unitySendMessageResulTypeWithCode:(Yodo1AdsType)type code:(int)code error:(NSString*)errorMsg
 {
     if (kYodo1AdsGameObject) {
         NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -164,8 +164,13 @@ typedef enum {
         [dict setObject:[NSNumber numberWithInt:code] forKey:@"code"];
         NSError* parseJSONError = nil;
         NSString* msg = [Yodo1AdsDelegate stringWithJSONObject:dict error:&parseJSONError];
+        NSString* jsonError = @"";
         if(parseJSONError){
-            [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+            jsonError = @"Convert result to json failed!";
+        }
+        if (errorMsg) {
+            jsonError = [NSString stringWithFormat:@"%@,errorMsg:%@",jsonError,errorMsg];
+            [dict setObject:jsonError forKey:@"error"];
             msg =  [Yodo1AdsDelegate stringWithJSONObject:dict error:&parseJSONError];
         }
         UnitySendMessage([kYodo1AdsGameObject cStringUsingEncoding:NSUTF8StringEncoding],UNITY3D_YODO1ADS_METHOD,
@@ -197,53 +202,88 @@ typedef enum {
 
 - (void)interstitialDidLoad {
     if(s_interstitial_callback){
-        s_interstitial_callback(Yodo1AdsCEventLoaded);
+        s_interstitial_callback(Yodo1AdsCEventLoaded,nil);
     }
     if(s_interstitialCallback){
-        s_interstitialCallback(Yodo1AdsEventLoaded);
+        s_interstitialCallback(Yodo1AdsEventLoaded,nil);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventLoaded];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventLoaded error:nil];
 }
 
 - (void)interstitialDidFailToLoadWithError:(NSError *)error {
     if(s_interstitial_callback){
-        s_interstitial_callback(Yodo1AdsCEventError);
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            s_interstitial_callback(Yodo1AdsCEventLoadFail,errorC);
+        }else{
+            s_interstitial_callback(Yodo1AdsCEventLoadFail,nil);
+        }
     }
     if(s_interstitialCallback){
-        s_interstitialCallback(Yodo1AdsEventError);
+        s_interstitialCallback(Yodo1AdsEventLoadFail,error);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventError];
+    NSString* errorMsg = nil;
+    if (error) {
+        errorMsg = [error localizedDescription];
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventLoadFail error:errorMsg];
 }
 
 - (void)interstitialDidShow {
     if(s_interstitial_callback){
-        s_interstitial_callback(Yodo1AdsCEventDisplay);
+        s_interstitial_callback(Yodo1AdsCEventShowSuccess,nil);
     }
     if(s_interstitialCallback){
-        s_interstitialCallback(Yodo1AdsEventDisplay);
+        s_interstitialCallback(Yodo1AdsEventShowSuccess,nil);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventDisplay];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventShowSuccess error:nil];
 }
 
 - (void)interstitialDidClose {
     if(s_interstitial_callback){
-        s_interstitial_callback(Yodo1AdsCEventClose);
+        s_interstitial_callback(Yodo1AdsCEventClose,nil);
     }
     if(s_interstitialCallback){
-        s_interstitialCallback(Yodo1AdsEventClose);
+        s_interstitialCallback(Yodo1AdsEventClose,nil);
     }
     
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClose];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClose error:nil];
 }
 
 - (void)didClickInterstitial {
     if(s_interstitial_callback){
-        s_interstitial_callback(Yodo1AdsCEventClick);
+        s_interstitial_callback(Yodo1AdsCEventClick,nil);
     }
     if(s_interstitialCallback){
-        s_interstitialCallback(Yodo1AdsEventClick);
+        s_interstitialCallback(Yodo1AdsEventClick,nil);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClick];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventClick error:nil];
+}
+
+- (void)interstitialDidFailToShowWithError:(NSError *)error {
+    if(s_interstitial_callback){
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            s_interstitial_callback(Yodo1AdsCEventShowFail,errorC);
+        }else{
+            s_interstitial_callback(Yodo1AdsCEventShowFail,nil);
+        }
+        
+    }
+    if(s_interstitialCallback){
+        s_interstitialCallback(Yodo1AdsEventShowFail,error);
+    }
+    NSString* errorMsg = nil;
+    if (error) {
+        errorMsg = [error localizedDescription];
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeInterstitial code:Yodo1AdsEventShowFail error:errorMsg];
 }
 
 @end
@@ -274,44 +314,56 @@ typedef enum {
 
 - (void)bannerDidLoad {
     if(s_banner_callback){
-        s_banner_callback(Yodo1AdsCEventLoaded);
+        s_banner_callback(Yodo1AdsCEventLoaded,nil);
     }
     
     if(s_bannerCallback){
-        s_bannerCallback(Yodo1AdsEventLoaded);
+        s_bannerCallback(Yodo1AdsEventLoaded,nil);
     }
     
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventLoaded];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventLoaded error:nil];
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)error {
     if(s_banner_callback){
-        s_banner_callback(Yodo1AdsCEventError);
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            s_banner_callback(Yodo1AdsCEventLoadFail,errorC);
+        }else{
+            s_banner_callback(Yodo1AdsCEventLoadFail,nil);
+        }
     }
     if(s_bannerCallback){
-        s_bannerCallback(Yodo1AdsEventError);
+        s_bannerCallback(Yodo1AdsEventLoadFail,error);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventError];
+    NSString* errorMsg = nil;
+    if (error) {
+        errorMsg = [error localizedDescription];
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventLoadFail error:errorMsg];
 }
 
 - (void)bannerWillPresentScreen {
     if(s_banner_callback){
-        s_banner_callback(Yodo1AdsCEventDisplay);
+        s_banner_callback(Yodo1AdsCEventShowSuccess,nil);
     }
     if(s_bannerCallback){
-        s_bannerCallback(Yodo1AdsEventDisplay);
+        s_bannerCallback(Yodo1AdsEventShowSuccess,nil);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventDisplay];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventShowSuccess error:nil];
 }
 
 - (void)didClickBanner {
     if(s_banner_callback){
-        s_banner_callback(Yodo1AdsCEventClick);
+        s_banner_callback(Yodo1AdsCEventClick,nil);
     }
     if(s_bannerCallback){
-        s_bannerCallback(Yodo1AdsEventClick);
+        s_bannerCallback(Yodo1AdsEventClick,nil);
     }
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventClick];
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeBanner code:Yodo1AdsEventClick error:nil];
 }
 
 @end
@@ -501,7 +553,7 @@ extern "C" {
             if (finished) {
                 adsEvent = Yodo1AdsEventFinish;
             }
-            [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:adsEvent];
+            [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:adsEvent error:nil];
         }];
     }
     

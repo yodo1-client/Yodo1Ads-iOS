@@ -15,8 +15,9 @@ typedef enum {
     Yodo1AdsCEventFinish    = 1,//Finish playing
     Yodo1AdsCEventClick     = 2,//Click ad
     Yodo1AdsCEventLoaded    = 3,//Ad load finish
-    Yodo1AdsCEventDisplay   = 4,//Display success
-    Yodo1AdsCEventError     = -1,//Error
+    Yodo1AdsCEventShowSuccess    = 4,   //Display success
+    Yodo1AdsCEventShowFail       = 5,   //display fail
+    Yodo1AdsCEventLoadFail       = -1,  //Load of Error
 }Yodo1AdsCEvent;
 
 typedef enum {
@@ -28,8 +29,15 @@ typedef enum {
     Yodo1AdsCBannerAdAlignBottom             = 1 << 5,
 }Yodo1AdsCBannerAdAlign;
 
-typedef void (*Banner_callback) (Yodo1AdsCEvent event);
-typedef void (*Interstitial_callback) (Yodo1AdsCEvent event);
+//Error Message
+class Yodo1AdsCError{
+public:
+    int errorCode;
+    const char * errorDescription;
+};
+
+typedef void (*Banner_callback) (Yodo1AdsCEvent event ,Yodo1AdsCError* error);
+typedef void (*Interstitial_callback) (Yodo1AdsCEvent event,Yodo1AdsCError* error);
 typedef void (*Video_callback) (bool finished);
 
 

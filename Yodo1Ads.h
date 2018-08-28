@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v3.0.8
+//  v3.0.9
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -15,8 +15,9 @@ typedef enum {
     Yodo1AdsEventFinish     = 1,//Finish playing
     Yodo1AdsEventClick      = 2,//Click ad
     Yodo1AdsEventLoaded     = 3,//Ad load finish
-    Yodo1AdsEventDisplay    = 4,//Display success
-    Yodo1AdsEventError      = -1,//Error
+    Yodo1AdsEventShowSuccess    = 4,   //Display success
+    Yodo1AdsEventShowFail       = 5,   //display fail
+    Yodo1AdsEventLoadFail       = -1,  //Load of Error
 }Yodo1AdsEvent;
 
 typedef enum {
@@ -31,14 +32,16 @@ typedef enum {
 /**
  *  Banner callback
  *  @param adEvent Apecify the ad event.
+ *  @param error ad event error.
  */
-typedef void (^BannerCallback)(Yodo1AdsEvent adEvent);
+typedef void (^BannerCallback)(Yodo1AdsEvent adEvent,NSError* error);
 
 /**
  *  Interstitial call back
  *  @param adEvent Apecify the ad event.
+ *  @param error ad event error.
  */
-typedef void (^InterstitialCallback)(Yodo1AdsEvent adEvent);
+typedef void (^InterstitialCallback)(Yodo1AdsEvent adEvent,NSError* error);
 
 /**
  *  Video call back
