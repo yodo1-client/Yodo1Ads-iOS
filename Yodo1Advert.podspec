@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
             
             ss.dependency 'Yodo1Banner','3.0.4'
             ss.dependency 'Yodo1Video','3.0.3'
-            ss.dependency 'Yodo1Interstitial','3.0.3'
+            ss.dependency 'Yodo1Interstitial','3.0.4'
     end
     
      s.subspec 'Yodo1Advert_iOS' do |ss|
