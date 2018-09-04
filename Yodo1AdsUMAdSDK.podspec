@@ -29,5 +29,5 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.libraries = 'sqlite3.0','z','libresolv.9'
+    s.libraries = 'sqlite3.0','z','resolv.9'
 end
