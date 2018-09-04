@@ -62,7 +62,7 @@ Pod::Spec.new do |s|
     s.dependency 'VideoVungle',         '3.0.5'
     s.dependency 'VideoAdmob',          '3.0.6'
     s.dependency 'VideoWmad',           '3.0.7'
-    s.dependency 'VideoTapjoy',         '3.0.5'
+    s.dependency 'VideoTapjoy',         '3.0.6'
 
     s.dependency 'VideoIronSource',     '3.0.7'
     s.dependency 'VideoFacebook',       '3.0.6'
@@ -97,7 +97,7 @@ Pod::Spec.new do |s|
 
     # s.dependency 'InterstitialIronSource',  '3.0.8' 
     # s.dependency 'InterstitialFacebook',    '3.0.7'
-    
+
     # s.dependency 'InterstitialApplovin',    '3.0.6'
 
     # s.dependency 'InterstitialAdview',      '3.0.0'
