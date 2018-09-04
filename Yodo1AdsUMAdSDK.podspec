@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUMAdSDK'
-    s.version          = '3.0.2'
-    s.summary          = '头条sdk v1.9.4.0'
+    s.version          = '3.0.3'
+    s.summary          = '头条sdk v1.9.4.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -29,5 +29,5 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.libraries = 'sqlite3.0','z'
+    s.libraries = 'sqlite3.0','z','libresolv.9'
 end
