@@ -36,6 +36,11 @@ typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
     Yodo1ConfigTypeVideo
 };
 
+typedef NS_ENUM(NSUInteger,SDKInitType) {
+    SDKInitTypeToutiao,
+    SDKInitTypeMintegral,
+};
+
 @interface Yodo1AdConfigHelper : NSObject
 
 + (instancetype)instance;
@@ -77,6 +82,11 @@ typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
 - (void)cleanAdsLog;
 
 - (NSString*)adsLog;
+
+- (BOOL)isInitedWithInitType:(SDKInitType)type;
+
+- (void)setInitedWithInitType:(SDKInitType)type
+                     isInited:(BOOL)isInited;
 
 @end
 
