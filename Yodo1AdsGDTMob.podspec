@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsGDTMob'
-    s.version          = '3.0.1'
-    s.summary          = '广点通sdk v4.7.7,支持https'
+    s.version          = '3.0.2'
+    s.summary          = '广点通sdk v4.8.0,支持https'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
     s.source_files = "#{s.version}" + '/*.h'
 
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.libraries = 'sqlite3', 'z', 'stdc++','xml2'
+    s.libraries = 'sqlite3', 'z', 'c++','xml2'
 
     s.requires_arc = true
 
