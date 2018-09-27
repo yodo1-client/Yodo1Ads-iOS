@@ -10,6 +10,8 @@ Pod::Spec.new do |s|
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    
+    s.ios.deployment_target = '8.0'
 
     s.source_files =  "#{s.version}" + '/headers/*.h'
 
@@ -27,8 +29,11 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'AdSupport', 'AVFoundation', 'CoreTelephony', 'CoreGraphics', 'CoreMedia', 'StoreKit', 'SystemConfiguration', 'UIKit'
+    s.frameworks = 'AdSupport', 'AVFoundation', 'CoreTelephony', 'CoreGraphics', 'CoreMedia', 'StoreKit', 'SystemConfiguration', 'UIKit','WebKit'
+
+    s.weak_frameworks = 'SafariServices'
 
 
     s.libraries = 'sqlite3.0','z'
+    
 end
