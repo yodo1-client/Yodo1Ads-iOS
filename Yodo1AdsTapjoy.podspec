@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsTapjoy'
-    s.version          = '3.0.1'
-    s.summary          = '更新Tapjoy V12.0.0'
+    s.version          = '3.0.2'
+    s.summary          = '更新Tapjoy V12.0.0,去掉Yodo1ManagerTapjoy'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
     s.resources = "#{s.version}" + '/Resources/*.*'
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.libraries = 'sqlite3.0','z','stdc++'
+    s.libraries = 'sqlite3.0','z','c++'
 end
