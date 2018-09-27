@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    # s.vendored_libraries = "#{s.version}" + '/*.a'
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.vendored_frameworks = "#{s.version}" + '/VungleSDK.framework'
 
