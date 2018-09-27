@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdColony'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'A short description of Yodo1AdColony.'
 
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
     s.source_files = "#{s.version}" + '/AdColony.framework/Versions/A/Headers/*.h'
 
