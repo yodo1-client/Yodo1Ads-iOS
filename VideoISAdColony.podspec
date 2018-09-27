@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'VideoIronSource','3.0.8'
 
-    s.dependency 'Yodo1AdsAdColony','3.0.0'
+    s.dependency 'Yodo1AdsAdColony','3.0.1'
     
 end
