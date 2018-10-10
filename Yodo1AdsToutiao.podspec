@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsToutiao'
-    s.version          = '3.0.4'
-    s.summary          = '头条sdk v1.9.4.1(fixed)'
+    s.version          = '3.0.5'
+    s.summary          = '头条sdk v1.9.6.1 添加全屏视频广告'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '7.0'
-    s.source_files = "#{s.version}" + '/WMAdSDK.framework/Headers/*.h'
-    s.public_header_files = "#{s.version}" + '/WMAdSDK.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/WMAdSDK.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/WMAdSDK.framework/Versions/A/Headers/*.h'
     s.resources = "#{s.version}" + '/*.bundle'
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     s.vendored_frameworks = "#{s.version}" + '/WMAdSDK.framework'
