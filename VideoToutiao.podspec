@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoToutiao'
-    s.version          = '3.0.8'
-    s.summary          = 'UMAdSDK V1.9.4.1(fixed 修改名字VideoToutiao)'
+    s.version          = '3.0.9'
+    s.summary          = 'UMAdSDK V1.9.6.1'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.4'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.6'
-    s.dependency 'Yodo1AdsToutiao','3.0.4'
+    s.dependency 'Yodo1AdsToutiao','3.0.5'
 end
