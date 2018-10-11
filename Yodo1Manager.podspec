@@ -1,15 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.0.11'
-    s.summary          = 'v3.0.11- 2018-09-27
-                            1.更新今日头条sdk v1.9.4.1(fixed)
-                            2.更新Mintegral 4.3.0
-                            3.更新Adomb v7.33.1(超出100M)
-                            4.修复Admob插屏广告多广告位统计诡异的现象
-                            5.修改Tapjoy 视频，插屏管理方式
-                            6.修改Mintegral 插屏里面的视频广告位插屏视频
-                            7.修改视频，插屏管理方式
-                            8.更新GDT v4.8.0(修复插屏广告bug)
+    s.version          = '3.0.12'
+    s.summary          = 'v3.0.12- 2018-10-11
+                            1.更新今日头条sdk v1.9.6.1
+                            2.头条插屏广告换成全屏视频广告
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -205,7 +199,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerToutiao','3.0.8'
+        ss.dependency 'BannerToutiao','3.0.9'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Banner_Inmobi' do |ss|
@@ -275,7 +269,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialToutiao','3.0.9'
+        ss.dependency 'InterstitialToutiao','3.0.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -498,7 +492,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoToutiao','3.0.8'
+        ss.dependency 'VideoToutiao','3.0.9'
         # ss.dependency 'Yodo1Video', Yodo1VideoVersion
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
