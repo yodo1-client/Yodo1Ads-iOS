@@ -1,7 +1,12 @@
 =============================================
-V1.0.10 — 2018-09-27
-Tapjoy V12.0.0
-去掉Yodo1ManagerTapjoy.a
+V1.0.10 — 2018-10-12
+Tapjoy V12.1.0
+删除了所有在info.plist中需要应用同意的项目。在当前版本，NSMotionUsageDescription, NSAppleMusicUsageDescription, and NSPhotoLibraryUsageDescription 都不再需要。其他的配置需要已经在以前的版本中删除，所以现在集成Tapjoy SDK时，不再需要在info.plist 里面配置任何项目。
+--------------------
+修复在Tapjoy广告展示时旋转设备的几个错误。
+修复在一个广告后立即播放另一个Tapjoy广告（使用contentDidDisappear）有时会失败的问题。
+删除在极少数情况下有可能导致崩溃的NSUserDefaults同步调用。
+
 
 =============================================
 V1.0.9 — 2018-07-31

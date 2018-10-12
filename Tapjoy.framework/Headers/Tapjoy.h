@@ -22,6 +22,7 @@
 
 typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 typedef void (^networkCompletion)(BOOL success, NSError *error);
+typedef void (^urlCompletion)(NSURL *url, NSDate *expires, NSError *error);
 
 @interface TJCAdView : UIView <UIWebViewDelegate>
 @end
@@ -55,9 +56,10 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
 @property (nonatomic, copy) NSString *plugin;
 
 /** The currency multiplier value, used to adjust currency earned. */
-@property (nonatomic, assign) float currencyMultiplier;	
+@property (nonatomic, assign) float currencyMultiplier;
 
 @property (nonatomic, copy) NSString *appGroupID;
+
 @property (nonatomic, copy) NSString *store;
 @property (nonatomic, copy) NSString *analyticsApiKey;
 @property (nonatomic, copy) NSString *managedDeviceID;
@@ -92,7 +94,7 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  * TJC_OPTION_USER_ID : NSString user id that must be set if your currency is not managed by Tapjoy. If you don’t have a user id on launch you can call setUserID later
  *
  * TJC_OPTION_DISABLE_GENERIC_ERROR_ALERT : BOOL to disable our default error dialogs
- * 
+ *
  * @return n/a
  */
 + (void)connect:(NSString *)sdkKey options:(NSDictionary *)optionsDict;
@@ -118,6 +120,14 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  * @return URL of Tapjoy support web page for specified currency
  */
 + (NSString*)getSupportURL:(NSString*)currencyID;
+
+/**
+ * Attempts to get an URL of Offerwall to show it on an external browser, i.e. Safari.
+ *
+ * @param placementName The name of the placement that is configured for Offerwall.
+ * @param completion The completion block that is invoked after the attempt has completed.
+ */
++ (void)getOfferwallURL:(NSString *)placementName completion:(urlCompletion)completion;
 
 /**
  * This method returns a user token for programmatic mediation.
@@ -352,6 +362,14 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  */
 + (NSString*)getVersion;
 
+/** Used by limited SDK only **/
+@property (nonatomic, copy) NSString *limitedSdkKey;
+@property (nonatomic, copy) NSString *limitedAppID;
+@property (nonatomic, copy) NSString *limitedSecretKey;
+@property (nonatomic, copy) NSString *limitedAppGroupID;
++ (BOOL)isLimitedConnected;
++ (void)limitedConnect:(NSString *)sdkKey;
+
 @end
 
 /**
@@ -484,6 +502,11 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  */
 + (void)setVideoAdDelegate:(id<TJCVideoAdDelegate>)delegate;
 
+@end
+
+@protocol TJCTopViewControllerProtocol <NSObject>
+@required
+@property (nonatomic, assign) BOOL canRotate;
 @end
 
 #endif
