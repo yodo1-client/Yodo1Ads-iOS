@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoAdmob'
-    s.version          = '3.0.7'
-    s.summary          = 'VideoAdmob admob sdk v7.33.1超过100M'
+    s.version          = '3.0.8'
+    s.summary          = 'VideoAdmob admob sdk v7.34.0 解决超过100M'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.4'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.6'
-    s.dependency 'Yodo1AdsAdmob','3.0.1'
+    s.dependency 'Yodo1AdsAdmob','3.0.2'
 end
