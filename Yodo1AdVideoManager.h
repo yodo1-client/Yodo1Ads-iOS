@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Yodo1VideoDelegate.h"
 
 @interface Yodo1AdVideoManager : NSObject
 
@@ -14,6 +15,11 @@
  *  返回Yodo1AdVideoManager的实例
  */
 + (Yodo1AdVideoManager*)sharedInstance;
+
+/*
+ * 设置video代理
+ */
++ (void)setDelegate:(id<Yodo1VideoDelegate>)delegate;
 
 /**
  *  初始化视频广告sdk，需要先设置各家广告的key
