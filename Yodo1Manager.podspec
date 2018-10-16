@@ -189,7 +189,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerAdmob','3.0.5'
+        ss.dependency 'BannerAdmob','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -235,7 +235,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmob','3.0.7'
+        ss.dependency 'InterstitialAdmob','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -316,14 +316,14 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmobFacebook','3.0.8'
+        ss.dependency 'InterstitialAdmobFacebook','3.0.9'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_AdmobIronSource' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmobIronSource','3.0.9'
+        ss.dependency 'InterstitialAdmobIronSource','3.0.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_AdmobTapjoy' do |ss|
@@ -337,7 +337,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmobVungle','3.0.7'
+        ss.dependency 'InterstitialAdmobVungle','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
