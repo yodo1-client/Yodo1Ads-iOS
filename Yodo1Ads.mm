@@ -32,24 +32,24 @@
 #endif
 
 ///C++
-static Banner_callback s_banner_callback;
+static Yodo1AdsEvent_Callback s_banner_callback;
 
-static Interstitial_callback s_interstitial_callback;
+static Yodo1AdsEvent_Callback s_interstitial_callback;
 
-static Video_callback s_video_callback;
+static Yodo1AdsEvent_Callback s_video_callback;
 
 //OC
-static BannerCallback s_bannerCallback;
+static Yodo1AdsEventCallback s_bannerCallback;
 
-static InterstitialCallback s_interstitialCallback;
+static Yodo1AdsEventCallback s_interstitialCallback;
 
-static VideoCallback s_videoCallback;
+static Yodo1AdsEventCallback s_videoCallback;
 
 //Unity3d
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.0.12";
+NSString* const kYodo1AdsVersion       = @"3.1.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -179,6 +179,94 @@ typedef enum {
 }
 
 @end
+
+#ifdef YODO1_ADS_VIDEO
+
+@interface Yodo1AdsVideoDelegate : NSObject<Yodo1VideoDelegate>
+
++ (instancetype)instance;
+
+@end
+
+@implementation Yodo1AdsVideoDelegate
+
++ (instancetype)instance {
+    static Yodo1AdsVideoDelegate *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[Yodo1AdsVideoDelegate alloc] init];
+    });
+    
+    return sharedInstance;
+}
+
+#pragma mark- Yodo1VideoDelegate
+
+- (void)onVideoShowSuccess {
+    if(s_video_callback){
+        s_video_callback(Yodo1AdsCEventShowSuccess,nil);
+    }
+    if(s_videoCallback){
+        s_videoCallback(Yodo1AdsEventShowSuccess,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventShowSuccess error:nil];
+}
+
+- (void)onVideoShowFailed:(nonnull NSError *)error {
+    if(s_video_callback){
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            s_video_callback(Yodo1AdsCEventLoadFail,errorC);
+        }else{
+            s_video_callback(Yodo1AdsCEventLoadFail,nil);
+        }
+    }
+    if(s_videoCallback){
+        s_videoCallback(Yodo1AdsEventLoadFail,error);
+    }
+    NSString* errorMsg = nil;
+    if (error) {
+        errorMsg = [error localizedDescription];
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventLoadFail error:errorMsg];
+}
+
+- (void)onVideoClicked {
+    if(s_video_callback){
+        s_video_callback(Yodo1AdsCEventClick,nil);
+    }
+    if(s_videoCallback){
+        s_videoCallback(Yodo1AdsEventClick,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventClick error:nil];
+}
+
+- (void)onVideoClosed:(BOOL)finished {
+    if(s_video_callback){
+        s_video_callback(Yodo1AdsCEventClose,nil);
+        if (finished) {
+            s_video_callback(Yodo1AdsCEventFinish,nil);
+        }
+    }
+    if(s_videoCallback){
+        s_videoCallback(Yodo1AdsEventClose,nil);
+        if (finished) {
+            s_videoCallback(Yodo1AdsEventFinish,nil);
+        }
+    }
+ 
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventClose error:nil];
+    if (finished) {
+        [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventFinish error:nil];
+    }
+}
+
+@end
+
+#endif
 
 #ifdef YODO1_ADS_INTERSTITIAL
 
@@ -392,6 +480,7 @@ typedef enum {
 #endif
 #ifdef YODO1_ADS_VIDEO
     //初始化Video
+    [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
 
@@ -403,7 +492,7 @@ typedef enum {
 }
 
 #pragma mark- OCBanner
-+ (void)setBannerCallback:(BannerCallback)callback {
++ (void)setBannerCallback:(Yodo1AdsEventCallback)callback {
     if (callback == nil) {
         return;
     }
@@ -459,7 +548,7 @@ typedef enum {
 
 #pragma mark- OCInterstitial
 
-+ (void)setInterstitialCallback:(InterstitialCallback)callback {
++ (void)setInterstitialCallback:(Yodo1AdsEventCallback)callback {
     if (callback == nil) {
         return;
     }
@@ -492,7 +581,7 @@ typedef enum {
 
 #pragma mark- OCVideo
 
-+ (void)setVideoCallback:(VideoCallback)callback {
++ (void)setVideoCallback:(Yodo1AdsEventCallback)callback {
     if (callback == nil) {
         return;
     }
@@ -520,9 +609,7 @@ typedef enum {
 #ifdef YODO1_ADS_VIDEO
     [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]
                                           awardBlock:^(bool finished) {
-                                              if (s_videoCallback) {
-                                                  s_videoCallback(finished);
-                                              }
+                                            
     }];
 #endif
 }
@@ -547,14 +634,6 @@ extern "C" {
         NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
         
         [Yodo1Ads initWithAppKey:m_appKey];
-        
-        [Yodo1Ads setVideoCallback:^(BOOL finished) {
-            Yodo1AdsEvent adsEvent = Yodo1AdsEventClose;
-            if (finished) {
-                adsEvent = Yodo1AdsEventFinish;
-            }
-            [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:adsEvent error:nil];
-        }];
     }
     
     void Unity3dSetLogEnable(BOOL enable)
@@ -642,7 +721,7 @@ void Yodo1AdsC::SetLogEnable(bool enable)
 
 #pragma mark - C++Banner
 
-void Yodo1AdsC::SetBannerCallback(Banner_callback callback)
+void Yodo1AdsC::SetBannerCallback(Yodo1AdsEvent_Callback callback)
 {
     if(callback == NULL){
         NSLog(@"Banner callback is null");
@@ -683,7 +762,7 @@ void Yodo1AdsC::RemoveBanner()
 
 #pragma mark - C++Interstitial
 
-void Yodo1AdsC::SetInterstitialCallback(Interstitial_callback callback)
+void Yodo1AdsC::SetInterstitialCallback(Yodo1AdsEvent_Callback callback)
 {
     if(callback == NULL){
         NSLog(@"interstitial callback is null");
@@ -706,18 +785,12 @@ void Yodo1AdsC:: ShowInterstitial()
 
 #pragma mark - C++Video
 
-void Yodo1AdsC::SetVideoCallback(Video_callback callback)
+void Yodo1AdsC::SetVideoCallback(Yodo1AdsEvent_Callback callback)
 {
     if (callback == NULL) {
         NSLog(@"video callback is null");
     }
     s_video_callback = callback;
-    [Yodo1Ads setVideoCallback:^(BOOL finished) {
-        if (s_video_callback) {
-            s_video_callback(finished);
-        }
-    }];
-  
 }
 
 bool Yodo1AdsC::VideoIsReady()

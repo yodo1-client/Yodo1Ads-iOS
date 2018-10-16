@@ -36,9 +36,7 @@ public:
     const char * errorDescription;
 };
 
-typedef void (*Banner_callback) (Yodo1AdsCEvent event ,Yodo1AdsCError* error);
-typedef void (*Interstitial_callback) (Yodo1AdsCEvent event,Yodo1AdsCError* error);
-typedef void (*Video_callback) (bool finished);
+typedef void (*Yodo1AdsEvent_Callback) (Yodo1AdsCEvent event,Yodo1AdsCError* error);
 
 
 class Yodo1AdsC {
@@ -64,7 +62,7 @@ public:
     /**
      *  Set banner's callback
      */
-    static void SetBannerCallback(Banner_callback callback);
+    static void SetBannerCallback(Yodo1AdsEvent_Callback callback);
     
     /**
      *  Set banner's offset
@@ -97,7 +95,7 @@ public:
     /**
      *  Set interstitial's callback
      */
-    static void SetInterstitialCallback(Interstitial_callback callback);
+    static void SetInterstitialCallback(Yodo1AdsEvent_Callback callback);
     
     /**
      *  Check if interstitial is ready to show
@@ -114,7 +112,7 @@ public:
     /**
      *  Set video's callback
      */
-    static void SetVideoCallback(Video_callback callback);
+    static void SetVideoCallback(Yodo1AdsEvent_Callback callback);
     
     /**
      *  Check if vedeo ad is ready to paly
