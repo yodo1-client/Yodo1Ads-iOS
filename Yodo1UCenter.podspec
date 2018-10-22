@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.0.6'
-    s.summary          = 'fix bug'
+    s.version          = '3.0.7'
+    s.summary          = '修复获取产品信息重复的BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

@@ -492,6 +492,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 - (void)productsInfo:(ProductsInfoCompletionBlock)callback
 {
     if (callback) {
+        if ([_productsInfoIdArray count] > 0 ) {
+            [_productsInfoIdArray removeAllObjects];
+        }
         NSArray* allAppStoreProduct = [dictProducts allValues];
         for (AppStoreProduct *productInfo in allAppStoreProduct) {
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
