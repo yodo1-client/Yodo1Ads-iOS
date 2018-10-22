@@ -4,6 +4,7 @@ Pod::Spec.new do |s|
     s.summary          = 'v3.1.0 - 2018-10-17
                             1.更新Tapjoy
                             2.添加视频广告代理回调
+                            3.修复获取产品信息的BUG
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -63,7 +64,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.6'
+        ss.dependency 'Yodo1UCenter','3.0.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
