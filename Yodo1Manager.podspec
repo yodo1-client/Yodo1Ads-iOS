@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.0'
-    s.summary          = 'v3.1.0 - 2018-10-17
+    s.version          = '3.1.1'
+    s.summary          = 'v3.1.1 - 2018-10-23
                             1.更新Tapjoy
                             2.添加视频广告代理回调
                             3.修复获取产品信息的BUG
+                            4.修改video 代理回调逻辑
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

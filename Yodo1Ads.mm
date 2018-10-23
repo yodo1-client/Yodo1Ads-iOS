@@ -246,21 +246,23 @@ typedef enum {
 
 - (void)onVideoClosed:(BOOL)finished {
     if(s_video_callback){
-        s_video_callback(Yodo1AdsCEventClose,nil);
         if (finished) {
             s_video_callback(Yodo1AdsCEventFinish,nil);
+        }else{
+            s_video_callback(Yodo1AdsCEventClose,nil);
         }
     }
     if(s_videoCallback){
-        s_videoCallback(Yodo1AdsEventClose,nil);
         if (finished) {
             s_videoCallback(Yodo1AdsEventFinish,nil);
+        }else{
+             s_videoCallback(Yodo1AdsEventClose,nil);
         }
     }
- 
-    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventClose error:nil];
     if (finished) {
         [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventFinish error:nil];
+    }else{
+        [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeVideo code:Yodo1AdsEventClose error:nil];
     }
 }
 
