@@ -40,6 +40,9 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
     SDKInitTypeToutiao,
     SDKInitTypeMintegral,
     SDKInitTypeTapjoy,
+    SDKInitTypeIronSource,
+    SDKInitTypeInmobi,
+    SDKInitTypeAdmob,
 };
 
 @interface Yodo1AdConfigHelper : NSObject
