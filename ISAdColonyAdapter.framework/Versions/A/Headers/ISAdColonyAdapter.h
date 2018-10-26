@@ -7,21 +7,21 @@
 
 //System Frameworks For Adcolony Adapter
 
+@import AdSupport;
+@import AudioToolbox;
 @import AVFoundation;
-@import CoreGraphics;
 @import CoreMedia;
 @import CoreTelephony;
 @import EventKit;
-@import EventKitUI;
-@import MediaPlayer;
+@import JavaScriptCore;
 @import MessageUI;
-@import QuartzCore;
-@import SystemConfiguration;
-@import AdSupport;
+@import MobileCoreServices;
 @import Social;
 @import StoreKit;
+@import SystemConfiguration;
+@import WatchConnectivity;
 @import WebKit;
-@import AudioToolbox;
+
 
 @interface ISAdColonyAdapter : ISBaseAdapter
 
