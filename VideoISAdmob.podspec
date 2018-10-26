@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoIronSource'
-    s.version          = '3.0.10'
-    s.summary          = 'A short description of VideoIronSource.'
+    s.name             = 'VideoISAdmob'
+    s.version          = '3.0.0'
+    s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -16,11 +16,12 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    #s.source_files = "#{s.version}" +'/*.{h,m}'
+    s.source_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
 
-    #s.public_header_files = "#{s.version}" +'/*.h'
-    
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    s.public_header_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
+
+
+    s.vendored_frameworks = "#{s.version}" + '/ISVungleAdapter.framework'
 
     s.requires_arc = true
 
@@ -33,8 +34,8 @@ Pod::Spec.new do |s|
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    
+    s.dependency 'VideoIronSource','3.0.10'
 
-    s.dependency 'Yodo1Video','3.0.6'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.6'
-    s.dependency 'Yodo1AdsIronSource','3.0.2'
+    s.dependency 'Yodo1AdsAdmob','3.0.1'
 end
