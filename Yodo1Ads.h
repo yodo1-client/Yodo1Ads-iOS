@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v3.1.0
+//  v3.1.2
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
