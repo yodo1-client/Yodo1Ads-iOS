@@ -16,12 +16,12 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
+    s.source_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
 
 
-    s.vendored_frameworks = "#{s.version}" + '/ISVungleAdapter.framework'
+    s.vendored_frameworks = "#{s.version}" + '/ISAdMobAdapter.framework'
 
     s.requires_arc = true
 
