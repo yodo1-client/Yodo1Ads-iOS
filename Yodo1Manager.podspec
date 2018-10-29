@@ -1,12 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.2'
-    s.summary          = 'v3.1.2 - 2018-10-23
-                            1.更新Tapjoy
-                            2.添加视频广告代理回调
-                            3.修复获取产品信息的BUG
-                            4.修改video 代理回调逻辑
-                            5.添加IronSource聚合中的admob平台
+    s.version          = '3.1.3'
+    s.summary          = 'v3.1.3 - 2018-10-29
+                            1.修复订阅购买弹框iPad的bug
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -66,7 +62,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.7'
+        ss.dependency 'Yodo1UCenter','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
