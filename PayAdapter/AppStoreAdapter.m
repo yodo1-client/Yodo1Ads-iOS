@@ -283,7 +283,13 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:privateTitle,serviceTitle,okTitle, nil];
             [alert show];
         }else{
-            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertControllerStyle uiAlertControllerStyle = UIAlertControllerStyleActionSheet;
+            if([Yodo1Commons isIpad] == YES){
+                NSLog(@"IS pad");
+                uiAlertControllerStyle = UIAlertControllerStyleAlert;
+            }
+            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiAlertControllerStyle];
+            
             UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.cn/about-us/privacy-policy"]];
             }];
