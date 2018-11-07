@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.dependency 'Yodo1Interstitial','3.0.7'
-    s.dependency 'Yodo1AdsIronSource','3.0.2'
+    s.dependency 'Yodo1AdsIronSource','3.0.3'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.7'
 
 end
