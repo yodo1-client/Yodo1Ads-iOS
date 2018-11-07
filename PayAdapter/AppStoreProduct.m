@@ -15,6 +15,7 @@
 @synthesize uniformProductId;
 @synthesize currency;
 @synthesize productType;
+@synthesize periodUnit;
 
 -(id)initWithDict:(NSDictionary*)dictProduct productId:(NSString*)uniformProductId_
 {
@@ -28,6 +29,7 @@
         self.currency = [dictProduct objectForKey:PRODUCT_CURRENCY];
         self.productDescription = [dictProduct objectForKey:PRODUCT_DESCRIPTION];
         self.productType = [[dictProduct objectForKey:PRODUCTTYPE] intValue];
+        self.periodUnit = [dictProduct objectForKey:PERIOD_UNIT];
     }
     return self;
 }

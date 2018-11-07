@@ -21,6 +21,7 @@
 @synthesize trxReceipt;
 @synthesize transactionIdentifier;
 @synthesize productType;
+@synthesize periodUnit;
 
 -(void)dealloc
 {
@@ -37,6 +38,7 @@
     [trxReceipt release];
     [transactionIdentifier release];
     [productType release];
+    [periodUnit release];
     
     [super dealloc];
 }
@@ -56,6 +58,7 @@
     [coder encodeObject:self.trxReceipt forKey:@"trxReceipt"];
     [coder encodeObject:self.transactionIdentifier forKey:@"transactionIdentifier"];
     [coder encodeObject:self.productType forKey:@"productType"];
+    [coder encodeObject:self.periodUnit forKey:@"periodUnit"];
 }
 
 - (id)initWithCoder:(NSCoder *) coder
@@ -73,6 +76,7 @@
     trxReceipt = [[coder decodeObjectForKey:@"trxReceipt"]copy];
     transactionIdentifier = [[coder decodeObjectForKey:@"transactionIdentifier"]copy];
     productType = [[coder decodeObjectForKey:@"productType"] copy];
+    periodUnit = [[coder decodeObjectForKey:@"periodUnit"] copy];
     
     return self;
 }

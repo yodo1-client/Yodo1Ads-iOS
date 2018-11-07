@@ -83,6 +83,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 /*获取货币种类*/
 - (NSString*)currencyCode:(NSLocale*)priceLocale;
 
+//根据产品对象获取订阅周期
+- (NSString*)periodUnitWithProduct:(SKProduct*)product;
+
 - (AppStoreProduct*)productWithChannelProductId:(NSString*)channelProductId;
 
 - (void)checkProductInfoWithChannelProductId:(NSString*)channelProductId
@@ -195,8 +198,63 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             product.productDescription = skProduct.localizedDescription;
             product.currency = [self currencyCode:skProduct.priceLocale];
             product.priceDisplay = [self diplayPrice:skProduct];
+            product.periodUnit = [self periodUnitWithProduct:skProduct];
         }
     }
+}
+
+- (NSString*)periodUnitWithProduct:(SKProduct*)product
+{
+    if (@available(iOS 11.2, *)) {
+       
+        NSString* unit = @"";
+        int numberOfUnits = (int)product.subscriptionPeriod.numberOfUnits;
+        switch (product.subscriptionPeriod.unit)
+        {
+            case SKProductPeriodUnitDay:
+            {
+                if (numberOfUnits == 7) {
+                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
+                }else if (numberOfUnits == 30){
+                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
+                } else {
+                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionDay" withDefault:@"每%d天"],numberOfUnits];
+                }
+            }
+            break;
+            case SKProductPeriodUnitWeek:
+            {
+                if (numberOfUnits == 1) {
+                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
+                } else {
+                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionWeeks" withDefault:@"每%d周"],numberOfUnits];
+                }
+            }
+            break;
+            case SKProductPeriodUnitMonth:
+            {
+                if (numberOfUnits == 1) {
+                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
+                } else {
+                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionMonths" withDefault:@"每%d个月"],numberOfUnits];
+                }
+            }
+            break;
+            case SKProductPeriodUnitYear:
+            {
+                if (numberOfUnits == 1) {
+                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionYear" withDefault:@"每年"];
+                } else {
+                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionYears" withDefault:@"每%d年"],numberOfUnits];
+                }
+            }
+            break;
+        }
+        return unit;
+    } else {
+        return @"";
+    }
+    return @"";
 }
 
 - (void)requestUpdateProductInfo
@@ -245,6 +303,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     paymentProduct.price = product.productPrice;
     paymentProduct.currency = product.currency;
     paymentProduct.productType = [NSString stringWithFormat:@"%d", (int)product.productType];
+    paymentProduct.periodUnit = product.periodUnit;
     
     if (![UCenterManager sharedInstance].gameUserId) {
         paymentProduct.gameUserId = [Yodo1Commons idfvString];
@@ -272,11 +331,13 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     
     if([paymentProduct.productType intValue] == Auto_Subscription){
-        NSString* message = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage" withDefault:@"确认后您的iTunes账户将支付 %@ %@。\n每月持续启用时，您的iTunes账户也会支付相同费用。\n在启用有效期结束时系统会自动为您持续启用服务，除非您在有效期结束前取消启用。"], paymentProduct.price, paymentProduct.currency];
-        NSString* title = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用服务"];
+        NSString* message = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage"
+                                                                               withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@。在服务有效期结束时系统会自动为您续订此服务，除非您在有效期结束前取消启用。%@自动续订此服务时您的iTunes账户也会支付相同费用。"], paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
+        
+        NSString* title = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
         NSString* cancelTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
-        NSString* okTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"确认启用服务"];
-        NSString* privateTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私保护政策"];
+        NSString* okTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"启用"];
+        NSString* privateTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私协议"];
         NSString* serviceTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertService" withDefault:@"服务条款"];
         
         if([[[UIDevice currentDevice]systemVersion] floatValue] < 8.0){
@@ -488,6 +549,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         productInfo.productPrice = [self productPrice:skProduct];
         productInfo.currency = [self currencyCode:skProduct.priceLocale];
         productInfo.priceDisplay = [self diplayPrice:skProduct];
+        productInfo.periodUnit = [self periodUnitWithProduct:skProduct];
     }else{
         productInfo.productPrice = product.productPrice;
         productInfo.priceDisplay = product.priceDisplay;
@@ -514,6 +576,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 price = [self productPrice:skProduct];
                 productInfo.currency = [self currencyCode:skProduct.priceLocale];
                 productInfo.priceDisplay = [self diplayPrice:skProduct];
+                productInfo.periodUnit = [self periodUnitWithProduct:skProduct];
             }else{
                 price = productInfo.productPrice;
             }
@@ -697,6 +760,8 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         [dict setObject:[NSNumber numberWithInt:productInfo.productType] forKey:@"ProductType"];
         [dict setObject:productInfo.currency == nil?@"":productInfo.currency forKey:@"currency"];
         [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
+        [dict setObject:productInfo.periodUnit == nil?@"":[self periodUnitWithProduct:skProduct] forKey:@"periodUnit"];
+        
         if (bRestorePayment) {
             [self.restoreProductIdArray addObject:dict];
         }else{
@@ -876,6 +941,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 #ifdef DEBUG
 	      NSLog(@"ID:%@: Title:%@ (%@) - %@ %@", product.productIdentifier,
               product.localizedTitle, product.localizedDescription, [self productPrice:product],[self currencyCode:product.priceLocale]);
+
 #endif
 	}
     

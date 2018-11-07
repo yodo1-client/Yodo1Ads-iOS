@@ -19,6 +19,8 @@
 #define KUAIYONG_MD5KEY             @"md5Key"
 #define PRODUCTTYPE                 @"ProductType"
 
+#define PERIOD_UNIT                 @"PeriodUnit"
+
 #define ORDER_ID                    @"orderid"
 
 
@@ -33,6 +35,8 @@
 @property (nonatomic, copy) NSString* productDescription;
 @property (nonatomic, copy) NSString* currency;
 @property (nonatomic, assign) ProductType productType;
+@property (nonatomic, copy) NSString* periodUnit;//订阅时间 每周，每月，每年,每2个月...
+
 
 - (id)initWithDict:(NSDictionary*)dictProduct productId:(NSString*)uniformProductId;
 

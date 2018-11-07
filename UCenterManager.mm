@@ -37,6 +37,7 @@ obj = nil;          \
 @synthesize productDescription;
 @synthesize currency;
 @synthesize productType;
+@synthesize periodUnit;
 
 - (void)dealloc
 {
@@ -46,6 +47,7 @@ obj = nil;          \
     [self.productPrice release];
     [self.productDescription release];
     [self.currency release];
+    [self.periodUnit release];
     [super dealloc];
 }
 

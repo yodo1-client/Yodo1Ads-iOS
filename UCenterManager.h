@@ -31,6 +31,8 @@
 @property (nonatomic, copy) NSString* currency;
 /**@brief 是否为消耗品 */
 @property (nonatomic, assign) ProductType productType;
+/**@brief 订阅时间 每周，每月，每年,每2个月... */
+@property (nonatomic, copy) NSString* periodUnit;
 
 @end
 

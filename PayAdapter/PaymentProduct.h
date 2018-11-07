@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSString* trxReceipt;             //苹果票据信息
 @property (nonatomic, retain) NSString* transactionIdentifier;  //苹果产品订单号：唯一
 @property (nonatomic, retain) NSString* productType;            //苹果产品类型
+@property (nonatomic, retain) NSString* periodUnit;             //订阅时间 每周，每月，每年,每2个月...
 
 @end
