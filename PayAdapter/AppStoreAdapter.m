@@ -331,8 +331,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     
     if([paymentProduct.productType intValue] == Auto_Subscription){
-        NSString* message = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage"
-                                                                               withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@。在服务有效期结束时系统会自动为您续订此服务，除非您在有效期结束前取消启用。%@自动续订此服务时您的iTunes账户也会支付相同费用。"], paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
+        NSString* mes = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage"
+                                                withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@。在服务有效期结束时系统会自动为您续订此服务，除非您在有效期结束前取消启用。%@自动续订此服务时您的iTunes账户也会支付相同费用。"];
+        NSString* message = [NSString stringWithFormat:mes,paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
         
         NSString* title = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
         NSString* cancelTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
@@ -349,13 +350,19 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 NSLog(@"IS pad");
                 uiAlertControllerStyle = UIAlertControllerStyleAlert;
             }
+
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiAlertControllerStyle];
             
+            NSString* privacyPolicyUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
+                                                                 withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
+            NSString* termsServiceUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionTermsServiceURL"
+                                                                withDefault:@"https://www.yodo1.com/cn/user_agreement"];
+            
             UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.cn/about-us/privacy-policy"]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
             }];
             UIAlertAction *serviceAction = [UIAlertAction actionWithTitle:serviceTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.cn/about-us/about-us/terms-of-service"]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
             }];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -377,12 +384,16 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSString* privacyPolicyUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
+                                                         withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
+    NSString* termsServiceUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionTermsServiceURL"
+                                                        withDefault:@"https://www.yodo1.com/cn/user_agreement"];
     switch (buttonIndex) {
         case 1:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.cn/about-us/privacy-policy"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
             break;
         case 2:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.cn/about-us/about-us/terms-of-service"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
             break;
         case 3:
             [self requestPaymentWithProduct:[dictProducts objectForKey:self.currentUniformProductId]];
@@ -939,7 +950,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 	}
 	for(SKProduct *product in self.products) {
 #ifdef DEBUG
-	      NSLog(@"ID:%@: Title:%@ (%@) - %@ %@", product.productIdentifier,
+        NSLog(@"ID:%@: Title:%@ (%@) - %@ %@", product.productIdentifier,
               product.localizedTitle, product.localizedDescription, [self productPrice:product],[self currencyCode:product.priceLocale]);
 
 #endif
