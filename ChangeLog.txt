@@ -1,4 +1,8 @@
 =============================================
+V1.0.15— 2018-11-12
+1.GoogleMobileAds V7.35.2
+Miscellaneous bug fixes.
+=============================================
 V1.0.14— 2018-10-19
 1.GoogleMobileAds V7.35.0
 Fixed an issue that may have caused rewarded ads to fail to load in cases where a
