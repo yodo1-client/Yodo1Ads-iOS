@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsInmobi'
-    s.version          = '3.0.0'
-    s.summary          = 'Inmobi v7.1.1'
+    s.version          = '3.0.1'
+    s.summary          = 'Inmobi v7.2.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
