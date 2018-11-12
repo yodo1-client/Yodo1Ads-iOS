@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'BannerInmobi'
-    s.version          = '3.0.7'
+    s.version          = '3.0.8'
     s.summary          = 'Inmobi Banner'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,5 +33,5 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
 
     s.dependency 'Yodo1Banner','3.0.7'
-    s.dependency 'Yodo1AdsInmobi','3.0.0'
+    s.dependency 'Yodo1AdsInmobi','3.0.1'
 end
