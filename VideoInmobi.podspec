@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoInmobi'
-    s.version          = '3.0.9'
-    s.summary          = '更新Inmobi SDK 7.1.1 最低支持8.0'
+    s.version          = '3.0.10'
+    s.summary          = '更新Inmobi SDK 7.2.1 最低支持8.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -35,6 +35,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.7'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.7'
-    s.dependency 'Yodo1AdsInmobi','3.0.0'
+    s.dependency 'Yodo1AdsInmobi','3.0.1'
 
 end
