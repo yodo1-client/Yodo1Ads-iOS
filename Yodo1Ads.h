@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v3.0.12
+//  v3.1.5
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -30,24 +30,11 @@ typedef enum {
 }Yodo1AdsBannerAdAlign;
 
 /**
- *  Banner callback
+ *  Yodo1AdsEvent call back
  *  @param adEvent Apecify the ad event.
  *  @param error ad event error.
  */
-typedef void (^BannerCallback)(Yodo1AdsEvent adEvent,NSError* error);
-
-/**
- *  Interstitial call back
- *  @param adEvent Apecify the ad event.
- *  @param error ad event error.
- */
-typedef void (^InterstitialCallback)(Yodo1AdsEvent adEvent,NSError* error);
-
-/**
- *  Video call back
- *  @param finished Video playing status.
- */
-typedef void (^VideoCallback)(BOOL finished);
+typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 
 @interface Yodo1Ads : NSObject
 
@@ -59,7 +46,7 @@ typedef void (^VideoCallback)(BOOL finished);
 
 #pragma mark- Banner
 //Set banner's call back
-+ (void)setBannerCallback:(BannerCallback)callback;
++ (void)setBannerCallback:(Yodo1AdsEventCallback)callback;
 
 //Set banner's align
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align;
@@ -87,7 +74,7 @@ typedef void (^VideoCallback)(BOOL finished);
 #pragma mark- Interstitial
 
 //Set interstitial's callback
-+ (void)setInterstitialCallback:(InterstitialCallback)callback;
++ (void)setInterstitialCallback:(Yodo1AdsEventCallback)callback;
 
 //Check if interstitial ad is ready to show
 + (BOOL)interstitialIsReady;
@@ -101,7 +88,7 @@ typedef void (^VideoCallback)(BOOL finished);
 #pragma mark- Video
 
 //Set video callback
-+ (void)setVideoCallback:(VideoCallback)callback;
++ (void)setVideoCallback:(Yodo1AdsEventCallback)callback;
 
 //Check if video ad is ready to play
 + (BOOL)videoIsReady;
