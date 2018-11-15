@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoFacebook'
-    s.version          = '3.0.10'
-    s.summary          = 'FBAudienceNetwork SDK V4.99.1'
+    s.version          = '3.0.11'
+    s.summary          = 'FBAudienceNetwork SDK V5.1.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.7'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.7'
-    s.dependency 'Yodo1AdsFacebook','3.0.1'
+    s.dependency 'Yodo1AdsFacebook','3.0.2'
 end
