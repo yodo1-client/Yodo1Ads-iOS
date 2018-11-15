@@ -1,9 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.5'
-    s.summary          = 'v3.1.5 - 2018-11-12
-                            1.更新第三方SDK,Admob v7.35.2，Inmobi v7.2.1,GDTMob v4.8.1
-                            2.添加广点通视频广告，Baidu 视频广告，Admob插屏聚合中的Inmobi渠道
+    s.version          = '3.1.6'
+    s.summary          = 'v3.1.6 - 2018-11-16
+                            1.添加Inmobi插屏广告
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -286,6 +285,14 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
         ss.dependency 'InterstitialMintegral','3.0.10'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Interstitial_Inmobi' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+        }
+        ss.dependency 'InterstitialInmobi','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
