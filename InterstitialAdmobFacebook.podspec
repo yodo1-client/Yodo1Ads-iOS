@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialAdmobFacebook'
-    s.version          = '3.0.12'
-    s.summary          = 'Admob 更新v7.35.2'
+    s.version          = '3.0.13'
+    s.summary          = 'Admob 更新v7.35.2，Facebook SDK v5.1.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
     s.libraries = 'z'
     
     s.dependency 'InterstitialAdmob','3.0.11'
-    s.dependency 'Yodo1AdsFacebook','3.0.1'
+    s.dependency 'Yodo1AdsFacebook','3.0.2'
 
 end
