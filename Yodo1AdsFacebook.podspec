@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsFacebook'
     s.version          = '3.0.2'
-    s.summary          = 'FBAudienceNetwork v5.1.0'
+    s.summary          = 'FBAudienceNetwork v5.1.0 解决framework 超过100M上传git的问题'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
