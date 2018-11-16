@@ -557,7 +557,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     SKProduct* skProduct = [self productInfoWithProductId:product.channelProductId];
     if (skProduct) {
-        productInfo.productPrice = [self productPrice:skProduct];
+        productInfo.productPrice = [skProduct.price stringValue];
         productInfo.currency = [self currencyCode:skProduct.priceLocale];
         productInfo.priceDisplay = [self diplayPrice:skProduct];
         productInfo.periodUnit = [self periodUnitWithProduct:skProduct];
@@ -584,7 +584,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             SKProduct* skProduct = [self productInfoWithProductId:productInfo.channelProductId];
             NSString* price = nil;
             if (skProduct) {
-                price = [self productPrice:skProduct];
+                price = [skProduct.price stringValue];
                 productInfo.currency = [self currencyCode:skProduct.priceLocale];
                 productInfo.priceDisplay = [self diplayPrice:skProduct];
                 productInfo.periodUnit = [self periodUnitWithProduct:skProduct];
