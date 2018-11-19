@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.6'
-    s.summary          = 'v3.1.6 - 2018-11-16
-                            1.添加Inmobi插屏广告
+    s.version          = '3.1.7'
+    s.summary          = 'v3.1.7 - 2018-11-19
+                            1.修复Yodo1UCenter的内付费appsfly统计BUG
+                            2.更新Facebook sdk 5.1.0
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -62,7 +63,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.9'
+        ss.dependency 'Yodo1UCenter','3.0.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -268,7 +269,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialFacebook','3.0.10'
+        ss.dependency 'InterstitialFacebook','3.0.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -301,7 +302,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialAdmobFacebook','3.0.12'
+        ss.dependency 'InterstitialAdmobFacebook','3.0.13'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_AdmobIronSource' do |ss|
@@ -354,7 +355,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoFacebook','3.0.10'
+        ss.dependency 'VideoFacebook','3.0.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -490,7 +491,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISFacebook','3.0.11'
+        ss.dependency 'VideoISFacebook','3.0.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
