@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISUnityAds'
-    s.version          = '3.0.12'
+    s.version          = '3.0.13'
     s.summary          = 'Adapter和SDK分离,更新UnityAds v2.3.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'VideoIronSource','3.0.11'
+    s.dependency 'VideoIronSource','3.0.12'
 
     s.dependency 'Yodo1AdsUnityAds','3.0.1'
 end
