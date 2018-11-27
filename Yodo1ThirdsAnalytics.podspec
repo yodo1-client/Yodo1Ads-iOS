@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '3.0.7'
+    s.version          = '3.0.8'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
@@ -37,7 +37,7 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1Commons','3.0.1'
+    s.dependency 'Yodo1Commons','3.0.2'
     s.dependency 'Yodo1KeyInfo','3.0.0'
     s.dependency 'Yodo1OnlineParameter','3.0.1'
 
