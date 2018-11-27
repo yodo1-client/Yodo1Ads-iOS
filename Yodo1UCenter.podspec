@@ -45,5 +45,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','3.0.0'
     s.dependency 'Yodo1Reachability','3.0.0'
     s.dependency 'Yodo1KeyInfo','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.7'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.8'
 end
