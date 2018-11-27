@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Commons'
-    s.version          = '3.0.1'
-    s.summary          = '添加多语言'
+    s.version          = '3.0.2'
+    s.summary          = '修改多语言翻译文字'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
