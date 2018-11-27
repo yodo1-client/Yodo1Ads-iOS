@@ -332,7 +332,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     if([paymentProduct.productType intValue] == Auto_Subscription){
         NSString* mes = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage"
-                                                withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@。在服务有效期结束时系统会自动为您续订此服务，除非您在有效期结束前取消启用。%@自动续订此服务时您的iTunes账户也会支付相同费用。"];
+                                                withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
         NSString* message = [NSString stringWithFormat:mes,paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
         
         NSString* title = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
