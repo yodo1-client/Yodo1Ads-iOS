@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoAdmob'
-    s.version          = '3.0.12'
+    s.version          = '3.0.13'
     s.summary          = 'VideoAdmob admob sdk v7.35.2 解决超过100M'
 
     s.description      = <<-DESC
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','3.0.7'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.7'
+    s.dependency 'Yodo1Video','3.0.8'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.8'
     s.dependency 'Yodo1AdsAdmob','3.0.3'
 end
