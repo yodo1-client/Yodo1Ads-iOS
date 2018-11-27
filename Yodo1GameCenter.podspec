@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.frameworks = 'UIKit','GameKit'
-    s.dependency 'Yodo1Commons','3.0.1'
+    s.dependency 'Yodo1Commons','3.0.2'
     s.dependency 'Yodo1Reachability','3.0.0'
 
 end
