@@ -118,7 +118,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'GAMECENTER'
         }
-        ss.dependency 'Yodo1GameCenter','3.0.1'
+        ss.dependency 'Yodo1GameCenter','3.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
      s.subspec 'Yodo1_iCloud' do |ss|
@@ -132,7 +132,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'NOTIFICATION'
         }
-        ss.dependency 'Yodo1Notification','3.0.1'
+        ss.dependency 'Yodo1Notification','3.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
