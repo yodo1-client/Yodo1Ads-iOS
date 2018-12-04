@@ -49,7 +49,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.1.8";
+NSString* const kYodo1AdsVersion       = @"3.1.9";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
