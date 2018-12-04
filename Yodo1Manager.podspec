@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.8'
+    s.version          = '3.1.9'
     s.summary          = 'v3.1.8 - 2018-11-27
                             1.更新订阅多语言文本
                           '
