@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Advert'
-    s.version          = '3.0.9'
-    s.summary          = '2018.11.13 11月份list更新版本 国内外版本
-                            Yodo1Ads v3.1.5'
+    s.version          = '3.0.10'
+    s.summary          = '2018.12.05 12月份list更新版本 国内外版本
+                            Yodo1Ads v3.1.9'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
             ss.public_header_files = "#{s.version}" + '/*.h'
             ss.preserve_path = "#{s.version}" + '/ChangeLog.txt',"#{s.version}" + '/VERSION'
             ss.vendored_libraries = "#{s.version}" + '/*.a'
+            ss.resource = "#{s.version}" + "/*.bundle"
             ss.requires_arc = false
             ss.xcconfig = {
                 'OTHER_LDFLAGS' => '-ObjC',
@@ -32,9 +33,9 @@ Pod::Spec.new do |s|
             ss.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
             ss.libraries = 'sqlite3.0','z','stdc++'
             
-            ss.dependency 'Yodo1Banner','3.0.7'
-            ss.dependency 'Yodo1Video','3.0.7'
-            ss.dependency 'Yodo1Interstitial','3.0.7'
+            ss.dependency 'Yodo1Banner','3.0.8'
+            ss.dependency 'Yodo1Video','3.0.8'
+            ss.dependency 'Yodo1Interstitial','3.0.8'
     end
     
      s.subspec 'Yodo1Advert_iOS' do |ss|
@@ -57,16 +58,16 @@ Pod::Spec.new do |s|
 
     ##Video
 
-    s.dependency 'VideoUnityAds',       '3.0.10'
-    s.dependency 'VideoMintegral',      '3.0.10'
-    s.dependency 'VideoVungle',         '3.0.9'
-    s.dependency 'VideoAdmob',          '3.0.12'
-    s.dependency 'VideoToutiao',        '3.0.12'
-    s.dependency 'VideoTapjoy',         '3.0.10'
+    s.dependency 'VideoUnityAds',       '3.0.11'
+    s.dependency 'VideoMintegral',      '3.0.11'
+    # s.dependency 'VideoVungle',         '3.0.9'
+    s.dependency 'VideoAdmob',          '3.0.13'
+    s.dependency 'VideoToutiao',        '3.0.14'
+    s.dependency 'VideoTapjoy',         '3.0.11'
 
 
-    s.dependency 'VideoGDTMob',         '3.0.0'
-    s.dependency 'VideoBaidu',          '3.0.0'
+    # s.dependency 'VideoGDTMob',         '3.0.0'
+    # s.dependency 'VideoBaidu',          '3.0.0'
 
     # s.dependency 'VideoIronSource',     '3.0.8'
     # s.dependency 'VideoFacebook',       '3.0.7'
@@ -87,19 +88,19 @@ Pod::Spec.new do |s|
     # s.dependency 'VideoISChartboost',   '2.0.6'
     
     # IronSource 聚合
-    s.dependency 'VideoISFacebook',     '3.0.11'
-    s.dependency 'VideoISUnityAds',     '3.0.12'
-    s.dependency 'VideoISVungle',       '3.0.11'
-    s.dependency 'VideoISTapjoy',       '3.0.12'
-    s.dependency 'VideoISAdmob',        '3.0.2'
+    s.dependency 'VideoISFacebook',     '3.0.13'
+    s.dependency 'VideoISUnityAds',     '3.0.13'
+    s.dependency 'VideoISVungle',       '3.0.12'
+    s.dependency 'VideoISTapjoy',       '3.0.13'
+    s.dependency 'VideoISAdmob',        '3.0.3'
 
     ##Interstitial
-    s.dependency 'InterstitialAdmob',       '3.0.11'
-    s.dependency 'InterstitialVungle',      '3.0.9'
-    s.dependency 'InterstitialMintegral',   '3.0.10'
-    s.dependency 'InterstitialTapjoy',      '3.0.11' 
-    s.dependency 'InterstitialToutiao',     '3.0.12'
-    s.dependency 'InterstitialGDTMob',      '3.0.11'
+    s.dependency 'InterstitialAdmob',       '3.0.12'
+    # s.dependency 'InterstitialVungle',      '3.0.9'
+    s.dependency 'InterstitialMintegral',   '3.0.11'
+    s.dependency 'InterstitialTapjoy',      '3.0.12' 
+    s.dependency 'InterstitialToutiao',     '3.0.14'
+    s.dependency 'InterstitialGDTMob',      '3.0.12'
 
     # s.dependency 'InterstitialIronSource',  '3.0.8' 
     # s.dependency 'InterstitialFacebook',    '3.0.7'
@@ -108,10 +109,16 @@ Pod::Spec.new do |s|
 
     # s.dependency 'InterstitialAdview',      '3.0.0'
 
+    #admob插屏聚合
+    s.dependency 'InterstitialAdmobFacebook',       '3.0.14'
+    s.dependency 'InterstitialAdmobIronSource',     '3.0.14'
+    s.dependency 'InterstitialAdmobTapjoy',         '3.0.13'
+    s.dependency 'InterstitialAdmobVungle',         '3.0.12'
+
     ##Banner
-    s.dependency 'BannerAdmob',         '3.0.9'
-    s.dependency 'BannerToutiao',       '3.0.11'
-    s.dependency 'BannerGDTMob',        '3.0.9'
+    s.dependency 'BannerAdmob',         '3.0.10'
+    s.dependency 'BannerToutiao',       '3.0.13'
+    s.dependency 'BannerGDTMob',        '3.0.10'
     # s.dependency 'BannerAdview',        '1.0.4'
     # s.dependency 'BannerApplovin',      '3.0.2'
     # s.dependency 'BannerInmobi',        '3.0.2'
