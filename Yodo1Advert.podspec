@@ -59,7 +59,7 @@ Pod::Spec.new do |s|
     ##Video
 
     s.dependency 'VideoUnityAds',       '3.0.12'
-    s.dependency 'VideoMintegral',      '3.0.13'
+    s.dependency 'VideoMintegral',      '3.0.12'
     # s.dependency 'VideoVungle',         '3.0.9'
     s.dependency 'VideoAdmob',          '3.0.14'
     s.dependency 'VideoToutiao',        '3.0.15'
