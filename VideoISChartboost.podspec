@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISChartboost'
-    s.version          = '3.0.13'
+    s.version          = '3.0.14'
     s.summary          = 'A short description of VideoSUChartboost.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
