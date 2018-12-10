@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdColony'
-    s.version          = '3.0.13'
+    s.version          = '3.0.14'
     s.summary          = 'Adcolony SDK 和 adapter 分离(更新Adcolony 3.2.1)'
 
     s.description      = <<-DESC
