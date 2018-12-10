@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISFacebook'
-    s.version          = '3.0.14'
+    s.version          = '3.0.15'
     s.summary          = 'Facebook SDK 和Adapter 分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
