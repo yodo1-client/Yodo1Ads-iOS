@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISUnityAds'
-    s.version          = '3.0.14'
+    s.version          = '3.0.15'
     s.summary          = 'Adapter和SDK分离,更新UnityAds v2.3.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
