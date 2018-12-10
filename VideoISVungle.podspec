@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISVungle'
-    s.version          = '3.0.13'
+    s.version          = '3.0.14'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
