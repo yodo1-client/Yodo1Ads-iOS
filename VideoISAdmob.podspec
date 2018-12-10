@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdmob'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
