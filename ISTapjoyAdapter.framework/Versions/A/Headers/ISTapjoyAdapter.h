@@ -31,7 +31,6 @@
 @import CoreTelephony;
 @import Social;
 @import StoreKit;
-@import Twitter;
 @import ImageIO;
 
 @interface ISTapjoyAdapter : ISBaseAdapter
