@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialIronSource'
-    s.version          = '3.0.13'
+    s.version          = '3.0.14'
     s.summary          = 'Interstitial IronSource'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'Yodo1Interstitial','3.0.9'
+    s.dependency 'Yodo1Interstitial','3.0.10'
     s.dependency 'Yodo1AdsIronSource','3.0.3'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
 
