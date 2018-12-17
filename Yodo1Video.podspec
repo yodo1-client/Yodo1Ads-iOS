@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Video'
-    s.version          = '3.0.9'
+    s.version          = '3.0.10'
     s.summary          = '2018.1.3 Github'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
