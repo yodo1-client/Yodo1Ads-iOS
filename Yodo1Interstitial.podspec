@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Interstitial'
-    s.version          = '3.0.9'
+    s.version          = '3.0.10'
     s.summary          = 'A short description of Yodo1Interstitial.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
