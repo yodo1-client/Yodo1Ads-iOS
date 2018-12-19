@@ -5,7 +5,7 @@
 //  Created by yujinping on 16/4/12.
 //
 
-#define MTGRewardVideoSDKVersion @"4.3.0"
+#define MTGRewardVideoSDKVersion @"4.8.0"
 
 #import <Foundation/Foundation.h>
 #import <MTGSDK/MTGRewardAdInfo.h>
@@ -18,6 +18,13 @@
  */
 @protocol MTGRewardAdLoadDelegate <NSObject>
 @optional
+
+/**
+ *  Called when the ad is loaded , but not ready to be displayed,need to wait load video
+ completely
+ *  @param unitId - the unitId string of the Ad that was loaded.
+ */
+- (void)onAdLoadSuccess:(nullable NSString *)unitId;
 
 /**
  *  Called when the ad is successfully load , and is ready to be displayed
