@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialAdmob'
-    s.version          = '3.0.14'
-    s.summary          = '2018.11.12 更新admob v7.35.2'
+    s.version          = '3.0.15'
+    s.summary          = '2018.12.24 更新admob v7.37.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
 
     s.dependency 'Yodo1Interstitial','3.0.10'
-    s.dependency 'Yodo1AdsAdmob','3.0.3'
+    s.dependency 'Yodo1AdsAdmob','3.0.4'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
 
 end
