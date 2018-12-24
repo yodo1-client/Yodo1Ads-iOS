@@ -1,4 +1,9 @@
 =============================================
+V1.0.16— 2018-12-24
+1.GoogleMobileAds V7.37.0
+mproved compatibility with Crashlytics to provide more usable crash reports with updated stack trace symbolication.
+
+=============================================
 V1.0.15— 2018-11-12
 1.GoogleMobileAds V7.35.2
 Miscellaneous bug fixes.
