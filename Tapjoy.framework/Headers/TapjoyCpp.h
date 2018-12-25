@@ -374,6 +374,21 @@ namespace tapjoy {
     */
     static void setUserConsent(const char* value);
 
+    /**
+     * @brief In the US, the Children’s Online Privacy Protection Act (COPPA) imposes certain requirements on operators of online
+     *        services that (a) have actual knowledge that the connected user is a child under 13 years of age, or (b) operate services
+     *        (including apps) that are directed to children under 13.
+     *
+     *        Similarly, the GDPR imposes certain requirements in connection with data subjects who are below the applicable local
+     *        minimum age for online consent (ranging from 13 to 16, as established by each member state).
+     *
+     *        For applications that are not directed towards children under 13 years of age, but still have a minority share of users known
+     *        to be under the applicable minimum age, utilize this method to access Tapjoy’s monetization capability. This method will set
+     *        ad_tracking_enabled to false for Tapjoy which only shows the user contextual ads. No ad tracking will be done on this user.
+     * @param isBelowConsentAge True if below consent age (COPPA) applies to this user, false otherwise
+     */
+    static void belowConsentAge(bool isBelowConsentAge);
+      
 #if defined(ANDROID)
     /**
      * @brief Returns true if the push notification is disabled.

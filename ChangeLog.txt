@@ -1,11 +1,22 @@
 =============================================
+V1.0.11 — 2018-12-25
+Tapjoy V12.2.0
++(void)belowConsentAge:(BOOL)isBelowConsentAge;
+[ 将此设置为TRUE意味着Tapjoy SDK会将用户视为打开了“限制广告跟踪”开关。
+这意味着他们仍会看到Tapjoy广告，但广告不会根据用户行为进行匹配，
+Tapjoy也不会跟踪用户的广告行为。 ]
+=============================================
 V1.0.10 — 2018-10-12
 Tapjoy V12.1.0
-删除了所有在info.plist中需要应用同意的项目。在当前版本，NSMotionUsageDescription, NSAppleMusicUsageDescription, and NSPhotoLibraryUsageDescription 都不再需要。其他的配置需要已经在以前的版本中删除，所以现在集成Tapjoy SDK时，不再需要在info.plist 里面配置任何项目。
---------------------
-修复在Tapjoy广告展示时旋转设备的几个错误。
-修复在一个广告后立即播放另一个Tapjoy广告（使用contentDidDisappear）有时会失败的问题。
-删除在极少数情况下有可能导致崩溃的NSUserDefaults同步调用。
+[ 删除了所有在info.plist中需要应用同意的项目。在当前版本，
+NSMotionUsageDescription, NSAppleMusicUsageDescription,
+and NSPhotoLibraryUsageDescription 都不再需要。
+其他的配置需要已经在以前的版本中删除，所以现在集成Tapjoy SDK时，
+不再需要在info.plist 里面配置任何项目。]
+
+[ 修复在Tapjoy广告展示时旋转设备的几个错误。
+修复在一个广告后立即播放另一个Tapjoy广告（使用contentDidDisappear）
+有时会失败的问题。删除在极少数情况下有可能导致崩溃的NSUserDefaults同步调用。]
 
 
 =============================================
