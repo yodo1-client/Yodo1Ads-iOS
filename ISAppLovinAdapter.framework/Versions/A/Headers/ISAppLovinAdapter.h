@@ -6,6 +6,7 @@
 #import "IronSource/ISBaseAdapter+Internal.h"
 
 //System Frameworks For Applovin Adapter
+static NSString * const AppLovinAdapterVersion = @"4.3.1";
 
 @import AdSupport;
 @import AVFoundation;
