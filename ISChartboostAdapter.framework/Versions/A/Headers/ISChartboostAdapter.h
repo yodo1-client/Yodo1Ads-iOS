@@ -6,6 +6,7 @@
 #import "IronSource/ISBaseAdapter+Internal.h"
 
 //System Frameworks For Chartboost Adapter
+static NSString * const ChartboostAdapterVersion     = @"4.1.5";
 
 @import Foundation;
 @import CoreGraphics;
