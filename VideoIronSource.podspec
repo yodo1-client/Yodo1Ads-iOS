@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoIronSource'
-    s.version          = '3.0.14'
-    s.summary          = 'A short description of VideoIronSource.'
+    s.version          = '3.0.15'
+    s.summary          = 'IronSource sdk v6.8.0.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.10'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
-    s.dependency 'Yodo1AdsIronSource','3.0.3'
+    s.dependency 'Yodo1AdsIronSource','3.0.4'
 end
