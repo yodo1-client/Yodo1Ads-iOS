@@ -1,14 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.14'
-    s.summary          = 'v3.1.14 - 2018-12-26
-                            1.更新Admob v7.37.0
-                            2.Mintegral v4.8.0
-                            3.Chartboost 7.3.0
-                            4.Tapjoy 12.2.0
-                            5.IronSource 6.8.0.0
-                            6.UnityAds 3.0.0
-                            7.修复IronSource插屏在Admob出现AppKey无效的BUG
+    s.version          = '3.1.15'
+    s.summary          = 'v3.1.15 - 2018-12-28
+                            1.添加验证票据信息的接口
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -69,7 +63,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.12'
+        ss.dependency 'Yodo1UCenter','3.0.13'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
