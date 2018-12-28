@@ -96,6 +96,7 @@ obj = nil;          \
 @synthesize querySubscriptionBlock;
 @synthesize updateStorePromotionOrderCompletionBlock;
 @synthesize updateStorePromotionVisibilityCompletionBlock;
+@synthesize validatePaymentBlock;
 
 static UCenterManager* _instance = nil;
 + (UCenterManager*)sharedInstance
@@ -159,6 +160,7 @@ static UCenterManager* _instance = nil;
     YODO1_REALEASE(self.querySubscriptionBlock);
     YODO1_REALEASE(self.updateStorePromotionOrderCompletionBlock);
     YODO1_REALEASE(self.updateStorePromotionVisibilityCompletionBlock);
+    YODO1_REALEASE(self.validatePaymentBlock);
 
     [super dealloc];
 }
@@ -436,6 +438,13 @@ static UCenterManager* _instance = nil;
 }
 
 #pragma mark - Payment
+
++ (void)setValidatePaymentCallback:(ValidatePaymentBlock)callback
+{
+    if ([UCenterManager sharedInstance].validatePaymentBlock == nil && callback) {
+        [UCenterManager sharedInstance].validatePaymentBlock = callback;
+    }
+}
 
 + (void)setPaymentCallback:(PaymentCompletionBlock)callback
 {
@@ -1409,6 +1418,21 @@ void UnityPayNetGame(const char* uniformProductId,const char* extra, const char*
                                       [msg cStringUsingEncoding:NSUTF8StringEncoding]);
                  }
              });
+    }];
+
+    [UCenterManager setValidatePaymentCallback:^(NSString *uniformProductId, NSString *response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(ocGameObjName && ocMethodName){
+                NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                [dict setObject:(uniformProductId == nil?@"":uniformProductId) forKey:@"uniformProductId"];
+                [dict setObject:(response == nil?@"":response) forKey:@"response"];
+                [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_ValidatePayment] forKey:@"resulType"];
+                NSString* msg = [Yodo1Commons stringWithJSONObject:dict error:nil];
+                UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                 [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                 [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+            }
+        });
     }];
 
     [[UCenterManager sharedInstance] paymentWithProductId:_uniformProductId

@@ -854,7 +854,13 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                                         currency:productInfo.currency
                                                                    transactionId:transaction.transactionIdentifier];
         }];
-        NSLog(@"%@",paymentProduct.uniformProductId);
+        if ([UCenterManager sharedInstance].validatePaymentBlock) {
+            NSDictionary* extra = @{@"productIdentifier":paymentProduct.channelProductId,
+                                    @"transactionIdentifier":paymentProduct.transactionIdentifier,
+                                    @"transactionReceipt":paymentProduct.trxReceipt};
+            NSString* extraSt = [Yodo1Commons stringWithJSONObject:extra error:nil];
+            [UCenterManager sharedInstance].validatePaymentBlock(paymentProduct.uniformProductId,extraSt);
+        }
         if ([UCenterManager sharedInstance].paymentCompletionBlock && paymentProduct) {
             
             if (paymentProduct.gameUserId == nil) {
@@ -976,8 +982,10 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 				
 			case SKPaymentTransactionStatePurchased:
             {
+#ifdef DEBUG
                 NSLog(@"Transaction successful!");
                 NSLog(@"订单号:transactionIdentifier:%@",transaction.transactionIdentifier);
+#endif
                 [self completeTransaction:transaction];
                 
             }

@@ -241,6 +241,15 @@ typedef void (^SNSLoginUCenterCallback) (BOOL success,Yodo1MembershipAuthorizati
  */
 typedef void (^UCenterChangeIdCallback) (BOOL success,NSError* error,NSString* response);
 
+/**
+ *@brief
+ *   苹果支付订单验证票据回调方法
+ *@param uniformProductId 产品ID
+ *@param response json格式 @{@"productIdentifier":@"苹果产品id",
+ *  @"transactionIdentifier":@"订单号",@"transactionReceipt":@"验证票据"}
+ */
+typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* response);
+
 @class Yodo1Adapter;
 
 @interface UCenterManager : NSObject
@@ -302,6 +311,10 @@ typedef void (^UCenterChangeIdCallback) (BOOL success,NSError* error,NSString* r
 @property (nonatomic,copy) UpdateStorePromotionOrderCompletionBlock  updateStorePromotionOrderCompletionBlock;
 /**@brief 查询Promotion Visibility回调*/
 @property (nonatomic,copy) UpdateStorePromotionVisibilityCompletionBlock  updateStorePromotionVisibilityCompletionBlock;
+
+/**@brief 苹果支付票据回调*/
+@property (nonatomic,copy) ValidatePaymentBlock  validatePaymentBlock;
+
 
 /**
  *  UCenterManager的单例
@@ -436,9 +449,16 @@ typedef void (^UCenterChangeIdCallback) (BOOL success,NSError* error,NSString* r
 #pragma mark- Payment支付
 
 /**
+ *  设置支付票据验单的回调
+ *
+ *  @param callback 支付票据验单的回调
+ */
++ (void)setValidatePaymentCallback:(ValidatePaymentBlock)callback;
+
+/**
  *  设置Payment支付的回调
  *
- *  @param callback Payment支付时的回调
+ *  @param callback Payment支付的回调
  */
 + (void)setPaymentCallback:(PaymentCompletionBlock)callback;
 

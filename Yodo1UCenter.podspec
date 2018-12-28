@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.0.12'
-    s.summary          = '修复appsfyer统计BUG'
+    s.version          = '3.0.13'
+    s.summary          = '添加内购买支付的票据验证回调接口'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
