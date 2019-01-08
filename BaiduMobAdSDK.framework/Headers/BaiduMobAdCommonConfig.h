@@ -18,7 +18,7 @@ typedef enum {
     VIDEO, // 视频广告，需开发者增加播放器支持
     HTML, // html模版广告
     GIF //GIF广告
-} MaterialType;
+} BaiduMobMaterialType;
 
 typedef enum {
     BaiduMobNativeAdActionTypeLP = 1,

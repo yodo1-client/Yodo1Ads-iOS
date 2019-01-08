@@ -35,9 +35,9 @@
  */
 @property (copy, nonatomic)  NSNumber *videoDuration;
 /**
- * 对返回的广告单元，需先判断MaterialType再决定使用何种渲染组件
+ * 对返回的广告单元，需先判断BaiduMobMaterialType再决定使用何种渲染组件
  */
-@property MaterialType materialType;
+@property BaiduMobMaterialType materialType;
 
 /**
  * 返回广告单元的点击类型

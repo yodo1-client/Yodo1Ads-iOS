@@ -26,7 +26,6 @@
 - (void)videoPreloadFail:(BaiduMobAdRewardVideo *)video withError:(BaiduMobFailReason)reason;
 
 #pragma mark - 视频播放delegate
-
 /**
  *  广告展示失败
  */

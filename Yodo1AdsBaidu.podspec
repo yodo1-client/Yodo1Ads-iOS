@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsBaidu'
-    s.version          = '3.0.0'
-    s.summary          = 'Baidu v4.5.0'
+    s.version          = '3.0.1'
+    s.summary          = 'Baidu v4.6.0,还没有支持Https'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
 
     s.preserve_paths = "#{s.version}" + '/ChangeLog.txt'
     
-    s.frameworks = 'CoreLocation', 'SystemConfiguration', 'CoreGraphics', 'CoreMotion', 'CoreTelephony', 'AdSupport', 'SystemConfiguration', 'QuartzCore', 'WebKit', 'MessageUI','SafariServices','AVFoundation','EventKit','QuartzCore','CoreMedia'
+    s.frameworks = 'CoreLocation', 'SystemConfiguration', 'CoreGraphics', 'CoreMotion', 'CoreTelephony', 'AdSupport', 'SystemConfiguration', 'QuartzCore', 'WebKit', 'MessageUI','SafariServices','AVFoundation','EventKit','QuartzCore','CoreMedia','StoreKit'
     s.weak_frameworks = 'WebKit'
     
     s.libraries = 'c++'
