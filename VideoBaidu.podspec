@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoBaidu'
-    s.version          = '3.0.3'
-    s.summary          = 'Baidu v4.5.0'
+    s.version          = '3.0.4'
+    s.summary          = 'Baidu v4.6.0,不支持https'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.10'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
-    s.dependency 'Yodo1AdsBaidu','3.0.0'
+    s.dependency 'Yodo1AdsBaidu','3.0.1'
 end
