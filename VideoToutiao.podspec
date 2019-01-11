@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoToutiao'
-    s.version          = '3.0.16'
+    s.version          = '3.0.17'
     s.summary          = 'UMAdSDK V1.9.7.1'
 
     s.description      = <<-DESC
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','3.0.10'
+    s.dependency 'Yodo1Video','3.0.11'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
     s.dependency 'Yodo1AdsToutiao','3.0.6'
 end
