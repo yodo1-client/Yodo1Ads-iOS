@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoVungle'
-    s.version          = '3.0.13'
-    s.summary          = '更新VungleSDk 6.2.0,最低支持iOS 8,添加广告位'
+    s.name             = 'VideoMopub'
+    s.version          = '3.0.0'
+    s.summary          = '更新Mopub 5.4.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.11'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
-    s.dependency 'Yodo1AdsVungle','3.0.1'
+    s.dependency 'Yodo1AdsMopub','3.0.0'
 end
