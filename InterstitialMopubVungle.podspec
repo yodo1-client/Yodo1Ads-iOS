@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialMopub'
+    s.name             = 'InterstitialMopubVungle'
     s.version          = '3.0.0'
     s.summary          = '2019.01.11 Mopub v5.4.1'
     s.description      = <<-DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
     #s.public_header_files = tags + '/*.h'
 
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = true
 
@@ -31,8 +31,6 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1Interstitial','3.0.11'
-    s.dependency 'Yodo1AdsMopub','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
+    s.dependency 'Yodo1MopubVungleAdapter','3.0.0'
 
 end
