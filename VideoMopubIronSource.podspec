@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoMopubUnityAds'
+    s.name             = 'VideoMopubIronSource'
     s.version          = '3.0.0'
     s.summary          = '更新Mopub 5.4.1'
     s.description      = <<-DESC
@@ -32,5 +32,5 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1MopubUnityAdsAdapter','3.0.0'
+    s.dependency 'Yodo1MopubIronSourceAdapter','3.0.0'
 end
