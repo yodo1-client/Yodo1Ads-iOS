@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'Yodo1MopubFacebookAdapter'
+    s.name             = 'Yodo1MopubAdmobAdapter'
     s.version          = '3.0.0'
     s.summary          = 'Mopub sdk v5.4.1 聚合'
     s.description      = <<-DESC
@@ -38,6 +38,6 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport'
 
     s.dependency 'Yodo1AdsMopub','3.0.0'
-    s.dependency 'Yodo1AdsFacebook','3.0.2'
+    s.dependency 'Yodo1AdsAdmob','3.0.4'
     # s.libraries = 'c++'
 end
