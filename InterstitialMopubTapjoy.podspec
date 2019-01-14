@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialMopubVungle'
+    s.name             = 'InterstitialMopubTapjoy'
     s.version          = '3.0.0'
     s.summary          = '2019.01.11 Mopub v5.4.1'
     s.description      = <<-DESC
@@ -31,6 +31,6 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1MopubVungleAdapter','3.0.0'
+    s.dependency 'Yodo1MopubTapjoyAdapter','3.0.0'
 
 end
