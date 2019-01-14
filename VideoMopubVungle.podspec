@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoMopub'
+    s.name             = 'VideoMopubVungle'
     s.version          = '3.0.0'
     s.summary          = '更新Mopub 5.4.1'
     s.description      = <<-DESC
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
     #s.public_header_files = "#{s.version}" +'/*.h'
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = true
 
@@ -32,7 +32,5 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','3.0.11'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
-    s.dependency 'Yodo1AdsMopub','3.0.0'
+    s.dependency 'Yodo1MopubVungleAdapter','3.0.0'
 end
