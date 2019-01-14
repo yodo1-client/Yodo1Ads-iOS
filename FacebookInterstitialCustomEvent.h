@@ -1,5 +1,8 @@
 //
-//  IronSourceInterstitialCustomEvent.h
+//  FacebookInterstitialCustomEvent.h
+//  MoPub
+//
+//  Copyright (c) 2014 MoPub. All rights reserved.
 //
 
 #if __has_include(<MoPub/MoPub.h>)
@@ -9,9 +12,7 @@
 #else
     #import "MPInterstitialCustomEvent.h"
 #endif
-#import <IronSource/IronSource.h>
 
-@interface IronSourceInterstitialCustomEvent : MPInterstitialCustomEvent <ISDemandOnlyInterstitialDelegate>
-
+@interface FacebookInterstitialCustomEvent : MPInterstitialCustomEvent
 
 @end
