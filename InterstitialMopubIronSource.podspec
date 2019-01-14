@@ -32,5 +32,6 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
 
     s.dependency 'Yodo1MopubIronSourceAdapter','3.0.0'
+    s.dependency 'InterstitialMopub','3.0.0'
 
 end
