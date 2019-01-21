@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.16'
-    s.summary          = 'v3.1.16 - 2019-01-14
-                            1.添加Mopub聚合广告[视频与插屏]
+    s.version          = '3.1.17'
+    s.summary          = 'v3.1.17 - 2019-01-21
+                            1.修复分享Facebook的bug和instagram回调的BUG
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -63,7 +63,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.13'
+        ss.dependency 'Yodo1UCenter','3.0.14'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -95,7 +95,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS'
         }
-        ss.dependency 'Yodo1Share','3.0.2'
+        ss.dependency 'Yodo1Share','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -103,7 +103,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_FACEBOOK_ANALYTICS'
         }
-        ss.dependency 'Yodo1FBSDKCoreKit','3.0.0'
+        ss.dependency 'Yodo1FBSDKCoreKit','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
