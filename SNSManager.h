@@ -38,6 +38,11 @@ FOUNDATION_EXPORT NSString * const kYodo1TwitterConsumerSecret;
             openURL:(NSURL *)url
             options:(NSDictionary *)options;
 
+// Still need this for iOS8
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(nullable NSString *)sourceApplication
+         annotation:(nonnull id)annotation;
 /**
  *  检查是否安装新浪，微信，QQ客户端,facebook,twitter 服务是否有效
  *

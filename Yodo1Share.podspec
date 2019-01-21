@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = '添加Instagram 分享功能.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1QQSDK','3.0.0'
     s.dependency 'Yodo1WeChatSDK','3.0.0'
-    s.dependency 'Yodo1WeiboSDK','3.0.0'
-    s.dependency 'Yodo1FBSDKCoreKit','3.0.0'
+    s.dependency 'Yodo1WeiboSDK','3.0.1'
+    s.dependency 'Yodo1FBSDKCoreKit','3.0.1'
     s.dependency 'Yodo1TwitterKit','3.0.0'
 end
