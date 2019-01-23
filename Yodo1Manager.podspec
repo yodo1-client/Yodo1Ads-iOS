@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.17'
-    s.summary          = 'v3.1.17 - 2019-01-21
+    s.version          = '3.1.18'
+    s.summary          = 'v3.1.18 - 2019-01-23
                             1.修复分享Facebook的bug和instagram回调的BUG
+                            2.把Mintegral 从v4.8.0退回到v4.3.0
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -285,7 +286,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialMintegral','3.0.15'
+        ss.dependency 'InterstitialMintegral','3.0.16'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -421,7 +422,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoMintegral','3.0.15'
+        ss.dependency 'VideoMintegral','3.0.16'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
