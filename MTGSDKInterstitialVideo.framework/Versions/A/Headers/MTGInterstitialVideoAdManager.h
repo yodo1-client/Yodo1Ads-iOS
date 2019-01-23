@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define MTGInterstitialVideoSDKVersion @"4.8.0"
+#define MTGInterstitialVideoSDKVersion @"4.3.0"
 
 @class MTGInterstitialVideoAdManager;
 /**
@@ -17,12 +17,6 @@
  */
 @protocol MTGInterstitialVideoDelegate <NSObject>
 @optional
-
-/**
- *  Called when the ad is loaded , but not ready to be displayed,need to wait load video
-    completely
- */
-- (void) onInterstitialAdLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
 
 /**
  *  Called when the ad is successfully load , and is ready to be displayed

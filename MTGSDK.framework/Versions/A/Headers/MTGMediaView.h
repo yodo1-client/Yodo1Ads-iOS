@@ -15,15 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGMediaView : UIView
 
-/* For best user experience, keep the aspect ratio of the mediaView at 16:9 */
 - (instancetype)initWithFrame:(CGRect)frame;
 /**
 the media source, can be set again to reuse this view.
 */
 - (void)setMediaSourceWithCampaign:(MTGCampaign *)campaign unitId:(NSString*)unitId;
-
-/* Call this method if you plan to reuse this view. (e.g. If this view is a subview of a reusable tableView cell, you can call this method within [tableViewCell prepareForReuse]) */
-// - (void)prepareForReuse;
 
 @property (nonatomic, weak, nullable) id<MTGMediaViewDelegate> delegate;
 
@@ -123,7 +119,6 @@ the media source, can be set again to reuse this view.
                              error:(nullable NSError *)error  mediaView:(MTGMediaView *)mediaView;
 
 - (void)nativeAdImpressionWithType:(MTGAdSourceType)type mediaView:(MTGMediaView *)mediaView;
-
 @end
 
 NS_ASSUME_NONNULL_END
