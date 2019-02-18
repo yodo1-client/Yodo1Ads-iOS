@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialGDTMob'
-    s.version          = '3.0.15'
+    s.version          = '3.0.16'
     s.summary          = '广点通 插屏广告更新 sdk v4.8.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'Yodo1Interstitial','3.0.11'
+    s.dependency 'Yodo1Interstitial','3.0.12'
     s.dependency 'Yodo1AdsGDTMob','3.0.3'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
 
