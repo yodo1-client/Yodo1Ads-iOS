@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialIronSource'
-    s.version          = '3.0.16'
-    s.summary          = 'IronSource v6.8.0.0 和Admob 插屏聚合互斥'
+    s.version          = '3.0.17'
+    s.summary          = 'IronSource v6.8.1.0 和Admob 插屏聚合互斥'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'Yodo1Interstitial','3.0.11'
-    s.dependency 'Yodo1AdsIronSource','3.0.4'
+    s.dependency 'Yodo1Interstitial','3.0.12'
+    s.dependency 'Yodo1AdsIronSource','3.0.5'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
 
 end
