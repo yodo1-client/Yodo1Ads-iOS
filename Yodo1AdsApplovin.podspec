@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsApplovin'
-    s.version          = '3.0.1'
-    s.summary          = 'sdk v5.1.2'
+    s.version          = '3.0.2'
+    s.summary          = 'sdk v6.2.0'
     s.description      = <<-DESC
                         TODO: Add long description of the pod here.
                        DESC
@@ -13,11 +13,13 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '8.0'
 
-    s.source_files =  "#{s.version}" + '/headers/*.h'
+    s.source_files =  "#{s.version}" + '/AppLovinSDK.framework/headers/*.h'
 
-    s.public_header_files =  "#{s.version}" + '/headers/*.h'
+    s.public_header_files =  "#{s.version}" + '/AppLovinSDK.framework/headers/*.h'
 
-    s.vendored_libraries =  "#{s.version}" + '/*.a'
+    # s.vendored_libraries =  "#{s.version}" + '/*.a'
+    
+    s.vendored_frameworks = "#{s.version}" + '/AppLovinSDK.framework'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
