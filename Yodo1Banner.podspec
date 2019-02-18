@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Banner'
-    s.version          = '3.0.10'
+    s.version          = '3.0.11'
     s.summary          = 'A short description of Yodo1Banner.'
 
     s.description      = <<-DESC
@@ -37,4 +37,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1Analytics','3.0.3'
     s.dependency 'Yodo1AdsConfig','3.0.6'
     s.dependency 'Yodo1GDCTimer','3.0.0'
+    s.dependency 'Yodo1FeedbackError','3.0.0'
 end
