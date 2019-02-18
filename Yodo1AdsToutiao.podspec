@@ -25,9 +25,23 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'CoreMotion','UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit','MediaPlayer'
+    s.frameworks = ["StoreKit",
+                    "MobileCoreServices",
+                    "WebKit",
+                    "MediaPlayer",
+                    "CoreMedia",
+                    "AVFoundation",
+                    "CoreLocation",
+                    "CoreTelephony",
+                    "SystemConfiguration",
+                    "AdSupport",
+                    "CoreMotion"
+                    ]
 
-    s.weak_frameworks = 'AdSupport'
+    # s.weak_frameworks = 'AdSupport'
 
-    s.libraries = 'c++','resolv.9'
+    s.libraries = ["c++",
+                    "resolv.9",
+                    "z"
+                    ]
 end
