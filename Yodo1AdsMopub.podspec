@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMopub'
-    s.version          = '3.0.0'
-    s.summary          = 'Mopub sdk v5.4.1 聚合'
+    s.version          = '3.0.1'
+    s.summary          = 'Mopub sdk v5.5.0 聚合'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
