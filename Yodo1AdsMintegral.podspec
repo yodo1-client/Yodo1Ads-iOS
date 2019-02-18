@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMintegral'
-    s.version          = '3.0.4'
-    s.summary          = '从v4.8.0退回到v4.3.0'
+    s.version          = '3.0.5'
+    s.summary          = '从v4.9.1修复在Unity3d引擎里面崩溃的BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
