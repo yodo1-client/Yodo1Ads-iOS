@@ -35,7 +35,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #endif
 
-#import "YYModel.h"
+#import "Yodo1Model.h"
 
 NSString* const kFacebookAppId      = @"FacebookAppId";
 NSString* const kYodo1ChannelId     = @"AppStore";
