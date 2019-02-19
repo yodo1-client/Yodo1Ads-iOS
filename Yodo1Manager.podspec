@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1KeyInfo','3.0.0'
         ss.dependency 'Yodo1Commons','3.0.2'
         ss.dependency 'Yodo1ZipArchive','3.0.0'
-        ss.dependency 'Yodo1YYModel', '3.0.0'
+        ss.dependency 'Yodo1YYModel', '3.0.1'
         ss.dependency 'Yodo1Analytics','3.0.3'
         ss.dependency 'Yodo1ThirdsAnalytics','3.0.9'
         ss.dependency 'Yodo1AdsConfig','3.0.6'

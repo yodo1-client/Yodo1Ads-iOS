@@ -163,7 +163,7 @@ extern "C" {
 
     void UnityInitSDKWithConfig(const char* sdkConfigJson) {
         NSString* _sdkConfigJson = Yodo1CreateNSString(sdkConfigJson);
-        SDKConfig* yySDKConfig = [SDKConfig yy_modelWithJSON:_sdkConfigJson];
+        SDKConfig* yySDKConfig = [SDKConfig yodo1_modelWithJSON:_sdkConfigJson];
         [Yodo1Manager initSDKWithConfig:yySDKConfig];
         
     }
