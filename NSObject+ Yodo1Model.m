@@ -1,6 +1,6 @@
 //
-//  NSObject+YYModel.m
-//  YYModel <https://github.com/ibireme/YYModel>
+//  NSObject+Yodo1Model.m
+//  Yodo1Model <https://github.com/ibireme/Yodo1Model>
 //
 //  Created by ibireme on 15/5/10.
 //  Copyright (c) 2015 ibireme.
@@ -9,74 +9,74 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
-#import "NSObject+YYModel.h"
-#import "YYClassInfo.h"
+#import "NSObject+Yodo1Model.h"
+#import "Yodo1ClassInfo.h"
 #import <objc/message.h>
 
 #define force_inline __inline__ __attribute__((always_inline))
 
 /// Foundation Class Type
-typedef NS_ENUM (NSUInteger, YYEncodingNSType) {
-    YYEncodingTypeNSUnknown = 0,
-    YYEncodingTypeNSString,
-    YYEncodingTypeNSMutableString,
-    YYEncodingTypeNSValue,
-    YYEncodingTypeNSNumber,
-    YYEncodingTypeNSDecimalNumber,
-    YYEncodingTypeNSData,
-    YYEncodingTypeNSMutableData,
-    YYEncodingTypeNSDate,
-    YYEncodingTypeNSURL,
-    YYEncodingTypeNSArray,
-    YYEncodingTypeNSMutableArray,
-    YYEncodingTypeNSDictionary,
-    YYEncodingTypeNSMutableDictionary,
-    YYEncodingTypeNSSet,
-    YYEncodingTypeNSMutableSet,
+typedef NS_ENUM (NSUInteger, Yodo1EncodingNSType) {
+    Yodo1EncodingTypeNSUnknown = 0,
+    Yodo1EncodingTypeNSString,
+    Yodo1EncodingTypeNSMutableString,
+    Yodo1EncodingTypeNSValue,
+    Yodo1EncodingTypeNSNumber,
+    Yodo1EncodingTypeNSDecimalNumber,
+    Yodo1EncodingTypeNSData,
+    Yodo1EncodingTypeNSMutableData,
+    Yodo1EncodingTypeNSDate,
+    Yodo1EncodingTypeNSURL,
+    Yodo1EncodingTypeNSArray,
+    Yodo1EncodingTypeNSMutableArray,
+    Yodo1EncodingTypeNSDictionary,
+    Yodo1EncodingTypeNSMutableDictionary,
+    Yodo1EncodingTypeNSSet,
+    Yodo1EncodingTypeNSMutableSet,
 };
 
 /// Get the Foundation class type from property info.
-static force_inline YYEncodingNSType YYClassGetNSType(Class cls) {
-    if (!cls) return YYEncodingTypeNSUnknown;
-    if ([cls isSubclassOfClass:[NSMutableString class]]) return YYEncodingTypeNSMutableString;
-    if ([cls isSubclassOfClass:[NSString class]]) return YYEncodingTypeNSString;
-    if ([cls isSubclassOfClass:[NSDecimalNumber class]]) return YYEncodingTypeNSDecimalNumber;
-    if ([cls isSubclassOfClass:[NSNumber class]]) return YYEncodingTypeNSNumber;
-    if ([cls isSubclassOfClass:[NSValue class]]) return YYEncodingTypeNSValue;
-    if ([cls isSubclassOfClass:[NSMutableData class]]) return YYEncodingTypeNSMutableData;
-    if ([cls isSubclassOfClass:[NSData class]]) return YYEncodingTypeNSData;
-    if ([cls isSubclassOfClass:[NSDate class]]) return YYEncodingTypeNSDate;
-    if ([cls isSubclassOfClass:[NSURL class]]) return YYEncodingTypeNSURL;
-    if ([cls isSubclassOfClass:[NSMutableArray class]]) return YYEncodingTypeNSMutableArray;
-    if ([cls isSubclassOfClass:[NSArray class]]) return YYEncodingTypeNSArray;
-    if ([cls isSubclassOfClass:[NSMutableDictionary class]]) return YYEncodingTypeNSMutableDictionary;
-    if ([cls isSubclassOfClass:[NSDictionary class]]) return YYEncodingTypeNSDictionary;
-    if ([cls isSubclassOfClass:[NSMutableSet class]]) return YYEncodingTypeNSMutableSet;
-    if ([cls isSubclassOfClass:[NSSet class]]) return YYEncodingTypeNSSet;
-    return YYEncodingTypeNSUnknown;
+static force_inline Yodo1EncodingNSType Yodo1ClassGetNSType(Class cls) {
+    if (!cls) return Yodo1EncodingTypeNSUnknown;
+    if ([cls isSubclassOfClass:[NSMutableString class]]) return Yodo1EncodingTypeNSMutableString;
+    if ([cls isSubclassOfClass:[NSString class]]) return Yodo1EncodingTypeNSString;
+    if ([cls isSubclassOfClass:[NSDecimalNumber class]]) return Yodo1EncodingTypeNSDecimalNumber;
+    if ([cls isSubclassOfClass:[NSNumber class]]) return Yodo1EncodingTypeNSNumber;
+    if ([cls isSubclassOfClass:[NSValue class]]) return Yodo1EncodingTypeNSValue;
+    if ([cls isSubclassOfClass:[NSMutableData class]]) return Yodo1EncodingTypeNSMutableData;
+    if ([cls isSubclassOfClass:[NSData class]]) return Yodo1EncodingTypeNSData;
+    if ([cls isSubclassOfClass:[NSDate class]]) return Yodo1EncodingTypeNSDate;
+    if ([cls isSubclassOfClass:[NSURL class]]) return Yodo1EncodingTypeNSURL;
+    if ([cls isSubclassOfClass:[NSMutableArray class]]) return Yodo1EncodingTypeNSMutableArray;
+    if ([cls isSubclassOfClass:[NSArray class]]) return Yodo1EncodingTypeNSArray;
+    if ([cls isSubclassOfClass:[NSMutableDictionary class]]) return Yodo1EncodingTypeNSMutableDictionary;
+    if ([cls isSubclassOfClass:[NSDictionary class]]) return Yodo1EncodingTypeNSDictionary;
+    if ([cls isSubclassOfClass:[NSMutableSet class]]) return Yodo1EncodingTypeNSMutableSet;
+    if ([cls isSubclassOfClass:[NSSet class]]) return Yodo1EncodingTypeNSSet;
+    return Yodo1EncodingTypeNSUnknown;
 }
 
 /// Whether the type is c number.
-static force_inline BOOL YYEncodingTypeIsCNumber(YYEncodingType type) {
-    switch (type & YYEncodingTypeMask) {
-        case YYEncodingTypeBool:
-        case YYEncodingTypeInt8:
-        case YYEncodingTypeUInt8:
-        case YYEncodingTypeInt16:
-        case YYEncodingTypeUInt16:
-        case YYEncodingTypeInt32:
-        case YYEncodingTypeUInt32:
-        case YYEncodingTypeInt64:
-        case YYEncodingTypeUInt64:
-        case YYEncodingTypeFloat:
-        case YYEncodingTypeDouble:
-        case YYEncodingTypeLongDouble: return YES;
+static force_inline BOOL Yodo1EncodingTypeIsCNumber(Yodo1EncodingType type) {
+    switch (type & Yodo1EncodingTypeMask) {
+        case Yodo1EncodingTypeBool:
+        case Yodo1EncodingTypeInt8:
+        case Yodo1EncodingTypeUInt8:
+        case Yodo1EncodingTypeInt16:
+        case Yodo1EncodingTypeUInt16:
+        case Yodo1EncodingTypeInt32:
+        case Yodo1EncodingTypeUInt32:
+        case Yodo1EncodingTypeInt64:
+        case Yodo1EncodingTypeUInt64:
+        case Yodo1EncodingTypeFloat:
+        case Yodo1EncodingTypeDouble:
+        case Yodo1EncodingTypeLongDouble: return YES;
         default: return NO;
     }
 }
 
 /// Parse a number value from 'id'.
-static force_inline NSNumber *YYNSNumberCreateFromID(__unsafe_unretained id value) {
+static force_inline NSNumber *Yodo1NSNumberCreateFromID(__unsafe_unretained id value) {
     static NSCharacterSet *dot;
     static NSDictionary *dic;
     static dispatch_once_t onceToken;
@@ -132,10 +132,10 @@ static force_inline NSNumber *YYNSNumberCreateFromID(__unsafe_unretained id valu
 }
 
 /// Parse string to date.
-static force_inline NSDate *YYNSDateFromString(__unsafe_unretained NSString *string) {
-    typedef NSDate* (^YYNSDateParseBlock)(NSString *string);
+static force_inline NSDate *Yodo1NSDateFromString(__unsafe_unretained NSString *string) {
+    typedef NSDate* (^Yodo1NSDateParseBlock)(NSString *string);
     #define kParserNum 34
-    static YYNSDateParseBlock blocks[kParserNum + 1] = {0};
+    static Yodo1NSDateParseBlock blocks[kParserNum + 1] = {0};
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         {
@@ -236,7 +236,7 @@ static force_inline NSDate *YYNSDateFromString(__unsafe_unretained NSString *str
     });
     if (!string) return nil;
     if (string.length > kParserNum) return nil;
-    YYNSDateParseBlock parser = blocks[string.length];
+    Yodo1NSDateParseBlock parser = blocks[string.length];
     if (!parser) return nil;
     return parser(string);
     #undef kParserNum
@@ -244,7 +244,7 @@ static force_inline NSDate *YYNSDateFromString(__unsafe_unretained NSString *str
 
 
 /// Get the 'NSBlock' class.
-static force_inline Class YYNSBlockClass() {
+static force_inline Class Yodo1NSBlockClass() {
     static Class cls;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -269,7 +269,7 @@ static force_inline Class YYNSBlockClass() {
  
  length: 20/24/25
  */
-static force_inline NSDateFormatter *YYISODateFormatter() {
+static force_inline NSDateFormatter *Yodo1ISODateFormatter() {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -282,7 +282,7 @@ static force_inline NSDateFormatter *YYISODateFormatter() {
 
 /// Get the value with key paths from dictionary
 /// The dic should be NSDictionary, and the keyPath should not be nil.
-static force_inline id YYValueForKeyPath(__unsafe_unretained NSDictionary *dic, __unsafe_unretained NSArray *keyPaths) {
+static force_inline id Yodo1ValueForKeyPath(__unsafe_unretained NSDictionary *dic, __unsafe_unretained NSArray *keyPaths) {
     id value = nil;
     for (NSUInteger i = 0, max = keyPaths.count; i < max; i++) {
         value = dic[keyPaths[i]];
@@ -299,14 +299,14 @@ static force_inline id YYValueForKeyPath(__unsafe_unretained NSDictionary *dic, 
 
 /// Get the value with multi key (or key path) from dictionary
 /// The dic should be NSDictionary
-static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic, __unsafe_unretained NSArray *multiKeys) {
+static force_inline id Yodo1ValueForMultiKeys(__unsafe_unretained NSDictionary *dic, __unsafe_unretained NSArray *multiKeys) {
     id value = nil;
     for (NSString *key in multiKeys) {
         if ([key isKindOfClass:[NSString class]]) {
             value = dic[key];
             if (value) break;
         } else {
-            value = YYValueForKeyPath(dic, (NSArray *)key);
+            value = Yodo1ValueForKeyPath(dic, (NSArray *)key);
             if (value) break;
         }
     }
@@ -317,11 +317,11 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
 
 
 /// A property info in object model.
-@interface _YYModelPropertyMeta : NSObject {
+@interface _Yodo1ModelPropertyMeta : NSObject {
     @package
     NSString *_name;             ///< property's name
-    YYEncodingType _type;        ///< property's type
-    YYEncodingNSType _nsType;    ///< property's Foundation type
+    Yodo1EncodingType _type;        ///< property's type
+    Yodo1EncodingNSType _nsType;    ///< property's Foundation type
     BOOL _isCNumber;             ///< is c number type
     Class _cls;                  ///< property's class, or nil
     Class _genericCls;           ///< container's generic class, or nil if threr's no generic class
@@ -339,13 +339,13 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     NSString *_mappedToKey;      ///< the key mapped to
     NSArray *_mappedToKeyPath;   ///< the key path mapped to (nil if the name is not key path)
     NSArray *_mappedToKeyArray;  ///< the key(NSString) or keyPath(NSArray) array (nil if not mapped to multiple keys)
-    YYClassPropertyInfo *_info;  ///< property's info
-    _YYModelPropertyMeta *_next; ///< next meta if there are multiple properties mapped to the same key.
+    Yodo1ClassPropertyInfo *_info;  ///< property's info
+    _Yodo1ModelPropertyMeta *_next; ///< next meta if there are multiple properties mapped to the same key.
 }
 @end
 
-@implementation _YYModelPropertyMeta
-+ (instancetype)metaWithClassInfo:(YYClassInfo *)classInfo propertyInfo:(YYClassPropertyInfo *)propertyInfo generic:(Class)generic {
+@implementation _Yodo1ModelPropertyMeta
++ (instancetype)metaWithClassInfo:(Yodo1ClassInfo *)classInfo propertyInfo:(Yodo1ClassPropertyInfo *)propertyInfo generic:(Class)generic {
     
     // support pseudo generic class with protocol name
     if (!generic && propertyInfo.protocols) {
@@ -358,18 +358,18 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
         }
     }
     
-    _YYModelPropertyMeta *meta = [self new];
+    _Yodo1ModelPropertyMeta *meta = [self new];
     meta->_name = propertyInfo.name;
     meta->_type = propertyInfo.type;
     meta->_info = propertyInfo;
     meta->_genericCls = generic;
     
-    if ((meta->_type & YYEncodingTypeMask) == YYEncodingTypeObject) {
-        meta->_nsType = YYClassGetNSType(propertyInfo.cls);
+    if ((meta->_type & Yodo1EncodingTypeMask) == Yodo1EncodingTypeObject) {
+        meta->_nsType = Yodo1ClassGetNSType(propertyInfo.cls);
     } else {
-        meta->_isCNumber = YYEncodingTypeIsCNumber(meta->_type);
+        meta->_isCNumber = Yodo1EncodingTypeIsCNumber(meta->_type);
     }
-    if ((meta->_type & YYEncodingTypeMask) == YYEncodingTypeStruct) {
+    if ((meta->_type & Yodo1EncodingTypeMask) == Yodo1EncodingTypeStruct) {
         /*
          It seems that NSKeyedUnarchiver cannot decode NSValue except these structs:
          */
@@ -401,7 +401,7 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     
     if (generic) {
         meta->_hasCustomClassFromDictionary = [generic respondsToSelector:@selector(modelCustomClassForDictionary:)];
-    } else if (meta->_cls && meta->_nsType == YYEncodingTypeNSUnknown) {
+    } else if (meta->_cls && meta->_nsType == Yodo1EncodingTypeNSUnknown) {
         meta->_hasCustomClassFromDictionary = [meta->_cls respondsToSelector:@selector(modelCustomClassForDictionary:)];
     }
     
@@ -422,23 +422,23 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
          long double
          pointer (such as SEL/CoreFoundation object)
          */
-        switch (meta->_type & YYEncodingTypeMask) {
-            case YYEncodingTypeBool:
-            case YYEncodingTypeInt8:
-            case YYEncodingTypeUInt8:
-            case YYEncodingTypeInt16:
-            case YYEncodingTypeUInt16:
-            case YYEncodingTypeInt32:
-            case YYEncodingTypeUInt32:
-            case YYEncodingTypeInt64:
-            case YYEncodingTypeUInt64:
-            case YYEncodingTypeFloat:
-            case YYEncodingTypeDouble:
-            case YYEncodingTypeObject:
-            case YYEncodingTypeClass:
-            case YYEncodingTypeBlock:
-            case YYEncodingTypeStruct:
-            case YYEncodingTypeUnion: {
+        switch (meta->_type & Yodo1EncodingTypeMask) {
+            case Yodo1EncodingTypeBool:
+            case Yodo1EncodingTypeInt8:
+            case Yodo1EncodingTypeUInt8:
+            case Yodo1EncodingTypeInt16:
+            case Yodo1EncodingTypeUInt16:
+            case Yodo1EncodingTypeInt32:
+            case Yodo1EncodingTypeUInt32:
+            case Yodo1EncodingTypeInt64:
+            case Yodo1EncodingTypeUInt64:
+            case Yodo1EncodingTypeFloat:
+            case Yodo1EncodingTypeDouble:
+            case Yodo1EncodingTypeObject:
+            case Yodo1EncodingTypeClass:
+            case Yodo1EncodingTypeBlock:
+            case Yodo1EncodingTypeStruct:
+            case Yodo1EncodingTypeUnion: {
                 meta->_isKVCCompatible = YES;
             } break;
             default: break;
@@ -451,21 +451,21 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
 
 
 /// A class info in object model.
-@interface _YYModelMeta : NSObject {
+@interface _Yodo1ModelMeta : NSObject {
     @package
-    YYClassInfo *_classInfo;
-    /// Key:mapped key and key path, Value:_YYModelPropertyMeta.
+    Yodo1ClassInfo *_classInfo;
+    /// Key:mapped key and key path, Value:_Yodo1ModelPropertyMeta.
     NSDictionary *_mapper;
-    /// Array<_YYModelPropertyMeta>, all property meta of this model.
+    /// Array<_Yodo1ModelPropertyMeta>, all property meta of this model.
     NSArray *_allPropertyMetas;
-    /// Array<_YYModelPropertyMeta>, property meta which is mapped to a key path.
+    /// Array<_Yodo1ModelPropertyMeta>, property meta which is mapped to a key path.
     NSArray *_keyPathPropertyMetas;
-    /// Array<_YYModelPropertyMeta>, property meta which is mapped to multi keys.
+    /// Array<_Yodo1ModelPropertyMeta>, property meta which is mapped to multi keys.
     NSArray *_multiKeysPropertyMetas;
     /// The number of mapped key (and key path), same to _mapper.count.
     NSUInteger _keyMappedCount;
     /// Model class type.
-    YYEncodingNSType _nsType;
+    Yodo1EncodingNSType _nsType;
     
     BOOL _hasCustomWillTransformFromDictionary;
     BOOL _hasCustomTransformFromDictionary;
@@ -474,16 +474,16 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
 }
 @end
 
-@implementation _YYModelMeta
+@implementation _Yodo1ModelMeta
 - (instancetype)initWithClass:(Class)cls {
-    YYClassInfo *classInfo = [YYClassInfo classInfoWithClass:cls];
+    Yodo1ClassInfo *classInfo = [Yodo1ClassInfo classInfoWithClass:cls];
     if (!classInfo) return nil;
     self = [super init];
     
     // Get black list
     NSSet *blacklist = nil;
     if ([cls respondsToSelector:@selector(modelPropertyBlacklist)]) {
-        NSArray *properties = [(id<YYModel>)cls modelPropertyBlacklist];
+        NSArray *properties = [(id<Yodo1Model>)cls modelPropertyBlacklist];
         if (properties) {
             blacklist = [NSSet setWithArray:properties];
         }
@@ -492,7 +492,7 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     // Get white list
     NSSet *whitelist = nil;
     if ([cls respondsToSelector:@selector(modelPropertyWhitelist)]) {
-        NSArray *properties = [(id<YYModel>)cls modelPropertyWhitelist];
+        NSArray *properties = [(id<Yodo1Model>)cls modelPropertyWhitelist];
         if (properties) {
             whitelist = [NSSet setWithArray:properties];
         }
@@ -501,7 +501,7 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     // Get container property's generic class
     NSDictionary *genericMapper = nil;
     if ([cls respondsToSelector:@selector(modelContainerPropertyGenericClass)]) {
-        genericMapper = [(id<YYModel>)cls modelContainerPropertyGenericClass];
+        genericMapper = [(id<Yodo1Model>)cls modelContainerPropertyGenericClass];
         if (genericMapper) {
             NSMutableDictionary *tmp = [NSMutableDictionary new];
             [genericMapper enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -523,13 +523,13 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     
     // Create all property metas.
     NSMutableDictionary *allPropertyMetas = [NSMutableDictionary new];
-    YYClassInfo *curClassInfo = classInfo;
+    Yodo1ClassInfo *curClassInfo = classInfo;
     while (curClassInfo && curClassInfo.superCls != nil) { // recursive parse super class, but ignore root class (NSObject/NSProxy)
-        for (YYClassPropertyInfo *propertyInfo in curClassInfo.propertyInfos.allValues) {
+        for (Yodo1ClassPropertyInfo *propertyInfo in curClassInfo.propertyInfos.allValues) {
             if (!propertyInfo.name) continue;
             if (blacklist && [blacklist containsObject:propertyInfo.name]) continue;
             if (whitelist && ![whitelist containsObject:propertyInfo.name]) continue;
-            _YYModelPropertyMeta *meta = [_YYModelPropertyMeta metaWithClassInfo:classInfo
+            _Yodo1ModelPropertyMeta *meta = [_Yodo1ModelPropertyMeta metaWithClassInfo:classInfo
                                                                     propertyInfo:propertyInfo
                                                                          generic:genericMapper[propertyInfo.name]];
             if (!meta || !meta->_name) continue;
@@ -547,9 +547,9 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     NSMutableArray *multiKeysPropertyMetas = [NSMutableArray new];
     
     if ([cls respondsToSelector:@selector(modelCustomPropertyMapper)]) {
-        NSDictionary *customMapper = [(id <YYModel>)cls modelCustomPropertyMapper];
+        NSDictionary *customMapper = [(id <Yodo1Model>)cls modelCustomPropertyMapper];
         [customMapper enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSString *mappedToKey, BOOL *stop) {
-            _YYModelPropertyMeta *propertyMeta = allPropertyMetas[propertyName];
+            _Yodo1ModelPropertyMeta *propertyMeta = allPropertyMetas[propertyName];
             if (!propertyMeta) return;
             [allPropertyMetas removeObjectForKey:propertyName];
             
@@ -603,7 +603,7 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
         }];
     }
     
-    [allPropertyMetas enumerateKeysAndObjectsUsingBlock:^(NSString *name, _YYModelPropertyMeta *propertyMeta, BOOL *stop) {
+    [allPropertyMetas enumerateKeysAndObjectsUsingBlock:^(NSString *name, _Yodo1ModelPropertyMeta *propertyMeta, BOOL *stop) {
         propertyMeta->_mappedToKey = name;
         propertyMeta->_next = mapper[name] ?: nil;
         mapper[name] = propertyMeta;
@@ -615,7 +615,7 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
     
     _classInfo = classInfo;
     _keyMappedCount = _allPropertyMetas.count;
-    _nsType = YYClassGetNSType(cls);
+    _nsType = Yodo1ClassGetNSType(cls);
     _hasCustomWillTransformFromDictionary = ([cls instancesRespondToSelector:@selector(modelCustomWillTransformFromDictionary:)]);
     _hasCustomTransformFromDictionary = ([cls instancesRespondToSelector:@selector(modelCustomTransformFromDictionary:)]);
     _hasCustomTransformToDictionary = ([cls instancesRespondToSelector:@selector(modelCustomTransformToDictionary:)]);
@@ -635,10 +635,10 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
         lock = dispatch_semaphore_create(1);
     });
     dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
-    _YYModelMeta *meta = CFDictionaryGetValue(cache, (__bridge const void *)(cls));
+    _Yodo1ModelMeta *meta = CFDictionaryGetValue(cache, (__bridge const void *)(cls));
     dispatch_semaphore_signal(lock);
     if (!meta || meta->_classInfo.needUpdate) {
-        meta = [[_YYModelMeta alloc] initWithClass:cls];
+        meta = [[_Yodo1ModelMeta alloc] initWithClass:cls];
         if (meta) {
             dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
             CFDictionarySetValue(cache, (__bridge const void *)(cls), (__bridge const void *)(meta));
@@ -659,46 +659,46 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
  @return A number object, or nil if failed.
  */
 static force_inline NSNumber *ModelCreateNumberFromProperty(__unsafe_unretained id model,
-                                                            __unsafe_unretained _YYModelPropertyMeta *meta) {
-    switch (meta->_type & YYEncodingTypeMask) {
-        case YYEncodingTypeBool: {
+                                                            __unsafe_unretained _Yodo1ModelPropertyMeta *meta) {
+    switch (meta->_type & Yodo1EncodingTypeMask) {
+        case Yodo1EncodingTypeBool: {
             return @(((bool (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeInt8: {
+        case Yodo1EncodingTypeInt8: {
             return @(((int8_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeUInt8: {
+        case Yodo1EncodingTypeUInt8: {
             return @(((uint8_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeInt16: {
+        case Yodo1EncodingTypeInt16: {
             return @(((int16_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeUInt16: {
+        case Yodo1EncodingTypeUInt16: {
             return @(((uint16_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeInt32: {
+        case Yodo1EncodingTypeInt32: {
             return @(((int32_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeUInt32: {
+        case Yodo1EncodingTypeUInt32: {
             return @(((uint32_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeInt64: {
+        case Yodo1EncodingTypeInt64: {
             return @(((int64_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeUInt64: {
+        case Yodo1EncodingTypeUInt64: {
             return @(((uint64_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
-        case YYEncodingTypeFloat: {
+        case Yodo1EncodingTypeFloat: {
             float num = ((float (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter);
             if (isnan(num) || isinf(num)) return nil;
             return @(num);
         }
-        case YYEncodingTypeDouble: {
+        case Yodo1EncodingTypeDouble: {
             double num = ((double (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter);
             if (isnan(num) || isinf(num)) return nil;
             return @(num);
         }
-        case YYEncodingTypeLongDouble: {
+        case Yodo1EncodingTypeLongDouble: {
             double num = ((long double (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter);
             if (isnan(num) || isinf(num)) return nil;
             return @(num);
@@ -716,54 +716,54 @@ static force_inline NSNumber *ModelCreateNumberFromProperty(__unsafe_unretained 
  */
 static force_inline void ModelSetNumberToProperty(__unsafe_unretained id model,
                                                   __unsafe_unretained NSNumber *num,
-                                                  __unsafe_unretained _YYModelPropertyMeta *meta) {
-    switch (meta->_type & YYEncodingTypeMask) {
-        case YYEncodingTypeBool: {
+                                                  __unsafe_unretained _Yodo1ModelPropertyMeta *meta) {
+    switch (meta->_type & Yodo1EncodingTypeMask) {
+        case Yodo1EncodingTypeBool: {
             ((void (*)(id, SEL, bool))(void *) objc_msgSend)((id)model, meta->_setter, num.boolValue);
         } break;
-        case YYEncodingTypeInt8: {
+        case Yodo1EncodingTypeInt8: {
             ((void (*)(id, SEL, int8_t))(void *) objc_msgSend)((id)model, meta->_setter, (int8_t)num.charValue);
         } break;
-        case YYEncodingTypeUInt8: {
+        case Yodo1EncodingTypeUInt8: {
             ((void (*)(id, SEL, uint8_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint8_t)num.unsignedCharValue);
         } break;
-        case YYEncodingTypeInt16: {
+        case Yodo1EncodingTypeInt16: {
             ((void (*)(id, SEL, int16_t))(void *) objc_msgSend)((id)model, meta->_setter, (int16_t)num.shortValue);
         } break;
-        case YYEncodingTypeUInt16: {
+        case Yodo1EncodingTypeUInt16: {
             ((void (*)(id, SEL, uint16_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint16_t)num.unsignedShortValue);
         } break;
-        case YYEncodingTypeInt32: {
+        case Yodo1EncodingTypeInt32: {
             ((void (*)(id, SEL, int32_t))(void *) objc_msgSend)((id)model, meta->_setter, (int32_t)num.intValue);
         }
-        case YYEncodingTypeUInt32: {
+        case Yodo1EncodingTypeUInt32: {
             ((void (*)(id, SEL, uint32_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint32_t)num.unsignedIntValue);
         } break;
-        case YYEncodingTypeInt64: {
+        case Yodo1EncodingTypeInt64: {
             if ([num isKindOfClass:[NSDecimalNumber class]]) {
                 ((void (*)(id, SEL, int64_t))(void *) objc_msgSend)((id)model, meta->_setter, (int64_t)num.stringValue.longLongValue);
             } else {
                 ((void (*)(id, SEL, uint64_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint64_t)num.longLongValue);
             }
         } break;
-        case YYEncodingTypeUInt64: {
+        case Yodo1EncodingTypeUInt64: {
             if ([num isKindOfClass:[NSDecimalNumber class]]) {
                 ((void (*)(id, SEL, int64_t))(void *) objc_msgSend)((id)model, meta->_setter, (int64_t)num.stringValue.longLongValue);
             } else {
                 ((void (*)(id, SEL, uint64_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint64_t)num.unsignedLongLongValue);
             }
         } break;
-        case YYEncodingTypeFloat: {
+        case Yodo1EncodingTypeFloat: {
             float f = num.floatValue;
             if (isnan(f) || isinf(f)) f = 0;
             ((void (*)(id, SEL, float))(void *) objc_msgSend)((id)model, meta->_setter, f);
         } break;
-        case YYEncodingTypeDouble: {
+        case Yodo1EncodingTypeDouble: {
             double d = num.doubleValue;
             if (isnan(d) || isinf(d)) d = 0;
             ((void (*)(id, SEL, double))(void *) objc_msgSend)((id)model, meta->_setter, d);
         } break;
-        case YYEncodingTypeLongDouble: {
+        case Yodo1EncodingTypeLongDouble: {
             long double d = num.doubleValue;
             if (isnan(d) || isinf(d)) d = 0;
             ((void (*)(id, SEL, long double))(void *) objc_msgSend)((id)model, meta->_setter, (long double)d);
@@ -783,9 +783,9 @@ static force_inline void ModelSetNumberToProperty(__unsafe_unretained id model,
  */
 static void ModelSetValueForProperty(__unsafe_unretained id model,
                                      __unsafe_unretained id value,
-                                     __unsafe_unretained _YYModelPropertyMeta *meta) {
+                                     __unsafe_unretained _Yodo1ModelPropertyMeta *meta) {
     if (meta->_isCNumber) {
-        NSNumber *num = YYNSNumberCreateFromID(value);
+        NSNumber *num = Yodo1NSNumberCreateFromID(value);
         ModelSetNumberToProperty(model, num, meta);
         if (num) [num class]; // hold the number
     } else if (meta->_nsType) {
@@ -793,10 +793,10 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, (id)nil);
         } else {
             switch (meta->_nsType) {
-                case YYEncodingTypeNSString:
-                case YYEncodingTypeNSMutableString: {
+                case Yodo1EncodingTypeNSString:
+                case Yodo1EncodingTypeNSMutableString: {
                     if ([value isKindOfClass:[NSString class]]) {
-                        if (meta->_nsType == YYEncodingTypeNSString) {
+                        if (meta->_nsType == Yodo1EncodingTypeNSString) {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                         } else {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, ((NSString *)value).mutableCopy);
@@ -804,7 +804,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                     } else if ([value isKindOfClass:[NSNumber class]]) {
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
                                                                        meta->_setter,
-                                                                       (meta->_nsType == YYEncodingTypeNSString) ?
+                                                                       (meta->_nsType == Yodo1EncodingTypeNSString) ?
                                                                        ((NSNumber *)value).stringValue :
                                                                        ((NSNumber *)value).stringValue.mutableCopy);
                     } else if ([value isKindOfClass:[NSData class]]) {
@@ -813,24 +813,24 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                     } else if ([value isKindOfClass:[NSURL class]]) {
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
                                                                        meta->_setter,
-                                                                       (meta->_nsType == YYEncodingTypeNSString) ?
+                                                                       (meta->_nsType == Yodo1EncodingTypeNSString) ?
                                                                        ((NSURL *)value).absoluteString :
                                                                        ((NSURL *)value).absoluteString.mutableCopy);
                     } else if ([value isKindOfClass:[NSAttributedString class]]) {
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
                                                                        meta->_setter,
-                                                                       (meta->_nsType == YYEncodingTypeNSString) ?
+                                                                       (meta->_nsType == Yodo1EncodingTypeNSString) ?
                                                                        ((NSAttributedString *)value).string :
                                                                        ((NSAttributedString *)value).string.mutableCopy);
                     }
                 } break;
                     
-                case YYEncodingTypeNSValue:
-                case YYEncodingTypeNSNumber:
-                case YYEncodingTypeNSDecimalNumber: {
-                    if (meta->_nsType == YYEncodingTypeNSNumber) {
-                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, YYNSNumberCreateFromID(value));
-                    } else if (meta->_nsType == YYEncodingTypeNSDecimalNumber) {
+                case Yodo1EncodingTypeNSValue:
+                case Yodo1EncodingTypeNSNumber:
+                case Yodo1EncodingTypeNSDecimalNumber: {
+                    if (meta->_nsType == Yodo1EncodingTypeNSNumber) {
+                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, Yodo1NSNumberCreateFromID(value));
+                    } else if (meta->_nsType == Yodo1EncodingTypeNSDecimalNumber) {
                         if ([value isKindOfClass:[NSDecimalNumber class]]) {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                         } else if ([value isKindOfClass:[NSNumber class]]) {
@@ -844,17 +844,17 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                             }
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, decNum);
                         }
-                    } else { // YYEncodingTypeNSValue
+                    } else { // Yodo1EncodingTypeNSValue
                         if ([value isKindOfClass:[NSValue class]]) {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                         }
                     }
                 } break;
                     
-                case YYEncodingTypeNSData:
-                case YYEncodingTypeNSMutableData: {
+                case Yodo1EncodingTypeNSData:
+                case Yodo1EncodingTypeNSMutableData: {
                     if ([value isKindOfClass:[NSData class]]) {
-                        if (meta->_nsType == YYEncodingTypeNSData) {
+                        if (meta->_nsType == Yodo1EncodingTypeNSData) {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                         } else {
                             NSMutableData *data = ((NSData *)value).mutableCopy;
@@ -862,22 +862,22 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                         }
                     } else if ([value isKindOfClass:[NSString class]]) {
                         NSData *data = [(NSString *)value dataUsingEncoding:NSUTF8StringEncoding];
-                        if (meta->_nsType == YYEncodingTypeNSMutableData) {
+                        if (meta->_nsType == Yodo1EncodingTypeNSMutableData) {
                             data = ((NSData *)data).mutableCopy;
                         }
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, data);
                     }
                 } break;
                     
-                case YYEncodingTypeNSDate: {
+                case Yodo1EncodingTypeNSDate: {
                     if ([value isKindOfClass:[NSDate class]]) {
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                     } else if ([value isKindOfClass:[NSString class]]) {
-                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, YYNSDateFromString(value));
+                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, Yodo1NSDateFromString(value));
                     }
                 } break;
                     
-                case YYEncodingTypeNSURL: {
+                case Yodo1EncodingTypeNSURL: {
                     if ([value isKindOfClass:[NSURL class]]) {
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                     } else if ([value isKindOfClass:[NSString class]]) {
@@ -891,8 +891,8 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                     }
                 } break;
                     
-                case YYEncodingTypeNSArray:
-                case YYEncodingTypeNSMutableArray: {
+                case Yodo1EncodingTypeNSArray:
+                case Yodo1EncodingTypeNSMutableArray: {
                     if (meta->_genericCls) {
                         NSArray *valueArr = nil;
                         if ([value isKindOfClass:[NSArray class]]) valueArr = value;
@@ -909,7 +909,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                                         if (!cls) cls = meta->_genericCls; // for xcode code coverage
                                     }
                                     NSObject *newOne = [cls new];
-                                    [newOne yy_modelSetWithDictionary:one];
+                                    [newOne yodo1_modelSetWithDictionary:one];
                                     if (newOne) [objectArr addObject:newOne];
                                 }
                             }
@@ -917,7 +917,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                         }
                     } else {
                         if ([value isKindOfClass:[NSArray class]]) {
-                            if (meta->_nsType == YYEncodingTypeNSArray) {
+                            if (meta->_nsType == Yodo1EncodingTypeNSArray) {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                             } else {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
@@ -925,7 +925,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                                                                                ((NSArray *)value).mutableCopy);
                             }
                         } else if ([value isKindOfClass:[NSSet class]]) {
-                            if (meta->_nsType == YYEncodingTypeNSArray) {
+                            if (meta->_nsType == Yodo1EncodingTypeNSArray) {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, ((NSSet *)value).allObjects);
                             } else {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
@@ -936,8 +936,8 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                     }
                 } break;
                     
-                case YYEncodingTypeNSDictionary:
-                case YYEncodingTypeNSMutableDictionary: {
+                case Yodo1EncodingTypeNSDictionary:
+                case Yodo1EncodingTypeNSMutableDictionary: {
                     if ([value isKindOfClass:[NSDictionary class]]) {
                         if (meta->_genericCls) {
                             NSMutableDictionary *dic = [NSMutableDictionary new];
@@ -949,13 +949,13 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                                         if (!cls) cls = meta->_genericCls; // for xcode code coverage
                                     }
                                     NSObject *newOne = [cls new];
-                                    [newOne yy_modelSetWithDictionary:(id)oneValue];
+                                    [newOne yodo1_modelSetWithDictionary:(id)oneValue];
                                     if (newOne) dic[oneKey] = newOne;
                                 }
                             }];
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, dic);
                         } else {
-                            if (meta->_nsType == YYEncodingTypeNSDictionary) {
+                            if (meta->_nsType == Yodo1EncodingTypeNSDictionary) {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, value);
                             } else {
                                 ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
@@ -966,8 +966,8 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                     }
                 } break;
                     
-                case YYEncodingTypeNSSet:
-                case YYEncodingTypeNSMutableSet: {
+                case Yodo1EncodingTypeNSSet:
+                case Yodo1EncodingTypeNSMutableSet: {
                     NSSet *valueSet = nil;
                     if ([value isKindOfClass:[NSArray class]]) valueSet = [NSMutableSet setWithArray:value];
                     else if ([value isKindOfClass:[NSSet class]]) valueSet = ((NSSet *)value);
@@ -984,13 +984,13 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                                     if (!cls) cls = meta->_genericCls; // for xcode code coverage
                                 }
                                 NSObject *newOne = [cls new];
-                                [newOne yy_modelSetWithDictionary:one];
+                                [newOne yodo1_modelSetWithDictionary:one];
                                 if (newOne) [set addObject:newOne];
                             }
                         }
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, set);
                     } else {
-                        if (meta->_nsType == YYEncodingTypeNSSet) {
+                        if (meta->_nsType == Yodo1EncodingTypeNSSet) {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, valueSet);
                         } else {
                             ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,
@@ -1005,8 +1005,8 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
         }
     } else {
         BOOL isNull = (value == (id)kCFNull);
-        switch (meta->_type & YYEncodingTypeMask) {
-            case YYEncodingTypeObject: {
+        switch (meta->_type & Yodo1EncodingTypeMask) {
+            case Yodo1EncodingTypeObject: {
                 if (isNull) {
                     ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, (id)nil);
                 } else if ([value isKindOfClass:meta->_cls] || !meta->_cls) {
@@ -1017,7 +1017,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                         one = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter);
                     }
                     if (one) {
-                        [one yy_modelSetWithDictionary:value];
+                        [one yodo1_modelSetWithDictionary:value];
                     } else {
                         Class cls = meta->_cls;
                         if (meta->_hasCustomClassFromDictionary) {
@@ -1025,13 +1025,13 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                             if (!cls) cls = meta->_genericCls; // for xcode code coverage
                         }
                         one = [cls new];
-                        [one yy_modelSetWithDictionary:value];
+                        [one yodo1_modelSetWithDictionary:value];
                         ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta->_setter, (id)one);
                     }
                 }
             } break;
                 
-            case YYEncodingTypeClass: {
+            case Yodo1EncodingTypeClass: {
                 if (isNull) {
                     ((void (*)(id, SEL, Class))(void *) objc_msgSend)((id)model, meta->_setter, (Class)NULL);
                 } else {
@@ -1052,7 +1052,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                 }
             } break;
                 
-            case  YYEncodingTypeSEL: {
+            case  Yodo1EncodingTypeSEL: {
                 if (isNull) {
                     ((void (*)(id, SEL, SEL))(void *) objc_msgSend)((id)model, meta->_setter, (SEL)NULL);
                 } else if ([value isKindOfClass:[NSString class]]) {
@@ -1061,17 +1061,17 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                 }
             } break;
                 
-            case YYEncodingTypeBlock: {
+            case Yodo1EncodingTypeBlock: {
                 if (isNull) {
                     ((void (*)(id, SEL, void (^)()))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)())NULL);
-                } else if ([value isKindOfClass:YYNSBlockClass()]) {
+                } else if ([value isKindOfClass:Yodo1NSBlockClass()]) {
                     ((void (*)(id, SEL, void (^)()))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)())value);
                 }
             } break;
                 
-            case YYEncodingTypeStruct:
-            case YYEncodingTypeUnion:
-            case YYEncodingTypeCArray: {
+            case Yodo1EncodingTypeStruct:
+            case Yodo1EncodingTypeUnion:
+            case Yodo1EncodingTypeCArray: {
                 if ([value isKindOfClass:[NSValue class]]) {
                     const char *valueType = ((NSValue *)value).objCType;
                     const char *metaType = meta->_info.typeEncoding.UTF8String;
@@ -1081,8 +1081,8 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                 }
             } break;
                 
-            case YYEncodingTypePointer:
-            case YYEncodingTypeCString: {
+            case Yodo1EncodingTypePointer:
+            case Yodo1EncodingTypeCString: {
                 if (isNull) {
                     ((void (*)(id, SEL, void *))(void *) objc_msgSend)((id)model, meta->_setter, (void *)NULL);
                 } else if ([value isKindOfClass:[NSValue class]]) {
@@ -1100,7 +1100,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
 
 
 typedef struct {
-    void *modelMeta;  ///< _YYModelMeta
+    void *modelMeta;  ///< _Yodo1ModelMeta
     void *model;      ///< id (self)
     void *dictionary; ///< NSDictionary (json)
 } ModelSetContext;
@@ -1114,8 +1114,8 @@ typedef struct {
  */
 static void ModelSetWithDictionaryFunction(const void *_key, const void *_value, void *_context) {
     ModelSetContext *context = _context;
-    __unsafe_unretained _YYModelMeta *meta = (__bridge _YYModelMeta *)(context->modelMeta);
-    __unsafe_unretained _YYModelPropertyMeta *propertyMeta = [meta->_mapper objectForKey:(__bridge id)(_key)];
+    __unsafe_unretained _Yodo1ModelMeta *meta = (__bridge _Yodo1ModelMeta *)(context->modelMeta);
+    __unsafe_unretained _Yodo1ModelPropertyMeta *propertyMeta = [meta->_mapper objectForKey:(__bridge id)(_key)];
     __unsafe_unretained id model = (__bridge id)(context->model);
     while (propertyMeta) {
         if (propertyMeta->_setter) {
@@ -1128,20 +1128,20 @@ static void ModelSetWithDictionaryFunction(const void *_key, const void *_value,
 /**
  Apply function for model property meta, to set dictionary to model.
  
- @param _propertyMeta should not be nil, _YYModelPropertyMeta.
+ @param _propertyMeta should not be nil, _Yodo1ModelPropertyMeta.
  @param _context      _context.model and _context.dictionary should not be nil.
  */
 static void ModelSetWithPropertyMetaArrayFunction(const void *_propertyMeta, void *_context) {
     ModelSetContext *context = _context;
     __unsafe_unretained NSDictionary *dictionary = (__bridge NSDictionary *)(context->dictionary);
-    __unsafe_unretained _YYModelPropertyMeta *propertyMeta = (__bridge _YYModelPropertyMeta *)(_propertyMeta);
+    __unsafe_unretained _Yodo1ModelPropertyMeta *propertyMeta = (__bridge _Yodo1ModelPropertyMeta *)(_propertyMeta);
     if (!propertyMeta->_setter) return;
     id value = nil;
     
     if (propertyMeta->_mappedToKeyArray) {
-        value = YYValueForMultiKeys(dictionary, propertyMeta->_mappedToKeyArray);
+        value = Yodo1ValueForMultiKeys(dictionary, propertyMeta->_mappedToKeyArray);
     } else if (propertyMeta->_mappedToKeyPath) {
-        value = YYValueForKeyPath(dictionary, propertyMeta->_mappedToKeyPath);
+        value = Yodo1ValueForKeyPath(dictionary, propertyMeta->_mappedToKeyPath);
     } else {
         value = [dictionary objectForKey:propertyMeta->_mappedToKey];
     }
@@ -1204,15 +1204,15 @@ static id ModelToJSONObjectRecursive(NSObject *model) {
     }
     if ([model isKindOfClass:[NSURL class]]) return ((NSURL *)model).absoluteString;
     if ([model isKindOfClass:[NSAttributedString class]]) return ((NSAttributedString *)model).string;
-    if ([model isKindOfClass:[NSDate class]]) return [YYISODateFormatter() stringFromDate:(id)model];
+    if ([model isKindOfClass:[NSDate class]]) return [Yodo1ISODateFormatter() stringFromDate:(id)model];
     if ([model isKindOfClass:[NSData class]]) return nil;
     
     
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:[model class]];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:[model class]];
     if (!modelMeta || modelMeta->_keyMappedCount == 0) return nil;
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:64];
     __unsafe_unretained NSMutableDictionary *dic = result; // avoid retain and release in block
-    [modelMeta->_mapper enumerateKeysAndObjectsUsingBlock:^(NSString *propertyMappedKey, _YYModelPropertyMeta *propertyMeta, BOOL *stop) {
+    [modelMeta->_mapper enumerateKeysAndObjectsUsingBlock:^(NSString *propertyMappedKey, _Yodo1ModelPropertyMeta *propertyMeta, BOOL *stop) {
         if (!propertyMeta->_getter) return;
         
         id value = nil;
@@ -1222,17 +1222,17 @@ static id ModelToJSONObjectRecursive(NSObject *model) {
             id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
             value = ModelToJSONObjectRecursive(v);
         } else {
-            switch (propertyMeta->_type & YYEncodingTypeMask) {
-                case YYEncodingTypeObject: {
+            switch (propertyMeta->_type & Yodo1EncodingTypeMask) {
+                case Yodo1EncodingTypeObject: {
                     id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
                     value = ModelToJSONObjectRecursive(v);
                     if (value == (id)kCFNull) value = nil;
                 } break;
-                case YYEncodingTypeClass: {
+                case Yodo1EncodingTypeClass: {
                     Class v = ((Class (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
                     value = v ? NSStringFromClass(v) : nil;
                 } break;
-                case YYEncodingTypeSEL: {
+                case Yodo1EncodingTypeSEL: {
                     SEL v = ((SEL (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
                     value = v ? NSStringFromSelector(v) : nil;
                 } break;
@@ -1274,7 +1274,7 @@ static id ModelToJSONObjectRecursive(NSObject *model) {
     }];
     
     if (modelMeta->_hasCustomTransformToDictionary) {
-        BOOL suc = [((id<YYModel>)model) modelCustomTransformToDictionary:dic];
+        BOOL suc = [((id<Yodo1Model>)model) modelCustomTransformToDictionary:dic];
         if (!suc) return nil;
     }
     return result;
@@ -1303,14 +1303,14 @@ static NSString *ModelDescription(NSObject *model) {
     if (![model isKindOfClass:[NSObject class]]) return [NSString stringWithFormat:@"%@",model];
     
     
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:model.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:model.class];
     switch (modelMeta->_nsType) {
-        case YYEncodingTypeNSString: case YYEncodingTypeNSMutableString: {
+        case Yodo1EncodingTypeNSString: case Yodo1EncodingTypeNSMutableString: {
             return [NSString stringWithFormat:@"\"%@\"",model];
         }
         
-        case YYEncodingTypeNSValue:
-        case YYEncodingTypeNSData: case YYEncodingTypeNSMutableData: {
+        case Yodo1EncodingTypeNSValue:
+        case Yodo1EncodingTypeNSData: case Yodo1EncodingTypeNSMutableData: {
             NSString *tmp = model.description;
             if (tmp.length > kDescMaxLength) {
                 tmp = [tmp substringToIndex:kDescMaxLength];
@@ -1319,18 +1319,18 @@ static NSString *ModelDescription(NSObject *model) {
             return tmp;
         }
             
-        case YYEncodingTypeNSNumber:
-        case YYEncodingTypeNSDecimalNumber:
-        case YYEncodingTypeNSDate:
-        case YYEncodingTypeNSURL: {
+        case Yodo1EncodingTypeNSNumber:
+        case Yodo1EncodingTypeNSDecimalNumber:
+        case Yodo1EncodingTypeNSDate:
+        case Yodo1EncodingTypeNSURL: {
             return [NSString stringWithFormat:@"%@",model];
         }
             
-        case YYEncodingTypeNSSet: case YYEncodingTypeNSMutableSet: {
+        case Yodo1EncodingTypeNSSet: case Yodo1EncodingTypeNSMutableSet: {
             model = ((NSSet *)model).allObjects;
         } // no break
             
-        case YYEncodingTypeNSArray: case YYEncodingTypeNSMutableArray: {
+        case Yodo1EncodingTypeNSArray: case Yodo1EncodingTypeNSMutableArray: {
             NSArray *array = (id)model;
             NSMutableString *desc = [NSMutableString new];
             if (array.count == 0) {
@@ -1347,7 +1347,7 @@ static NSString *ModelDescription(NSObject *model) {
                 return desc;
             }
         }
-        case YYEncodingTypeNSDictionary: case YYEncodingTypeNSMutableDictionary: {
+        case Yodo1EncodingTypeNSDictionary: case Yodo1EncodingTypeNSMutableDictionary: {
             NSDictionary *dic = (id)model;
             NSMutableString *desc = [NSMutableString new];
             if (dic.count == 0) {
@@ -1375,43 +1375,43 @@ static NSString *ModelDescription(NSObject *model) {
             
             // sort property names
             NSArray *properties = [modelMeta->_allPropertyMetas
-                                   sortedArrayUsingComparator:^NSComparisonResult(_YYModelPropertyMeta *p1, _YYModelPropertyMeta *p2) {
+                                   sortedArrayUsingComparator:^NSComparisonResult(_Yodo1ModelPropertyMeta *p1, _Yodo1ModelPropertyMeta *p2) {
                                        return [p1->_name compare:p2->_name];
                                    }];
             
             [desc appendFormat:@" {\n"];
             for (NSUInteger i = 0, max = properties.count; i < max; i++) {
-                _YYModelPropertyMeta *property = properties[i];
+                _Yodo1ModelPropertyMeta *property = properties[i];
                 NSString *propertyDesc;
                 if (property->_isCNumber) {
                     NSNumber *num = ModelCreateNumberFromProperty(model, property);
                     propertyDesc = num.stringValue;
                 } else {
-                    switch (property->_type & YYEncodingTypeMask) {
-                        case YYEncodingTypeObject: {
+                    switch (property->_type & Yodo1EncodingTypeMask) {
+                        case Yodo1EncodingTypeObject: {
                             id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, property->_getter);
                             propertyDesc = ModelDescription(v);
                             if (!propertyDesc) propertyDesc = @"<nil>";
                         } break;
-                        case YYEncodingTypeClass: {
+                        case Yodo1EncodingTypeClass: {
                             id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, property->_getter);
                             propertyDesc = ((NSObject *)v).description;
                             if (!propertyDesc) propertyDesc = @"<nil>";
                         } break;
-                        case YYEncodingTypeSEL: {
+                        case Yodo1EncodingTypeSEL: {
                             SEL sel = ((SEL (*)(id, SEL))(void *) objc_msgSend)((id)model, property->_getter);
                             if (sel) propertyDesc = NSStringFromSelector(sel);
                             else propertyDesc = @"<NULL>";
                         } break;
-                        case YYEncodingTypeBlock: {
+                        case Yodo1EncodingTypeBlock: {
                             id block = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, property->_getter);
                             propertyDesc = block ? ((NSObject *)block).description : @"<nil>";
                         } break;
-                        case YYEncodingTypeCArray: case YYEncodingTypeCString: case YYEncodingTypePointer: {
+                        case Yodo1EncodingTypeCArray: case Yodo1EncodingTypeCString: case Yodo1EncodingTypePointer: {
                             void *pointer = ((void* (*)(id, SEL))(void *) objc_msgSend)((id)model, property->_getter);
                             propertyDesc = [NSString stringWithFormat:@"%p",pointer];
                         } break;
-                        case YYEncodingTypeStruct: case YYEncodingTypeUnion: {
+                        case Yodo1EncodingTypeStruct: case Yodo1EncodingTypeUnion: {
                             NSValue *value = [model valueForKey:property->_name];
                             propertyDesc = value ? value.description : @"{unknown}";
                         } break;
@@ -1430,9 +1430,9 @@ static NSString *ModelDescription(NSObject *model) {
 }
 
 
-@implementation NSObject (YYModel)
+@implementation NSObject (Yodo1Model)
 
-+ (NSDictionary *)_yy_dictionaryWithJSON:(id)json {
++ (NSDictionary *)_yodo1_dictionaryWithJSON:(id)json {
     if (!json || json == (id)kCFNull) return nil;
     NSDictionary *dic = nil;
     NSData *jsonData = nil;
@@ -1450,41 +1450,41 @@ static NSString *ModelDescription(NSObject *model) {
     return dic;
 }
 
-+ (instancetype)yy_modelWithJSON:(id)json {
-    NSDictionary *dic = [self _yy_dictionaryWithJSON:json];
-    return [self yy_modelWithDictionary:dic];
++ (instancetype)yodo1_modelWithJSON:(id)json {
+    NSDictionary *dic = [self _yodo1_dictionaryWithJSON:json];
+    return [self yodo1_modelWithDictionary:dic];
 }
 
-+ (instancetype)yy_modelWithDictionary:(NSDictionary *)dictionary {
++ (instancetype)yodo1_modelWithDictionary:(NSDictionary *)dictionary {
     if (!dictionary || dictionary == (id)kCFNull) return nil;
     if (![dictionary isKindOfClass:[NSDictionary class]]) return nil;
     
     Class cls = [self class];
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:cls];
     if (modelMeta->_hasCustomClassFromDictionary) {
         cls = [cls modelCustomClassForDictionary:dictionary] ?: cls;
     }
     
     NSObject *one = [cls new];
-    if ([one yy_modelSetWithDictionary:dictionary]) return one;
+    if ([one yodo1_modelSetWithDictionary:dictionary]) return one;
     return nil;
 }
 
-- (BOOL)yy_modelSetWithJSON:(id)json {
-    NSDictionary *dic = [NSObject _yy_dictionaryWithJSON:json];
-    return [self yy_modelSetWithDictionary:dic];
+- (BOOL)yodo1_modelSetWithJSON:(id)json {
+    NSDictionary *dic = [NSObject _yodo1_dictionaryWithJSON:json];
+    return [self yodo1_modelSetWithDictionary:dic];
 }
 
-- (BOOL)yy_modelSetWithDictionary:(NSDictionary *)dic {
+- (BOOL)yodo1_modelSetWithDictionary:(NSDictionary *)dic {
     if (!dic || dic == (id)kCFNull) return NO;
     if (![dic isKindOfClass:[NSDictionary class]]) return NO;
     
 
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:object_getClass(self)];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:object_getClass(self)];
     if (modelMeta->_keyMappedCount == 0) return NO;
     
     if (modelMeta->_hasCustomWillTransformFromDictionary) {
-        dic = [((id<YYModel>)self) modelCustomWillTransformFromDictionary:dic];
+        dic = [((id<Yodo1Model>)self) modelCustomWillTransformFromDictionary:dic];
         if (![dic isKindOfClass:[NSDictionary class]]) return NO;
     }
     
@@ -1516,12 +1516,12 @@ static NSString *ModelDescription(NSObject *model) {
     }
     
     if (modelMeta->_hasCustomTransformFromDictionary) {
-        return [((id<YYModel>)self) modelCustomTransformFromDictionary:dic];
+        return [((id<Yodo1Model>)self) modelCustomTransformFromDictionary:dic];
     }
     return YES;
 }
 
-- (id)yy_modelToJSONObject {
+- (id)yodo1_modelToJSONObject {
     /*
      Apple said:
      The top level object is an NSArray or NSDictionary.
@@ -1535,83 +1535,83 @@ static NSString *ModelDescription(NSObject *model) {
     return nil;
 }
 
-- (NSData *)yy_modelToJSONData {
-    id jsonObject = [self yy_modelToJSONObject];
+- (NSData *)yodo1_modelToJSONData {
+    id jsonObject = [self yodo1_modelToJSONObject];
     if (!jsonObject) return nil;
     return [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
 }
 
-- (NSString *)yy_modelToJSONString {
-    NSData *jsonData = [self yy_modelToJSONData];
+- (NSString *)yodo1_modelToJSONString {
+    NSData *jsonData = [self yodo1_modelToJSONData];
     if (jsonData.length == 0) return nil;
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-- (id)yy_modelCopy{
+- (id)yodo1_modelCopy{
     if (self == (id)kCFNull) return self;
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:self.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:self.class];
     if (modelMeta->_nsType) return [self copy];
     
     NSObject *one = [self.class new];
-    for (_YYModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
+    for (_Yodo1ModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
         if (!propertyMeta->_getter || !propertyMeta->_setter) continue;
         
         if (propertyMeta->_isCNumber) {
-            switch (propertyMeta->_type & YYEncodingTypeMask) {
-                case YYEncodingTypeBool: {
+            switch (propertyMeta->_type & Yodo1EncodingTypeMask) {
+                case Yodo1EncodingTypeBool: {
                     bool num = ((bool (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, bool))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt8:
-                case YYEncodingTypeUInt8: {
+                case Yodo1EncodingTypeInt8:
+                case Yodo1EncodingTypeUInt8: {
                     uint8_t num = ((bool (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint8_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt16:
-                case YYEncodingTypeUInt16: {
+                case Yodo1EncodingTypeInt16:
+                case Yodo1EncodingTypeUInt16: {
                     uint16_t num = ((uint16_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint16_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt32:
-                case YYEncodingTypeUInt32: {
+                case Yodo1EncodingTypeInt32:
+                case Yodo1EncodingTypeUInt32: {
                     uint32_t num = ((uint32_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint32_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt64:
-                case YYEncodingTypeUInt64: {
+                case Yodo1EncodingTypeInt64:
+                case Yodo1EncodingTypeUInt64: {
                     uint64_t num = ((uint64_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint64_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeFloat: {
+                case Yodo1EncodingTypeFloat: {
                     float num = ((float (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, float))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeDouble: {
+                case Yodo1EncodingTypeDouble: {
                     double num = ((double (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, double))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeLongDouble: {
+                case Yodo1EncodingTypeLongDouble: {
                     long double num = ((long double (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, long double))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } // break; commented for code coverage in next line
                 default: break;
             }
         } else {
-            switch (propertyMeta->_type & YYEncodingTypeMask) {
-                case YYEncodingTypeObject:
-                case YYEncodingTypeClass:
-                case YYEncodingTypeBlock: {
+            switch (propertyMeta->_type & Yodo1EncodingTypeMask) {
+                case Yodo1EncodingTypeObject:
+                case Yodo1EncodingTypeClass:
+                case Yodo1EncodingTypeBlock: {
                     id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)one, propertyMeta->_setter, value);
                 } break;
-                case YYEncodingTypeSEL:
-                case YYEncodingTypePointer:
-                case YYEncodingTypeCString: {
+                case Yodo1EncodingTypeSEL:
+                case Yodo1EncodingTypePointer:
+                case Yodo1EncodingTypeCString: {
                     size_t value = ((size_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, size_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, value);
                 } break;
-                case YYEncodingTypeStruct:
-                case YYEncodingTypeUnion: {
+                case Yodo1EncodingTypeStruct:
+                case Yodo1EncodingTypeUnion: {
                     @try {
                         NSValue *value = [self valueForKey:NSStringFromSelector(propertyMeta->_getter)];
                         if (value) {
@@ -1626,28 +1626,28 @@ static NSString *ModelDescription(NSObject *model) {
     return one;
 }
 
-- (void)yy_modelEncodeWithCoder:(NSCoder *)aCoder {
+- (void)yodo1_modelEncodeWithCoder:(NSCoder *)aCoder {
     if (!aCoder) return;
     if (self == (id)kCFNull) {
         [((id<NSCoding>)self)encodeWithCoder:aCoder];
         return;
     }
     
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:self.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:self.class];
     if (modelMeta->_nsType) {
         [((id<NSCoding>)self)encodeWithCoder:aCoder];
         return;
     }
     
-    for (_YYModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
+    for (_Yodo1ModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
         if (!propertyMeta->_getter) return;
         
         if (propertyMeta->_isCNumber) {
             NSNumber *value = ModelCreateNumberFromProperty(self, propertyMeta);
             if (value) [aCoder encodeObject:value forKey:propertyMeta->_name];
         } else {
-            switch (propertyMeta->_type & YYEncodingTypeMask) {
-                case YYEncodingTypeObject: {
+            switch (propertyMeta->_type & Yodo1EncodingTypeMask) {
+                case Yodo1EncodingTypeObject: {
                     id value = ((id (*)(id, SEL))(void *)objc_msgSend)((id)self, propertyMeta->_getter);
                     if (value && (propertyMeta->_nsType || [value respondsToSelector:@selector(encodeWithCoder:)])) {
                         if ([value isKindOfClass:[NSValue class]]) {
@@ -1659,15 +1659,15 @@ static NSString *ModelDescription(NSObject *model) {
                         }
                     }
                 } break;
-                case YYEncodingTypeSEL: {
+                case Yodo1EncodingTypeSEL: {
                     SEL value = ((SEL (*)(id, SEL))(void *)objc_msgSend)((id)self, propertyMeta->_getter);
                     if (value) {
                         NSString *str = NSStringFromSelector(value);
                         [aCoder encodeObject:str forKey:propertyMeta->_name];
                     }
                 } break;
-                case YYEncodingTypeStruct:
-                case YYEncodingTypeUnion: {
+                case Yodo1EncodingTypeStruct:
+                case Yodo1EncodingTypeUnion: {
                     if (propertyMeta->_isKVCCompatible && propertyMeta->_isStructAvailableForKeyedArchiver) {
                         @try {
                             NSValue *value = [self valueForKey:NSStringFromSelector(propertyMeta->_getter)];
@@ -1683,13 +1683,13 @@ static NSString *ModelDescription(NSObject *model) {
     }
 }
 
-- (id)yy_modelInitWithCoder:(NSCoder *)aDecoder {
+- (id)yodo1_modelInitWithCoder:(NSCoder *)aDecoder {
     if (!aDecoder) return self;
     if (self == (id)kCFNull) return self;    
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:self.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:self.class];
     if (modelMeta->_nsType) return self;
     
-    for (_YYModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
+    for (_Yodo1ModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
         if (!propertyMeta->_setter) continue;
         
         if (propertyMeta->_isCNumber) {
@@ -1699,21 +1699,21 @@ static NSString *ModelDescription(NSObject *model) {
                 [value class];
             }
         } else {
-            YYEncodingType type = propertyMeta->_type & YYEncodingTypeMask;
+            Yodo1EncodingType type = propertyMeta->_type & Yodo1EncodingTypeMask;
             switch (type) {
-                case YYEncodingTypeObject: {
+                case Yodo1EncodingTypeObject: {
                     id value = [aDecoder decodeObjectForKey:propertyMeta->_name];
                     ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)self, propertyMeta->_setter, value);
                 } break;
-                case YYEncodingTypeSEL: {
+                case Yodo1EncodingTypeSEL: {
                     NSString *str = [aDecoder decodeObjectForKey:propertyMeta->_name];
                     if ([str isKindOfClass:[NSString class]]) {
                         SEL sel = NSSelectorFromString(str);
                         ((void (*)(id, SEL, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_setter, sel);
                     }
                 } break;
-                case YYEncodingTypeStruct:
-                case YYEncodingTypeUnion: {
+                case Yodo1EncodingTypeStruct:
+                case Yodo1EncodingTypeUnion: {
                     if (propertyMeta->_isKVCCompatible) {
                         @try {
                             NSValue *value = [aDecoder decodeObjectForKey:propertyMeta->_name];
@@ -1730,14 +1730,14 @@ static NSString *ModelDescription(NSObject *model) {
     return self;
 }
 
-- (NSUInteger)yy_modelHash {
+- (NSUInteger)yodo1_modelHash {
     if (self == (id)kCFNull) return [self hash];
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:self.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:self.class];
     if (modelMeta->_nsType) return [self hash];
     
     NSUInteger value = 0;
     NSUInteger count = 0;
-    for (_YYModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
+    for (_Yodo1ModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
         if (!propertyMeta->_isKVCCompatible) continue;
         value ^= [[self valueForKey:NSStringFromSelector(propertyMeta->_getter)] hash];
         count++;
@@ -1746,14 +1746,14 @@ static NSString *ModelDescription(NSObject *model) {
     return value;
 }
 
-- (BOOL)yy_modelIsEqual:(id)model {
+- (BOOL)yodo1_modelIsEqual:(id)model {
     if (self == model) return YES;
     if (![model isMemberOfClass:self.class]) return NO;
-    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:self.class];
+    _Yodo1ModelMeta *modelMeta = [_Yodo1ModelMeta metaWithClass:self.class];
     if (modelMeta->_nsType) return [self isEqual:model];
     if ([self hash] != [model hash]) return NO;
     
-    for (_YYModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
+    for (_Yodo1ModelPropertyMeta *propertyMeta in modelMeta->_allPropertyMetas) {
         if (!propertyMeta->_isKVCCompatible) continue;
         id this = [self valueForKey:NSStringFromSelector(propertyMeta->_getter)];
         id that = [model valueForKey:NSStringFromSelector(propertyMeta->_getter)];
@@ -1764,7 +1764,7 @@ static NSString *ModelDescription(NSObject *model) {
     return YES;
 }
 
-- (NSString *)yy_modelDescription {
+- (NSString *)yodo1_modelDescription {
     return ModelDescription(self);
 }
 
@@ -1772,9 +1772,9 @@ static NSString *ModelDescription(NSObject *model) {
 
 
 
-@implementation NSArray (YYModel)
+@implementation NSArray (Yodo1Model)
 
-+ (NSArray *)yy_modelArrayWithClass:(Class)cls json:(id)json {
++ (NSArray *)yodo1_modelArrayWithClass:(Class)cls json:(id)json {
     if (!json) return nil;
     NSArray *arr = nil;
     NSData *jsonData = nil;
@@ -1789,15 +1789,15 @@ static NSString *ModelDescription(NSObject *model) {
         arr = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
         if (![arr isKindOfClass:[NSArray class]]) arr = nil;
     }
-    return [self yy_modelArrayWithClass:cls array:arr];
+    return [self yodo1_modelArrayWithClass:cls array:arr];
 }
 
-+ (NSArray *)yy_modelArrayWithClass:(Class)cls array:(NSArray *)arr {
++ (NSArray *)yodo1_modelArrayWithClass:(Class)cls array:(NSArray *)arr {
     if (!cls || !arr) return nil;
     NSMutableArray *result = [NSMutableArray new];
     for (NSDictionary *dic in arr) {
         if (![dic isKindOfClass:[NSDictionary class]]) continue;
-        NSObject *obj = [cls yy_modelWithDictionary:dic];
+        NSObject *obj = [cls yodo1_modelWithDictionary:dic];
         if (obj) [result addObject:obj];
     }
     return result;
@@ -1806,9 +1806,9 @@ static NSString *ModelDescription(NSObject *model) {
 @end
 
 
-@implementation NSDictionary (YYModel)
+@implementation NSDictionary (Yodo1Model)
 
-+ (NSDictionary *)yy_modelDictionaryWithClass:(Class)cls json:(id)json {
++ (NSDictionary *)yodo1_modelDictionaryWithClass:(Class)cls json:(id)json {
     if (!json) return nil;
     NSDictionary *dic = nil;
     NSData *jsonData = nil;
@@ -1823,15 +1823,15 @@ static NSString *ModelDescription(NSObject *model) {
         dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
         if (![dic isKindOfClass:[NSDictionary class]]) dic = nil;
     }
-    return [self yy_modelDictionaryWithClass:cls dictionary:dic];
+    return [self yodo1_modelDictionaryWithClass:cls dictionary:dic];
 }
 
-+ (NSDictionary *)yy_modelDictionaryWithClass:(Class)cls dictionary:(NSDictionary *)dic {
++ (NSDictionary *)yodo1_modelDictionaryWithClass:(Class)cls dictionary:(NSDictionary *)dic {
     if (!cls || !dic) return nil;
     NSMutableDictionary *result = [NSMutableDictionary new];
     for (NSString *key in dic.allKeys) {
         if (![key isKindOfClass:[NSString class]]) continue;
-        NSObject *obj = [cls yy_modelWithDictionary:dic[key]];
+        NSObject *obj = [cls yodo1_modelWithDictionary:dic[key]];
         if (obj) result[key] = obj;
     }
     return result;

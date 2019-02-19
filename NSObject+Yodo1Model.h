@@ -1,6 +1,6 @@
 //
-//  NSObject+YYModel.h
-//  YYModel <https://github.com/ibireme/YYModel>
+//  NSObject+Yodo1Model.h
+//  Yodo1Model <https://github.com/ibireme/Yodo1Model>
 //
 //  Created by ibireme on 15/5/10.
 //  Copyright (c) 2015 ibireme.
@@ -20,52 +20,52 @@ NS_ASSUME_NONNULL_BEGIN
  * Set object properties with a key-value dictionary (like KVC).
  * Implementations of `NSCoding`, `NSCopying`, `-hash` and `-isEqual:`.
  
- See `YYModel` protocol for custom methods.
+ See `Yodo1Model` protocol for custom methods.
  
  
  Sample Code:
     
      ********************** json convertor *********************
-     @interface YYAuthor : NSObject
+     @interface Yodo1Author : NSObject
      @property (nonatomic, strong) NSString *name;
      @property (nonatomic, assign) NSDate *birthday;
      @end
-     @implementation YYAuthor
+     @implementation Yodo1Author
      @end
  
-     @interface YYBook : NSObject
+     @interface Yodo1Book : NSObject
      @property (nonatomic, copy) NSString *name;
      @property (nonatomic, assign) NSUInteger pages;
-     @property (nonatomic, strong) YYAuthor *author;
+     @property (nonatomic, strong) Yodo1Author *author;
      @end
-     @implementation YYBook
+     @implementation Yodo1Book
      @end
     
      int main() {
          // create model from json
-         YYBook *book = [YYBook yy_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\": {\"name\": \"J.K.Rowling\", \"birthday\": \"1965-07-31\" }}"];
+         Yodo1Book *book = [Yodo1Book yodo1_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\": {\"name\": \"J.K.Rowling\", \"birthday\": \"1965-07-31\" }}"];
  
          // convert model to json
-         NSString *json = [book yy_modelToJSONString];
+         NSString *json = [book yodo1_modelToJSONString];
          // {"author":{"name":"J.K.Rowling","birthday":"1965-07-31T00:00:00+0000"},"name":"Harry Potter","pages":256}
      }
  
      ********************** Coding/Copying/hash/equal *********************
-     @interface YYShadow :NSObject <NSCoding, NSCopying>
+     @interface Yodo1Shadow :NSObject <NSCoding, NSCopying>
      @property (nonatomic, copy) NSString *name;
      @property (nonatomic, assign) CGSize size;
      @end
  
-     @implementation YYShadow
-     - (void)encodeWithCoder:(NSCoder *)aCoder { [self yy_modelEncodeWithCoder:aCoder]; }
-     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self yy_modelInitWithCoder:aDecoder]; }
-     - (id)copyWithZone:(NSZone *)zone { return [self yy_modelCopy]; }
-     - (NSUInteger)hash { return [self yy_modelHash]; }
-     - (BOOL)isEqual:(id)object { return [self yy_modelIsEqual:object]; }
+     @implementation Yodo1Shadow
+     - (void)encodeWithCoder:(NSCoder *)aCoder { [self yodo1_modelEncodeWithCoder:aCoder]; }
+     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self yodo1_modelInitWithCoder:aDecoder]; }
+     - (id)copyWithZone:(NSZone *)zone { return [self yodo1_modelCopy]; }
+     - (NSUInteger)hash { return [self yodo1_modelHash]; }
+     - (BOOL)isEqual:(id)object { return [self yodo1_modelIsEqual:object]; }
      @end
  
  */
-@interface NSObject (YYModel)
+@interface NSObject (Yodo1Model)
 
 /**
  Creates and returns a new instance of the receiver from a json.
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return A new instance created from the json, or nil if an error occurs.
  */
-+ (nullable instancetype)yy_modelWithJSON:(id)json;
++ (nullable instancetype)yodo1_modelWithJSON:(id)json;
 
 /**
  Creates and returns a new instance of the receiver from a key-value dictionary.
@@ -91,12 +91,12 @@ NS_ASSUME_NONNULL_BEGIN
  property, this method will try to convert the value based on these rules:
  
      `NSString` or `NSNumber` -> c number, such as BOOL, int, long, float, NSUInteger...
-     `NSString` -> NSDate, parsed with format "yyyy-MM-dd'T'HH:mm:ssZ", "yyyy-MM-dd HH:mm:ss" or "yyyy-MM-dd".
+     `NSString` -> NSDate, parsed with format "yodo1yodo1-MM-dd'T'HH:mm:ssZ", "yodo1yodo1-MM-dd HH:mm:ss" or "yodo1yodo1-MM-dd".
      `NSString` -> NSURL.
      `NSValue` -> struct or union, such as CGRect, CGSize, ...
      `NSString` -> SEL, Class.
  */
-+ (nullable instancetype)yy_modelWithDictionary:(NSDictionary *)dictionary;
++ (nullable instancetype)yodo1_modelWithDictionary:(NSDictionary *)dictionary;
 
 /**
  Set the receiver's properties with a json object.
@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return Whether succeed.
  */
-- (BOOL)yy_modelSetWithJSON:(id)json;
+- (BOOL)yodo1_modelSetWithJSON:(id)json;
 
 /**
  Set the receiver's properties with a key-value dictionary.
@@ -121,14 +121,14 @@ NS_ASSUME_NONNULL_BEGIN
  property, this method will try to convert the value based on these rules:
  
      `NSString`, `NSNumber` -> c number, such as BOOL, int, long, float, NSUInteger...
-     `NSString` -> NSDate, parsed with format "yyyy-MM-dd'T'HH:mm:ssZ", "yyyy-MM-dd HH:mm:ss" or "yyyy-MM-dd".
+     `NSString` -> NSDate, parsed with format "yodo1yodo1-MM-dd'T'HH:mm:ssZ", "yodo1yodo1-MM-dd HH:mm:ss" or "yodo1yodo1-MM-dd".
      `NSString` -> NSURL.
      `NSValue` -> struct or union, such as CGRect, CGSize, ...
      `NSString` -> SEL, Class.
  
  @return Whether succeed.
  */
-- (BOOL)yy_modelSetWithDictionary:(NSDictionary *)dic;
+- (BOOL)yodo1_modelSetWithDictionary:(NSDictionary *)dic;
 
 /**
  Generate a json object from the receiver's properties.
@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it just convert
  the inner object to json object.
  */
-- (nullable id)yy_modelToJSONObject;
+- (nullable id)yodo1_modelToJSONObject;
 
 /**
  Generate a json string's data from the receiver's properties.
@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it will also convert the 
  inner object to json string.
  */
-- (nullable NSData *)yy_modelToJSONData;
+- (nullable NSData *)yodo1_modelToJSONData;
 
 /**
  Generate a json string from the receiver's properties.
@@ -162,21 +162,21 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it will also convert the 
  inner object to json string.
  */
-- (nullable NSString *)yy_modelToJSONString;
+- (nullable NSString *)yodo1_modelToJSONString;
 
 /**
  Copy a instance with the receiver's properties.
  
  @return A copied instance, or nil if an error occurs.
  */
-- (nullable id)yy_modelCopy;
+- (nullable id)yodo1_modelCopy;
 
 /**
  Encode the receiver's properties to a coder.
  
  @param aCoder  An archiver object.
  */
-- (void)yy_modelEncodeWithCoder:(NSCoder *)aCoder;
+- (void)yodo1_modelEncodeWithCoder:(NSCoder *)aCoder;
 
 /**
  Decode the receiver's properties from a decoder.
@@ -185,14 +185,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return self
  */
-- (id)yy_modelInitWithCoder:(NSCoder *)aDecoder;
+- (id)yodo1_modelInitWithCoder:(NSCoder *)aDecoder;
 
 /**
  Get a hash code with the receiver's properties.
  
  @return Hash code.
  */
-- (NSUInteger)yy_modelHash;
+- (NSUInteger)yodo1_modelHash;
 
 /**
  Compares the receiver with another object for equality, based on properties.
@@ -201,14 +201,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return `YES` if the reciever is equal to the object, otherwise `NO`.
  */
-- (BOOL)yy_modelIsEqual:(id)model;
+- (BOOL)yodo1_modelIsEqual:(id)model;
 
 /**
  Description method for debugging purposes based on properties.
  
  @return A string that describes the contents of the receiver.
  */
-- (NSString *)yy_modelDescription;
+- (NSString *)yodo1_modelDescription;
 
 @end
 
@@ -217,7 +217,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Provide some data-model method for NSArray.
  */
-@interface NSArray (YYModel)
+@interface NSArray (Yodo1Model)
 
 /**
  Creates and returns an array from a json-array.
@@ -229,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return A array, or nil if an error occurs.
  */
-+ (nullable NSArray *)yy_modelArrayWithClass:(Class)cls json:(id)json;
++ (nullable NSArray *)yodo1_modelArrayWithClass:(Class)cls json:(id)json;
 
 @end
 
@@ -238,7 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Provide some data-model method for NSDictionary.
  */
-@interface NSDictionary (YYModel)
+@interface NSDictionary (Yodo1Model)
 
 /**
  Creates and returns a dictionary from a json.
@@ -250,7 +250,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return A dictionary, or nil if an error occurs.
  */
-+ (nullable NSDictionary *)yy_modelDictionaryWithClass:(Class)cls json:(id)json;
++ (nullable NSDictionary *)yodo1_modelDictionaryWithClass:(Class)cls json:(id)json;
 @end
 
 
@@ -258,9 +258,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  If the default model transform does not fit to your model class, implement one or
  more method in this protocol to change the default key-value transform process.
- There's no need to add '<YYModel>' to your class header.
+ There's no need to add '<Yodo1Model>' to your class header.
  */
-@protocol YYModel <NSObject>
+@protocol Yodo1Model <NSObject>
 @optional
 
 /**
@@ -282,14 +282,14 @@ NS_ASSUME_NONNULL_BEGIN
         }
  
     model:
-        @interface YYBook : NSObject
+        @interface Yodo1Book : NSObject
         @property NSString *name;
         @property NSInteger page;
         @property NSString *desc;
         @property NSString *bookID;
         @end
         
-        @implementation YYBook
+        @implementation Yodo1Book
         + (NSDictionary *)modelCustomPropertyMapper {
             return @{@"name"  : @"n",
                      @"page"  : @"p",
@@ -310,20 +310,20 @@ NS_ASSUME_NONNULL_BEGIN
  object will be add to the array/set/dictionary.
  
   Example:
-        @class YYShadow, YYBorder, YYAttachment;
+        @class Yodo1Shadow, Yodo1Border, Yodo1Attachment;
  
-        @interface YYAttributes
+        @interface Yodo1Attributes
         @property NSString *name;
         @property NSArray *shadows;
         @property NSSet *borders;
         @property NSDictionary *attachments;
         @end
  
-        @implementation YYAttributes
+        @implementation Yodo1Attributes
         + (NSDictionary *)modelContainerPropertyGenericClass {
-            return @{@"shadows" : [YYShadow class],
-                     @"borders" : YYBorder.class,
-                     @"attachments" : @"YYAttachment" };
+            return @{@"shadows" : [Yodo1Shadow class],
+                     @"borders" : Yodo1Border.class,
+                     @"attachments" : @"Yodo1Attachment" };
         }
         @end
  
@@ -340,17 +340,17 @@ NS_ASSUME_NONNULL_BEGIN
  (both singular and containers via `+modelContainerPropertyGenericClass`).
  
  Example:
-        @class YYCircle, YYRectangle, YYLine;
+        @class Yodo1Circle, Yodo1Rectangle, Yodo1Line;
  
-        @implementation YYShape
+        @implementation Yodo1Shape
 
         + (Class)modelCustomClassForDictionary:(NSDictionary*)dictionary {
             if (dictionary[@"radius"] != nil) {
-                return [YYCircle class];
+                return [Yodo1Circle class];
             } else if (dictionary[@"width"] != nil) {
-                return [YYRectangle class];
+                return [Yodo1Rectangle class];
             } else if (dictionary[@"y2"] != nil) {
-                return [YYLine class];
+                return [Yodo1Line class];
             } else {
                 return [self class];
             }
