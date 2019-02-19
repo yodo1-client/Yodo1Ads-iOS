@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MoreGame'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'A short description of Yodo1MoreGame.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1GMGrid','3.0.0'
     s.dependency 'Yodo1SDWebImage','3.0.0'
     s.dependency 'Yodo1Commons','3.0.2'
-    s.dependency 'Yodo1YYModel','3.0.0'
+    s.dependency 'Yodo1YYModel','3.0.1'
     s.dependency 'Yodo1OnlineParameter', '3.0.2'
 
 end
