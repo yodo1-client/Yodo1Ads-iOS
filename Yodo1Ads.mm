@@ -13,6 +13,7 @@
 
 #import "Yodo1OnlineParameter.h"
 #import "Yodo1Analytics.h"
+#import "Yodo1ReportError.h"
 
 #ifdef YODO1_ADS_VIDEO
 #import "Yodo1AdVideoManager.h"
@@ -49,7 +50,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.1.12";
+NSString* const kYodo1AdsVersion       = @"3.1.13";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -468,7 +469,17 @@ typedef enum {
 + (void)initWithAppKey:(NSString *)appKey {
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"AppStore"];
+    
+    //初始化错误上报系统
+    NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
+    if ([feedback isEqualToString:@"on"]) {//默认是关
+        [[Yodo1ReportError instance]initWithAppKey:appKey channel:@"AppStore"];
+        //每次启动游戏都会上传一次
+        [[Yodo1ReportError instance]uploadReportError];
+    }
+    
     //初始化数据统计
+//TODO
     // [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
     // [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"AppStore"];
 
