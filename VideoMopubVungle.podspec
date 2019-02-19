@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoMopubVungle'
-    s.version          = '3.0.0'
-    s.summary          = '更新Mopub 5.4.1'
+    s.version          = '3.0.1'
+    s.summary          = '更新Mopub 5.5.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -32,6 +32,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1MopubVungleAdapter','3.0.0'
-    s.dependency 'VideoMopub','3.0.0'
+    s.dependency 'Yodo1MopubVungleAdapter','3.0.1'
+    s.dependency 'VideoMopub','3.0.1'
 end
