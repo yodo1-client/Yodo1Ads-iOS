@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
     s.libraries = ['sqlite3.0','z']
 
     s.dependency 'Yodo1AFNetworking','3.0.0'
-    s.dependency 'Yodo1YYModel','3.0.0'
+    s.dependency 'Yodo1YYModel','3.0.1'
     s.dependency 'Yodo1Reachability','3.0.0'
     
 end
