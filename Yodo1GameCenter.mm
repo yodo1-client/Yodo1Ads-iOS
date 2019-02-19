@@ -190,6 +190,20 @@ extern "C" {
     {
         [[GameCenterManager sharedManager]presentAchievementsOnViewController:[Yodo1Commons getRootViewController]];
     }
+    
+    //获取指定identifier的成就完成百分比
+    double UnityProgressForAchievement(const char* identifier)
+    {
+        NSString *_identifier = Yodo1CreateNSString(identifier);
+        return [[GameCenterManager sharedManager]progressForAchievement:_identifier];
+    }
+    
+    /// 获取指定identifier排行榜的最高分
+    int  UnityHighScoreForLeaderboard(const char* identifier)
+    {
+        NSString *_identifier = Yodo1CreateNSString(identifier);
+        return [[GameCenterManager sharedManager]highScoreForLeaderboard:_identifier];
+    }
 }
 #endif
 @end
