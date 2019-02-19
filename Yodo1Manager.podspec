@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_MORE_GAME'
         }
-        ss.dependency 'Yodo1MoreGame','3.0.4'
+        ss.dependency 'Yodo1MoreGame','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
