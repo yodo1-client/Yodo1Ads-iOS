@@ -461,12 +461,17 @@ typedef enum {
 
 #endif
 
-
 #pragma mark- ///OC实现
 
 @implementation Yodo1Ads
 
+static bool bYodo1AdsInited = false;
 + (void)initWithAppKey:(NSString *)appKey {
+    if (bYodo1AdsInited) {
+        NSLog(@"[Yodo1 Ads] has already been initialized");
+        return;
+    }
+    bYodo1AdsInited = true;
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"AppStore"];
     
