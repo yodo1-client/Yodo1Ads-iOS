@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1MopubAdmobAdapter','3.0.2'
-    s.dependency 'InterstitialMopub','3.0.1'
+    s.dependency 'Yodo1MopubAdmobAdapter','3.0.1'
+    s.dependency 'InterstitialMopub','3.0.2'
     
 end
