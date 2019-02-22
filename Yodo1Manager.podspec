@@ -1,11 +1,12 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.19'
-    s.summary          = 'v3.1.19 - 2019-02-19
+    s.version          = '3.1.20'
+    s.summary          = 'v3.1.20 - 2019-02-22
                             1.添加Yodo1ReportError功能
                             2.更新Admob_v7.39.0,UnityAds_v3.0.1,Inmobi_v7.2.4
                             3.更新IronSource_v6.8.1.0,Facebook_v5.1.1,Toutiao_v1.9.8.1
                             4.更新Mopub_v5.5.0,Applovin_v6.2.0
+                            5.添加Swrve统计
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,7 +37,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1ZipArchive','3.0.0'
         ss.dependency 'Yodo1YYModel', '3.0.1'
         ss.dependency 'Yodo1Analytics','3.0.3'
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.9'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.10'
         ss.dependency 'Yodo1AdsConfig','3.0.6'
         ss.dependency 'Yodo1Track','3.0.2'
         ss.dependency 'Yodo1FeedbackError','3.0.0'
@@ -67,7 +68,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.14'
+        ss.dependency 'Yodo1UCenter','3.0.15'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -83,7 +84,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'Yodo1ThirdsAnalytics','3.0.9'
+        ss.dependency 'Yodo1ThirdsAnalytics','3.0.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -153,7 +154,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.7'
+        ss.dependency 'AnalyticsAdapterAppsFlyer','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -161,7 +162,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterGameAnalytics','3.0.7'
+        ss.dependency 'AnalyticsAdapterGameAnalytics','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -169,7 +170,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterTalkingData','3.0.7'
+        ss.dependency 'AnalyticsAdapterTalkingData','3.0.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -177,7 +178,15 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterUmeng','3.0.7'
+        ss.dependency 'AnalyticsAdapterUmeng','3.0.8'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Analytics_Swrve' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+        }
+        ss.dependency 'AnalyticsAdapterSwrve','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
