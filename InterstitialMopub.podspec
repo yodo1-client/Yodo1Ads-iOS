@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialMopub'
-    s.version          = '3.0.1'
+    s.version          = '3.0.2'
     s.summary          = '2019.01.11 Mopub v5.5.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Interstitial','3.0.12'
     s.dependency 'Yodo1AdsMopub','3.0.1'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
 
 end
