@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '3.0.9'
+    s.version          = '3.0.10'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
@@ -16,7 +16,10 @@ TODO: Add long description of the pod here.
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files  = "#{s.version}" + "/*.{h,m}","#{s.version}" + "/*.{h,mm}"
+    s.source_files  = [
+        "#{s.version}" + "/*.{h,m}",
+        "#{s.version}" + "/*.{h,mm}"
+    ]
     
     s.public_header_files = "#{s.version}" + '/*.h'
     
@@ -32,10 +35,40 @@ TODO: Add long description of the pod here.
         "ONLY_ACTIVE_ARCH" => "NO"
     }
    
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion' ,
+        'CoreMedia', 
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-    s.libraries = 'sqlite3', 'z'
+    s.weak_frameworks = [
+        'AdSupport',
+        'SafariServices',
+        'ReplayKit',
+        'CloudKit',
+        'GameKit'
+    ]
+    s.libraries = ['sqlite3', 'z']
     
     s.dependency 'Yodo1Commons','3.0.2'
     s.dependency 'Yodo1KeyInfo','3.0.0'

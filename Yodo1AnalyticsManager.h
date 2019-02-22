@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 
 @interface AnalyticsInitConfig : NSObject
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions01;//GA统计自定义维度
@@ -21,7 +22,8 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
     AnalyticsTypeUmeng,         //友盟数据统计
     AnalyticsTypeTalkingData,   //TalkingData数据统计
     AnalyticsTypeGameAnalytics, //GameAnalytics数据统计
-    AnalyticsTypeAppsFlyer      //AppsFlyer 数据统计
+    AnalyticsTypeAppsFlyer,     //AppsFlyer 数据统计
+    AnalyticsTypeSwrve          //Swrve统计
 };
 
 @interface Yodo1AnalyticsManager : NSObject
@@ -251,5 +253,17 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
                                 price:(NSString*)price
                              currency:(NSString*)currency
                         transactionId:(NSString*)transactionId;
+
+/**
+ *  Swrve 事件统计
+ */
+- (void)swrveEventAnalyticsWithName:(NSString *)eventName
+                          eventData:(NSDictionary *)eventData;
+
+/**
+ *  Swrve 内付费验证和事件统计
+ */
+- (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction
+                    productBought:(SKProduct*) product;
 
 @end

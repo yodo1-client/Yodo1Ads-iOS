@@ -18,12 +18,16 @@
 //AppsFlyer Event
 - (void)eventAdAnalyticsWithName:(NSString *)eventName
 					   eventData:(NSDictionary *)eventData;
+//Swrve Event
+- (void)swrveEventAnalyticsWithName:(NSString *)eventName
+                          eventData:(NSDictionary *)eventDat;
 
 - (void)startLevelAnalytics:(NSString*)level;
 
 - (void)finishLevelAnalytics:(NSString*)level;
 
-- (void)failLevelAnalytics:(NSString*)level  failedCause:(NSString*)cause;
+- (void)failLevelAnalytics:(NSString*)level
+               failedCause:(NSString*)cause;
 
 - (void)userLevelIdAnalytics:(int)level;
 
@@ -34,18 +38,26 @@
         virtualCurrencyAmount:(double)virtualCurrencyAmount
                   paymentType:(NSString *)paymentType;
 
-- (void)chargeSuccessAnalytics:(NSString *)orderId source:(int)source;
+- (void)chargeSuccessAnalytics:(NSString *)orderId
+                        source:(int)source;
 
-- (void)rewardAnalytics:(double)virtualCurrencyAmount reason:(NSString *)reason source:(int)source;
+- (void)rewardAnalytics:(double)virtualCurrencyAmount
+                 reason:(NSString *)reason
+                 source:(int)source;
 
-- (void)purchaseAnalytics:(NSString *)item itemNumber:(int)number priceInVirtualCurrency:(double)price;
+- (void)purchaseAnalytics:(NSString *)item
+               itemNumber:(int)number
+   priceInVirtualCurrency:(double)price;
 
-- (void)useAnalytics:(NSString *)item amount:(int)amount price:(double)price;
+- (void)useAnalytics:(NSString *)item
+              amount:(int)amount
+               price:(double)price;
 
 - (NSString*)talkingDataDeviceId;
 
 - (void)track:(NSString *)eventName;
-- (void)track:(NSString *)eventName property:(NSDictionary *) property;
+- (void)track:(NSString *)eventName
+     property:(NSDictionary *) property;
 
 - (void)registerSuperProperty:(NSDictionary *)property;
 
@@ -68,5 +80,7 @@
                                 price:(NSString*)price
                              currency:(NSString*)currency
                         transactionId:(NSString*)transactionId;
-
+//Swrve
+- (void)swrveTransactionProcessed:(SKPaymentTransaction*)transaction
+                 productBought:(SKProduct*) product;
 @end

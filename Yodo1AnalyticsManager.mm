@@ -25,6 +25,7 @@
     BOOL bTalkingDataOpen;
     BOOL bGameAnalyticsOpen;
     BOOL bAppsFlyerOpen;
+    BOOL bSwrveOpen;
 }
 
 @property (nonatomic, strong) NSMutableDictionary* analyticsDict;
@@ -87,6 +88,13 @@
 
 - (void)initializeAnalyticsWithConfig:(AnalyticsInitConfig*)initConfig  
 {
+    NSString* umengEvent = [Yodo1OnlineParameter stringParams:@"Platform_Analytics_SwitchUmeng" defaultValue:@"on"];
+    if ([umengEvent isEqualToString:@"off"]) {//默认是开着
+        bUmengOpen = NO;
+    }else{
+        bUmengOpen = YES;
+    }
+    
     NSString* talkingDataEvent = [Yodo1OnlineParameter stringParams:@"Platform_Analytics_SwitchTalkingData" defaultValue:@"on"];
     if ([talkingDataEvent isEqualToString:@"off"]) {//默认是开着
         bTalkingDataOpen = NO;
@@ -101,13 +109,6 @@
         bGameAnalyticsOpen = YES;
     }
     
-    NSString* umengEvent = [Yodo1OnlineParameter stringParams:@"Platform_Analytics_SwitchUmeng" defaultValue:@"on"];
-    if ([umengEvent isEqualToString:@"off"]) {//默认是开着
-        bUmengOpen = NO;
-    }else{
-        bUmengOpen = YES;
-    }
-    
     NSString* appsFlyerEvent = [Yodo1OnlineParameter stringParams:@"Platform_Analytics_SwitchAppsFlyer" defaultValue:@"on"];
     if ([appsFlyerEvent isEqualToString:@"off"]) {//默认是开着
         bAppsFlyerOpen = NO;
@@ -115,11 +116,30 @@
         bAppsFlyerOpen = YES;
     }
     
+    NSString* switchEvent = [Yodo1OnlineParameter stringParams:@"Platform_Analytics_SwitchSwrve" defaultValue:@"on"];
+    if ([switchEvent isEqualToString:@"off"]) {//默认是开着
+        bSwrveOpen = NO;
+    }else{
+        bSwrveOpen = YES;
+    }
+    
     NSDictionary* dic = [[Yodo1Registry sharedRegistry] getClassesStatusType:@"analyticsType"
                                                               replacedString:@"AnalyticsAdapter"
                                                                replaceString:@"AnalyticsType"];
     if (dic) {
         NSArray* keyArr = [dic allKeys];
+        //优先初始化Swrve
+        BOOL isHaveSwrve = false;
+        for (id key1 in keyArr) {
+            if (bSwrveOpen && [key1 integerValue] == AnalyticsTypeSwrve) {
+                Class adapter = [[[Yodo1Registry sharedRegistry] adapterClassFor:[key1 integerValue] classType:@"analyticsType"] theYodo1Class];
+                AnalyticsAdapter* advideoAdapter = [[adapter alloc] initWithAnalytics:initConfig];
+                NSNumber* adVideoOrder = [NSNumber numberWithInt:[key1 intValue]];
+                [self.analyticsDict setObject:advideoAdapter forKey:adVideoOrder];
+                isHaveSwrve = true;
+            }
+        }
+        
         for (id key in keyArr) {
             if (!bTalkingDataOpen && [key integerValue] == AnalyticsTypeTalkingData) {
                 continue;
@@ -131,6 +151,13 @@
                 continue;
             }
             if (!bAppsFlyerOpen && [key integerValue] == AnalyticsTypeAppsFlyer) {
+                continue;
+            }
+            if (!bSwrveOpen && [key integerValue] == AnalyticsTypeSwrve) {
+                continue;
+            }
+            //跳过Swrve
+            if (isHaveSwrve) {
                 continue;
             }
             
@@ -521,6 +548,28 @@
     }
 }
 
+- (void)swrveEventAnalyticsWithName:(NSString *)eventName
+                          eventData:(NSDictionary *)eventData {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeSwrve){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter swrveEventAnalyticsWithName:eventName eventData:eventData];
+            break;
+        }
+    }
+}
+
+- (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction
+                    productBought:(SKProduct*) product {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeSwrve){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter swrveTransactionProcessed:transaction productBought:product];
+            break;
+        }
+    }
+}
+
 - (void)dealloc
 {
     self.analyticsDict = nil;
@@ -718,6 +767,7 @@ extern "C" {
         [[Yodo1AnalyticsManager sharedInstance]setGACustomDimension03:dimension];
     }
     
+     #pragma mark - AppsFlyer
     // AppsFlyer
     void UnityValidateAndTrackInAppPurchase(const char*productIdentifier,
                                             const char*price,
@@ -736,9 +786,20 @@ extern "C" {
         [[Yodo1AnalyticsManager sharedInstance]eventAdAnalyticsWithName:m_EventName eventData:eventDataDic];
     }
     
+     #pragma mark - Swrve
+    //Swrve event
+    void UnitySwrveEventAnalyticsWithName(const char*eventName, const char* jsonData) {
+        NSString* m_EventName = Yodo1CreateNSString(eventName);
+        NSString* eventData = Yodo1CreateNSString(jsonData);
+        NSDictionary *eventDataDic = [Yodo1Commons JSONObjectWithString:eventData error:nil];
+        [[Yodo1AnalyticsManager sharedInstance]swrveEventAnalyticsWithName:m_EventName
+                                                                 eventData:eventDataDic];
 }
 
+    void UnitySwrveTransactionProcessed(const char* jsonData) {
+ 
+    }
+}
 #endif
-
 
 @end
