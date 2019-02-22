@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.0.14'
+    s.version          = '3.0.15'
     s.summary          = '添加内购买支付的票据验证回调接口'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -45,5 +45,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','3.0.0'
     s.dependency 'Yodo1Reachability','3.0.0'
     s.dependency 'Yodo1KeyInfo','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.9'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
 end

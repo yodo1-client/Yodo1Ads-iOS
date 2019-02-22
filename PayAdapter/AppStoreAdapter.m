@@ -853,6 +853,11 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                                            price:productInfo.productPrice
                                                                         currency:productInfo.currency
                                                                    transactionId:transaction.transactionIdentifier];
+                                  
+            //Swrve 统计
+            SKProduct* sk = [self productInfoWithProductId:productInfo.channelProductId];
+            [[Yodo1AnalyticsManager sharedInstance]swrveTransactionProcessed:transaction
+                                                             productBought:sk];
         }];
         if ([UCenterManager sharedInstance].validatePaymentBlock) {
             NSDictionary* extra = @{@"productIdentifier":paymentProduct.channelProductId,
