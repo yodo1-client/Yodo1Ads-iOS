@@ -157,7 +157,7 @@
                 continue;
             }
             //跳过Swrve
-            if (isHaveSwrve) {
+            if (isHaveSwrve && [key integerValue] == AnalyticsTypeSwrve) {
                 continue;
             }
             
