@@ -11,8 +11,8 @@
 #import "Yodo1KeyInfo.h"
 #import <SwrveSDK/SwrveSDK.h>
 
-NSString* const YODO1_ANALYTICS_SWRVE_APPID       = @"AppId";
-NSString* const YODO1_ANALYTICS_SWRVE_API_KEY     = @"ApiKey";
+NSString* const YODO1_ANALYTICS_SWRVE_APPID       = @"SwrveAppId";
+NSString* const YODO1_ANALYTICS_SWRVE_API_KEY     = @"SwrveApiKey";
 
 @implementation AnalyticsAdapterSwrve
 
@@ -28,19 +28,18 @@ NSString* const YODO1_ANALYTICS_SWRVE_API_KEY     = @"ApiKey";
 - (id)initWithAnalytics:(AnalyticsInitConfig *)initConfig {
     self = [super init];
     if (self) {
-        if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
-            NSString* appId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_SWRVE_APPID];
-            NSString* apiKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_SWRVE_API_KEY];
-            NSAssert(appId != nil||apiKey != nil, @"Swrve Appid或apiKey 没有设置");
-
-            [SwrveSDK sharedInstanceWithAppID:[appId intValue] apiKey:apiKey];
-            NSString* useId = [SwrveSDK userID];
-            if (useId) {
-                [[NSUserDefaults standardUserDefaults]setObject:useId forKey:@"YODO1_SWRVE_USEID"];
-                [[NSUserDefaults standardUserDefaults]synchronize];
-            }
-            NSLog(@"Swrve of useId:%@",useId);
+        NSString* appId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_SWRVE_APPID];
+        NSString* apiKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_SWRVE_API_KEY];
+        NSAssert(appId != nil||apiKey != nil, @"Swrve Appid或apiKey 没有设置");
+        SwrveConfig* config = [[SwrveConfig alloc] init];
+        config.stack = SWRVE_STACK_EU;
+        [SwrveSDK sharedInstanceWithAppID:[appId intValue] apiKey:apiKey config:config];
+        NSString* useId = [SwrveSDK userID];
+        if (useId) {
+            [[NSUserDefaults standardUserDefaults]setObject:useId forKey:@"YODO1_SWRVE_USEID"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
         }
+        NSLog(@"Swrve of useId:%@",useId);
     }
     return self;
 }
