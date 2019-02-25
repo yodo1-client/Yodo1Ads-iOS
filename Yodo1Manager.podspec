@@ -190,6 +190,87 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
+	################# Soomla ##############
+    s.subspec 'Yodo1_Soomla' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'Yodo1Soomla','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Soomla_AppLovin' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaAppLovin','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Soomla_InMobi' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaInMobi','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_MoPub' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaMoPub','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_Facebook' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaFacebook','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_Tapjoy' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaTapjoy','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_UnityAds' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaUnityAds','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_Vungle' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaVungle','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_IronSource' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaIronSource','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+     s.subspec 'Soomla_AdMob' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaAdMob','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
     ################# Banner ##############
 
     s.subspec 'Banner_Admob' do |ss|

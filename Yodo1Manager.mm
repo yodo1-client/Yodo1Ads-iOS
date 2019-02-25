@@ -35,6 +35,11 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #endif
 
+#ifdef YODO1_SOOMLA
+#import "SoomlaConfig.h"
+#import "SoomlaTraceback.h"
+#endif
+
 #import "Yodo1Model.h"
 
 NSString* const kFacebookAppId      = @"FacebookAppId";
@@ -117,6 +122,12 @@ static SDKConfig* kYodo1Config = nil;
     [UCenterManager sharedInstance].appKey = sdkConfig.appKey;
     [UCenterManager sharedInstance].gameRegionCode = sdkConfig.regionCode;
     [UCenterManager sharedInstance].channelId = kYodo1ChannelId;
+#endif
+    
+#ifdef YODO1_SOOMLA
+    NSString *appKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:@"SoomlaAppKey"];;
+    SoomlaConfig *config = [SoomlaConfig config];
+    [[SoomlaTraceback getInstance] initializeWithAppKey:appKey andConfig:config];
 #endif
 }
 
