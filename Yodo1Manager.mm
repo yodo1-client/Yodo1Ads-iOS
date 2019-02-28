@@ -50,6 +50,7 @@ NSString* const kYodo1ChannelId     = @"AppStore";
 @end
 
 static SDKConfig* kYodo1Config = nil;
+static BOOL isInitialized = false;
 
 @interface Yodo1Manager ()
 
@@ -60,7 +61,11 @@ static SDKConfig* kYodo1Config = nil;
 + (void)initSDKWithConfig:(SDKConfig*)sdkConfig {
     
     NSAssert(sdkConfig.appKey != nil, @"appKey is not set!");
-    
+    if (isInitialized) {
+        NSLog(@"[Yodo1 SDK] has already been initialized!");
+        return;
+    }
+    isInitialized = true;
     //初始化Yodo1Track
     NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
     [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
