@@ -1,12 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.20'
-    s.summary          = 'v3.1.20 - 2019-02-22
-                            1.添加Yodo1ReportError功能
-                            2.更新Admob_v7.39.0,UnityAds_v3.0.1,Inmobi_v7.2.4
-                            3.更新IronSource_v6.8.1.0,Facebook_v5.1.1,Toutiao_v1.9.8.1
-                            4.更新Mopub_v5.5.0,Applovin_v6.2.0
-                            5.添加Swrve统计
+    s.version          = '3.1.21'
+    s.summary          = 'v3.1.21 - 2019-03-04
+                            1.更新Mintegral v4.9.4
+                            2.更新Toutiao v2.0.0.0
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -285,7 +282,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerToutiao','3.0.16'
+        ss.dependency 'BannerToutiao','3.0.17'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Banner_Inmobi' do |ss|
@@ -339,7 +336,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialToutiao','3.0.19'
+        ss.dependency 'InterstitialToutiao','3.0.20'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -379,7 +376,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialMintegral','3.0.18'
+        ss.dependency 'InterstitialMintegral','3.0.19'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -515,7 +512,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoMintegral','3.0.18'
+        ss.dependency 'VideoMintegral','3.0.19'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -579,7 +576,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoToutiao','3.0.19'
+        ss.dependency 'VideoToutiao','3.0.20'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Video_Baidu' do |ss|
