@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsToutiao'
-    s.version          = '3.0.8'
-    s.summary          = '头条sdk v2.0.0.0'
+    s.version          = '3.0.9'
+    s.summary          = '头条sdk v2.0.0.0 fix bug'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
