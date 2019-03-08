@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.1.21'
-    s.summary          = 'v3.1.21 - 2019-03-04
+    s.version          = '3.1.22'
+    s.summary          = 'v3.1.22 - 2019-03-08
                             1.更新Mintegral v4.9.4
-                            2.更新Toutiao v2.0.0.0
+                            2.更新Toutiao v2.0.0.0 fix bug
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -282,7 +282,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_BANNER'
         }
-        ss.dependency 'BannerToutiao','3.0.17'
+        ss.dependency 'BannerToutiao','3.0.18'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Banner_Inmobi' do |ss|
@@ -336,7 +336,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialToutiao','3.0.20'
+        ss.dependency 'InterstitialToutiao','3.0.21'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -576,7 +576,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoToutiao','3.0.20'
+        ss.dependency 'VideoToutiao','3.0.21'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Video_Baidu' do |ss|
