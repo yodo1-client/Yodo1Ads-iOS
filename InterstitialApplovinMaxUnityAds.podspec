@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialApplovinMaxTapjoy'
+    s.name             = 'InterstitialApplovinMaxUnityAds'
     s.version          = '3.0.0'
-    s.summary          = 'A short description of InterstitialApplovinMaxTapjoy.'
+    s.summary          = 'A short description of InterstitialApplovinMaxUnityAds.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1ApplovinMaxTapjoy','3.0.0'  
+    s.dependency 'Yodo1ApplovinMaxUnityAds','3.0.0'  
     s.dependency 'InterstitialApplovinMax','3.0.0'
 end
