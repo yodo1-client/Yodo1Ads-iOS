@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaAdMob'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'A short description of SoomlaAdMob.'
 
     s.description      = <<-DESC
@@ -44,5 +44,5 @@ TODO: Add long description of the pod here.
         "sqlite3.0"
     ]
     s.dependency 'Yodo1Soomla','3.0.0'
-    s.dependency 'Yodo1AdsAdmob','3.0.5'
+    s.dependency 'Yodo1AdsAdmob','3.0.6'
 end
