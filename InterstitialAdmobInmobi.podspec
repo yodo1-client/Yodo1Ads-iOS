@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialAdmobInmobi'
     s.version          = '3.0.8'
-    s.summary          = 'Admob 更新v7.39.0'
+    s.summary          = 'Admob 更新v7.40.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'InterstitialAdmob','3.0.18'
+    s.dependency 'InterstitialAdmob','3.0.19'
     s.dependency 'Yodo1AdsInmobi','3.0.3'
 
 end
