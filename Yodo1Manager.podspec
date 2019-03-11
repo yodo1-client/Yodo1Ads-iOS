@@ -518,11 +518,11 @@ Pod::Spec.new do |s|
         ss.dependency 'InterstitialApplovinMaxInmobi','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
-    s.subspec 'InterstitialApplovinMaxIronSource' do |ss|
+    s.subspec 'Interstitial_ApplovinMaxIronSource' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'Interstitial_ApplovinMaxIronSource','3.0.0'
+        ss.dependency 'InterstitialApplovinMaxIronSource','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_ApplovinMaxMintegral' do |ss|
