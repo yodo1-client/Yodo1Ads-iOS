@@ -6,8 +6,6 @@
 //  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "ALAd.h"
 #import "ALAdSize.h"
 #import "ALAdLoadDelegate.h"
@@ -41,27 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @param delegate        A callback to notify of the fact that the ad is loaded.
  */
 - (void)loadNextAdForZoneIdentifier:(NSString *)zoneIdentifier andNotify:(id<ALAdLoadDelegate>)delegate;
-
-/**
- * @name Observing Ad Rotations
- */
-
-/**
- * Add an observer of updates of advertisements of a given size.
- *
- *  @param adListener  Listener to add
- *  @param adSize      Size of ads that the listener is interested in
- */
-- (void)addAdUpdateObserver:(id<ALAdUpdateObserver>)adListener ofSize:(ALAdSize *)adSize;
-
-/**
- * Remove an observer of updates of advertisements of a given size.
- *
- *  @param adListener  Listener to modify
- *  @param adSize      Size of ads that the listener should no longer receive notifications about
- */
-- (void)removeAdUpdateObserver:(id<ALAdUpdateObserver>)adListener ofSize:(ALAdSize *)adSize;
-
 
 - (instancetype)init __attribute__((unavailable("Access ALAdService through ALSdk's adService property.")));
 
@@ -103,42 +80,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)preloadAdForZoneIdentifier:(NSString *)zoneIdentifier __deprecated_msg("Manually preloading ads in the background has been deprecated and will be removed in a future SDK version. Please use [ALAdService loadNextAdForZoneIdentifier:andNotify:] to load ads to display.");
 - (BOOL)hasPreloadedAdOfSize:(ALAdSize *)adSize __deprecated_msg("Manually preloading ads in the background has been deprecated and will be removed in a future SDK version. Please use [ALAdService loadNextAd:andNotify:] to load ads to display.");
 - (BOOL)hasPreloadedAdForZoneIdentifier:(NSString *)zoneIdentifier __deprecated_msg("Manually preloading ads in the background has been deprecated and will be removed in a future SDK version. Please use [ALAdService loadNextAdForZoneIdentifier:andNotify:] to load ads to display.");
+- (void)addAdUpdateObserver:(id<ALAdUpdateObserver>)adListener ofSize:(ALAdSize *)adSize __deprecated_msg("Listening to ad updates has been deprecated. The `ALAdView` class for banners, leaderboards, and mrecs no longer automatically refresh contents by itself. You must explicitly call `[ALAdView loadNextAd]` or `[ALAdView renderAd: ...]`. This method will be removed in a future SDK version.");
+- (void)removeAdUpdateObserver:(id<ALAdUpdateObserver>)adListener ofSize:(ALAdSize *)adSize __deprecated_msg("Listening to ad updates has been deprecated. The `ALAdView` class for banners, leaderboards, and mrecs no longer automatically refresh contents by itself. You must explicitly call `[ALAdView loadNextAd]` or `[ALAdView renderAd: ...]`. This method will be removed in a future SDK version.");
 @end
 
-/**
- * This is an endpoint name for custom AppLovin URL for forcing
- * container to load the next ad:
- * <pre>
- *        applovin://com.applovin.sdk/adservice/next_ad
- * </pre>
- */
 extern NSString *const ALDeepLinkCommandNextAd;
-
-/**
- * This is an endpoint name for custom AppLovin URL for forcing
- * ad container to close itself:
- * <pre>
- *        applovin://com.applovin.sdk/adservice/close_ad
- * </pre>
- */
 extern NSString *const ALDeepLinkCommandCloseAd;
-
-/**
- * This is an endpoint name for custom AppLovin URL for forcing
- * ad container to expland itself (using MRAID mechanism)
- * <pre>
- *        applovin://com.applovin.sdk/adservice/expand_ad
- * </pre>
- */
 extern NSString *const ALDeepLinkCommandExpandAd;
-
-/**
- * This is an endpoint name for custom AppLovin URL for forcing
- * an ad expanded before using ALSdkUriExpandAd contract back
- * <pre>
- *        applovin://com.applovin.sdk/adservice/contract_ad
- * </pre>
- */
 extern NSString *const ALDeepLinkCommandContractAd;
 
 NS_ASSUME_NONNULL_END

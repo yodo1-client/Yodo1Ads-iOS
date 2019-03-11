@@ -5,7 +5,6 @@
 //  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "ALAdSize.h"
 #import "ALAdType.h"
 

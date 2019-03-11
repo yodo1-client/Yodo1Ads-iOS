@@ -6,8 +6,6 @@
 //  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "ALInterstitialAd.h"
 #import "ALAdVideoPlaybackDelegate.h"
 #import "ALAdDisplayDelegate.h"
@@ -84,22 +82,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 + (void)showAndNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate;
-
-/**
- * Show an incentivized interstitial, using the most recently pre-loaded ad.
- *
- * You must call preloadAndNotify before calling showOver.
- *
- * Using the ALAdRewardDelegate, you will be able to verify with AppLovin servers the the video view is legitimate,
- * as we will confirm whether the specific ad was actually served - then we will ping your server with a url for you to update
- * the user's balance. The Reward Validation Delegate will tell you whether we were able to reach our servers or not. If you receive
- * a successful response, you should refresh the user's balance from your server. For more info, see the documentation.
- *
- * @param adRewardDelegate The reward delegate to notify upon validating reward authenticity with AppLovin.
- * @param window The UIWindow over which the rewarded video should be displayed.
- *
- */
-+ (void)showOver:(UIWindow *)window andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate;
 
 #pragma mark - Integration, Instance Methods
 
@@ -188,26 +170,10 @@ NS_ASSUME_NONNULL_BEGIN
  * the user's balance. The Reward Validation Delegate will tell you whether we were able to reach our servers or not. If you receive
  * a successful response, you should refresh the user's balance from your server. For more info, see the documentation.
  *
- * @param adRewardDelegate The reward delegate to notify upon validating reward authenticity with AppLovin.
- * @param window The UIWindow over which the rewarded video should be displayed.
- */
-- (void)showOver:(UIWindow *)window andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate;
-
-/**
- * Show an incentivized interstitial, using the most recently pre-loaded ad.
- *
- * You must call preloadAndNotify before calling showOver.
- *
- * Using the ALAdRewardDelegate, you will be able to verify with AppLovin servers that the video view is legitimate,
- * as we will confirm whether the specific ad was actually served - then we will ping your server with a url for you to update
- * the user's balance. The Reward Validation Delegate will tell you whether we were able to reach our servers or not. If you receive
- * a successful response, you should refresh the user's balance from your server. For more info, see the documentation.
- *
- * @param window           The UIWindow over which the rewarded video should be displayed.
  * @param ad               The ad to render into this incentivized ad.
  * @param adRewardDelegate The reward delegate to notify upon validating reward authenticity with AppLovin.
  */
-- (void)showOver:(UIWindow *)window renderAd:(ALAd *)ad andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate;
+- (void)showAd:(ALAd *)ad andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate;
 
 /**
  * Dismiss an incentivized interstitial prematurely, before video playback has completed.
@@ -215,26 +181,6 @@ NS_ASSUME_NONNULL_BEGIN
  * In most circumstances, this is not recommended, as it may confuse users by denying them a reward.
  */
 - (void)dismiss;
-
-#pragma mark - Custom User Identifiers
-
-/**
- * Set a string which identifies the current user, which will be passed through to your server via our optional S2S postbacks.
- *
- * If you're using reward validation, you can optionally set a user identifier to be included with
- * currency validation postbacks. For example, a user name. We'll include this in the postback when we
- * ping your currency endpoint from our server.
- *
- * @param userIdentifier Some descriptive string identifying the user, usually a username.
- */
-+ (void)setUserIdentifier:(nullable NSString *)userIdentifier;
-
-/**
- *  Get the currently set user identification string.
- *
- *  @return The last value supplied via setUserIdentifier:
- */
-+ (nullable NSString *)userIdentifier;
 
 
 - (instancetype)init __attribute__((unavailable("Use initWithSdk:, initWithZoneIdentifier:, or [ALIncentivizedInterstitialAd shared] instead.")));
@@ -251,6 +197,12 @@ __deprecated_msg("Placements have been deprecated and will be removed in a futur
 - (void)showOver:(UIWindow *)window placement:(nullable NSString *)placement andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate
 __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
 - (instancetype)initIncentivizedInterstitialWithSdk:(ALSdk *)sdk __deprecated_msg("Use initWithSdk:, initWithZoneIdentifier: or [ALIncentivizedInterstitialAd shared] instead.");
+
++ (void)showOver:(UIWindow *)window andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate __deprecated_msg("Explicitly passing in an UIWindow to show an ad is deprecated as all cases show over the application's key window. Use showAndNotify: instead.");
+- (void)showOver:(UIWindow *)window andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate __deprecated_msg("Explicitly passing in an UIWindow to show an ad is deprecated as all cases show over the application's key window. Use showAndNotify: instead.");
+- (void)showOver:(UIWindow *)window renderAd:(ALAd *)ad andNotify:(nullable id<ALAdRewardDelegate>)adRewardDelegate __deprecated_msg("Explicitly passing in an UIWindow to show an ad is deprecated as all cases show over the application's key window. Use showAd:andNotify: instead.");
+@property (nonatomic, copy, nullable, class) NSString *userIdentifier __deprecated_msg("Please use -[ALSdk userIdentifier] instead to properly identify your users in our system. This property is now deprecated and will be removed in a future SDK version.");
+
 @end
 
 NS_ASSUME_NONNULL_END

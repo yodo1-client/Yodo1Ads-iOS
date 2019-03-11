@@ -6,7 +6,6 @@
 //  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "MAAdDelegate.h"
 #import "MAAd.h"
 

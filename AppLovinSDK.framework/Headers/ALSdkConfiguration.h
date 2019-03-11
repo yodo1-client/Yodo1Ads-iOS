@@ -5,8 +5,6 @@
 //  Created by Thomas So on 9/29/18.
 //
 
-#import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
