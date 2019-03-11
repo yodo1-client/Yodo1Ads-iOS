@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.dependency 'Yodo1ApplovinMaxFacebook','3.0.0'  
-    s.dependency 'VideoApplovinMax','3.0.10'
+    s.dependency 'VideoApplovinMax','3.0.0'
 end
