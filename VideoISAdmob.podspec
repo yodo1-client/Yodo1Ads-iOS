@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdmob'
-    s.version          = '3.0.11'
+    s.version          = '3.0.12'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
     
     s.dependency 'VideoIronSource','3.0.18'
 
-    s.dependency 'Yodo1AdsAdmob','3.0.5'
+    s.dependency 'Yodo1AdsAdmob','3.0.6'
 end
