@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAppLovin'
-    s.version          = '3.0.19'
+    s.version          = '3.0.20'
     s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.2.0)'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'VideoIronSource','3.0.18'
 
-    s.dependency 'Yodo1AdsApplovin','3.0.2'
+    s.dependency 'Yodo1AdsApplovin','3.0.3'
 end
