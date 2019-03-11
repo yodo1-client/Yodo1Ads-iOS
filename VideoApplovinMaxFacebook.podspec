@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoApplovinMax'
+    s.name             = 'VideoApplovinMaxFacebook'
     s.version          = '3.0.0'
-    s.summary          = 'A short description of VideoApplovinMax.'
+    s.summary          = 'A short description of VideoApplovinMaxFacebook.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     #s.source_files = "#{s.version}" +'/*.{h,m}'
     #s.public_header_files = "#{s.version}" +'/*.h'
 
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
     
     s.requires_arc = true
 
@@ -33,7 +33,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','3.0.12'  
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
-    s.dependency 'Yodo1AdsApplovin','3.0.3'
+    s.dependency 'Yodo1ApplovinMaxFacebook','3.0.0'  
+    s.dependency 'VideoApplovinMax','3.0.10'
 end
