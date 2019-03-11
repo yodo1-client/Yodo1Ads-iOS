@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'InterstitialAdmob','3.0.18'
+    s.dependency 'InterstitialAdmob','3.0.19'
     s.dependency 'Yodo1AdsFacebook','3.0.4'
 
 end
