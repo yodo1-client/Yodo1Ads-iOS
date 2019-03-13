@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'Yodo1IronSourceFacebook'
+    s.name             = 'Yodo1IronSourceChartboost'
     s.version          = '3.0.0'
-    s.summary          = 'Yodo1IronSourceFacebook of Facebook v5.2.0'
+    s.summary          = 'Yodo1IronSourceChartboost of Chartboost v7.3.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.0.6'
 
-    s.dependency 'Yodo1AdsFacebook','3.0.4'
+    s.dependency 'Yodo1AdsChartboost','3.0.1'
     
 end
