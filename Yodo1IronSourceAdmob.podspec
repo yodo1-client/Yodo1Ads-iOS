@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'Yodo1IronSourceAdColony'
+    s.name             = 'Yodo1IronSourceAdmob'
     s.version          = '3.0.0'
-    s.summary          = 'Adcolony SDK 和 adapter 分离(更新Adcolony 3.2.1)'
+    s.summary          = 'Yodo1IronSourceAdmob of Admob v7.40.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
     s.public_header_files =  "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
 
-    s.preserve_path =  "#{s.version}" + '/ChangeLog.txt'
+    # s.preserve_path =  "#{s.version}" + '/ChangeLog.txt'
 
     s.vendored_frameworks =  "#{s.version}" + '/*.framework'
 
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.0.6'
 
-    s.dependency 'Yodo1AdsAdColony','3.0.1'
+    s.dependency 'Yodo1AdsAdmob','3.0.6'
     
 end
