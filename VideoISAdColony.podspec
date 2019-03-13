@@ -16,13 +16,13 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files =  "#{s.version}" + '/ISAdColonyAdapter.framework/Versions/A/Headers/*.h'
+    #s.source_files =  "#{s.version}" + '/ISAdColonyAdapter.framework/Versions/A/Headers/*.h'
 
-    s.public_header_files =  "#{s.version}" + '/ISAdColonyAdapter.framework/Versions/A/Headers/*.h'
+    #s.public_header_files =  "#{s.version}" + '/ISAdColonyAdapter.framework/Versions/A/Headers/*.h'
 
     s.preserve_path =  "#{s.version}" + '/ChangeLog.txt'
 
-    s.vendored_frameworks =  "#{s.version}" + '/ISAdColonyAdapter.framework'
+    #s.vendored_frameworks =  "#{s.version}" + '/ISAdColonyAdapter.framework'
 
     s.requires_arc = true
 
