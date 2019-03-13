@@ -17,6 +17,7 @@ NSString* const kAnalyticsChannelId = @"AppStore";
 
 @implementation AnalyticsAdapterTalkingData
 {
+    TDGAAccount* account;
 }
 
 + (AnalyticsType)analyticsType
@@ -38,16 +39,16 @@ NSString* const kAnalyticsChannelId = @"AppStore";
         NSAssert(appKey != nil, @"Talking Data appKey 没有设置");
         
         [TalkingDataGA onStart:appKey withChannelId:kAnalyticsChannelId];
-        [TDGAAccount setAccount:[Yodo1Commons idfvString]];
+        account = [TDGAAccount setAccount:[Yodo1Commons idfvString]];
     }
     return self;
 }
 
 /**
  1) NSDictionary的Value目前仅支持字符串（NSString）和数字（NSNumber）类型，
-    key类型必须是NSString。如果value为NSString，TalkingData会统计每种value出现的次数；
-    如果为NSNumber类型，那么TalkingData会统计value的总和/平均值。
- 2）	eventId、Dictionary的key和NSString类型的value，分别最多支持32个字符。
+ key类型必须是NSString。如果value为NSString，TalkingData会统计每种value出现的次数；
+ 如果为NSNumber类型，那么TalkingData会统计value的总和/平均值。
+ 2）    eventId、Dictionary的key和NSString类型的value，分别最多支持32个字符。
  */
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
                           eventData:(NSDictionary *)eventData
@@ -79,7 +80,11 @@ NSString* const kAnalyticsChannelId = @"AppStore";
 
 - (void)userLevelIdAnalytics:(int)level
 {
-    [[TDGAAccount setAccount:_accountId]setLevel:level];
+    if (account) {
+        [account setLevel:level];
+    }else{
+        NSLog(@"[-- Yodo1 --] : Talkingdata没设置Account用户");
+    }
 }
 
 //虚拟货币请求
