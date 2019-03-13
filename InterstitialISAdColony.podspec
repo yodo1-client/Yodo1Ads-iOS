@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialIronSource'
-    s.version          = '3.0.19'
+    s.name             = 'InterstitialISAdColony'
+    s.version          = '3.0.0'
     s.summary          = 'IronSource v6.8.1.0 和Admob 插屏聚合互斥'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
     #s.public_header_files = "#{s.version}" + '/*.h'
 
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = true
 
@@ -28,8 +28,7 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'Yodo1Interstitial','3.0.12'
-    s.dependency 'Yodo1AdsIronSource','3.0.6'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
+    s.dependency 'InterstitialIronSource','3.0.19'
+    s.dependency 'Yodo1IronSourceAdColony','3.0.0'
 
 end
