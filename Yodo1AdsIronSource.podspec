@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsIronSource'
-    s.version          = '3.0.5'
+    s.version          = '3.0.6'
     s.summary          = 'IronSource更新6.8.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
     s.source_files = "#{s.version}" + '/IronSource.framework/Versions/A/Headers/*.h'
     s.preserve_paths = "#{s.version}" + '/IronSource.framework/*'
