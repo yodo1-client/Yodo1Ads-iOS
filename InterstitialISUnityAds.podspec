@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialISChartboost'
+    s.name             = 'InterstitialISUnityAds'
     s.version          = '3.0.0'
-    s.summary          = 'IronSource v6.8.1.0 和 Chartboost 插屏聚合互斥'
+    s.summary          = 'IronSource v6.8.1.0 和 UnityAds 插屏聚合互斥'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.dependency 'InterstitialIronSource','3.0.19'
-    s.dependency 'Yodo1IronSourceFacebook','3.0.0'
+    s.dependency 'Yodo1IronSourceUnityAds','3.0.0'
 
 end
