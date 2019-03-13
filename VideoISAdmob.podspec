@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdmob'
-    s.version          = '3.0.12'
+    s.version          = '3.0.13'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
@@ -16,12 +16,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
-
-    s.public_header_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
-
-
-    s.vendored_frameworks = "#{s.version}" + '/ISAdMobAdapter.framework'
+    # s.source_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
+    # s.public_header_files = "#{s.version}" + '/ISAdMobAdapter.framework/Versions/A/Headers/*.h'
+    # s.vendored_frameworks = "#{s.version}" + '/ISAdMobAdapter.framework'
 
     s.requires_arc = true
 
@@ -35,7 +32,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'VideoIronSource','3.0.18'
+    s.dependency 'VideoIronSource','3.0.19'
 
-    s.dependency 'Yodo1AdsAdmob','3.0.6'
+    s.dependency 'Yodo1IronSourceAdmob','3.0.0'
 end
