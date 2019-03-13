@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISTapjoy'
-    s.version          = '3.0.20'
+    s.version          = '3.0.21'
     s.summary          = 'Adapter和SDK分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -16,13 +16,13 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files =  "#{s.version}" + '/ISTapjoyAdapter.framework/Versions/A/Headers/*.h'
+    # s.source_files =  "#{s.version}" + '/ISTapjoyAdapter.framework/Versions/A/Headers/*.h'
 
-    s.public_header_files =  "#{s.version}" + '/ISTapjoyAdapter.framework/Versions/A/Headers/*.h'
+    # s.public_header_files =  "#{s.version}" + '/ISTapjoyAdapter.framework/Versions/A/Headers/*.h'
 
     s.preserve_path =  "#{s.version}" + '/ChangeLog.txt'
         
-    s.vendored_frameworks =  "#{s.version}" + '/ISTapjoyAdapter.framework'
+    # s.vendored_frameworks =  "#{s.version}" + '/ISTapjoyAdapter.framework'
 
     s.requires_arc = true
 
@@ -38,8 +38,8 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3.0','z'
 
-    s.dependency 'VideoIronSource','3.0.18'
+    s.dependency 'VideoIronSource','3.0.19'
 
-    s.dependency 'Yodo1AdsTapjoy', '3.0.4'
+    s.dependency 'Yodo1IronSourceTapjoy', '3.0.0'
 
 end
