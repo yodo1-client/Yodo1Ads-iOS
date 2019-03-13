@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.5'
+    s.dependency 'Yodo1AdsIronSource','3.0.6'
 
     s.dependency 'Yodo1AdsAdColony','3.0.1'
     
