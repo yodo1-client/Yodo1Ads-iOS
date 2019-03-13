@@ -17,7 +17,6 @@ NSString* const kAnalyticsChannelId = @"AppStore";
 
 @implementation AnalyticsAdapterTalkingData
 {
-    NSString* _accountId;
 }
 
 + (AnalyticsType)analyticsType
@@ -80,9 +79,7 @@ NSString* const kAnalyticsChannelId = @"AppStore";
 
 - (void)userLevelIdAnalytics:(int)level
 {
-    if (_accountId) {
-        [[TDGAAccount setAccount:_accountId]setLevel:level];
-    }
+    [[TDGAAccount setAccount:_accountId]setLevel:level];
 }
 
 //虚拟货币请求
