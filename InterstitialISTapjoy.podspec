@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialISFacebook'
+    s.name             = 'InterstitialISTapjoy'
     s.version          = '3.0.0'
-    s.summary          = 'IronSource v6.8.1.0 和Admob 插屏聚合互斥'
+    s.summary          = 'IronSource v6.8.1.0 和Tapjoy 插屏聚合互斥'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.dependency 'InterstitialIronSource','3.0.19'
-    s.dependency 'Yodo1IronSourceFacebook','3.0.0'
+    s.dependency 'Yodo1IronSourceTapjoy','3.0.0'
 
 end
