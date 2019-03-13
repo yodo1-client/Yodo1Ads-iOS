@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISUnityAds'
-    s.version          = '3.0.20'
+    s.version          = '3.0.21'
     s.summary          = 'Adapter和SDK分离,更新UnityAds v3.0.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -16,12 +16,12 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/ISUnityAdsAdapter.framework/Versions/A/Headers/*.h'
+    # s.source_files = "#{s.version}" + '/ISUnityAdsAdapter.framework/Versions/A/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/ISUnityAdsAdapter.framework/Versions/A/Headers/*.h'
+    # s.public_header_files = "#{s.version}" + '/ISUnityAdsAdapter.framework/Versions/A/Headers/*.h'
 
 
-    s.vendored_frameworks = "#{s.version}" + '/ISUnityAdsAdapter.framework'
+    # s.vendored_frameworks = "#{s.version}" + '/ISUnityAdsAdapter.framework'
 
     s.requires_arc = true
 
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'VideoIronSource','3.0.18'
+    s.dependency 'VideoIronSource','3.0.19'
 
-    s.dependency 'Yodo1AdsUnityAds','3.0.3'
+    s.dependency 'Yodo1IronSourceUnityAds','3.0.0'
 end
