@@ -171,7 +171,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterTalkingData','3.0.8'
+        ss.dependency 'AnalyticsAdapterTalkingData','3.0.9'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
