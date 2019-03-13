@@ -5,19 +5,23 @@
 #import <Foundation/Foundation.h>
 #import "IronSource/ISBaseAdapter+Internal.h"
 
-//System Frameworks For Applovin Adapter
-static NSString * const AppLovinAdapterVersion = @"4.3.1";
+//System Frameworks For Vungle Adapter
 
 @import AdSupport;
+@import AudioToolbox;
 @import AVFoundation;
+@import CFNetwork;
 @import CoreGraphics;
 @import CoreMedia;
-@import CoreTelephony;
+@import Foundation;
+@import MediaPlayer;
+@import QuartzCore;
 @import StoreKit;
 @import SystemConfiguration;
 @import UIKit;
 @import WebKit;
 
-@interface ISAppLovinAdapter : ISBaseAdapter
+
+@interface ISVungleAdapter : ISBaseAdapter
 
 @end
