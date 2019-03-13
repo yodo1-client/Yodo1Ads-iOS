@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISVungle'
-    s.version          = '3.0.19'
+    s.version          = '3.0.20'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -16,12 +16,12 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
+    # s.source_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
+    # s.public_header_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
 
 
-    s.vendored_frameworks = "#{s.version}" + '/ISVungleAdapter.framework'
+    # s.vendored_frameworks = "#{s.version}" + '/ISVungleAdapter.framework'
 
     s.requires_arc = true
 
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'VideoIronSource','3.0.18'
+    s.dependency 'VideoIronSource','3.0.19'
 
-    s.dependency 'Yodo1AdsVungle','3.0.2'
+    s.dependency 'Yodo1IronSourceVungle','3.0.0'
 end
