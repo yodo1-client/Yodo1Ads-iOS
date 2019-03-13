@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'Yodo1IronSourceUnityAds'
+    s.name             = 'Yodo1IronSourceTapjoy'
     s.version          = '3.0.0'
-    s.summary          = 'Yodo1IronSourceUnityAds of UnityAds v3.0.1'
+    s.summary          = 'Yodo1IronSourceTapjoy of Tapjoy v12.2.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.0.6'
 
-    s.dependency 'Yodo1AdsUnityAds','3.0.3'
+    s.dependency 'Yodo1AdsTapjoy','3.0.4'
     
 end
