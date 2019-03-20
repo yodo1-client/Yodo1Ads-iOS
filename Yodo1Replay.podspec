@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Replay'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = 'A short description of Yodo1Replay.'
 
 
@@ -34,6 +34,6 @@ Pod::Spec.new do |s|
     
     s.weak_frameworks = 'ReplayKit'
 
-    s.dependency 'Yodo1Commons','3.0.2'
+    s.dependency 'Yodo1Commons','3.0.3'
 
 end
