@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Commons'
-    s.version          = '3.0.2'
-    s.summary          = '修改多语言翻译文字'
+    s.version          = '3.0.3'
+    s.summary          = '去掉多语言依赖[移到Yodo1UCenter里面]'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     
     s.public_header_files = "#{s.version}" + "/*.h"
 
-    s.resources = "#{s.version}" + "/Yodo1SDKStrings.bundle"
+    # s.resources = "#{s.version}" + "/Yodo1SDKStrings.bundle"
     
     s.vendored_libraries = "#{s.version}" + "/*.a"
 
