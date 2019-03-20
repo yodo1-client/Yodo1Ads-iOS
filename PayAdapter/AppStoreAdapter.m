@@ -186,6 +186,54 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     return self;
 }
 
+
+- (NSString *)localizedStringForKeyWithBundleName:(NSString *)bundleName
+                                              key:(NSString *)key
+                                      withDefault:(NSString *)defaultString
+{
+    if (bundleName==nil) {
+        return nil;
+    }
+    static NSBundle *bundle = nil;
+    if (bundle == nil) {
+        NSString *bundlePath = [[NSBundle bundleForClass:[self class]] pathForResource:bundleName ofType:@"bundle"];
+        bundle = [NSBundle bundleWithPath:bundlePath];
+        NSString *language = [[NSLocale preferredLanguages] count]? [self language]: @"en";
+        if ([[bundle localizations] containsObject:language]) {
+            bundlePath = [bundle pathForResource:language ofType:@"lproj"];
+        } else {
+            NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString* locSt = @"en";//默认英文
+            if ([[infoDictionary allKeys] containsObject:@"CFBundleDevelopmentRegion"]) {
+                locSt = [infoDictionary objectForKey:@"CFBundleDevelopmentRegion"];
+            }
+            if ([locSt isEqualToString:@"zh_CN"]) {
+                locSt = @"zh-Hans";//中文
+            }
+            bundlePath = [bundle pathForResource:locSt ofType:@"lproj"];
+        }
+        bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
+    }
+    defaultString = [bundle localizedStringForKey:key value:defaultString table:nil];
+    return [[NSBundle mainBundle] localizedStringForKey:key value:defaultString table:nil];
+}
+
+- (NSString *)language {
+    NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSArray * langArrayWord = [lang componentsSeparatedByString:@"-"];
+    NSString* langSt = [langArrayWord objectAtIndex:0];
+    if (langArrayWord.count >=3) {
+        langSt = [NSString stringWithFormat:@"%@-%@",
+                  [langArrayWord objectAtIndex:0],
+                  [langArrayWord objectAtIndex:1]];
+    }
+    return langSt;
+}
+
+- (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString {
+    return [self localizedStringForKeyWithBundleName:@"Yodo1SDKStrings" key:key withDefault:defaultString];
+}
+
 -(void)updateProductInfo
 {
     for (id key in self.uniformProductIdArray) {
@@ -214,38 +262,38 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             case SKProductPeriodUnitDay:
             {
                 if (numberOfUnits == 7) {
-                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
+                    unit = [self localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
                 }else if (numberOfUnits == 30){
-                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
+                    unit = [self localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
                 } else {
-                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionDay" withDefault:@"每%d天"],numberOfUnits];
+                    unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionDay" withDefault:@"每%d天"],numberOfUnits];
                 }
             }
             break;
             case SKProductPeriodUnitWeek:
             {
                 if (numberOfUnits == 1) {
-                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
+                    unit = [self localizedStringForKey:@"SubscriptionWeek" withDefault:@"每周"];
                 } else {
-                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionWeeks" withDefault:@"每%d周"],numberOfUnits];
+                    unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionWeeks" withDefault:@"每%d周"],numberOfUnits];
                 }
             }
             break;
             case SKProductPeriodUnitMonth:
             {
                 if (numberOfUnits == 1) {
-                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
+                    unit = [self localizedStringForKey:@"SubscriptionMonth" withDefault:@"每月"];
                 } else {
-                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionMonths" withDefault:@"每%d个月"],numberOfUnits];
+                    unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionMonths" withDefault:@"每%d个月"],numberOfUnits];
                 }
             }
             break;
             case SKProductPeriodUnitYear:
             {
                 if (numberOfUnits == 1) {
-                    unit = [Yodo1Commons localizedStringForKey:@"SubscriptionYear" withDefault:@"每年"];
+                    unit = [self localizedStringForKey:@"SubscriptionYear" withDefault:@"每年"];
                 } else {
-                    unit = [NSString stringWithFormat:[Yodo1Commons localizedStringForKey:@"SubscriptionYears" withDefault:@"每%d年"],numberOfUnits];
+                    unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionYears" withDefault:@"每%d年"],numberOfUnits];
                 }
             }
             break;
@@ -331,15 +379,15 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     
     if([paymentProduct.productType intValue] == Auto_Subscription){
-        NSString* mes = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertMessage"
+        NSString* mes = [self localizedStringForKey:@"SubscriptionAlertMessage"
                                                 withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
         NSString* message = [NSString stringWithFormat:mes,paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
         
-        NSString* title = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
-        NSString* cancelTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
-        NSString* okTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"启用"];
-        NSString* privateTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私协议"];
-        NSString* serviceTitle = [Yodo1Commons localizedStringForKey:@"SubscriptionAlertService" withDefault:@"服务条款"];
+        NSString* title = [self localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
+        NSString* cancelTitle = [self localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
+        NSString* okTitle = [self localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"启用"];
+        NSString* privateTitle = [self localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私协议"];
+        NSString* serviceTitle = [self localizedStringForKey:@"SubscriptionAlertService" withDefault:@"服务条款"];
         
         if([[[UIDevice currentDevice]systemVersion] floatValue] < 8.0){
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:privateTitle,serviceTitle,okTitle, nil];
@@ -353,9 +401,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiAlertControllerStyle];
             
-            NSString* privacyPolicyUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
+            NSString* privacyPolicyUrl = [self localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
                                                                  withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
-            NSString* termsServiceUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionTermsServiceURL"
+            NSString* termsServiceUrl = [self localizedStringForKey:@"SubscriptionTermsServiceURL"
                                                                 withDefault:@"https://www.yodo1.com/cn/user_agreement"];
             
             UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -384,9 +432,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSString* privacyPolicyUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
+    NSString* privacyPolicyUrl = [self localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
                                                          withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
-    NSString* termsServiceUrl = [Yodo1Commons localizedStringForKey:@"SubscriptionTermsServiceURL"
+    NSString* termsServiceUrl = [self localizedStringForKey:@"SubscriptionTermsServiceURL"
                                                         withDefault:@"https://www.yodo1.com/cn/user_agreement"];
     switch (buttonIndex) {
         case 1:
@@ -678,8 +726,8 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         SKPayment *payment = [SKPayment paymentWithProduct:productItem];
         [[SKPaymentQueue defaultQueue] addPayment:payment];
     }else{
-        NSString* info = [Yodo1Commons localizedStringForKey:ucBuyItemError withDefault:@"购买的产品无效或不存在！"];
-        NSString* ok =  [Yodo1Commons localizedStringForKey:ucBuyItemOK withDefault:@"确定"];
+        NSString* info = [self localizedStringForKey:ucBuyItemError withDefault:@"购买的产品无效或不存在！"];
+        NSString* ok =  [self localizedStringForKey:ucBuyItemOK withDefault:@"确定"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:info
                                                        delegate:nil
