@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAdmob'
-    s.version          = '3.0.13'
+    s.version          = '3.0.14'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'VideoIronSource','3.0.19'
+    s.dependency 'VideoIronSource','3.0.20'
 
     s.dependency 'Yodo1IronSourceAdmob','3.0.0'
 end
