@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialMintegral'
-    s.version          = '3.0.19'
+    s.version          = '3.0.20'
     s.summary          = 'Interstitial Mintegral'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -28,9 +28,9 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
 
-    s.dependency 'Yodo1Interstitial','3.0.12'
+    s.dependency 'Yodo1Interstitial','3.0.13'
     s.dependency 'Yodo1AdsMintegral','3.0.6' 
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.11'
 
 
 end
