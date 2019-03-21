@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialTapjoy'
-    s.version          = '3.0.18'
+    s.version          = '3.0.19'
     s.summary          = 'Tapjoy v12.2.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
 
-    s.dependency 'Yodo1Interstitial','3.0.12'
+    s.dependency 'Yodo1Interstitial','3.0.13'
     s.dependency 'Yodo1AdsTapjoy','3.0.4'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.10'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.11'
 
 end
