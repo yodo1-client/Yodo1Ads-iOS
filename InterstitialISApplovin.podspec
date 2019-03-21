@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialISApplovin'
-    s.version          = '3.0.1'
+    s.version          = '3.0.2'
     s.summary          = 'IronSource v6.8.1.0 和Applovin 插屏聚合互斥'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.dependency 'InterstitialIronSource','3.0.19'
+    s.dependency 'InterstitialIronSource','3.0.20'
     s.dependency 'Yodo1IronSourceApplovin','3.0.1'
 
 end
