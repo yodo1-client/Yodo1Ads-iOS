@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaInMobi'
-    s.version          = '3.0.3'
-    s.summary          = 'A short description of SoomlaInMobi.'
+    s.version          = '3.0.4'
+    s.summary          = 'Supported InMobi SDK Versions: 7.0.0-7.2.7'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
