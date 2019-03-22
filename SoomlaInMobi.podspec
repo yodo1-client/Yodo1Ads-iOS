@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.1'
+    s.dependency 'Yodo1Soomla','3.0.2'
     s.dependency 'Yodo1AdsInmobi','3.0.2'
 end
