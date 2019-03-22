@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaAppLovin'
-    s.version          = '3.0.3'
-    s.summary          = 'A short description of SoomlaAppLovin.'
+    s.version          = '3.0.4'
+    s.summary          = 'Supported AppLovin SDK Versions: 3.2.0-6.4.0'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
