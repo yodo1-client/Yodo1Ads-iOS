@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceTapjoy'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'Yodo1IronSourceTapjoy of Tapjoy v12.2.0'
 
     s.description      = <<-DESC
