@@ -413,7 +413,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
             }];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
+                 [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentCannel,@"购买取消",self.extra);
             }];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 [self requestPaymentWithProduct:product];
@@ -447,6 +447,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             [self requestPaymentWithProduct:[dictProducts objectForKey:self.currentUniformProductId]];
             break;
         default:
+             [UCenterManager sharedInstance].paymentCompletionBlock(self.currentUniformProductId,PaymentCannel,@"购买取消",self.extra);
             break;
     }
 }
