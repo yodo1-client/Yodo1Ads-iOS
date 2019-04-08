@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Soomla'
-    s.version          = '3.0.2'
-    s.summary          = 'A short description of Yodo1Soomla.'
+    s.version          = '3.0.3'
+    s.summary          = '更新Soomla sdk v4.9.3'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
