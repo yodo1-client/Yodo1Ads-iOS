@@ -114,6 +114,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, nullable) NSString *userIdentifier;
 
+/**
+ * Present the mediation debugger UI.
+ * This debugger tool provides the status of your integration for each third-party ad network.
+ *
+ * Please call this method after the SDK has initialized, e.g. in the completionHandler of -[ALSdk initializeSdkWithCompletionHandler:].
+ */
+- (void)showMediationDebugger;
+
 #pragma mark - SDK Initialization
 
 typedef void (^ALSdkInitializationCompletionHandler)(ALSdkConfiguration *configuration);
