@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUnityAds'
-    s.version          = '3.0.3'
-    s.summary          = 'UnityAds of v3.0.1'
+    s.version          = '3.0.4'
+    s.summary          = 'UnityAds of v3.0.3'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
     s.source_files = "#{s.version}" +'/UnityAds.framework/Headers/*.h'
 
