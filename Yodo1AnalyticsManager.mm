@@ -559,6 +559,16 @@
     }
 }
 
+- (void)swrveUserUpdate:(NSDictionary *)eventData {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeSwrve){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter swrveUserUpdate:eventData];
+            break;
+        }
+    }
+}
+
 - (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction
                     productBought:(SKProduct*) product {
     for (id key in [self.analyticsDict allKeys]) {
@@ -791,10 +801,24 @@ extern "C" {
     void UnitySwrveEventAnalyticsWithName(const char*eventName, const char* jsonData) {
         NSString* m_EventName = Yodo1CreateNSString(eventName);
         NSString* eventData = Yodo1CreateNSString(jsonData);
-        NSDictionary *eventDataDic = [Yodo1Commons JSONObjectWithString:eventData error:nil];
+        NSError *error = nil;
+        NSDictionary *eventDataDic = [Yodo1Commons JSONObjectWithString:eventData error:&error];
+        if(error){
+            NSLog(@"Swrve Event error:%@",error.localizedDescription);
+        }
         [[Yodo1AnalyticsManager sharedInstance]swrveEventAnalyticsWithName:m_EventName
                                                                  eventData:eventDataDic];
-}
+    }
+    
+    void UnitySwrveUserUpdate(const char* jsonData) {
+        NSString* eventData = Yodo1CreateNSString(jsonData);
+        NSError *error = nil;
+        NSDictionary *eventDataDic = [Yodo1Commons JSONObjectWithString:eventData error:&error];
+        if(error){
+            NSLog(@"Swrve UserUpdate error:%@",error.localizedDescription);
+        }
+        [[Yodo1AnalyticsManager sharedInstance]swrveUserUpdate:eventDataDic];
+    }
 
     void UnitySwrveTransactionProcessed(const char* jsonData) {
  

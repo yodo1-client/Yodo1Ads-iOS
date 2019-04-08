@@ -261,6 +261,11 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
                           eventData:(NSDictionary *)eventData;
 
 /**
+ *  Swrve 更新用户数据事件
+ */
+- (void)swrveUserUpdate:(NSDictionary *)eventData;
+
+/**
  *  Swrve 内付费验证和事件统计
  */
 - (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction

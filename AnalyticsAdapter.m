@@ -27,6 +27,8 @@
 - (void)swrveEventAnalyticsWithName:(NSString *)eventName
                           eventData:(NSDictionary *)eventData{}
 
+- (void)swrveUserUpdate:(NSDictionary *)eventData{}
+
 - (void)startLevelAnalytics:(NSString*)level{}
 
 - (void)finishLevelAnalytics:(NSString*)level{}

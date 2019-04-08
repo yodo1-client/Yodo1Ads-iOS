@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '3.0.11'
+    s.version          = '3.0.12'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC

@@ -20,7 +20,9 @@
 					   eventData:(NSDictionary *)eventData;
 //Swrve Event
 - (void)swrveEventAnalyticsWithName:(NSString *)eventName
-                          eventData:(NSDictionary *)eventDat;
+                          eventData:(NSDictionary *)eventData;
+
+- (void)swrveUserUpdate:(NSDictionary *)eventData;
 
 - (void)startLevelAnalytics:(NSString*)level;
 
