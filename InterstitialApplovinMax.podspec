@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialApplovinMax'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = 'A short description of InterstitialApplovinMax.'
 
     s.description      = <<-DESC
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     }
 
     s.dependency 'Yodo1Interstitial','3.0.13'
-    s.dependency 'Yodo1AdsApplovin','3.0.2'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.11'
+    s.dependency 'Yodo1AdsApplovin','3.0.4'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
 
 end
