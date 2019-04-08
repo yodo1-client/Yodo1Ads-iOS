@@ -54,6 +54,19 @@ NSString* const YODO1_ANALYTICS_SWRVE_API_KEY     = @"SwrveApiKey";
     }
 }
 
+- (void)swrveUserUpdate:(NSDictionary *)eventData {
+    int status = [SwrveSDK userUpdate:eventData];
+    if (status == SWRVE_SUCCESS) {
+#ifdef DEBUG
+        NSLog(@"[Yodo1] Swrve User update success！");
+#endif
+    }else if (status == SWRVE_FAILURE){
+#ifdef DEBUG
+        NSLog(@"[Yodo1] Swrve User update fail！");
+#endif
+    }
+}
+
 - (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction
                  productBought:(SKProduct*) product
 {
