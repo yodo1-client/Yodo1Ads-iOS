@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
     s.libraries = 'z'
     
     s.dependency 'InterstitialAdmob','3.0.21'
-    s.dependency 'Yodo1AdsInmobi','3.0.2'
+    s.dependency 'Yodo1AdsInmobi','3.0.3'
 
 end
