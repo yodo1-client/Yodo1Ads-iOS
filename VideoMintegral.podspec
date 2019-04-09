@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoMintegral'
-    s.version          = '3.0.20'
+    s.version          = '3.0.21'
     s.summary          = 'A short description of VideoMintegral.'
 
     s.description      = <<-DESC
@@ -34,6 +34,6 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.dependency 'Yodo1Video','3.0.13'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.11'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsMintegral','3.0.6'
 end
