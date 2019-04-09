@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1MopubApplovinAdapter','3.0.43'
+    s.dependency 'Yodo1MopubApplovinAdapter','3.0.4'
     s.dependency 'VideoMopub','3.0.4'
     
 end
