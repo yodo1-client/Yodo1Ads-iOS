@@ -1,12 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.2.3'
-    s.summary          = 'v3.2.3 - 2019-04-09
-                            1.添加Swrve UserUpdate接口
-                            2.更新UnityAds v3.0.3
-                            3.更新广点通 v4.8.7
-                            4.更新Applovin v6.4.2
-                            5.修复订阅取消没有回调的BUG
+    s.version          = '3.2.4'
+    s.summary          = 'v3.2.4 - 2019-04-16
+                            1.恢复Yodo1 SDK 统计[自家统计]
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

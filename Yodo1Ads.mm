@@ -50,7 +50,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.1.13";
+NSString* const kYodo1AdsVersion       = @"3.1.15";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -461,6 +461,7 @@ typedef enum {
 
 #endif
 
+
 #pragma mark- ///OC实现
 
 @implementation Yodo1Ads
@@ -485,8 +486,8 @@ static bool bYodo1AdsInited = false;
     
     //初始化数据统计
 //TODO
-    // [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
-    // [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"AppStore"];
+    [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
+    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"AppStore"];
 
 #ifdef YODO1_ADS_BANNER
     //初始化Banner
