@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUnityAds'
-    s.version          = '3.0.4'
-    s.summary          = 'UnityAds of v3.0.3'
+    s.version          = '3.0.5'
+    s.summary          = 'UnityAds of v3.0.3 [支持视频，插屏视频]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -20,6 +20,8 @@ Pod::Spec.new do |s|
      
     s.vendored_frameworks = "#{s.version}" +'/UnityAds.framework'
     
+    s.vendored_libraries = "#{s.version}" + '/*.a'
+
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
     s.libraries = 'sqlite3.0','z'
