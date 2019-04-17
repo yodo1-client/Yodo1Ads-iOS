@@ -1,8 +1,10 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
     s.version          = '3.2.4'
-    s.summary          = 'v3.2.4 - 2019-04-16
+    s.summary          = 'v3.2.4 - 2019-04-17
                             1.恢复Yodo1 SDK 统计[自家统计]
+                            2.添加UnityAds 插屏视频
+                            3.修复内购买的BUG
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -64,7 +66,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
         }
-        ss.dependency 'Yodo1UCenter','3.0.17'
+        ss.dependency 'Yodo1UCenter','3.0.18'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -239,7 +241,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'SoomlaUnityAds','3.0.3'
+        ss.dependency 'SoomlaUnityAds','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -403,6 +405,13 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
+    s.subspec 'Interstitial_UnityAds' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+        }
+        ss.dependency 'InterstitialUnityAds','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     ######## Admob Interstitial ########
     s.subspec 'Interstitial_AdmobFacebook' do |ss|
         ss.xcconfig = {
@@ -546,7 +555,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialApplovinMaxUnityAds','3.0.3'
+        ss.dependency 'InterstitialApplovinMaxUnityAds','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Interstitial_ApplovinMaxVungle' do |ss|
@@ -595,7 +604,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
         }
-        ss.dependency 'InterstitialISUnityAds','3.0.2'
+        ss.dependency 'InterstitialISUnityAds','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -668,7 +677,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoUnityAds','3.0.19'
+        ss.dependency 'VideoUnityAds','3.0.20'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -772,7 +781,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoISUnityAds','3.0.23'
+        ss.dependency 'VideoISUnityAds','3.0.24'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -854,7 +863,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoMopubUnityAds','3.0.5'
+        ss.dependency 'VideoMopubUnityAds','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -929,7 +938,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_VIDEO'
         }
-        ss.dependency 'VideoApplovinMaxUnityAds','3.0.3'
+        ss.dependency 'VideoApplovinMaxUnityAds','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Video_ApplovinMaxVungle' do |ss|
