@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.0.17'
-    s.summary          = '添加内购买支付的票据验证回调接口 [添加多语言支持资源]'
+    s.version          = '3.0.18'
+    s.summary          = '修复内购买iOS系统兼容BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

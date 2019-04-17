@@ -660,16 +660,48 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 - (void)savePaymentProducts:(id)productsObject key:(NSString *)key
 {
-    NSData *yodo1PaymentProductData = [NSKeyedArchiver archivedDataWithRootObject:productsObject];
+    if (productsObject == nil) {
+        NSLog(@"[ Yodo1 ] 保存数据为nil");
+        return;
+    }
+    NSData *yodo1PaymentProductData = nil;
+    NSError *error = nil;
+    if (@available(iOS 11.0, *)) {
+        yodo1PaymentProductData = [NSKeyedArchiver archivedDataWithRootObject:productsObject requiringSecureCoding:YES error:&error];
+        if (error){
+            NSLog(@"[ Yodo1 ] 保存数据error:%@",error);
+        }
+        
+    } else {
+        yodo1PaymentProductData = [NSKeyedArchiver archivedDataWithRootObject:productsObject];
+    }
+    if (yodo1PaymentProductData) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:yodo1PaymentProductData forKey:key];
     [defaults synchronize];
+    }else{
+        NSLog(@"[ Yodo1 ] 保存数据为nil");
+    }
 }
 
 - (id)loadPaymentProducts:(NSString *)key
 {
+    NSError *error = nil;
+    id content = nil;
     NSData* yodo1PaymentProductData  = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:yodo1PaymentProductData];
+    if (yodo1PaymentProductData == nil) {
+        return nil;
+    }
+    NSSet* sets = [NSSet setWithArray:@[NSArray.class,NSDictionary.class,PaymentProduct.class]];
+    if (@available(iOS 11.0, *)) {
+        content = [NSKeyedUnarchiver unarchivedObjectOfClasses:sets fromData:yodo1PaymentProductData error:&error];
+        if (error) {
+           NSLog(@"[ Yodo1 ] load数据error:%@",error);
+        }
+    } else {
+        content = [NSKeyedUnarchiver unarchiveObjectWithData:yodo1PaymentProductData];
+    }
+    return content;
 }
 
 - (BOOL)removeVerifyingRequestWithTransactionIdentifier:(NSString*)transactionIdentifier
@@ -895,6 +927,11 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         PaymentProduct* paymentProduct = [self removeAppstoreRequestListWithProductId:transaction.payment.productIdentifier
                                                                            withUserId:gameUserId
                                                                      isSaveVerifyList:transaction];
+        if (paymentProduct == nil) {
+            NSLog(@"没有主动点击购买");
+            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+            return;
+        }
         [self productInfoWithProductId:paymentProduct.uniformProductId
                               callback:^(NSString *uniformProductId, ProductInfo *productInfo) {
             //AppsFlyer 数据统计

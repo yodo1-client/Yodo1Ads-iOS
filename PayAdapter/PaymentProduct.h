@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PaymentProduct : NSObject
+@interface PaymentProduct : NSObject <NSSecureCoding>
 
 @property (nonatomic, retain) NSString* uniformProductId;       //通用产品id
 @property (nonatomic, retain) NSString* channelProductId;       //渠道产品id:比如91的产品id，AppStore的产品
