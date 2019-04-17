@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ApplovinMaxUnityAds'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = 'Applovin sdk v6.4.2 聚合'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,6 +38,6 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport'
 
     s.dependency 'Yodo1AdsApplovin','3.0.4'
-    s.dependency 'Yodo1AdsUnityAds','3.0.4'
+    s.dependency 'Yodo1AdsUnityAds','3.0.5'
     # s.libraries = 'c++'
 end
