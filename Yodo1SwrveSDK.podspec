@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1SwrveSDK'
-    s.version          = '3.0.1'
-    s.summary          = 'Swrve 统计SDK [SDK v6.1.0]'
+    s.version          = '3.0.2'
+    s.summary          = 'Swrve 统计SDK [SDK v6.1.0]自己创建工程导出.a'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -15,25 +15,21 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '8.0'
 
     s.source_files = [
-        "#{s.version}" + '/SwrveSDK.framework/Headers/*.h',
-        "#{s.version}" + '/SwrveSDKCommon.framework/Headers/*.h',
-        "#{s.version}" + '/SwrveConversationSDK.framework/Headers/*.h'
+        "#{s.version}" + '/Yodo1Swrve/*.h'
     ]
 
     s.public_header_files = [
-        "#{s.version}" + '/SwrveSDK.framework/Headers/*.h',
-        "#{s.version}" + '/SwrveSDKCommon.framework/Headers/*.h',
-        "#{s.version}" + '/SwrveConversationSDK.framework/Headers/*.h'
+        "#{s.version}" + '/Yodo1Swrve/*.h'
     ]
 
     # s.resources = "#{s.version}" + '/*.bundle'
 
-    s.vendored_frameworks = [
-        "#{s.version}" + '/SwrveSDK.framework',
-        "#{s.version}" + '/SwrveSDKCommon.framework',
-        "#{s.version}" + '/SwrveConversationSDK.framework'
-    ]
-
+    # s.vendored_frameworks = [
+    #     "#{s.version}" + '/SwrveSDK.framework',
+    #     "#{s.version}" + '/SwrveSDKCommon.framework',
+    #     "#{s.version}" + '/SwrveConversationSDK.framework'
+    # ]
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.libraries = 'sqlite3'
     s.compiler_flags = '-Dunix'
