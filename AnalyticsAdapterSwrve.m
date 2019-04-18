@@ -9,7 +9,7 @@
 #import "Yodo1Registry.h"
 #import "Yodo1Commons.h"
 #import "Yodo1KeyInfo.h"
-#import <SwrveSDK/SwrveSDK.h>
+#import "SwrveSDK.h"
 
 NSString* const YODO1_ANALYTICS_SWRVE_APPID       = @"SwrveAppId";
 NSString* const YODO1_ANALYTICS_SWRVE_API_KEY     = @"SwrveApiKey";
