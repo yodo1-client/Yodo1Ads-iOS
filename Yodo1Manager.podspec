@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
     s.version          = '3.2.4'
-    s.summary          = 'v3.2.4 - 2019-04-17
+    s.summary          = 'v3.2.4 - 2019-04-18
                             1.恢复Yodo1 SDK 统计[自家统计]
                             2.添加UnityAds 插屏视频
                             3.修复内购买的BUG
+                            4.更新Swrve sdk v6.1.0
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -184,7 +185,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterSwrve','3.0.2'
+        ss.dependency 'AnalyticsAdapterSwrve','3.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
