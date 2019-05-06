@@ -26,9 +26,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 @optional
 /*!
- @method
- 
- @abstract When the MTGNativeAdManager has finished loading a batch of ads this message will be sent. A batch of ads may be loaded in response to calling loadAds.
+
+  When the MTGNativeAdManager has finished loading a batch of ads this message will be sent. A batch of ads may be loaded in response to calling loadAds.
  @param nativeAds A array contains native ads (MTGCampaign).
  
  */
@@ -37,9 +36,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 
 /*!
- @method
- 
- @abstract When the MTGNativeAdManager has reached a failure while attempting to load a batch of ads this message will be sent to the application.
+
+  When the MTGNativeAdManager has reached a failure while attempting to load a batch of ads this message will be sent to the application.
  @param error An NSError object with information about the failure.
  
  */
@@ -47,9 +45,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)nativeAdsFailedToLoadWithError:(nonnull NSError *)error nativeManager:(nonnull MTGNativeAdManager *)nativeManager;
 
 /*!
- @method
- 
- @abstract When the MTGNativeAdManager has finished loading a batch of frames this message will be sent. A batch of frames may be loaded in response to calling loadAds.
+
+When the MTGNativeAdManager has finished loading a batch of frames this message will be sent. A batch of frames may be loaded in response to calling loadAds.
  @param nativeFrames A array contains native frames (MTGFrame).
  
  @deprecated This method has been deprecated.
@@ -57,9 +54,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)nativeFramesLoaded:(nullable NSArray *)nativeFrames DEPRECATED_ATTRIBUTE;
 
 /*!
- @method
- 
- @abstract When the MTGNativeAdManager has reached a failure while attempting to load a batch of frames this message will be sent to the application.
+
+ When the MTGNativeAdManager has reached a failure while attempting to load a batch of frames this message will be sent to the application.
  @param error An NSError object with information about the failure.
  
  @deprecated This method has been deprecated.
@@ -67,9 +63,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)nativeFramesFailedToLoadWithError:(nonnull NSError *)error DEPRECATED_ATTRIBUTE;
 
 /*!
- @method
  
- @abstract
  Sent after an ad has been clicked by a user.
  
  @param nativeAd An MTGCampaign object sending the message.
@@ -79,9 +73,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 
 /*!
- @method
  
- @abstract
  Sent after an ad url did start to resolve.
  
  @param clickUrl The click url of the ad.
@@ -89,9 +81,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)nativeAdClickUrlWillStartToJump:(nonnull NSURL *)clickUrl DEPRECATED_ATTRIBUTE;
 - (void)nativeAdClickUrlWillStartToJump:(nonnull NSURL *)clickUrl nativeManager:(nonnull MTGNativeAdManager *)nativeManager;
 /*!
- @method
- 
- @abstract
+
  Sent after an ad url has jumped to a new url.
  
  @param jumpUrl The url during jumping.
@@ -103,9 +93,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 
 /*!
- @method
  
- @abstract
  Sent after an ad url did reach the final jump url.
  
  @param finalUrl the final jump url of the click url.
@@ -168,9 +156,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 
 /*!
- @method
 
- @abstract Initialize the native ads manager which is for loading ads. (MTGCampaign)
+ Initialize the native ads manager which is for loading ads. (MTGCampaign)
 
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
@@ -184,9 +171,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
               presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
- @method
- 
- @abstract Initialize the native ads manager which is for loading ads. (MTGCampaign)
+
+ Initialize the native ads manager which is for loading ads. (MTGCampaign)
  
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
@@ -202,9 +188,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
               presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
- @method
  
- @abstract Initialize the native ads manager which is for loading ads with more options.
+ Initialize the native ads manager which is for loading ads with more options.
  
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
@@ -222,18 +207,16 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
               presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
- @method
  
- @abstract The method that kicks off the loading of ads. It may be called again in the future to refresh the ads manually.
+ The method that kicks off the loading of ads. It may be called again in the future to refresh the ads manually.
  
  @discussion It only works if you init the manager by the 2 method above.
  */
 - (void)loadAds;
 
 /*!
- @method
  
- @abstract Initialize the native ads manager which is for loading frames (MTGFrame).
+ Initialize the native ads manager which is for loading frames (MTGFrame).
  
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param fbPlacementId The Facebook PlacementID is used to request ads from Facebook. You can also set the placementID in our portal. The ID you set in our web portal will replace the ID you set here in future.
@@ -258,9 +241,8 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 
 
 /*!
- @method
- 
- @abstract The method that kicks off the loading of frames. It may be called again in the future to refresh the frames manually.
+
+ The method that kicks off the loading of frames. It may be called again in the future to refresh the frames manually.
  
  @discussion It only works if you init the manager by the the method above.
 
@@ -269,9 +251,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)loadFrames DEPRECATED_ATTRIBUTE;
 
 /*!
- @method
- 
- @abstract
+
  This is a method to associate a MTGCampaign with the UIView you will use to display the native ads.
  
  @param view The UIView you created to render all the native ads data elements.
@@ -283,9 +263,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
                       withCampaign:(nonnull MTGCampaign *)campaign;
 
 /*!
- @method
  
- @abstract
  This is a method to disconnect a MTGCampaign with the UIView you used to display the native ads.
  
  @param view The UIView you created to render all the native ads data elements.
@@ -294,9 +272,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)unregisterView:(nonnull UIView *)view;
 
 /*!
- @method
- 
- @abstract
+
  This is a method to associate a MTGCampaign with the UIView you will use to display the native ads and set clickable areas.
  
  @param view The UIView you created to render all the native ads data elements.
@@ -309,9 +285,7 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
                       withCampaign:(nonnull MTGCampaign *)campaign;
 
 /*!
- @method
- 
- @abstract
+
  This is a method to disconnect a MTGCampaign with the UIView you used to display the native ads.
  
  @param view The UIView you created to render all the native ads data elements.
@@ -321,21 +295,13 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 - (void)unregisterView:(nonnull UIView *)view clickableViews:(nonnull NSArray *)clickableViews;
 
 /*!
- @method
  
- @abstract
-
- This is a method to clean the cache nativeAd .
- 
- @param
+ This is a method to clean the cache nativeAd.
  
  */
 - (void)cleanAdsCache;
 
 /*!
- @method
- 
- @abstract
 
  Set the video display area size.
  
@@ -345,13 +311,11 @@ typedef NS_ENUM(NSInteger, MTGAdCategory) {
 -(void)setVideoViewSize:(CGSize)size;
 
 /*!
- @method
- 
- @abstract
+
  Set the video display area size.
  
  @param width The display area width.
- @param width The display area height.
+ @param height The display area height.
  */
 -(void)setVideoViewSizeWithWidth:(CGFloat)width height:(CGFloat)height;
 

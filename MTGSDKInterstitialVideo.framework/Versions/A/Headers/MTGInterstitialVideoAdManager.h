@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define MTGInterstitialVideoSDKVersion @"4.9.4"
+#define MTGInterstitialVideoSDKVersion @"5.3.2"
+
 
 @class MTGInterstitialVideoAdManager;
 /**
@@ -48,16 +49,33 @@
 - (void) onInterstitialVideoShowFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
 
 /**
+ *  Called only when the ad has a video content, and called when the video play completed
+ */
+- (void) onInterstitialVideoPlayCompleted:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
+
+/**
+ *  Called only when the ad has a endcard content, and called when the endcard show
+ */
+- (void) onInterstitialVideoEndCardShowSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
+
+
+/**
  *  Called when the ad is clicked
  */
 - (void) onInterstitialVideoAdClick:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
 
 /**
- *  Called when the ad has been dismissed from being displayed, and control will return to your app
+ *  Called when the ad will be dismissed from being displayed, and control will return to your app
  *  @param converted   - BOOL describing whether the ad has converted
  */
-- (void)onInterstitialVideoAdDismissedWithConverted:(BOOL)converted adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
+- (void) onInterstitialVideoAdDismissedWithConverted:(BOOL)converted adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
 
+/**
+ *  Called when the ad  did closed;
+ *
+ *  @param unitId - the unitId string of the Ad clicked.
+ */
+- (void) onInterstitialVideoAdDidClosed:(MTGInterstitialVideoAdManager *_Nonnull)adManager;
 
 @end
 
@@ -105,6 +123,14 @@
  */
 - (void)showFromViewController:(UIViewController *_Nonnull)viewController;
 
+/**
+ *  Whether the given unitId is loaded and ready to be shown.
+ *
+ *  @param unitId - adPositionId value in Self Service.
+ *
+ *  @return - YES if the unitId is loaded and ready to be shown, otherwise NO.
+ */
+- (BOOL)isVideoReadyToPlay:(nonnull NSString *)unitId;
 
 /**
  *  Clean all the video file cache from the disk.
