@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceApplovin'
-    s.version          = '3.0.2'
-    s.summary          = 'Yodo1IronSourceAdmob of Applovin v6.4.2'
+    s.version          = '3.0.3'
+    s.summary          = 'Yodo1IronSourceAdmob of Applovin v6.6.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -37,8 +37,8 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.6'
+    s.dependency 'Yodo1AdsIronSource','3.0.7'
 
-    s.dependency 'Yodo1AdsApplovin','3.0.4'
+    s.dependency 'Yodo1AdsApplovin','3.0.5'
     
 end
