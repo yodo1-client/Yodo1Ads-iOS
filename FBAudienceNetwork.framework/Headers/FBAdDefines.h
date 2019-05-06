@@ -35,6 +35,7 @@
 
 #define FB_CLASS_EXPORT __attribute__((visibility("default")))
 #define FB_DEPRECATED __attribute__((deprecated))
+#define FB_DEPRECATED_WITH_MESSAGE(M) __attribute__((deprecated(M)))
 
 #if __has_feature(objc_generics)
 #define FB_NSArrayOf(x) NSArray<x>
