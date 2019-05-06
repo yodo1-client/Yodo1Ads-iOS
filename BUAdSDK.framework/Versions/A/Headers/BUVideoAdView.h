@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Control Tiktok Ad Network video player.
+ Control TikTok Audience Network video player.
  */
 @protocol BUVideoEngine <NSObject>
 

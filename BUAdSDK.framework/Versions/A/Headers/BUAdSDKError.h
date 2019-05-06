@@ -38,5 +38,7 @@ typedef NS_ENUM(NSInteger, BUErrorCode) {
     BUErrorCodeAdSlotSizeEmpty  = 40005,    // the ad slot size is invalid
     BUErrorCodeAdSlotIDError    = 40006,    // the ad slot ID is invalid
     BUErrorCodeAdCountError     = 40007,    // request the wrong number of ads
+    BUErrorCodeAdPackageIncomplete = 40025, // the SDK package is incomplete. It is recommended to verify the integrity of SDK package or contact technical support.
+    
     BUErrorCodeSysError         = 50001     // ad server error
 };

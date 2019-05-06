@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Register clickable views in native ads view.
- Interaction types can be configured on Tiktok Ad Network.
+ Interaction types can be configured on TikTok Audience Network.
  Interaction types include view video ad details page, make a call, send email, download the app, open the webpage using a browser,open the webpage within the app, etc.
  @param containerView : required.
                         container view of the native ad.
