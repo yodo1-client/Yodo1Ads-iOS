@@ -24,9 +24,6 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 typedef void (^networkCompletion)(BOOL success, NSError *error);
 typedef void (^urlCompletion)(NSURL *url, NSDate *expires, NSError *error);
 
-@interface TJCAdView : UIView <UIWebViewDelegate>
-@end
-
 @class TJCCurrencyManager;
 @class TJCVideoManager;
 @class TJCViewHandler;
