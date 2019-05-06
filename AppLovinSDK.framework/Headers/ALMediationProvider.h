@@ -1,9 +1,9 @@
 //
 //  ALMediationProvider.h
-//  sdk
+//  AppLovinSDK
 //
 //  Created by Thomas So on 1/28/18.
-//  Copyright © 2018 AppLovin Corporation. All rights reserved.
+//  Copyright © 2019 AppLovin Corporation. All rights reserved.
 //
 
 
