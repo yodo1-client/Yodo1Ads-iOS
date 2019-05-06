@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialUnityAds'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'UnityAds插屏视频广告'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
