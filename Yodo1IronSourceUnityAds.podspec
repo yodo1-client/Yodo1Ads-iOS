@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceUnityAds'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = 'Yodo1IronSourceUnityAds of UnityAds v3.0.3'
 
     s.description      = <<-DESC
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.6'
+    s.dependency 'Yodo1AdsIronSource','3.0.7'
 
     s.dependency 'Yodo1AdsUnityAds','3.0.5'
     
