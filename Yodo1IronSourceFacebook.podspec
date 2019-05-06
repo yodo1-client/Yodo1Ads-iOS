@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceFacebook'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'Yodo1IronSourceFacebook of Facebook v5.2.0'
 
     s.description      = <<-DESC
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.6'
+    s.dependency 'Yodo1AdsIronSource','3.0.7'
 
     s.dependency 'Yodo1AdsFacebook','3.0.4'
     
