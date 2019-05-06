@@ -18,7 +18,7 @@
 #import "MPVungleRouter.h"
 #import "VungleInstanceMediationSettings.h"
 
-@interface VungleRewardedVideoCustomEvent ()  <MPVungleRouterDelegate>
+@interface VungleRewardedVideoCustomEvent ()  <VungleRouterDelegate>
 
 @property (nonatomic, copy) NSString *placementId;
 

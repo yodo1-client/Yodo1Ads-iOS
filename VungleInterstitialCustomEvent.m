@@ -16,7 +16,7 @@
 
 // If you need to play ads with vungle options, you may modify playVungleAdFromRootViewController and create an options dictionary and call the playAd:withOptions: method on the vungle SDK.
 
-@interface VungleInterstitialCustomEvent () <MPVungleRouterDelegate>
+@interface VungleInterstitialCustomEvent () <VungleRouterDelegate>
 
 @property (nonatomic, assign) BOOL handledAdAvailable;
 @property (nonatomic, copy) NSString *placementId;
@@ -94,7 +94,7 @@
     [[MPVungleRouter sharedRouter] clearDelegateForPlacementId:self.placementId];
 }
 
-#pragma mark - MPVungleRouterDelegate
+#pragma mark - VungleRouterDelegate
 
 - (void)vungleAdDidLoad
 {
