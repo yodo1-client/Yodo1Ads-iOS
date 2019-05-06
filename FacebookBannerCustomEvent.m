@@ -7,6 +7,7 @@
 
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 #import "FacebookBannerCustomEvent.h"
+#import "FacebookAdapterConfiguration.h"
 
 #if __has_include("MoPub.h")
     #import "MoPub.h"
@@ -55,7 +56,7 @@
         [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
         return;
     }
-
+    
     if (self.fbPlacementId == nil) {
         NSError *error = [self createErrorWith:@"Invalid Facebook placement ID"
                                      andReason:@""
@@ -90,8 +91,8 @@
     CGRect fbAdFrame = self.fbAdView.frame;
     fbAdFrame.size = size;
     self.fbAdView.frame = fbAdFrame;
-    [FBAdSettings setMediationService:[NSString stringWithFormat:@"MOPUB_%@", MP_SDK_VERSION]];
-    
+    [FBAdSettings setMediationService:[FacebookAdapterConfiguration mediationString]];
+
     // Load the advanced bid payload.
     if (adMarkup != nil) {
         MPLogInfo(@"Loading Facebook banner ad markup for Advanced Bidding");
@@ -106,7 +107,7 @@
 
         MPLogAdEvent([MPLogEvent adLoadAttemptForAdapter:NSStringFromClass(self.class) dspCreativeId:nil dspName:nil], self.fbPlacementId);
     }
-    }
+}
 
 - (NSError *)createErrorWith:(NSString *)description andReason:(NSString *)reaason andSuggestion:(NSString *)suggestion {
     NSDictionary *userInfo = @{
