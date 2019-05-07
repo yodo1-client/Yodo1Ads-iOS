@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISFacebook'
-    s.version          = '3.0.24'
+    s.version          = '3.0.25'
     s.summary          = 'Facebook SDK 和Adapter 分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,8 +36,8 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'VideoIronSource','3.0.21'
+    s.dependency 'VideoIronSource','3.0.22'
 
-    s.dependency 'Yodo1IronSourceFacebook','3.0.0'
+    s.dependency 'Yodo1IronSourceFacebook','3.0.1'
     
 end
