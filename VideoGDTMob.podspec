@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoGDTMob'
-    s.version          = '3.0.8'
-    s.summary          = 'GDTMob[广点通] v4.8.7'
+    s.version          = '3.0.9'
+    s.summary          = 'GDTMob[广点通] v4.8.10'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.13'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
-    s.dependency 'Yodo1AdsGDTMob','3.0.4'
+    s.dependency 'Yodo1AdsGDTMob','3.0.5'
 end
