@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoApplovin'
-    s.version          = '3.0.19'
-    s.summary          = 'A short description of VideoApplovin. [回滚applovin v6.2.0]'
+    s.version          = '3.0.20'
+    s.summary          = 'sdk v6.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1Video','3.0.13'  
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
-    s.dependency 'Yodo1AdsApplovin','3.0.4'
+    s.dependency 'Yodo1AdsApplovin','3.0.5'
 end
