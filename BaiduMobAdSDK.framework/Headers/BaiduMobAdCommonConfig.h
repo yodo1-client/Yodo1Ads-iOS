@@ -9,7 +9,7 @@
 #ifndef BaiduMobAdSdk_BaiduMobAdCommonConfig_h
 #define BaiduMobAdSdk_BaiduMobAdCommonConfig_h
 // SDK版本号
-#define SDK_VERSION_IN_MSSP @"4.6"
+#define SDK_VERSION_IN_MSSP @"4.64"
 
 typedef void (^BaiduMobAdViewCompletionBlock)(NSArray *errors);
 
@@ -56,12 +56,9 @@ typedef enum {
  *  广告展示失败类型枚举
  */
 typedef enum _BaiduMobFailReason {
-    BaiduMobFailReason_NOAD = 0,
-    // 没有推广返回
-    BaiduMobFailReason_EXCEPTION,
-    //网络或其它异常
-    BaiduMobFailReason_FRAME
-    //广告尺寸异常，不显示广告
+    BaiduMobFailReason_NOAD = 0,// 没有推广返回
+    BaiduMobFailReason_EXCEPTION,//网络或其它异常
+    BaiduMobFailReason_FRAME//广告尺寸或元素异常，不显示广告
 } BaiduMobFailReason;
 
 

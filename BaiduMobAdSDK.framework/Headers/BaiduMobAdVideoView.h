@@ -13,18 +13,25 @@
 @optional
 
 /**
+ 视频开始播放
+ 
+ @param videoView self
+ */
+- (void)fullscreenVideoAdDidStartPlaying:(BaiduMobAdVideoView *)videoView;
+
+/**
  视频播放完成
 
  @param videoView self
  */
-- (void)baiduMobMediaPlayerDidEnd:(BaiduMobAdVideoView *)videoView;
+- (void)fullscreenVideoAdDidComplete:(BaiduMobAdVideoView *)videoView;
 
 /**
  视频播放失败
 
  @param videoView self
  */
-- (void)baiduMobMediaPlayerDidFailed:(BaiduMobAdVideoView *)videoView;
+- (void)fullscreenVideoAdDidFailed:(BaiduMobAdVideoView *)videoView;
 
 @end
 

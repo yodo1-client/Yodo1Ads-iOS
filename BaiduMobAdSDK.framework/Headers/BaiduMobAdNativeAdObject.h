@@ -69,6 +69,15 @@
 @property (nonatomic)   BaiduMobNativeAdActionType actType;
 
 /**
+ * 大图图片宽
+ */
+@property (copy, nonatomic)  NSString *w;
+/**
+ * 大图图片高
+ */
+@property (copy, nonatomic)  NSString *h;
+
+/**
  * 是否过期，默认为false，30分钟后过期，需要重新请求广告
  */
 -(BOOL) isExpired;
