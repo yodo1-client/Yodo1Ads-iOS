@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISVungle'
-    s.version          = '3.0.22'
+    s.version          = '3.0.23'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'VideoIronSource','3.0.21'
+    s.dependency 'VideoIronSource','3.0.22'
 
-    s.dependency 'Yodo1IronSourceVungle','3.0.0'
+    s.dependency 'Yodo1IronSourceVungle','3.0.1'
 end
