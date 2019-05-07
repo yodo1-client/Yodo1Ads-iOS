@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'VideoISAppLovin'
-    s.version          = '3.0.24'
-    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.4.2)'
+    s.version          = '3.0.25'
+    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.6.0)'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'VideoIronSource','3.0.21'
+    s.dependency 'VideoIronSource','3.0.22'
 
-    s.dependency 'Yodo1IronSourceApplovin','3.0.2'
+    s.dependency 'Yodo1IronSourceApplovin','3.0.3'
 end
