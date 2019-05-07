@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'InterstitialMopubIronSource'
-    s.version          = '3.0.5'
-    s.summary          = '2019.01.11 Mopub v5.5.0'
+    s.version          = '3.0.6'
+    s.summary          = 'Mopub v5.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'UIKit'
 
-    s.dependency 'Yodo1MopubIronSourceAdapter','3.0.2'
-    s.dependency 'InterstitialMopub','3.0.4'
+    s.dependency 'Yodo1MopubIronSourceAdapter','3.0.3'
+    s.dependency 'InterstitialMopub','3.0.5'
 
 end
