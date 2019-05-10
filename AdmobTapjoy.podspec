@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'InterstitialAdmobTapjoy'
-    s.version          = '3.0.24'
+    s.name             = 'AdmobTapjoy'
+    s.version          = '3.1.0'
     s.summary          = 'Admob 更新v7.40.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/interstitial/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1Admob/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'InterstitialAdmob','3.0.21'
+    s.dependency 'YD1Admob','3.1.0'
     s.dependency 'Yodo1AdsTapjoy','3.0.5'
 
 end
