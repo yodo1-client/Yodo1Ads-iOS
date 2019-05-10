@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoISAppLovin'
-    s.version          = '3.0.25'
+    s.name             = 'ISAppLovin'
+    s.version          = '3.1.0'
     s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.6.0)'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/video/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1ISource/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'VideoIronSource','3.0.22'
-
+    s.dependency 'YD1IronSource','3.1.0'
+    
     s.dependency 'Yodo1IronSourceApplovin','3.0.3'
 end
