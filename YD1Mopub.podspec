@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoMopub'
-    s.version          = '3.0.5'
+    s.name             = 'YD1Mopub'
+    s.version          = '3.1.0'
     s.summary          = '更新Mopub 5.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/video/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -33,6 +33,8 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.dependency 'Yodo1Video','3.0.13'
+    s.dependency 'Yodo1Interstitial','3.0.13'
+    s.dependency 'Yodo1Banner','3.0.12'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsMopub','3.0.2'
 end
