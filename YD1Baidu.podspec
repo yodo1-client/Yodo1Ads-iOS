@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoBaidu'
-    s.version          = '3.0.10'
+    s.name             = 'YD1Baidu'
+    s.version          = '3.1.0'
     s.summary          = 'Baidu v4.64,不支持https [已经支持 不明显]'
 
     s.description      = <<-DESC
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/video/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -32,8 +32,10 @@ Pod::Spec.new do |s|
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
+    
     s.dependency 'Yodo1Video','3.0.13'
+    s.dependency 'Yodo1Interstitial','3.0.13'
+    s.dependency 'Yodo1Banner','3.0.12'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsBaidu','3.0.2'
 end
