@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'VideoApplovinMaxMopub'
-    s.version          = '3.0.4'
+    s.name             = 'ApplovinMaxMopub'
+    s.version          = '3.0.5'
     s.summary          = 'A short description of VideoApplovinMaxMopub.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => "#{s.version}" + "/LICENSE" }
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
-    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/video/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
+    s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1ApplovinMax/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    # s.dependency 'Yodo1ApplovinMaxMopub','3.0.2'  
-    s.dependency 'VideoApplovinMax','3.0.4'
+    s.dependency 'Yodo1ApplovinMaxMopub','3.0.3'  
+    s.dependency 'YD1ApplovinMax','3.1.0'
 end
