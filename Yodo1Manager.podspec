@@ -555,7 +555,7 @@ Pod::Spec.new do |s|
 
     s.subspec 'IS_Facebook' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISFacebook','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -563,7 +563,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'IS_Admob' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISAdmob','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -571,7 +571,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'IS_Vungle' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISVungle','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -579,7 +579,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'IS_UnityAds' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISUnityAds','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -587,7 +587,7 @@ Pod::Spec.new do |s|
 
     s.subspec 'IS_Tapjoy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISTapjoy','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -595,7 +595,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'IS_AppLovin' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS_INTERSTITIAL'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
         ss.dependency 'ISAppLovin','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"

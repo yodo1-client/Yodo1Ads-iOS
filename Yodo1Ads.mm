@@ -15,15 +15,9 @@
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
-#endif
-
-#ifdef YODO1_ADS_INTERSTITIAL
 #import "Yodo1InterstitialAdManager.h"
-#endif
-
-#ifdef YODO1_ADS_BANNER
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
 #endif
@@ -181,7 +175,7 @@ typedef enum {
 
 @end
 
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
 
 @interface Yodo1AdsVideoDelegate : NSObject<Yodo1VideoDelegate>
 
@@ -271,7 +265,7 @@ typedef enum {
 
 #endif
 
-#ifdef YODO1_ADS_INTERSTITIAL
+#ifdef YODO1_ADS
 
 @interface Yodo1AdsInterstitialDelegate : NSObject<InterstitialAdDelegate>
 
@@ -381,7 +375,7 @@ typedef enum {
 
 #endif
 
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
 
 @interface Yodo1AdsBannerDelegate : NSObject<Yodo1BannerDelegate>
 
@@ -489,15 +483,15 @@ static bool bYodo1AdsInited = false;
     [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
     [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"AppStore"];
 
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     //初始化Banner
     [[Yodo1BannerManager sharedInstance]initBannerSDK:[Yodo1AdsBannerDelegate instance]];
 #endif
-#ifdef YODO1_ADS_INTERSTITIAL
+#ifdef YODO1_ADS
     //Interstital 初始化
     [[Yodo1InterstitialAdManager sharedInstance]initInterstitalSDK:[Yodo1AdsInterstitialDelegate instance]];
 #endif
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
     //初始化Video
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
@@ -522,45 +516,45 @@ static bool bYodo1AdsInited = false;
 }
 
 + (void)setBannerOffset:(CGPoint)point {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]setBannerOffset:point];
 #endif
 }
 
 + (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]setBannerScale:sx sy:sy];
 #endif
 }
 
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [Yodo1Ads setBannerAlign:align viewcontroller:nil];
 #endif
 }
 
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align
         viewcontroller:(UIViewController *)viewcontroller {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]setBannerAlign:(BannerAlign)align
                                         viewcontroller:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]];
 #endif
 }
 
 + (void)showBanner {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]showBanner];
 #endif
 }
 
 + (void)hideBanner {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]hideBanner];
 #endif
 }
 
 + (void)removeBanner {
-#ifdef YODO1_ADS_BANNER
+#ifdef YODO1_ADS
     [[Yodo1BannerManager sharedInstance]removeBanner];
 #endif
 }
@@ -578,7 +572,7 @@ static bool bYodo1AdsInited = false;
 }
 
 + (BOOL)interstitialIsReady {
-#ifdef YODO1_ADS_INTERSTITIAL
+#ifdef YODO1_ADS
     return [[Yodo1InterstitialAdManager sharedInstance]interstitialAdReady];
 #else
     return NO;
@@ -586,13 +580,13 @@ static bool bYodo1AdsInited = false;
 }
 
 + (void)showInterstitial {
-#ifdef YODO1_ADS_INTERSTITIAL
+#ifdef YODO1_ADS
     [Yodo1Ads showInterstitial:nil];
 #endif
 }
 
 + (void)showInterstitial:(UIViewController*)viewcontroller {
-#ifdef YODO1_ADS_INTERSTITIAL
+#ifdef YODO1_ADS
     [[Yodo1InterstitialAdManager sharedInstance]showAd:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]];
 #endif
 }
@@ -611,7 +605,7 @@ static bool bYodo1AdsInited = false;
 }
 
 + (BOOL)videoIsReady {
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
     return [[Yodo1AdVideoManager sharedInstance]hasAdVideo];
 #else
     return NO;
@@ -619,13 +613,13 @@ static bool bYodo1AdsInited = false;
 }
 
 + (void)showVideo {
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
     [Yodo1Ads showVideo:nil];
 #endif
 }
 
 + (void)showVideo:(UIViewController*)viewcontroller {
-#ifdef YODO1_ADS_VIDEO
+#ifdef YODO1_ADS
     [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]
                                           awardBlock:^(bool finished) {
                                             
