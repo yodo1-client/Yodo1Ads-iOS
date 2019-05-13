@@ -348,11 +348,11 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
-    s.subspec 'YD1_Toutiao' do |ss|
+    s.subspec 'YD1_Facebook' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Toutiao','3.1.0'
+        ss.dependency 'YD1Facebook','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
