@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
     
     s.dependency 'VideoIronSource','3.0.22'
 
-    s.dependency 'Yodo1IronSourceVungle','3.0.1'
+    s.dependency 'Yodo1IronSourceVungle','3.0.2'
 end
