@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.dependency 'InterstitialIronSource','3.0.22'
-    s.dependency 'Yodo1IronSourceVungle','3.0.1'
+    s.dependency 'Yodo1IronSourceVungle','3.0.2'
 
 end
