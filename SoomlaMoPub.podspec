@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaMoPub'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'Supported MoPub SDK Versions: v4.7.0-v5.6.0'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.4'
+    s.dependency 'Yodo1Soomla','3.0.5'
     s.dependency 'Yodo1AdsMopub','3.0.2'
 end
