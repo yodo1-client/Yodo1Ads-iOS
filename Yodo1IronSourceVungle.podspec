@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceVungle'
-    s.version          = '3.0.2'
+    s.version          = '3.0.3'
     s.summary          = 'Adapter v4.1.6 of Vungle v6.3.2'
 
     s.description      = <<-DESC
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.0.7'
 
-    s.dependency 'Yodo1AdsVungle','3.0.2'
+    s.dependency 'Yodo1AdsVungle','3.0.3'
     
 end
