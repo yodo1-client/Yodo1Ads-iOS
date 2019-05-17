@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1GDTMob'
-    s.version          = '3.1.0'
+    s.version          = '3.1.1'
     s.summary          = 'GDTMob[广点通] v4.8.10'
 
     s.description      = <<-DESC
@@ -33,9 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Video','3.0.13'
-    s.dependency 'Yodo1Interstitial','3.0.13'
-    s.dependency 'Yodo1Banner','3.0.12'
+    s.dependency 'Yodo1AdvertSDK','3.0.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsGDTMob','3.0.5'
 end
