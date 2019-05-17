@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'MopubTapjoy'
-    s.version          = '3.0.6'
+    s.version          = '3.0.7'
     s.summary          = '更新Mopub 5.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,5 +33,5 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.dependency 'Yodo1MopubTapjoyAdapter','3.0.2'
-    s.dependency 'YD1Mopub','3.1.0'
+    s.dependency 'YD1Mopub','3.1.1'
 end
