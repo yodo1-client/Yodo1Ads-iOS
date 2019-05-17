@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Mintegral'
-    s.version          = '3.1.0'
+    s.version          = '3.1.1'
     s.summary          = 'sdk v5.3.2'
 
     s.description      = <<-DESC
@@ -33,9 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'Yodo1Video','3.0.13'
-    s.dependency 'Yodo1Interstitial','3.0.13'
-    s.dependency 'Yodo1Banner','3.0.12'
+    s.dependency 'Yodo1AdvertSDK','3.0.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsMintegral','3.0.7'
 end
