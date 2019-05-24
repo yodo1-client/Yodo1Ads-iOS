@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Inmobi'
-    s.version          = '3.1.1'
+    s.version          = '3.1.2'
     s.summary          = '更新Inmobi SDK 7.2.7 最低支持8.0 [回滚到v7.2.4]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1AdvertSDK','3.0.0'
+    s.dependency 'Yodo1AdvertSDK','3.0.1'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsInmobi','3.0.3'
 
