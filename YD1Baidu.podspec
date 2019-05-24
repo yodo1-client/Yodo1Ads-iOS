@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Baidu'
-    s.version          = '3.1.1'
+    s.version          = '3.1.2'
     s.summary          = 'Baidu v4.64,不支持https [已经支持 不明显]'
 
     s.description      = <<-DESC
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'Yodo1AdvertSDK','3.0.0'
+    s.dependency 'Yodo1AdvertSDK','3.0.1'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
     s.dependency 'Yodo1AdsBaidu','3.0.2'
 end
