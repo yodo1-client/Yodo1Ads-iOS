@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISVungle'
-    s.version          = '3.1.1'
+    s.version          = '3.1.2'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'YD1IronSource','3.1.1'
+    s.dependency 'YD1IronSource','3.1.2'
 
     s.dependency 'Yodo1IronSourceVungle','3.0.3'
 end
