@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxToutiao'
-    s.version          = '3.0.1'
+    s.version          = '3.0.2'
     s.summary          = 'A short description of ApplovinMaxToutiao.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.dependency 'Yodo1ApplovinMaxToutiao','3.0.0'  
-    s.dependency 'YD1ApplovinMax','3.1.1'
+    s.dependency 'YD1ApplovinMax','3.1.2'
 end
