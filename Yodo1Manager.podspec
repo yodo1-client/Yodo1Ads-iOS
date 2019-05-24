@@ -519,13 +519,13 @@ Pod::Spec.new do |s|
         ss.dependency 'ApplovinMaxMintegral','3.0.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
-    s.subspec 'ApplovinMax_Mopub' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ApplovinMaxMopub','3.0.7'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'ApplovinMax_Mopub' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+    #     }
+    #     ss.dependency 'ApplovinMaxMopub','3.0.7'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
     s.subspec 'ApplovinMax_Tapjoy' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
