@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
                             4.更新广点通[2.0]v4.10.1 Banner,插屏
                             5.修改GDTMob为GDT
                             6.暂时屏蔽Mopub 广告聚合，MoreGame
+                            7.修复Twwitter分享的BUG
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -101,7 +102,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS'
         }
-        ss.dependency 'Yodo1Share','3.0.5'
+        ss.dependency 'Yodo1Share','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
