@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISTapjoy'
-    s.version          = '3.1.2'
+    s.version          = '3.1.3'
     s.summary          = 'Adapter和SDK分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,8 +38,8 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3.0','z'
 
-    s.dependency 'YD1IronSource','3.1.2'
+    s.dependency 'YD1IronSource','3.1.3'
 
-    s.dependency 'Yodo1IronSourceTapjoy', '3.0.2'
+    s.dependency 'Yodo1IronSourceTapjoy', '3.0.3'
 
 end
