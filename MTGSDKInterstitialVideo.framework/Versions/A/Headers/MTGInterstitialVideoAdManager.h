@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define MTGInterstitialVideoSDKVersion @"5.3.2"
+#define MTGInterstitialVideoSDKVersion @"5.3.3"
 
 
 @class MTGInterstitialVideoAdManager;
