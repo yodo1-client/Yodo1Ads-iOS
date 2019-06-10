@@ -11,7 +11,7 @@
 #import "TracebackAdvertising.h"
 #import "SoomlaConfig.h"
 
-#define SOOMLA_TRACEBACK_VERSION    @"4.9.6"
+#define SOOMLA_TRACEBACK_VERSION    @"4.9.7"
 
 @protocol SoomlaTracebackDelegate <NSObject>
 
