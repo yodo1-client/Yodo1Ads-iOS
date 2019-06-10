@@ -1,5 +1,15 @@
 =============================================
 V1.0.12 — 2019-05-06
+Tapjoy V12.3.0
+视频广告性能优化。
+出于符合Apple激励安装政策的考虑，我们删除了网页版积分墙（也称为tapjoy.com 积分墙或者TJC积分墙）。同时删除了在SDK中直接调用网页版积分墙的方法。
+在TJPlacementDelegate中添加didClick接口。注意：此接口在服务器端尚不支持，预计将会在2019年6月中支持。
+@protocol TJPlacementDelegate <NSObject>
+@optional
+- (void)didClick:(TJPlacement*)placement;
+
+=============================================
+V1.0.12 — 2019-05-06
 Tapjoy V12.2.1
 修复集成iOS SDK之后编译应用时出现的一些假的“unable to open object file”警告信息。
 修复集成AdMob聚合之后的旋转问题。
