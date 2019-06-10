@@ -235,7 +235,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'SoomlaTapjoy','3.0.6'
+        ss.dependency 'SoomlaTapjoy','3.0.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
