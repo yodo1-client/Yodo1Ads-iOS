@@ -45,6 +45,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
     SDKInitTypeAdmob,
     SDKInitTypeMopub,
     SDKInitTypeUnityAds,
+    SDKInitTypeOneWay,
 };
 
 @interface Yodo1AdConfigHelper : NSObject
