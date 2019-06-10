@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceTapjoy'
-    s.version          = '3.0.3'
+    s.version          = '3.0.4'
     s.summary          = 'Adapter v4.1.3 '
 
     s.description      = <<-DESC
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.0.7'
 
-    s.dependency 'Yodo1AdsTapjoy','3.0.5'
+    s.dependency 'Yodo1AdsTapjoy','3.0.6'
     
 end
