@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaAdMob'
-    s.version          = '3.0.6'
-    s.summary          = 'Supported AdMob SDK Versions: 7.8.0-7.42.2'
+    s.version          = '3.0.7'
+    s.summary          = 'Supported AdMob SDK v7.8.0-v7.44.0'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.5'
+    s.dependency 'Yodo1Soomla','3.0.6'
     s.dependency 'Yodo1AdsAdmob','3.0.6'
 end
