@@ -1,12 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.3.1'
-    s.summary          = 'v3.3.1 - 2019-06-10
-                            1.更新广点通v4.10.2 [解决评审被拒的问题]
-                            2.更新Soomla v4.9.7
-                            3.更新Tapjoy v12.3.0 [解决评审被拒的问题]
-                            4.更新今日头条 v2.0.1.4
-                            5.Mintegral v5.3.3
+    s.version          = '3.3.2'
+    s.summary          = 'v3.3.2 - 2019-06-19
+                            1.添加iPad 在Info.plist配置广告位的需求
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -340,7 +336,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Toutiao','3.1.3'
+        ss.dependency 'YD1Toutiao','3.1.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
