@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Toutiao'
-    s.version          = '3.1.3'
-    s.summary          = 'UMAdSDK V2.0.1.4'
+    s.version          = '3.1.4'
+    s.summary          = 'UMAdSDK V2.0.1.4 添加iPad 在Info.plist配置广告位的需求'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
