@@ -35,4 +35,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'xml2','c++'
+    
+    s.dependency 'Yodo1FBSDKCoreKit','3.0.2'
 end
