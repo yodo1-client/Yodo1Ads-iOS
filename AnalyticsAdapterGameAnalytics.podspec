@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterGameAnalytics'
-    s.version          = '3.0.10'
+    s.version          = '3.0.11'
     s.summary          = 'A short description of AnalyticsAdapterGameAnalytics.'
 
     s.description      = <<-DESC
@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1GameAnalytics','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.12'
+    s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
 
 end
