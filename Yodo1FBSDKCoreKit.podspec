@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1FBSDKCoreKit'
-    s.version          = '3.0.1'
-    s.summary          = 'Facebook SDK 分享,启动统计 [更新SDK v4.39.0]'
+    s.version          = '3.0.2'
+    s.summary          = 'Facebook SDK 启动统计 [更新SDK v5.1.1]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -12,15 +12,15 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/FBSDKCoreKit.framework/Headers/*.h',"#{s.version}" + '/Bolts.framework/Headers/*.h',"#{s.version}" + '/FBSDKShareKit.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/FBSDKCoreKit.framework/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/FBSDKCoreKit.framework/Headers/*.h',"#{s.version}" + '/Bolts.framework/Headers/*.h',"#{s.version}" + '/FBSDKShareKit.framework/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/FBSDKCoreKit.framework/Headers/*.h'
 
     s.resources = "#{s.version}" + '/*.bundle'
 
-    s.vendored_frameworks = "#{s.version}" + '/FBSDKCoreKit.framework',"#{s.version}" + '/Bolts.framework',"#{s.version}" + '/FBSDKShareKit.framework'
+    s.vendored_frameworks = "#{s.version}" + '/FBSDKCoreKit.framework'
 
 
     s.libraries = 'sqlite3', 'z', 'stdc++'
