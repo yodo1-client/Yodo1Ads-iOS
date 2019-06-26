@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaTapjoy'
-    s.version          = '3.0.8'
+    s.version          = '3.0.9'
     s.summary          = 'Supported Tapjoy SDK v11.8.0-v12.3.0'
 
     s.description      = <<-DESC
@@ -44,5 +44,5 @@ TODO: Add long description of the pod here.
         "sqlite3.0"
     ]
     s.dependency 'Yodo1Soomla','3.0.7'
-    s.dependency 'Yodo1AdsTapjoy','3.0.6'
+    s.dependency 'Yodo1AdsTapjoy','3.0.7'
 end
