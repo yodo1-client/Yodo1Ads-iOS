@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdvertSDK','3.0.3'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
-    s.dependency 'Yodo1AdsChartboost','3.0.0'
+    s.dependency 'Yodo1AdsChartboost','3.0.2'
 end
