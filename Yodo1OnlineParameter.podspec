@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '3.0.2'
-    s.summary          = '添加发布版本号，sdk 广告区域'
+    s.version          = '3.0.3'
+    s.summary          = '添加发布版本号，sdk 广告区域 [添加测试设备功能]'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

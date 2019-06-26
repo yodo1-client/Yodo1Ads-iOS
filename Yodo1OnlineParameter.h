@@ -3,7 +3,7 @@
 //
 //  Created by yixian huang on 2017/7/24.
 //
-//  sdk version 2.0.2
+//  sdk version 3.0.0
 //
 
 #ifndef Yodo1OnlineParameter_h
@@ -32,6 +32,17 @@ FOUNDATION_EXPORT NSString* const kOPSDKVersion;
 + (void)setDebugMode:(BOOL)enableDebugMode;
 
 + (BOOL)getDebug;
+//是否是测试设备
++ (BOOL)isTestDevice;
+
++  (BOOL)isDeviceSourceFromPA;
+
+//测试设备是否来自MAS
++ (BOOL)isDeviceSourceFromMAS;
+
+//广告列表是否为空
++ (BOOL)isHaveAdList;
+
 
 @end
 
