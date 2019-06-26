@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsChartboost'
-    s.version          = '3.0.1'
+    s.version          = '3.0.2'
     s.summary          = 'A short description of Yodo1Chartboost.'
 
     s.description      = <<-DESC
@@ -22,6 +22,8 @@ Pod::Spec.new do |s|
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
     s.vendored_frameworks = "#{s.version}" + '/Chartboost.framework'
+    
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.requires_arc = false
 
