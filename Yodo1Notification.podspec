@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Notification'
-    s.version          = '3.0.3'
+    s.version          = '3.0.4'
     s.summary          = 'A short description of Yodo1Notification.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -24,5 +24,5 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.frameworks = 'UIKit'
-    s.dependency 'Yodo1Commons','3.0.3'
+    s.dependency 'Yodo1Commons','3.0.4'
 end
