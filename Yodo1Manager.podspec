@@ -25,8 +25,10 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_Manager' do |ss|
         ss.source_files = "#{s.version}" + '/*.{h,mm}'
-        ss.vendored_libraries = "#{s.version}" + '/*.a',
         ss.public_header_files = "#{s.version}" + '/*.h'
+
+        ss.vendored_libraries = "#{s.version}" + '/*.a'
+
         ss.preserve_path = "#{s.version}" + '/ChangeLog.txt'
         ss.resources = "#{s.version}" + '/Yodo1Ads.bundle'
         ss.requires_arc = true
@@ -44,6 +46,9 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1AdsConfig','3.0.9'
         ss.dependency 'Yodo1Track','3.0.4'
         ss.dependency 'Yodo1FeedbackError','3.0.0'
+        ss.dependency 'Yodo1SDWebImage','3.0.0'
+        ss.dependency 'Yodo1OnlineParameter','3.0.3'
+        ss.dependency 'Yodo1AdvertSDK','3.0.3'
 
     end
 
@@ -193,7 +198,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
-	################# Soomla ##############
+    ################# Soomla ##############
     s.subspec 'Yodo1_Soomla' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
