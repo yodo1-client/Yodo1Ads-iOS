@@ -20,6 +20,7 @@
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
+#import "YD1LogView.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
@@ -468,7 +469,7 @@ static bool bYodo1AdsInited = false;
     }
     bYodo1AdsInited = true;
     //初始化在线参数
-    [Yodo1OnlineParameter initWithAppKey:appKey channel:@"AppStore"];
+    [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
     
     //初始化错误上报系统
     NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
@@ -492,7 +493,9 @@ static bool bYodo1AdsInited = false;
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
-
+    if ([Yodo1OnlineParameter isTestDevice]) {
+        [YD1LogView startLog:appKey];
+    }
 }
 
 + (void)setLogEnable:(BOOL)enable {
