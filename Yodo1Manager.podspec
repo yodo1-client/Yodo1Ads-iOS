@@ -1,14 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.3.4'
-    s.summary          = 'v3.3.4 - 2019-06-27
-                            1.更新 Tapjoy v12.3.1
-                            2.更新 IronSource v6.8.4.0
-                            3.更新 Facebook v5.4.0
-                            4.更新 Toutiao v2.2.0.0
-                            5.更新 Chartboost v7.5.0
-                            6.添加 测试设备功能 [在线参数]
-                            7.添加 Yodo1 测试广告
+    s.version          = '3.3.5'
+    s.summary          = 'v3.3.5 - 2019-07-02
+                            1.添加Soomla中Chartboost的广告统计
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -276,6 +270,14 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
         ss.dependency 'SoomlaAdMob','3.0.8'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Soomla_Chartboost' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaChartboost','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
