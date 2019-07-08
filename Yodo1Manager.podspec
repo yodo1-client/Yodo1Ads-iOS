@@ -3,6 +3,7 @@ Pod::Spec.new do |s|
     s.version          = '3.3.5'
     s.summary          = 'v3.3.5 - 2019-07-02
                             1.添加Soomla中Chartboost的广告统计
+                            2.修复YD1 测试广告的BUG
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
