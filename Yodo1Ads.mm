@@ -45,7 +45,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.3.1";
+NSString* const kYodo1AdsVersion       = @"3.3.2";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -493,7 +493,7 @@ static bool bYodo1AdsInited = false;
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
-    if ([Yodo1OnlineParameter isTestDevice]) {
+    if ([Yodo1OnlineParameter isTestDevice] && [Yodo1OnlineParameter isDeviceSourceFromPA]) {
         [YD1LogView startLog:appKey];
     }
 }
