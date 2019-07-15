@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAppLovin'
-    s.version          = '3.1.5'
-    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.7.1)'
+    s.version          = '3.1.6'
+    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.7.1)[回调滚到v6.6.0]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'YD1IronSource','3.1.4'
     
-    s.dependency 'Yodo1IronSourceApplovin','3.0.6'
+    s.dependency 'Yodo1IronSourceApplovin','3.0.7'
 end
