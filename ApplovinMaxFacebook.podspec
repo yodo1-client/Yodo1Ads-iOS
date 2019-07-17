@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxFacebook'
     s.version          = '3.0.12'
-    s.summary          = 'v6.7.1 [回调滚到v6.6.0]'
+    s.summary          = 'v6.7.1 [回调滚到v6.6.0]更新Facebook的adapter v5.4.0.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1ApplovinMaxFacebook','3.0.6'  
+    s.dependency 'Yodo1ApplovinMaxFacebook','3.0.7'  
     s.dependency 'YD1ApplovinMax','3.1.6'
 end
