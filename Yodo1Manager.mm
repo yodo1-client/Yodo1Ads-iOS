@@ -45,6 +45,8 @@
 NSString* const kFacebookAppId      = @"FacebookAppId";
 NSString* const kYodo1ChannelId     = @"AppStore";
 
+NSString* const kSoomlaAppKey       = @"SoomlaAppKey";
+
 @implementation SDKConfig
 
 @end
@@ -66,6 +68,13 @@ static BOOL isInitialized = false;
         return;
     }
     isInitialized = true;
+
+#ifdef YODO1_SOOMLA
+    NSString *appKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:kSoomlaAppKey];
+    SoomlaConfig *config = [SoomlaConfig config];
+    [[SoomlaTraceback getInstance] initializeWithAppKey:appKey andConfig:config];
+#endif
+
     //初始化Yodo1Track
     NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
     [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
@@ -129,11 +138,6 @@ static BOOL isInitialized = false;
     [UCenterManager sharedInstance].channelId = kYodo1ChannelId;
 #endif
     
-#ifdef YODO1_SOOMLA
-    NSString *appKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:@"SoomlaAppKey"];;
-    SoomlaConfig *config = [SoomlaConfig config];
-    [[SoomlaTraceback getInstance] initializeWithAppKey:appKey andConfig:config];
-#endif
 }
 
 #ifdef YODO1_ANALYTICS
