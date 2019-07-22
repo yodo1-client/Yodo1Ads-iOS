@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1FBSDKCoreKit'
-    s.version          = '3.0.2'
-    s.summary          = 'Facebook SDK 启动统计 [更新SDK v5.1.1]'
+    s.version          = '3.0.3'
+    s.summary          = 'Facebook SDK 启动统计 [更新SDK v5.2.3]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
