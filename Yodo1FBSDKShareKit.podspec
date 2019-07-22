@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1FBSDKShareKit'
-    s.version          = '3.0.0'
-    s.summary          = 'Facebook SDK 分享[更新SDK v5.1.1]'
+    s.version          = '3.0.1'
+    s.summary          = 'Facebook SDK 分享[更新SDK v5.2.3]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'Yodo1FBSDKCoreKit','3.0.2'
+    s.dependency 'Yodo1FBSDKCoreKit','3.0.3'
 
 end
