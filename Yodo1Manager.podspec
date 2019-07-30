@@ -1,9 +1,10 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.4.0'
-    s.summary          = 'v3.4.0 - 2019-07-22
+    s.version          = '3.4.1'
+    s.summary          = 'v3.4.1 - 2019-07-30
                             1.回滚Applvoin的版本v6.6.0
-                            1.修复Soomla 统计Applovin出现的BUG
+                            2.修复Soomla 统计Applovin出现的BUG
+                            3.换spec地址
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
