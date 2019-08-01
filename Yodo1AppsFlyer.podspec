@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AppsFlyer'
-    s.version          = '3.0.0'
-    s.summary          = 'A short description of Yodo1AppsFlyer.'
+    s.version          = '3.0.1'
+    s.summary          = 'v4.10.3'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
