@@ -11,7 +11,7 @@
 #import "TracebackAdvertising.h"
 #import "SoomlaConfig.h"
 
-#define SOOMLA_TRACEBACK_VERSION    @"4.9.8"
+#define SOOMLA_TRACEBACK_VERSION    @"4.12.2"
 
 @protocol SoomlaTracebackDelegate <NSObject>
 
@@ -24,10 +24,17 @@
 
 @end
 
+@protocol SoomlaConnectorStatusDelegate <NSObject>
+
+@optional
+- (void)statusReceived:(NSString*)status forAdNetwork:(NSString*)adNetwork withMessage:(NSString*)message;
+
+@end
 
 @interface SoomlaTraceback : NSObject
 
 @property (nonatomic, weak) id<SoomlaTracebackDelegate> delegate;
+@property (nonatomic, weak) id<SoomlaConnectorStatusDelegate> connectorStatusDelegate;
 
 + (SoomlaTraceback *)getInstance;
 
