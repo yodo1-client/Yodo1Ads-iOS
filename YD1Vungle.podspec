@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Vungle'
-    s.version          = '3.1.5'
+    s.version          = '3.1.6'
     s.summary          = '更新VungleSDk 6.2.0,最低支持iOS 8,添加广告位'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1AdvertSDK','3.0.3'
+    s.dependency 'Yodo1AdvertSDK','3.0.4'
     s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
-    s.dependency 'Yodo1AdsVungle','3.0.4'
+    s.dependency 'Yodo1AdsVungle','3.0.5'
 end
