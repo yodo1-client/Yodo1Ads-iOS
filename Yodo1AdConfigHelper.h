@@ -95,6 +95,16 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (void)setInitedWithInitType:(SDKInitType)type
                      isInited:(BOOL)isInited;
 
+- (void)setUserConsent:(BOOL)gdprApplicability;
+
+- (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
+
+// return ture 同意收集数据
+- (BOOL)isUserConsent;
+
+// return true 表示16岁以下
+- (BOOL)isTagForUnderAgeOfConsent;
+
 @end
 
 NS_ASSUME_NONNULL_END
