@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaInMobi'
-    s.version          = '3.0.9'
+    s.version          = '3.0.10'
     s.summary          = 'Supported InMobi SDK v7.0.0-v7.2.7'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.7'
+    s.dependency 'Yodo1Soomla','3.0.8'
     s.dependency 'Yodo1AdsInmobi','3.0.3'
 end
