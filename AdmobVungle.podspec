@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobVungle'
-    s.version          = '3.1.4'
+    s.version          = '3.1.5'
     s.summary          = 'Admob 更新v7.40.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.1.4'
-    s.dependency 'Yodo1AdsVungle','3.0.4'
+    s.dependency 'YD1Admob','3.1.5'
+    s.dependency 'Yodo1AdsVungle','3.0.5'
 
 end
