@@ -49,13 +49,20 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
                     [AppsFlyerTracker sharedTracker].customerUserID = initConfig.appsflyerCustomUserId;
                 }
             }
+            BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
+            if (isGDPR) {
+                [AppsFlyerTracker sharedTracker].isStopTracking = true;
+            }
         }
     }
     return self;
 }
 
 - (void)applicationDidBecomeActive:(NSNotification*)notifi {
-    [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
+    if (!isGDPR) {
+        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+    }
 }
 
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
