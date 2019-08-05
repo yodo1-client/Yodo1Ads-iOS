@@ -102,8 +102,9 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //This can be used by the integrating App to indicate if
 //the user falls in any of the GDPR applicable countries
 //(European Economic Area).
-//gdprApplicability YES if the user is affected by GDPR, NO if they are not.
-+ (void)setUserConsent:(BOOL)gdprApplicability;
+//consent YES User consents (Behavioral and Contextual Ads).
+//NO if they are not.
++ (void)setUserConsent:(BOOL)consent;
 
 //In the US, the Children’s Online Privacy Protection Act (COPPA) imposes
 //certain requirements on operators of online services that (a)
