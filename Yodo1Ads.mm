@@ -627,9 +627,9 @@ static bool bYodo1AdsInited = false;
 #endif
 }
 
-+ (void)setUserConsent:(BOOL)gdprApplicability {
++ (void)setUserConsent:(BOOL)consent {
 #ifdef YODO1_ADS
-    [[Yodo1AdConfigHelper instance]setUserConsent:gdprApplicability];
+    [[Yodo1AdConfigHelper instance]setUserConsent:consent];
 #endif
 }
 
@@ -728,9 +728,9 @@ extern "C" {
 
 #pragma mark - Privacy
 
-    void Unity3dSetUserConsent(BOOL gdprApplicability)
+    void Unity3dSetUserConsent(BOOL consent)
     {
-        [Yodo1Ads setUserConsent:gdprApplicability];
+        [Yodo1Ads setUserConsent:consent];
     }
 
     void Unity3dSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
@@ -840,9 +840,9 @@ void Yodo1AdsC::ShowVideo()
     [Yodo1Ads showVideo];
 }
 
-void Yodo1AdsC::SetUserConsent(BOOL gdprApplicability)
+void Yodo1AdsC::SetUserConsent(BOOL consent)
 {
-    [Yodo1Ads setUserConsent:gdprApplicability];
+    [Yodo1Ads setUserConsent:consent];
 }
 
 void Yodo1AdsC::SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
