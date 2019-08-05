@@ -95,7 +95,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (void)setInitedWithInitType:(SDKInitType)type
                      isInited:(BOOL)isInited;
 
-- (void)setUserConsent:(BOOL)gdprApplicability;
+- (void)setUserConsent:(BOOL)consent;
 
 - (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
 
