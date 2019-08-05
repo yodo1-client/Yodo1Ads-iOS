@@ -69,7 +69,14 @@ static BOOL isInitialized = false;
     }
     isInitialized = true;
 
+    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
+    
 #ifdef YODO1_SOOMLA
+    if (!isGDPR) {
+        [[SoomlaTraceback getInstance]setUserConsent:YES];
+    } else {
+        [[SoomlaTraceback getInstance]setUserConsent:NO];
+    }
     NSString *appKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:kSoomlaAppKey];
     SoomlaConfig *config = [SoomlaConfig config];
     [[SoomlaTraceback getInstance] initializeWithAppKey:appKey andConfig:config];
@@ -125,11 +132,22 @@ static BOOL isInitialized = false;
     
 #ifdef YODO1_FACEBOOK_ANALYTICS
     //初始化Facebook（启动统计激活）
+    if (!isGDPR) {
+        [FBSDKSettings setAutoInitEnabled:YES];
+        [FBSDKSettings setAutoLogAppEventsEnabled:YES];
+        [FBSDKSettings setLimitEventAndDataUsage:NO];
+        [FBSDKAppEvents activateApp];
+    } else {
+        [FBSDKSettings setAutoInitEnabled:NO];
+        [FBSDKSettings setAutoLogAppEventsEnabled:NO];
+        [FBSDKSettings setLimitEventAndDataUsage:YES];
+    }
+    
     NSString* facebookAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kFacebookAppId];
     if ([facebookAppId length] > 0) {
         [FBSDKSettings setAppID:facebookAppId];
-        [FBSDKAppEvents activateApp];
     }
+    
 #endif
     
 #ifdef YODO1_UCCENTER

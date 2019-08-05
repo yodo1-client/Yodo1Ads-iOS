@@ -21,6 +21,7 @@
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
+#import "Yodo1AdConfigHelper.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
@@ -45,7 +46,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.3.2";
+NSString* const kYodo1AdsVersion       = @"3.3.3";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -626,6 +627,18 @@ static bool bYodo1AdsInited = false;
 #endif
 }
 
++ (void)setUserConsent:(BOOL)gdprApplicability {
+#ifdef YODO1_ADS
+    [[Yodo1AdConfigHelper instance]setUserConsent:gdprApplicability];
+#endif
+}
+
++ (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge {
+#ifdef YODO1_ADS
+    [[Yodo1AdConfigHelper instance]setTagForUnderAgeOfConsent:isBelowConsentAge];
+#endif
+}
+
 @end
 
 
@@ -711,6 +724,18 @@ extern "C" {
     void Unity3dShowVideo()
     {
         [Yodo1Ads showVideo];
+    }
+
+#pragma mark - Privacy
+
+    void Unity3dSetUserConsent(BOOL gdprApplicability)
+    {
+        [Yodo1Ads setUserConsent:gdprApplicability];
+    }
+
+    void Unity3dSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
+    {
+        [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
     }
 }
 
@@ -815,3 +840,12 @@ void Yodo1AdsC::ShowVideo()
     [Yodo1Ads showVideo];
 }
 
+void Yodo1AdsC::SetUserConsent(BOOL gdprApplicability)
+{
+    [Yodo1Ads setUserConsent:gdprApplicability];
+}
+
+void Yodo1AdsC::SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
+{
+    [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
+}
