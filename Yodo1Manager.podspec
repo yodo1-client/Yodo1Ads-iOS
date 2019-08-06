@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
                             2.修复Soomla 统计Applovin出现的BUG
                             3.换spec地址
                             4.更新今日头条sdk v2.2.0.2
-                            5.更新Soomla v4.10.3
+                            5.更新Soomla v4.12.2
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
