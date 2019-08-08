@@ -33,10 +33,6 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
             NSString* devkey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_DEV_KEY];
             NSString* appleAppId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_APPLE_APPID];
             NSAssert(devkey != nil||appleAppId != nil, @"AppsFlyer devKey 没有设置");
-            [[NSNotificationCenter defaultCenter]addObserver:self
-                                                    selector:@selector(applicationDidBecomeActive:)//前台进入后台
-                                                        name:UIApplicationDidBecomeActiveNotification
-                                                      object:nil];
             
             [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
             [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
@@ -52,17 +48,12 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
             BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
             if (isGDPR) {
                 [AppsFlyerTracker sharedTracker].isStopTracking = true;
+            } else {
+                [[AppsFlyerTracker sharedTracker] trackAppLaunch];
             }
         }
     }
     return self;
-}
-
-- (void)applicationDidBecomeActive:(NSNotification*)notifi {
-    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
-    if (!isGDPR) {
-        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
-    }
 }
 
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
@@ -94,11 +85,7 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 }
 
 - (void)dealloc {
-     if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
-        [[NSNotificationCenter defaultCenter]removeObserver:self
-                                                       name:UIApplicationDidBecomeActiveNotification
-                                                     object:nil];
-     }
+
 }
 
 @end

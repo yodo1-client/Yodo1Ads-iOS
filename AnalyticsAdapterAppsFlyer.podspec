@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterAppsFlyer'
-    s.version          = '3.0.12'
+    s.version          = '3.0.13'
     s.summary          = 'A short description of AnalyticsAdapterAppsFlyer.'
 
     s.description      = <<-DESC
