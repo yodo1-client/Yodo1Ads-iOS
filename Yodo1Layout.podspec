@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-    s.name             = 'YD1Layout'
+    s.name             = 'Yodo1Layout'
     s.version          = '3.0.0'
-    s.summary          = 'A short description of YD1Layout.'
+    s.summary          = 'A short description of Yodo1Layout.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -26,6 +26,6 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
 
-    s.frameworks = 'Foundation'
+    s.frameworks = 'Foundation','UIKit'
     s.weak_frameworks = 'CoreFoundation'
 end
