@@ -1,12 +1,8 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.4.1'
-    s.summary          = 'v3.4.1 - 2019-08-05
-                            1.回滚Applvoin的版本v6.6.0
-                            2.修复Soomla 统计Applovin出现的BUG
-                            3.换spec地址
-                            4.更新今日头条sdk v2.2.0.2
-                            5.更新Soomla v4.12.2
+    s.version          = '3.4.2'
+    s.summary          = 'v3.4.2 - 2019-08-30
+                            1.添加隐私和儿童UI功能
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -153,6 +149,14 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'REPLAY'
         }
         ss.dependency 'Yodo1Replay','3.0.4'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Yodo1_AgePrivacy' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'REPLAY'
+        }
+        ss.dependency 'Yodo1AgePrivacy','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     ################# 统计 ##############
