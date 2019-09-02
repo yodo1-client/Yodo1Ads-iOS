@@ -154,7 +154,7 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_AgePrivacy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'REPLAY'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'PRIVACY'
         }
         ss.dependency 'Yodo1AgePrivacy','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
