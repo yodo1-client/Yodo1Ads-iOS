@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaToutiao'
-    s.version          = '3.0.0'
+    s.version          = '3.0.1'
     s.summary          = 'Supported Toutiao SDK v2.1.0.1-v2.2.0.2'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.8'
+    s.dependency 'Yodo1Soomla','3.0.9'
     s.dependency 'Yodo1AdsToutiao','3.1.0'
 end
