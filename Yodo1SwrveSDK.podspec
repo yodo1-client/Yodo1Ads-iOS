@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1SwrveSDK'
-    s.version          = '3.0.2'
-    s.summary          = 'Swrve 统计SDK [SDK v6.1.0]自己创建工程导出.a'
+    s.version          = '3.0.3'
+    s.summary          = 'Swrve 统计SDK [SDK v6.2.0]自己创建工程导出.a'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
