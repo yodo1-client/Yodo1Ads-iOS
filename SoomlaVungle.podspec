@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaVungle'
-    s.version          = '3.0.8'
+    s.version          = '3.0.9'
     s.summary          = 'Supported Vungle SDK v4.0.0-v6.3.2'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.8'
+    s.dependency 'Yodo1Soomla','3.0.9'
     s.dependency 'Yodo1AdsVungle','3.0.5'
 end
