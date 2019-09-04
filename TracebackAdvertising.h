@@ -22,7 +22,8 @@ typedef enum {
     TB_OFFER_WALL       = 7,
     TB_NATIVE_HTML      = 8,
     TB_EXTERNAL         = 9,
-    TB_REWARDED         = 10
+    TB_REWARDED         = 10,
+    TB_INTERACTIVE      = 11
 } TracebackAdType;
 
 typedef enum {

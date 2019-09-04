@@ -11,7 +11,7 @@
 #import "TracebackAdvertising.h"
 #import "SoomlaConfig.h"
 
-#define SOOMLA_TRACEBACK_VERSION    @"4.12.2"
+#define SOOMLA_TRACEBACK_VERSION    @"4.15.0"
 
 @protocol SoomlaTracebackDelegate <NSObject>
 
@@ -31,10 +31,18 @@
 
 @end
 
+@protocol SoomlaAdsCustomData <NSObject>
+
+@required
+- (NSDictionary*)impressionCustomDataForAdNetwork:(NSString*)adNetwork withAdType:(TracebackAdType)adType andExtra:(NSDictionary*)extra;
+
+@end
+
 @interface SoomlaTraceback : NSObject
 
 @property (nonatomic, weak) id<SoomlaTracebackDelegate> delegate;
 @property (nonatomic, weak) id<SoomlaConnectorStatusDelegate> connectorStatusDelegate;
+@property (nonatomic, weak) id<SoomlaAdsCustomData> adsCustomData;
 
 + (SoomlaTraceback *)getInstance;
 
@@ -55,5 +63,10 @@
 - (void)onCrossPromotionAdDisplayed:(NSObject*)ad withAdType:(TracebackAdType)adType andAppStoreId:(NSString*)appStoreId;
 - (void)onCrossPromotionAdClicked:(NSObject*)ad withAdType:(TracebackAdType)adType andAppStoreId:(NSString*)appStoreId;
 - (void)onCrossPromotionAdClosed:(NSObject*)ad withAdType:(TracebackAdType)adType andAppStoreId:(NSString*)appStoreId;
+
+- (void)onAdDisplayed:(NSString *)adNetwork withAdType:(TracebackAdType)adType andExtraFields:(NSDictionary *)extraFields;
+- (void)onAdClicked:(NSString *)adNetwork withAdType:(TracebackAdType)adType andExtraFields:(NSDictionary *)extraFields;
+- (void)onVideoCompleted:(NSString *)adNetwork withAdType:(TracebackAdType)adType andExtraFields:(NSDictionary *)extraFields;
+- (void)onAdClosed:(NSString *)adNetwork withAdType:(TracebackAdType)adType andExtraFields:(NSDictionary *)extraFields;
 
 @end
