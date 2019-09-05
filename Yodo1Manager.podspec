@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.4.2'
-    s.summary          = 'v3.4.2 - 2019-08-30
+    s.version          = '3.4.3'
+    s.summary          = 'v3.4.3 - 2019-09-05
                             1.添加隐私和儿童UI功能
+                            2.添加Soomla中统计Mintegral
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -294,6 +295,14 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
         ss.dependency 'SoomlaToutiao','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'Soomla_Mintegral' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+        }
+        ss.dependency 'SoomlaMintegral','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
