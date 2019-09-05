@@ -302,7 +302,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'SoomlaMintegral','3.0.0'
+        ss.dependency 'SoomlaMintegral','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -343,7 +343,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Mintegral','3.1.5'
+        ss.dependency 'YD1Mintegral','3.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -565,7 +565,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxMintegral','3.0.12'
+        ss.dependency 'ApplovinMaxMintegral','3.0.13'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     # s.subspec 'ApplovinMax_Mopub' do |ss|
