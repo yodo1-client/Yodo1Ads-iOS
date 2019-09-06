@@ -44,6 +44,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1SDWebImage','3.0.0'
         ss.dependency 'Yodo1OnlineParameter','3.0.3'
         ss.dependency 'Yodo1AdvertSDK','3.0.4'
+        ss.dependency 'Yodo1UDID','3.0.0'
 
     end
 

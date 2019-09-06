@@ -12,6 +12,7 @@
 #import "Yodo1UnityTool.h"
 #import "Yodo1OnlineParameter.h"
 #import "AnalyticsYodo1Track.h"
+#import "Yodo1UDIDManager.h"
 
 #import "Yodo1Ads.h"
 
@@ -235,6 +236,11 @@ extern "C" {
     char* UnityGetDeviceId() {
         const char* deviceId = [Yodo1Commons idfvString].UTF8String;
         return Yodo1MakeStringCopy(deviceId);
+    }
+
+    char* UnityUserId(){
+        const char* userId = Yodo1UDIDManager.value.UTF8String;
+        return Yodo1MakeStringCopy(userId);
     }
 }
 
