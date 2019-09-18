@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaAppLovin'
     s.version          = '3.1.0'
-    s.summary          = 'Supported AppLovin v3.2.0-v6.7.1 [回调滚到v6.6.0]'
+    s.summary          = 'Supported AppLovin v3.2.0-v6.7.1 [回调滚到v6.6.0] (Soomla v5.0.2去掉adapter)'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
