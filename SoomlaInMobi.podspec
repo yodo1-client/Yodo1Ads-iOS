@@ -20,7 +20,7 @@ TODO: Add long description of the pod here.
     
     #s.public_header_files = ["#{s.version}" + '/*.h']
     
-    s.vendored_libraries = ["#{s.version}" + '/*.a']
+    # s.vendored_libraries = ["#{s.version}" + '/*.a']
     
     # s.preserve_paths = "#{s.version}" + '/ChangeLog.txt'
     
