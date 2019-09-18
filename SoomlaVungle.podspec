@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaVungle'
-    s.version          = '3.0.9'
+    s.version          = '3.1.0'
     s.summary          = 'Supported Vungle SDK v4.0.0-v6.3.2'
 
     s.description      = <<-DESC
@@ -20,7 +20,7 @@ TODO: Add long description of the pod here.
     
     #s.public_header_files = ["#{s.version}" + '/*.h']
     
-    s.vendored_libraries = ["#{s.version}" + '/*.a']
+    # s.vendored_libraries = ["#{s.version}" + '/*.a']
     
     # s.preserve_paths = "#{s.version}" + '/ChangeLog.txt'
     
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.9'
+    s.dependency 'Yodo1Soomla','3.1.0'
     s.dependency 'Yodo1AdsVungle','3.0.5'
 end
