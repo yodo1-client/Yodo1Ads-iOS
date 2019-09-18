@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaFacebook'
-    s.version          = '3.0.12'
+    s.version          = '3.1.0'
     s.summary          = 'A short description of SoomlaFacebook. v4.25.0-v5.3.2 [回滚Facebook v5.3.2]'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.9'
+    s.dependency 'Yodo1Soomla','3.1.0'
     s.dependency 'Yodo1AdsFacebook','3.0.5'
 end
