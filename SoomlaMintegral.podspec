@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaMintegral'
-    s.version          = '3.0.1'
+    s.version          = '3.1.0'
     s.summary          = 'Supported Mintegral SDK v5.5.3-v5.5.3'
 
     s.description      = <<-DESC
@@ -20,7 +20,7 @@ TODO: Add long description of the pod here.
     
     #s.public_header_files = ["#{s.version}" + '/*.h']
     
-    s.vendored_libraries = ["#{s.version}" + '/*.a']
+    # s.vendored_libraries = ["#{s.version}" + '/*.a']
     
     # s.preserve_paths = "#{s.version}" + '/ChangeLog.txt'
     
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.0.9'
+    s.dependency 'Yodo1Soomla','3.1.0'
     s.dependency 'Yodo1AdsMintegral','3.0.9'
 end
