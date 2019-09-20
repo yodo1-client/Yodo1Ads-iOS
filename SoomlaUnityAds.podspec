@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaUnityAds'
-    s.version          = '3.1.0'
+    s.version          = '3.1.1'
     s.summary          = 'Supported UnityAds SDK v2.0.0-v3.1.0'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.1.0'
+    s.dependency 'Yodo1Soomla','3.1.1'
     s.dependency 'Yodo1AdsUnityAds','3.0.7'
 end
