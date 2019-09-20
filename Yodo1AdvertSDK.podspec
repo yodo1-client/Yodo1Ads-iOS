@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdvertSDK'
-    s.version          = '3.0.4'
+    s.version          = '3.0.5'
     s.summary          = 'Yodo1AdvertSDK Have Banner,Intersttial,Video [修改广点通特殊处理逻辑]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -33,9 +33,9 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
  
     s.dependency 'Yodo1Commons','3.0.4'
-    s.dependency 'Yodo1OnlineParameter','3.0.3'
-    s.dependency 'Yodo1Analytics','3.0.4'
-    s.dependency 'Yodo1AdsConfig','3.1.0'
+    s.dependency 'Yodo1OnlineParameter','3.0.4'
+    s.dependency 'Yodo1Analytics','3.0.5'
+    s.dependency 'Yodo1AdsConfig','3.1.1'
     s.dependency 'Yodo1FeedbackError','3.0.0'
     
 end
