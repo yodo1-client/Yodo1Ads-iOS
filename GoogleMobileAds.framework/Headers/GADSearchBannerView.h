@@ -2,14 +2,12 @@
 //  GADSearchBannerView.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2011 Google Inc. All rights reserved.
+//  Copyright 2011 Google LLC. All rights reserved.
 //
 
 #import <GoogleMobileAds/GADAdSizeDelegate.h>
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
-
-NS_ASSUME_NONNULL_BEGIN
 
 /// A view that displays search ads.
 /// To show search ads:
@@ -23,5 +21,3 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak, nullable) IBOutlet id<GADAdSizeDelegate> adSizeDelegate;
 
 @end
-
-NS_ASSUME_NONNULL_END

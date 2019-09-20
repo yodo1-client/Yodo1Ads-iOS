@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdmob'
-    s.version          = '3.0.6'
-    s.summary          = '2019.03.08 Admob sdk v7.40.0'
+    s.version          = '3.1.0'
+    s.summary          = '2019.03.08 Admob sdk v7.40.0 [ 更新到v7.50.0 ]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -14,17 +14,19 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/GoogleMobileAds.framework/Headers/**/*.h'
+    s.source_files = "#{s.version}" + '/GoogleMobileAds.framework/Headers/**/*.h',"#{s.version}" + '/GoogleUtilities.framework/Headers/*.h',"#{s.version}" + '/nanopb.framework/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/GoogleMobileAds.framework/Headers/**/*.h'
+
+
+    s.public_header_files = "#{s.version}" + '/GoogleMobileAds.framework/Headers/**/*.h',"#{s.version}" + '/GoogleUtilities.framework/Headers/*.h',"#{s.version}" + '/nanopb.framework/Headers/*.h'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
     s.requires_arc = true
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
-    s.vendored_frameworks = "#{s.version}" + '/GoogleMobileAds.framework'
+    s.vendored_frameworks = "#{s.version}" + '/GoogleMobileAds.framework',"#{s.version}" + '/GoogleUtilities.framework',"#{s.version}" + '/nanopb.framework',"#{s.version}" + '/GoogleAppMeasurement.framework'
 
     s.frameworks = 'AudioToolbox', 'AVFoundation','CoreGraphics', 'CoreMedia','CoreMotion', 'CoreTelephony' ,'CoreVideo', 'GLKit','MediaPlayer', 'MessageUI', 'MobileCoreServices','OpenGLES','Security','StoreKit' ,'SystemConfiguration'
 

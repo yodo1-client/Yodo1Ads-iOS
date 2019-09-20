@@ -2,20 +2,17 @@
 //  GADCustomEventInterstitial.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2012 Google Inc. All rights reserved.
+//  Copyright 2012 Google LLC. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 
 #import <GoogleMobileAds/GADCustomEventInterstitialDelegate.h>
 #import <GoogleMobileAds/GADCustomEventRequest.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <UIKit/UIKit.h>
 
 /// The interstitial custom event protocol. Your interstitial custom event handler must implement
 /// this protocol.
-@protocol GADCustomEventInterstitial<NSObject>
+@protocol GADCustomEventInterstitial <NSObject>
 
 /// Inform |delegate| with the custom event execution results to ensure mediation behaves correctly.
 ///
@@ -32,12 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param request Contains ad request information.
 - (void)requestInterstitialAdWithParameter:(nullable NSString *)serverParameter
                                      label:(nullable NSString *)serverLabel
-                                   request:(GADCustomEventRequest *)request;
+                                   request:(nonnull GADCustomEventRequest *)request;
 
 /// Present the interstitial ad as a modal view using the provided view controller. Called only
 /// after your class calls -customEventInterstitialDidReceiveAd: on its custom event delegate.
-- (void)presentFromRootViewController:(UIViewController *)rootViewController;
+- (void)presentFromRootViewController:(nonnull UIViewController *)rootViewController;
 
 @end
-
-NS_ASSUME_NONNULL_END

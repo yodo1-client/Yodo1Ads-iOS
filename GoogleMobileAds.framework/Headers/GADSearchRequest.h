@@ -2,16 +2,13 @@
 //  GADSearchRequest.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2011 Google Inc. All rights reserved.
+//  Copyright 2011 Google LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <UIKit/UIKit.h>
 
 /// Search ad border types.
 typedef NS_ENUM(NSUInteger, GADSearchBorderType) {
@@ -64,14 +61,12 @@ typedef NS_ENUM(NSUInteger, GADSearchCallButtonColor) {
 /// can either be a solid color, or a gradient, which can be specified through
 /// setBackgroundGradientFrom:toColor: method. If both solid and gradient
 /// background is requested, only the latter is considered.
-- (void)setBackgroundSolid:(UIColor *)color;
+- (void)setBackgroundSolid:(nonnull UIColor *)color;
 
 /// A linear gradient background color for rendering the ad. The background of
 /// the ad can either be a linear gradient, or a solid color, which can be
 /// specified through setBackgroundSolid method. If both solid and gradient
 /// background is requested, only the latter is considered.
-- (void)setBackgroundGradientFrom:(UIColor *)from toColor:(UIColor *)toColor;
+- (void)setBackgroundGradientFrom:(nonnull UIColor *)from toColor:(nonnull UIColor *)toColor;
 
 @end
-
-NS_ASSUME_NONNULL_END

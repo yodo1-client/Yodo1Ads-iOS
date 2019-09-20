@@ -2,18 +2,15 @@
 //  GADNativeExpressAdView.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2015 Google Inc. All rights reserved.
+//  Copyright 2015 Google LLC. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 
 #import <GoogleMobileAds/GADAdSize.h>
 #import <GoogleMobileAds/GADNativeExpressAdViewDelegate.h>
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GADVideoController.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <UIKit/UIKit.h>
 
 /// The view that displays native ads. A minimum implementation to get an ad from within a
 /// UIViewController class is:
@@ -38,12 +35,12 @@ GAD_DEPRECATED_ATTRIBUTE
 /// |origin| relative to its superview bounds. Returns nil if |adSize| is an invalid ad size.
 - (nullable instancetype)initWithAdSize:(GADAdSize)adSize origin:(CGPoint)origin;
 
-/// Returns an initialized GADNativeExpressAdView instance set to |adSize| and positioned at the top
-/// left of its superview. Returns nil if |adSize| is an invalid ad size.
+/// Returns an initialized GADNativeExpressAdView instance set to |adSize| and positioned at the
+/// top left of its superview. Returns nil if |adSize| is an invalid ad size.
 - (nullable instancetype)initWithAdSize:(GADAdSize)adSize;
 
 /// Video controller for controlling video rendered by this native express ad view.
-@property(nonatomic, strong, readonly) GADVideoController *videoController;
+@property(nonatomic, readonly, nonnull) GADVideoController *videoController;
 
 #pragma mark - Pre-Request
 
@@ -77,7 +74,7 @@ GAD_DEPRECATED_ATTRIBUTE
 ///
 /// @param adOptions An array of GADAdLoaderOptions objects. The array is deep copied and option
 /// objects cannot be modified after calling this method.
-- (void)setAdOptions:(NSArray *)adOptions;
+- (void)setAdOptions:(nonnull NSArray *)adOptions;
 
 #pragma mark - Making an Ad Request
 
@@ -88,10 +85,8 @@ GAD_DEPRECATED_ATTRIBUTE
 
 /// The name of the ad network adapter class that fetched the current ad. Returns nil while the
 /// latest ad request is in progress or if the latest ad request failed. For both standard and
-/// mediated Google AdMob ads, this method returns @"GADMAdapterGoogleAdMobAds". For ads fetched via
-/// mediation custom events, this method returns @"GADMAdapterCustomEvents".
+/// mediated Google AdMob ads, this method returns @"GADMAdapterGoogleAdMobAds". For ads fetched
+/// via mediation custom events, this method returns @"GADMAdapterCustomEvents".
 @property(nonatomic, readonly, weak, nullable) NSString *adNetworkClassName;
 
 @end
-
-NS_ASSUME_NONNULL_END
