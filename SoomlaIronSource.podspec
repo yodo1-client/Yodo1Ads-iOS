@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaIronSource'
-    s.version          = '3.1.0'
+    s.version          = '3.1.1'
     s.summary          = 'Supported IronSource SDK v6.5-v6.8.3'
 
     s.description      = <<-DESC
@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
         "z",
         "sqlite3.0"
     ]
-    s.dependency 'Yodo1Soomla','3.1.0'
+    s.dependency 'Yodo1Soomla','3.1.1'
     s.dependency 'Yodo1AdsIronSource','3.0.8'
 end
