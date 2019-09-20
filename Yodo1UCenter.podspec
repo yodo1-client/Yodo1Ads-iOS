@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.0.19'
+    s.version          = '3.1.0'
     s.summary          = '修复内购买iOS系统兼容BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -45,5 +45,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','3.0.0'
     s.dependency 'Yodo1Reachability','3.0.0'
     s.dependency 'Yodo1KeyInfo','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
 end
