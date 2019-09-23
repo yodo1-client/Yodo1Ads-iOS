@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUnityAds'
-    s.version          = '3.0.7'
-    s.summary          = 'UnityAds of v3.1.0 [支持视频，插屏视频]'
+    s.version          = '3.0.8'
+    s.summary          = 'UnityAds of v3.2.0 [支持视频，插屏视频]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -31,5 +31,15 @@ Pod::Spec.new do |s|
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO"
     }
-    s.frameworks = 'UIKit', 'Security','SystemConfiguration','CoreGraphics','CoreTelephony','CoreFoundation','AdSupport','AVFoundation'
+    s.frameworks = [
+        'UIKit',
+        'Security',
+        'SystemConfiguration',
+        'CoreGraphics',
+        'CoreTelephony',
+        'CoreFoundation',
+        'AdSupport',
+        'AVFoundation'
+     ]
+
 end
