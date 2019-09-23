@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Tapjoy'
-    s.version          = '3.1.5'
-    s.summary          = '更新Tapjoy sdk 12.3.1'
+    s.version          = '3.2.0'
+    s.summary          = '更新Tapjoy sdk 12.3.3'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -28,11 +28,32 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
-    s.dependency 'Yodo1AdvertSDK','3.0.4'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
-    s.dependency 'Yodo1AdsTapjoy','3.0.7'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
+    s.dependency 'Yodo1AdvertSDK','3.0.5'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
+    s.dependency 'Yodo1AdsTapjoy','3.1.0'
 end
