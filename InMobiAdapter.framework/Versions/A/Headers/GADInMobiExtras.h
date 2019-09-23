@@ -9,9 +9,10 @@
 #import <GoogleMobileAds/GADRequest.h>
 #import <InMobiSDK/IMSdk.h>
 
-@interface GADInMobiExtras : NSObject<GADAdNetworkExtras>
+@interface GADInMobiExtras : NSObject <GADAdNetworkExtras>
 
 #pragma mark Optional Parameters for targeted advertising during an Ad Request
+
 /**
  * Age of the user may be used to deliver more relevant ads.
  */
@@ -59,7 +60,7 @@ Set InMobi SDK logLevel.
 /**
  * Provide additional values to be passed in the ad request as key-value pair.
  */
-@property(nonatomic, retain) NSDictionary *additionalParameters;
+@property(nonatomic, retain) NSDictionary<NSString *, id> *additionalParameters;
 
 #pragma mark Setting User Location
 /**
@@ -84,6 +85,9 @@ Set InMobi SDK logLevel.
  */
 @property(nonatomic, copy) NSString *sessionId;
 
-#pragma mark Setting Device Id Mask
+@property(nonatomic, copy, readonly) NSString *city;
+@property(nonatomic, copy, readonly) NSString *state;
+@property(nonatomic, copy, readonly) NSString *country;
+@property(nonatomic, strong, readonly) CLLocation *location;
 
 @end
