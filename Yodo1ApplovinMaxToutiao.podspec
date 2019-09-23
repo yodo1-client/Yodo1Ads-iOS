@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ApplovinMaxToutiao'
-    s.version          = '3.0.5'
-    s.summary          = 'Applovin sdk v6.7.1 聚合 [回调滚到v6.6.0]'
+    s.version          = '3.1.0'
+    s.summary          = 'Applovin sdk v6.9.3'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -33,11 +33,31 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'CoreMotion','UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit','MediaPlayer','SafariServices'
-
-    s.weak_frameworks = 'AdSupport'
-
-    s.dependency 'Yodo1AdsApplovin','3.0.5'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation',
+        'CoreMotion' ,
+        'CoreMedia', 
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security'
+    ]
+    s.dependency 'Yodo1AdsApplovin','3.1.0'
     s.dependency 'Yodo1AdsToutiao','3.1.0'
     # s.libraries = 'c++'
 end
