@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsTapjoy'
-    s.version          = '3.0.7'
-    s.summary          = '更新Tapjoy v12.3.1 [解决因为积分墙被拒审核的问题]'
+    s.version          = '3.1.0'
+    s.summary          = '更新Tapjoy v12.3.3 [支持iOS13]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -34,9 +34,38 @@ Pod::Spec.new do |s|
     'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation',
+        'CoreMotion' ,
+        'CoreMedia', 
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security'
+    ]
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    s.weak_frameworks = [
+        'AdSupport',
+        'SafariServices',
+        'ReplayKit',
+        'CloudKit',
+        'GameKit'
+    ]
 
     s.libraries = 'sqlite3.0','z','c++'
 end
