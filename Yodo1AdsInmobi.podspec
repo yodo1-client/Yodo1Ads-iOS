@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
     
     s.frameworks = 'AdSupport','AudioToolbox','AVFoundation','CoreTelephony','CoreLocation','Foundation','MediaPlayer','MessageUI','StoreKit','Social','SystemConfiguration','Security','SafariServices','UIKit'
     s.weak_frameworks = 'WebKit'
-    s.libraries = 'sqlite3.0','z'
+    s.libraries = 'sqlite3.0','z','xml2'
     s.requires_arc = true
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
