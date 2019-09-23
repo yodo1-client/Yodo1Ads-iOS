@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Vungle'
-    s.version          = '3.1.6'
-    s.summary          = '更新VungleSDk 6.2.0,最低支持iOS 8,添加广告位'
+    s.version          = '3.2.0'
+    s.summary          = '更新VungleSDk 6.4.3,最低支持iOS 8,添加广告位'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -28,11 +28,32 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security'
+    ]
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
-    s.dependency 'Yodo1AdvertSDK','3.0.4'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
-    s.dependency 'Yodo1AdsVungle','3.0.5'
+    s.dependency 'Yodo1AdvertSDK','3.0.5'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
+    s.dependency 'Yodo1AdsVungle','3.1.0'
 end
