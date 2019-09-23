@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAppLovin'
-    s.version          = '3.1.7'
-    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.7.1)[回调滚到v6.6.0]'
+    s.version          = '3.2.0'
+    s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.9.3)'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -32,11 +32,32 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
-    s.dependency 'YD1IronSource','3.1.5'
+   s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
+    s.dependency 'YD1IronSource','3.2.0'
     
-    s.dependency 'Yodo1IronSourceApplovin','3.0.7'
+    s.dependency 'Yodo1IronSourceApplovin','3.1.0'
 end
