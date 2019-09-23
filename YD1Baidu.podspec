@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Baidu'
-    s.version          = '3.1.6'
+    s.version          = '3.2.0'
     s.summary          = 'Baidu v4.65,不支持https [已经支持 不明显]'
 
     s.description      = <<-DESC
@@ -29,11 +29,32 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-    
-    s.dependency 'Yodo1AdvertSDK','3.0.4'
-    s.dependency 'Yodo1ThirdsAnalytics','3.0.13'
+   s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ] 
+    s.dependency 'Yodo1AdvertSDK','3.0.5'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
     s.dependency 'Yodo1AdsBaidu','3.0.3'
 end
