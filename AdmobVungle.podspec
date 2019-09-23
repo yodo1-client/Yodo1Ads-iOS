@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobVungle'
-    s.version          = '3.1.5'
-    s.summary          = 'Admob 更新v7.40.0'
+    s.version          = '3.2.0'
+    s.summary          = 'Admob 更新v7.50.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -25,10 +25,34 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
     s.requires_arc = true
-    s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.1.5'
-    s.dependency 'Yodo1AdsVungle','3.0.5'
+    s.dependency 'YD1Admob','3.2.0'
+    s.dependency 'Yodo1AdsVungle','3.1.0'
 
 end
