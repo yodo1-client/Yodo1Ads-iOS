@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAdmob'
-    s.version          = '3.1.5'
+    s.version          = '3.2.0'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
@@ -28,11 +28,32 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
+    s.dependency 'YD1IronSource','3.2.0'
     
-    s.dependency 'YD1IronSource','3.1.5'
-    
-    s.dependency 'Yodo1IronSourceAdmob','3.0.3'
+    s.dependency 'Yodo1IronSourceAdmob','3.1.0'
 end
