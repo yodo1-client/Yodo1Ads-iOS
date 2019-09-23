@@ -61,6 +61,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdsIronSource','3.1.0'
 
-    s.dependency 'Yodo1AdsUnityAds','3.1.0'
+    s.dependency 'Yodo1AdsUnityAds','3.0.8'
     
 end
