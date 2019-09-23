@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SoomlaAppLovin'
-    s.version          = '3.1.1'
+    s.version          = '3.1.2'
     s.summary          = 'Supported AppLovin v3.2.0-v6.7.1 [回调滚到v6.6.0] (Soomla v5.0.4去掉adapter)'
 
     s.description      = <<-DESC
@@ -44,5 +44,5 @@ TODO: Add long description of the pod here.
         "sqlite3.0"
     ]
     s.dependency 'Yodo1Soomla','3.1.1'
-    s.dependency 'Yodo1AdsApplovin','3.0.5'
+    s.dependency 'Yodo1AdsApplovin','3.1.0'
 end
