@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceApplovin'
-    s.version          = '3.0.7'
-    s.summary          = 'Adapter v4.3.3 [回调滚到v6.6.0]'
+    s.version          = '3.1.0'
+    s.summary          = 'Adapter v4.3.3'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -32,13 +32,35 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.8'
+    s.dependency 'Yodo1AdsIronSource','3.1.0'
 
-    s.dependency 'Yodo1AdsApplovin','3.0.5'
+    s.dependency 'Yodo1AdsApplovin','3.1.0'
     
 end
