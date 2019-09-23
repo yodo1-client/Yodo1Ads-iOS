@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceVungle'
-    s.version          = '3.0.5'
+    s.version          = '3.1.0'
     s.summary          = 'Adapter v4.1.6 of Vungle v6.3.2'
 
     s.description      = <<-DESC
@@ -37,8 +37,8 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.8'
+    s.dependency 'Yodo1AdsIronSource','3.1.0'
 
-    s.dependency 'Yodo1AdsVungle','3.0.5'
+    s.dependency 'Yodo1AdsVungle','3.1.0'
     
 end
