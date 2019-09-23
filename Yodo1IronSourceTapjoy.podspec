@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1IronSourceTapjoy'
-    s.version          = '3.0.5'
+    s.version          = '3.1.0'
     s.summary          = 'Adapter v4.1.3 '
 
     s.description      = <<-DESC
@@ -37,8 +37,8 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
-    s.dependency 'Yodo1AdsIronSource','3.0.8'
+    s.dependency 'Yodo1AdsIronSource','3.1.0'
 
-    s.dependency 'Yodo1AdsTapjoy','3.0.7'
+    s.dependency 'Yodo1AdsTapjoy','3.1.0'
     
 end
