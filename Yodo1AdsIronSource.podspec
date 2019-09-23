@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsIronSource'
-    s.version          = '3.0.8'
-    s.summary          = 'IronSource更新v6.8.4.0'
+    s.version          = '3.1.0'
+    s.summary          = 'IronSource更新v6.8.5.0 [iOS 13]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -26,6 +26,29 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
     s.requires_arc = true
-    s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation',
+        'CoreMotion' ,
+        'CoreMedia', 
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security'
+    ]
     s.libraries = 'z'
 end
