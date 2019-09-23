@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxChartboost'
-    s.version          = '3.0.2'
-    s.summary          = 'v6.7.1 [回调滚到v6.6.0]'
+    s.version          = '3.1.0'
+    s.summary          = 'v6.9.3'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -28,11 +28,32 @@ Pod::Spec.new do |s|
         'ENABLE_BITCODE' => 'NO',
         'ONLY_ACTIVE_ARCH' => 'NO'
     }
+    s.frameworks = [
+        'Accounts', 
+        'AssetsLibrary',
+        'AVFoundation', 
+        'CoreTelephony',
+        'CoreLocation', 
+        'CoreMotion',
+        'CoreMedia',
+        'EventKit',
+        'EventKitUI', 
+        'iAd', 
+        'ImageIO',
+        'MobileCoreServices', 
+        'MediaPlayer',
+        'MessageUI',
+        'MapKit',
+        'Social',
+        'StoreKit',
+        'Twitter',
+        'WebKit',
+        'SystemConfiguration',
+        'AudioToolbox',
+        'Security',
+        'CoreBluetooth'
+    ]
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
-    s.dependency 'Yodo1ApplovinMaxChartboost','3.0.2'  
-    s.dependency 'YD1ApplovinMax','3.1.7'
+    s.dependency 'Yodo1ApplovinMaxChartboost','3.1.0'  
+    s.dependency 'YD1ApplovinMax','3.2.0'
 end
