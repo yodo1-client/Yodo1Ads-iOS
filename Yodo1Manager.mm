@@ -234,7 +234,7 @@ extern "C" {
     }
 
     char* UnityGetDeviceId() {
-        const char* deviceId = [Yodo1Commons idfvString].UTF8String;
+        const char* deviceId = [Yodo1Commons idfaString].UTF8String;
         return Yodo1MakeStringCopy(deviceId);
     }
 
