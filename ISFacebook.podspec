@@ -60,6 +60,6 @@ Pod::Spec.new do |s|
     
     s.dependency 'YD1IronSource','3.2.0'
 
-    s.dependency 'Yodo1IronSourceFacebook','3.1.0'
+    s.dependency 'Yodo1IronSourceFacebook','3.1.1'
     
 end
