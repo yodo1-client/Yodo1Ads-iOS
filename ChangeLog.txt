@@ -1,4 +1,20 @@
 =============================================
+2019-09-26
+1. FBAudienceNetwork v5.5.1
+New: iOS13 support
+
+Official release for iOS 13 support
+Removed usage of UIWebView
+
+=============================================
+2019-09-20
+1.Facebook [core] SDK V5.6.0  FBAudienceNetwork视频广告v5.5.0[未适配iOS 13]
+
+=============================================
+2019-09-12
+1.Facebook 视频广告SDK V5.5.0 [未适配iOS 13]
+
+=============================================
 2019-05-06
 1.Facebook 视频广告SDK V5.4.0
 
