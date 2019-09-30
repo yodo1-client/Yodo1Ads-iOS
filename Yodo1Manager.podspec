@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
                             Vungle      已适配 v6.4.3  基本测试没发现问题   
                             今日头条（TIKTOK）    已适配 v2.4.6.0    
                             Mintegral   已适配 v5.7.1
+                            Soomla v5.1.1
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -217,7 +218,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'Yodo1Soomla','3.1.2'
+        ss.dependency 'Yodo1Soomla','3.1.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
