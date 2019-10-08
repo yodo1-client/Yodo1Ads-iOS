@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
                             Chartboost  已适配 v8.0.1  
                             Applovin    已适配 v6.8.1  
                             Tapjoy      已适配 v12.3.1 v12.3.2 2019.9.18已更新
-                            Facebook    未适配 v5.5.0  经过测试最新sdk,发现还没适配    
+                            Facebook    已适配 v5.5.1  经过测试最新sdk,发现还没适配    
                             Admob       已适配 v7.50.0 
                             IronSource  已适配 v6.8.5.0    
-                            UnityAds    未适配 v3.2.0  需要修改才能支持    等待平台发布最新Sdk
+                            UnityAds    已适配 v3.3.0  需要修改才能支持    等待平台发布最新Sdk
                             Vungle      已适配 v6.4.3  基本测试没发现问题   
                             今日头条（TIKTOK）    已适配 v2.4.6.0    
                             Mintegral   已适配 v5.7.1
@@ -218,7 +218,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'Yodo1Soomla','3.1.3'
+        ss.dependency 'Yodo1Soomla','3.1.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
