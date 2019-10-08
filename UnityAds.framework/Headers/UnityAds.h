@@ -28,6 +28,9 @@
 #import "UnityAdsPlacementState.h"
 #import "NSString+UnityAdsError.h"
 #import "UnityAdsExtendedDelegate.h"
+#import "UADSBannerView.h"
+#import "UADSBannerViewDelegate.h"
+#import "UADSBannerError.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
