@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1GameCenter'
-    s.version          = '3.0.5'
+    s.version          = '3.0.6'
     s.summary          = 'A short description of Yodo1GameCenter.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
     s.frameworks = 'UIKit','GameKit'
-    s.dependency 'Yodo1Commons','3.0.4'
+    s.dependency 'Yodo1Commons','3.1.0'
     s.dependency 'Yodo1Reachability','3.0.0'
 
 end
