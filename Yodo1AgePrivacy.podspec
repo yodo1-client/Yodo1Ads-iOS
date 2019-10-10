@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AgePrivacy'
-    s.version          = '3.0.0'
-    s.summary          = '添加隐私，未成年提示功能'
+    s.version          = '3.0.1'
+    s.summary          = '添加隐私，未成年提示功能,兼容iOS 13'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     s.requires_arc = true
     s.compiler_flags = '-Dunix'
     
-    s.dependency 'Yodo1Commons','3.0.4'
+    s.dependency 'Yodo1Commons','3.1.0'
     s.dependency 'Yodo1AFNetworking','3.0.0'
     s.dependency 'Yodo1YYModel','3.0.1'
     s.dependency 'Yodo1YYCache','3.0.0'
