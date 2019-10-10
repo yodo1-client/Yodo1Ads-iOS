@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name              = 'Yodo1QQSDK'
-    s.version           = '3.0.1'
-    s.summary           = 'QQ v3.3.3'
+    s.version           = '3.0.2'
+    s.summary           = 'QQ v3.3.6'
     s.description       = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
