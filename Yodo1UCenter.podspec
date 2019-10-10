@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '3.1.0'
+    s.version          = '3.1.1'
     s.summary          = '修复内购买iOS系统兼容BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -39,11 +39,11 @@ Pod::Spec.new do |s|
     s.requires_arc = false
     s.compiler_flags = '-Dunix'
     
-    s.dependency 'Yodo1Commons','3.0.4'
-    s.dependency 'Yodo1WeiboSDK','3.0.1'
-    s.dependency 'Yodo1QQSDK','3.0.0'
+    s.dependency 'Yodo1Commons','3.1.0'
+    s.dependency 'Yodo1WeiboSDK','3.0.2'
+    s.dependency 'Yodo1QQSDK','3.0.2'
     s.dependency 'Yodo1AFNetworking','3.0.0'
     s.dependency 'Yodo1Reachability','3.0.0'
     s.dependency 'Yodo1KeyInfo','3.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
 end
