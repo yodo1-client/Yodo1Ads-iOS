@@ -1,7 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1WeiboSDK'
-    s.version          = '3.0.1'
-    s.summary          = 'A short description of Yodo1WeiboSDK.'
+    s.version          = '3.0.2'
+    s.summary          = '微博移动SDK3.2.5具体的变动如下：替换UIWebView控件,
+                            适配iOS13，禁用暗黑模式，全屏展示页面删除无用代码及“支付”相关字符，
+                            优化内容，缩减包大小.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
