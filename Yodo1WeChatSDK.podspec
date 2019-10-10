@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO"
     }
 
-    s.frameworks = 'UIKit', 'ImageIO','SystemConfiguration','Security','CoreTelephony'
+    s.frameworks = 'UIKit', 'ImageIO','SystemConfiguration','Security','CoreTelephony','WebKit'
 
     s.libraries = 'z','sqlite3','stdc++'
 
