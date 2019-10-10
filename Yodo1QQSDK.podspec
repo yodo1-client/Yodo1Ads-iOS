@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
 
-    s.frameworks = 'UIKit', 'Security','SystemConfiguration','CoreGraphics','CoreTelephony','ImageIO','CloudKit','GameKit'
+    s.frameworks = 'UIKit', 'Security','SystemConfiguration','CoreGraphics','CoreTelephony','ImageIO','CloudKit','GameKit','WebKit'
 
 
     s.libraries = 'iconv','sqlite3.0','z','c++'
