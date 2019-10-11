@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Baidu'
-    s.version          = '3.2.0'
+    s.version          = '3.2.1'
     s.summary          = 'Baidu v4.65,不支持https [已经支持 不明显]'
 
     s.description      = <<-DESC
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ] 
-    s.dependency 'Yodo1AdvertSDK','3.0.5'
-    s.dependency 'Yodo1ThirdsAnalytics','3.1.0'
+    s.dependency 'Yodo1AdvertSDK','3.0.6'
+    s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
     s.dependency 'Yodo1AdsBaidu','3.0.3'
 end
