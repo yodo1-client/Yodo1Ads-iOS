@@ -83,24 +83,27 @@ typedef enum {
 }
 
 + (UIViewController*)getRootViewController {
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+     UIWindow* window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray* windows = [[UIApplication sharedApplication] windows];
-        for (window in windows) {
-            if (window.windowLevel == UIWindowLevelNormal) {
+        for (UIWindow* _window in windows) {
+            if (_window.windowLevel == UIWindowLevelNormal) {
+                window = _window;
                 break;
             }
         }
     }
-    
+    UIViewController* viewController = nil;
     for (UIView* subView in [window subviews]) {
         UIResponder* responder = [subView nextResponder];
         if ([responder isKindOfClass:[UIViewController class]]) {
-            return [Yodo1AdsDelegate topMostViewController:(UIViewController*)responder];
+            viewController = [self topMostViewController:(UIViewController*)responder];
         }
     }
-    
-    return nil;
+    if (!viewController) {
+        viewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    }
+    return viewController;
 }
 
 + (UIViewController*)topMostViewController:(UIViewController*)controller {
