@@ -12,6 +12,7 @@
 
 FOUNDATION_EXPORT NSString * const kYodo1QQAppId;
 FOUNDATION_EXPORT NSString * const kYodo1WechatAppId;
+FOUNDATION_EXPORT NSString * const kYodo1WechatUniversalLink;
 FOUNDATION_EXPORT NSString * const kYodo1SinaWeiboAppKey;
 FOUNDATION_EXPORT NSString * const kYodo1TwitterConsumerKey;
 FOUNDATION_EXPORT NSString * const kYodo1TwitterConsumerSecret;
