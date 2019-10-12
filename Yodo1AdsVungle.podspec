@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsVungle'
-    s.version          = '3.1.0'
-    s.summary          = '更新sdk v6.4.3 [iOS 13]'
+    s.version          = '3.1.1'
+    s.summary          = '更新sdk v6.4.5 [iOS 13]remove UIWebview'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
