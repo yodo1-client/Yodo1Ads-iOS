@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1QQSDK','3.0.2'
     s.dependency 'Yodo1WeChatSDK','3.0.2'
-    s.dependency 'Yodo1WeiboSDK','3.0.1'
+    s.dependency 'Yodo1WeiboSDK','3.0.3.1'
     s.dependency 'Yodo1FBSDKShareKit','3.1.0'
     s.dependency 'Yodo1TwitterKit','3.0.0'
 end
