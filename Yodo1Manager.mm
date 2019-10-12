@@ -117,7 +117,7 @@ static BOOL isInitialized = false;
         [snsPlugn setObject:wechatAppId forKey:kYodo1WechatAppId];
     }
     if (wechatUniversalLink) {
-        [snsPlugn setObject:wechatAppId forKey:kYodo1WechatUniversalLink];
+        [snsPlugn setObject:wechatUniversalLink forKey:kYodo1WechatUniversalLink];
     }
     if (sinaAppKey) {
         [snsPlugn setObject:sinaAppKey forKey:kYodo1SinaWeiboAppKey];
