@@ -58,6 +58,6 @@ Pod::Spec.new do |s|
         'Security'
     ]
     s.dependency 'Yodo1AdsApplovin','3.1.1'
-    s.dependency 'Yodo1AdsToutiao','3.1.1'
+    s.dependency 'Yodo1AdsToutiao','3.1.2'
     # s.libraries = 'c++'
 end
