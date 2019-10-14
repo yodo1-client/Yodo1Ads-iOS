@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ApplovinMaxInmobi'
-    s.version          = '3.1.0'
-    s.summary          = 'Applovin sdk v6.9.3'
+    s.version          = '3.1.1'
+    s.summary          = 'Applovin sdk v6.9.4'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
         'AudioToolbox',
         'Security'
     ]
-    s.dependency 'Yodo1AdsApplovin','3.1.0'
+    s.dependency 'Yodo1AdsApplovin','3.1.1'
     s.dependency 'Yodo1AdsInmobi','3.1.0'
     # s.libraries = 'c++'
 end
