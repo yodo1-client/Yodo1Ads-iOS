@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMintegral'
-    s.version          = '3.1.0'
-    s.summary          = '从v5.5.3 更新SDK v5.7.1 [iOS13]'
+    s.version          = '3.1.1'
+    s.summary          = '从v5.7.1 更新SDK v5.8.2 [iOS13]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
