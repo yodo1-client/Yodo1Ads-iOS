@@ -29,6 +29,8 @@
 	<dict>
 		<key>WechatAppId</key>
 		<string>wx85f3dcdb7e13035f</string>
+		<key>WechatUniversalLink</key>
+		<string>https://yodo1.com/rod/</string>
 		<key>SinaCallbackUrl</key>
 		<string>https://api.weibo.com/oauth2/default.html</string>
 		<key>SinaAppId</key>

@@ -1,22 +1,22 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.5.1'
-    s.summary          = 'v3.5.1 - 2019-10-11
+    s.version          = '3.5.2'
+    s.summary          = 'v3.5.2 - 2019-10-14
                             1.更新支持各平台的iOS 13 ==>
-                            ApplovinMAX 已适配 v6.8.1  
+                            ApplovinMAX 已适配 v6.9.4  
                             Chartboost  已适配 v8.0.1  
-                            Applovin    已适配 v6.8.1  
-                            Tapjoy      已适配 v12.3.1 v12.3.2 2019.9.18已更新
+                            Applovin    已适配 v6.9.4
+                            Tapjoy      已适配 v12.3.4 2019.9.18已更新
                             Facebook    已适配 v5.5.1  经过测试最新sdk,发现还没适配    
                             Admob       已适配 v7.50.0 
-                            IronSource  已适配 v6.8.5.0    
+                            IronSource  已适配 v6.8.7.0    
                             UnityAds    已适配 v3.3.0  需要修改才能支持    等待平台发布最新Sdk
-                            Vungle      已适配 v6.4.3  基本测试没发现问题   
-                            今日头条（TIKTOK）    已适配 v2.4.6.0    
-                            Mintegral   已适配 v5.7.1
-                            Soomla v5.1.1
-                            2.更新微信，QQ SDK [新浪微博尚未支持iOS 13]
-                            3.修复隐私UI的BUG [不支持iOS 13]
+                            Vungle      已适配 v6.4.5  基本测试没发现问题   
+                            今日头条（TIKTOK）    已适配 v2.4.6.7    
+                            Mintegral   已适配 v5.8.2
+                            Soomla v5.1.3
+                            2.更新微信，QQ SDK [支持iOS 13]
+                            3.修复隐私UI的BUG [支持iOS 13]
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -116,7 +116,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS'
         }
-        ss.dependency 'Yodo1Share','3.0.10'
+        ss.dependency 'Yodo1Share','3.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -124,7 +124,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_FACEBOOK_ANALYTICS'
         }
-        ss.dependency 'Yodo1FBSDKCoreKit','3.1.0'
+        ss.dependency 'Yodo1FBSDKCoreKit','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -332,7 +332,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Applovin','3.2.1'
+        ss.dependency 'YD1Applovin','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -340,7 +340,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1IronSource','3.2.1'
+        ss.dependency 'YD1IronSource','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -356,7 +356,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Mintegral','3.2.1'
+        ss.dependency 'YD1Mintegral','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -364,7 +364,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Tapjoy','3.2.1'
+        ss.dependency 'YD1Tapjoy','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -380,7 +380,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Vungle','3.2.1'
+        ss.dependency 'YD1Vungle','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -388,7 +388,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Toutiao','3.2.1'
+        ss.dependency 'YD1Toutiao','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -404,7 +404,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Facebook','3.2.1'
+        ss.dependency 'YD1Facebook','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -412,7 +412,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1GDT','3.2.1'
+        ss.dependency 'YD1GDT','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -420,7 +420,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1ApplovinMax','3.2.1'
+        ss.dependency 'YD1ApplovinMax','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -476,7 +476,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxFacebook','3.1.1'
+        ss.dependency 'ApplovinMaxFacebook','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -484,7 +484,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxAdmob','3.1.1'
+        ss.dependency 'ApplovinMaxAdmob','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -492,21 +492,21 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxInmobi','3.1.1'
+        ss.dependency 'ApplovinMaxInmobi','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_IronSource' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxIronSource','3.1.1'
+        ss.dependency 'ApplovinMaxIronSource','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Mintegral' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxMintegral','3.1.1'
+        ss.dependency 'ApplovinMaxMintegral','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -514,21 +514,21 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxTapjoy','3.1.1'
+        ss.dependency 'ApplovinMaxTapjoy','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_UnityAds' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxUnityAds','3.1.1'
+        ss.dependency 'ApplovinMaxUnityAds','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Vungle' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxVungle','3.1.1'
+        ss.dependency 'ApplovinMaxVungle','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -536,7 +536,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxToutiao','3.1.1'
+        ss.dependency 'ApplovinMaxToutiao','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -544,7 +544,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxChartboost','3.1.1'
+        ss.dependency 'ApplovinMaxChartboost','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
