@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxTapjoy'
-    s.version          = '3.1.1'
-    s.summary          = 'v6.9.3'
+    s.version          = '3.1.2'
+    s.summary          = 'v6.9.4'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -53,6 +53,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1ApplovinMaxTapjoy','3.1.0'  
-    s.dependency 'YD1ApplovinMax','3.2.1'
+    s.dependency 'Yodo1ApplovinMaxTapjoy','3.1.1'  
+    s.dependency 'YD1ApplovinMax','3.2.2'
 end
