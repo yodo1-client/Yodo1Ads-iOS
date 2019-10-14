@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Toutiao'
-    s.version          = '3.2.1'
-    s.summary          = 'UMAdSDK V2.4.6.0 添加iPad 在Info.plist配置广告位的需求'
+    s.version          = '3.2.2'
+    s.summary          = 'UMAdSDK V2.4.6.7 添加iPad 在Info.plist配置广告位的需求'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -56,5 +56,5 @@ Pod::Spec.new do |s|
     ]
     s.dependency 'Yodo1AdvertSDK','3.0.6'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AdsToutiao','3.1.0'
+    s.dependency 'Yodo1AdsToutiao','3.1.1'
 end
