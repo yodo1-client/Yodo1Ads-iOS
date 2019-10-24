@@ -198,19 +198,24 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     if (bundle == nil) {
         NSString *bundlePath = [[NSBundle bundleForClass:[self class]] pathForResource:bundleName ofType:@"bundle"];
         bundle = [NSBundle bundleWithPath:bundlePath];
-        NSString *language = [[NSLocale preferredLanguages] count]? [self language]: @"en";
+        NSString *language = [NSBundle mainBundle].preferredLocalizations.firstObject;
         if ([[bundle localizations] containsObject:language]) {
             bundlePath = [bundle pathForResource:language ofType:@"lproj"];
         } else {
-            NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
-            NSString* locSt = @"en";//默认英文
-            if ([[infoDictionary allKeys] containsObject:@"CFBundleDevelopmentRegion"]) {
-                locSt = [infoDictionary objectForKey:@"CFBundleDevelopmentRegion"];
+            language = [self language];
+            if ([[bundle localizations] containsObject:language]) {
+                bundlePath = [bundle pathForResource:language ofType:@"lproj"];
+            }else{
+                language = @"en";//默认英文
+                NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
+                if ([[infoDictionary allKeys] containsObject:@"CFBundleDevelopmentRegion"]) {
+                    language = [infoDictionary objectForKey:@"CFBundleDevelopmentRegion"];
+                }
+                if ([language isEqualToString:@"zh_CN"]) {
+                    language = @"zh-Hans";//中文
+                }
+                bundlePath = [bundle pathForResource:language ofType:@"lproj"];
             }
-            if ([locSt isEqualToString:@"zh_CN"]) {
-                locSt = @"zh-Hans";//中文
-            }
-            bundlePath = [bundle pathForResource:locSt ofType:@"lproj"];
         }
         bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
     }
@@ -219,15 +224,15 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (NSString *)language {
-    NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSArray * langArrayWord = [lang componentsSeparatedByString:@"-"];
-    NSString* langSt = [langArrayWord objectAtIndex:0];
-    if (langArrayWord.count >=3) {
-        langSt = [NSString stringWithFormat:@"%@-%@",
-                  [langArrayWord objectAtIndex:0],
-                  [langArrayWord objectAtIndex:1]];
-    }
-    return langSt;
+     NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+     NSArray * langArrayWord = [lang componentsSeparatedByString:@"-"];
+     NSString* langString = [langArrayWord objectAtIndex:0];
+     if (langArrayWord.count >= 3) {
+         langString = [NSString stringWithFormat:@"%@-%@",
+                   [langArrayWord objectAtIndex:0],
+                   [langArrayWord objectAtIndex:1]];
+     }
+     return langString;
 }
 
 - (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString {
