@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
                             Soomla v5.3.0
                             2.更新微信，QQ SDK [支持iOS 13]
                             3.修复隐私UI的BUG [支持iOS 13]
+                            4.更新Umeng V6.0.5 [去掉Dplus接口]
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -202,7 +203,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterUmeng','3.1.1'
+        ss.dependency 'AnalyticsAdapterUmeng','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
