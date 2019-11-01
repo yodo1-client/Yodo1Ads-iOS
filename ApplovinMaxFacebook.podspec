@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxFacebook'
-    s.version          = '3.1.2'
-    s.summary          = 'v6.9.4 更新Facebook的adapter v5.5.1'
+    s.version          = '3.1.3'
+    s.summary          = 'v6.9.5 更新Facebook的adapter v5.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -54,6 +54,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1ApplovinMaxFacebook','3.1.2'  
-    s.dependency 'YD1ApplovinMax','3.2.2'
+    s.dependency 'Yodo1ApplovinMaxFacebook','3.1.3'  
+    s.dependency 'YD1ApplovinMax','3.2.3'
 end
