@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
     s.vendored_frameworks = "#{s.version}" + '/AdColony.framework'
     
-    s.spec.vendored_libraries = "#{s.version}" + "/*.a"
+    s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
