@@ -1,4 +1,13 @@
 =============================================
+2019-10-30
+1. FBAudienceNetwork v5.6.0
+Change: UiWebView Removed
+We have removed all references to UIWebView which has been deprecated by Apple.
+Fixed: Interstitial video now plays when user navigates to next video carousel card from previous image card.
+Fixed: Interstitial now appears correctly when device is rotated after ad is loaded.
+Changed: FBSDKCoreKit_Basics dependency bumped to version 5.6.0 or greater.
+
+=============================================
 2019-09-26
 1. FBAudienceNetwork v5.5.1
 New: iOS13 support
