@@ -1,5 +1,12 @@
 =============================================
 2019-09-19
+v7.51.0
+Minimum supported iOS version increased to iOS 9. Apps can still link against iOS 8, but ads will only load on iOS 9+.
+Added currentTime and duration properties to GADMediaContent.
+Added mediaContent property to GADInstreamAd and removed videoController, duration, currentTime, and aspectRatio properties.
+Added the anchored adaptive banner API.
+=============================================
+2019-09-19
 1.GoogleMobileAds V7.50.0 [大更新]
 Official release for iOS 13 support.
 Added support for multi-scene apps. Apps supporting multiple scenes must set the scene property on GADRequest to receive appropriately sized ads.
