@@ -1,4 +1,15 @@
 =============================================
+2019-10-30
+
+Improvements:
+Improved compatibility with iOS 13.
+Removed usage of UIWebView.
+Removed support for Moat.
+Added MAX and Fairbid to the list of predefined CBMediation values.
+Notes:
+This version does no longer support iOS 8.
+
+=============================================
 2019-09-11
 Chartboost V8.0.1 支持iOS 13
 
