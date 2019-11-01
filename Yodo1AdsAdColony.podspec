@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdColony'
-    s.version          = '3.0.1'
-    s.summary          = 'A short description of Yodo1AdColony.'
+    s.version          = '3.0.2'
+    s.summary          = 'A short description of Yodo1AdColony. v4.1.2'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -16,12 +16,14 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/AdColony.framework/Versions/A/Headers/*.h'
+    s.source_files = "#{s.version}" + '/AdColony.framework/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/AdColony.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/AdColony.framework/Headers/*.h'
 
     s.vendored_frameworks = "#{s.version}" + '/AdColony.framework'
     
+    s.spec.vendored_libraries = "#{s.version}" + "/*.a"
+
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
     s.requires_arc = false
