@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterUmeng'
-    s.version          = '3.1.1'
-    s.summary          = 'A short description of AnalyticsAdapterUmeng.'
+    s.version          = '3.1.2'
+    s.summary          = 'v6.0.5'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -32,12 +32,12 @@ TODO: Add long description of the pod here.
         "ONLY_ACTIVE_ARCH" => "NO"
     }
    
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+    # s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-    s.libraries = 'sqlite3', 'z'
+    # s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
+    # s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1MobClick','3.0.0'
+    s.dependency 'Yodo1MobClick','3.1.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
 
 end

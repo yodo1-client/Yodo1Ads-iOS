@@ -6,9 +6,9 @@
 //
 
 #import "AnalyticsAdapterUmeng.h"
-#import <MobClickInOne/MobClick.h>
-#import <MobClickInOne/DplusMobClick.h>
-#import "MobClickGameAnalytics.h"
+#import <UMCommon/UMCommon.h>
+#import <UMAnalytics/MobClickGameAnalytics.h>
+#import <UMAnalytics/MobClick.h>
 #import "Yodo1AnalyticsManager.h"
 #import "Yodo1Registry.h"
 #import <Yodo1Commons.h>
@@ -39,28 +39,14 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
     self = [super init];
     if (self) {
 #ifdef DEBUG
-        [MobClick setLogEnabled:YES];
+        [UMConfigure setLogEnabled:YES];
 #endif
         NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
         NSAssert(appKey != nil, @"友盟 appKey 没有设置");
-        
-        UMConfigInstance.appKey = appKey;
-        UMConfigInstance.channelId = @"AppStore";
-        UMConfigInstance.ePolicy = SEND_INTERVAL;
-        UMConfigInstance.eSType = E_UM_GAME;
-        [MobClick startWithConfigure:UMConfigInstance];
-        [MobClick setAppVersion:[self appVersion]];
+        [UMConfigure initWithAppkey:appKey channel:@"AppStore"];
+        [MobClick setScenarioType:E_UM_GAME];//支持游戏场景
     }
     return self;
-}
-
-- (NSString*)appVersion
-{
-    NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    if ([[infoDictionary allKeys] containsObject:@"CFBundleShortVersionString"]) {
-        return [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    }
-    return nil;
 }
 
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
@@ -130,7 +116,7 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
         NSArray* arr = [[NSUserDefaults standardUserDefaults] objectForKey:kChargeRequstAnalytics];
         if ([arr count] >0) {
             for (int i = 0; i<[arr count]; i++) {
-                 NSDictionary* dic = [arr objectAtIndex:i];
+                NSDictionary* dic = [arr objectAtIndex:i];
                 if ([[dic allKeys]containsObject:orderId]) {
                     if (i==0) {
                         _currencyAmount = [[dic objectForKey:orderId]doubleValue];
@@ -142,7 +128,7 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
                 }
             }
         }
-
+        
         [MobClickGameAnalytics pay:_currencyAmount source:0 coin:_virtualCurrencyAmount];
         NSString* userId = [Yodo1Commons idfvString];
         NSString* amount = [NSString stringWithFormat:@"%f",_virtualCurrencyAmount];
@@ -173,52 +159,53 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 
 - (void)track:(NSString *)eventName
 {
-    if (eventName == nil) {
-        return;
-    }
-    [DplusMobClick track:eventName];
+#ifdef DEBUG
+    NSLog(@"track deprecated!");
+#endif
 }
 
 - (void)track:(NSString *)eventName property:(NSDictionary *) property
 {
-    if (eventName == nil || property == nil) {
-        return;
-    }
-    [DplusMobClick track:eventName property:property];
+#ifdef DEBUG
+    NSLog(@"track of property deprecated!");
+#endif
 }
 
 - (void)registerSuperProperty:(NSDictionary *)property
 {
-    if (property == nil) {
-        return;
-    }
-    [DplusMobClick registerSuperProperty:property];
+#ifdef DEBUG
+    NSLog(@"registerSuperProperty deprecated!");
+#endif
 }
 
 - (void)unregisterSuperProperty:(NSString *)propertyName
 {
-    if (propertyName == nil) {
-        return;
-    }
-    [DplusMobClick unregisterSuperProperty:propertyName];
+#ifdef DEBUG
+    NSLog(@"unregisterSuperProperty deprecated!");
+#endif
 }
 
 - (NSString *)getSuperProperty:(NSString *)propertyName
 {
-    if (propertyName) {
-        return [DplusMobClick getSuperProperty:propertyName];
-    }
-    return nil;
+#ifdef DEBUG
+    NSLog(@"getSuperProperty deprecated!");
+#endif
+    return @"";
 }
 
 - (NSDictionary *)getSuperProperties
 {
-  return [DplusMobClick getSuperProperties];
+#ifdef DEBUG
+    NSLog(@"getSuperProperties deprecated!");
+#endif
+    return @{};
 }
 
 - (void)clearSuperProperties
 {
-    [DplusMobClick clearSuperProperties];
+#ifdef DEBUG
+    NSLog(@"clearSuperProperties deprecated!");
+#endif
 }
 
 - (void)dealloc
