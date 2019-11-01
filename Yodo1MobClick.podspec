@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MobClick'
-    s.version          = '3.0.0'
-    s.summary          = 'MobClick 更新 V4.1.8.001'
+    s.version          = '3.1.0'
+    s.summary          = 'UMAnalytics 更新 V6.0.5+G_917526b7bc_20190701161549 [大更新]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -12,13 +12,13 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" +'/MobClickInOne.framework/Versions/A/Headers/*.h'
+    s.source_files = "#{s.version}" +'/UMAnalytics.framework/Versions/A/Headers/*.h',"#{s.version}" +'/UMCommon.framework/Versions/A/Headers/*.h'
     
-    s.public_header_files = "#{s.version}" +'/MobClickInOne.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" +'/UMAnalytics.framework/Versions/A/Headers/*.h',"#{s.version}" +'/UMCommon.framework/Versions/A/Headers/*.h'
   
-    s.vendored_frameworks = "#{s.version}" +'/MobClickInOne.framework'
+    s.vendored_frameworks = "#{s.version}" +'/*.framework'
 
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
@@ -28,9 +28,8 @@ Pod::Spec.new do |s|
 
     s.requires_arc = false
 
-    s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
+    s.frameworks = 'CoreTelephony','SystemConfiguration','UIKit','Foundation'
 
-    s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
 
 end
