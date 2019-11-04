@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1TalkingData'
-    s.version          = '3.0.0'
-    s.summary          = 'MobClick 更新 V4.1.8.001'
+    s.version          = '3.0.1'
+    s.summary          = 'v4.0.39'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '8.0'
 
     s.source_files = "#{s.version}" +'/*.h'
     

@@ -9,31 +9,32 @@
 #import <Foundation/Foundation.h>
 
 
-// 帐户类型
+// 账户类型
 typedef enum {
-    kAccountAnonymous = 0,      // 匿名帐户
-    kAccountRegistered = 1,     // 显性注册帐户
-    kAccountSinaWeibo = 2,      // 新浪微博
-    kAccountQQ = 3,             // QQ帐户
-    kAccountTencentWeibo = 4,   // 腾讯微博
-    kAccountND91 = 5,           // 91帐户
-    kAccountType1 = 11,         // 预留1
-    kAccountType2 = 12,         // 预留2
-    kAccountType3 = 13,         // 预留3
-    kAccountType4 = 14,         // 预留4
-    kAccountType5 = 15,         // 预留5
-    kAccountType6 = 16,         // 预留6
-    kAccountType7 = 17,         // 预留7
-    kAccountType8 = 18,         // 预留8
-    kAccountType9 = 19,         // 预留9
-    kAccountType10 = 20         // 预留10
+    kAccountAnonymous       = 0,    // 匿名账户
+    kAccountRegistered      = 1,    // 显性注册账户
+    kAccountSinaWeibo       = 2,    // 新浪微博
+    kAccountQQ              = 3,    // QQ账户
+    kAccountTencentWeibo    = 4,    // 腾讯微博
+    kAccountND91            = 5,    // 91账户
+    kAccountTypeWeiXin      = 6,    // 微信
+    kAccountType1           = 11,   // 预留1
+    kAccountType2           = 12,   // 预留2
+    kAccountType3           = 13,   // 预留3
+    kAccountType4           = 14,   // 预留4
+    kAccountType5           = 15,   // 预留5
+    kAccountType6           = 16,   // 预留6
+    kAccountType7           = 17,   // 预留7
+    kAccountType8           = 18,   // 预留8
+    kAccountType9           = 19,   // 预留9
+    kAccountType10          = 20    // 预留10
 } TDGAAccountType;
 
 // 性别
 typedef enum {
-    kGenderUnknown = 0,     // 未知
-    kGenderMale = 1,        // 男
-    kGenderFemale = 2       // 女
+    kGenderUnknown          = 0,    // 未知
+    kGenderMale             = 1,    // 男
+    kGenderFemale           = 2     // 女
 } TDGAGender;
 
 
@@ -41,6 +42,22 @@ typedef enum {
 
 
 @interface TalkingDataGA: NSObject
+
+/**
+ *  @method getDeviceId 获取设备id
+ */
++ (NSString *)getDeviceId;
+
+/**
+ *  @method setVerboseLogDisabled 设置不显示日志  如发布时不需显示日志，应当最先调用该方法
+ */
++ (void)setVerboseLogDisabled;
+
+/**
+ *  @method backgroundSessionEnabled
+ *  开启后台使用时长统计，需在SDK初始化之前调用。
+ */
++ (void)backgroundSessionEnabled;
 
 /**
  *	@method	onStart     初始化统计实例     请在application:didFinishLaunchingWithOptions:方法里调用
@@ -64,11 +81,6 @@ typedef enum {
 + (void)setLatitude:(double)latitude longitude:(double)longitude;
 
 /**
- *  @method getDeviceId 获取设备id
- */
-+ (NSString *)getDeviceId;
-
-/**
  *  @method setDeviceToken 设置DeviceToken
  *  @param  deviceToken    从Apple获取的DeviceToken
  */
@@ -81,16 +93,6 @@ typedef enum {
  */
 + (BOOL)handleTDGAPushMessage:(NSDictionary *)message;
 
-/**
- *  @method setVerboseLogDisabled 设置不显示日志  如发布时不需显示日志，应当最先调用该方法
- */
-+ (void)setVerboseLogDisabled;
-
-/**
- *  @method setSdkType 设置SDK类型  区分开发框架使用，开发者请勿调用
- */
-+ (void)setSdkType:(int)type;
-
 @end
 
 
@@ -100,25 +102,25 @@ typedef enum {
 @interface TDGAAccount : NSObject
 
 /**
- *	@method	setAccount  设置帐号
- *	@param 	accountId   帐号id    类型:NSString
+ *	@method	setAccount  设置账户
+ *	@param 	accountId   账户ID    类型:NSString
  */
 + (TDGAAccount *)setAccount:(NSString *)accountId;
 
 /**
- *	@method	setAccountName  设置帐号名称
+ *	@method	setAccountName  设置账户名称
  *	@param 	accountName     账户名称    类型:NSString
  */
 - (void)setAccountName:(NSString *)accountName;
 
 /**
- *	@method	setAccountType  设置帐号类型
+ *	@method	setAccountType  设置账户类型
  *	@param 	accountType     账户类型        类型TDGAAccountType
  */
 - (void)setAccountType:(TDGAAccountType)accountType;
 
 /**
- *	@method	setLevel    设置帐号等级
+ *	@method	setLevel    设置账户等级
  *	@param 	level       升级之后的等级     类型:int
  */
 - (void)setLevel:(int)level;
@@ -164,7 +166,7 @@ typedef enum {
 /**
  *	@method	onFailed    一项任务失败
  *	@param 	missionId   任务名称    类型:NSString
- *	@param 	failedCause 失败原因    类型:NSString
+ *	@param 	cause       失败原因    类型:NSString
  */
 + (void)onFailed:(NSString *)missionId failedCause:(NSString *)cause;
 
