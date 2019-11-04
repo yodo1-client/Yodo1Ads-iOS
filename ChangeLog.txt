@@ -1,4 +1,15 @@
 =============================================
+2019-11-04
+AppsFlyer V4.11.1
+Bug fixes and maintenance
+Dropped support for iOS 7. iOS 8 is the minimum supported version now.
+ Improved logging for better debug capabilities, ESP and Branded Links resolving as well as for onInstallConversionData and onAppOpenAttribution.
+Improved fetching of Apple S.
+
+Update for iOS 13 push token retrieval needed for Uninstall Measurement
+Bug fixes and maintenance
+
+=============================================
 2019-08-01
 AppsFlyer V4.10.3
 

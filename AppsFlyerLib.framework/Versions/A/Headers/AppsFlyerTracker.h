@@ -2,7 +2,7 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 4.10.3 (840)
+//  AppsFlyer iOS SDK 4.11.1 (916)
 //  Copyright (c) 2019 AppsFlyer Ltd. All rights reserved.
 //
 
@@ -313,6 +313,18 @@ typedef enum  {
  */
 @property(nonatomic) NSArray<NSString *> *oneLinkCustomDomains;
 
+/*
+ * Set phone number for each `trackAppLaunch` event. `phoneNumber` will be sent as SHA256 string
+ */
+@property(nonatomic) NSString *phoneNumber;
+
+- (NSString *)phoneNumber UNAVAILABLE_ATTRIBUTE;
+
+/**
+ To disable app's vendor identifier(IDFV), set disableIDFVCollection to true
+ */
+@property(nonatomic) BOOL disableIDFVCollection;
+    
 /**
  Enable the collection of Facebook Deferred AppLinks
  Requires Facebook SDK and Facebook app on target/client device.
