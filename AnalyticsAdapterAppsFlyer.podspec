@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AppsFlyer','3.0.1'
+    s.dependency 'Yodo1AppsFlyer','3.1.0'
 
 end
