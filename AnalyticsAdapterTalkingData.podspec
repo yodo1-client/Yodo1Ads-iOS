@@ -37,7 +37,7 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1TalkingData','3.0.0'
+    s.dependency 'Yodo1TalkingData','3.0.1'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
 
 end
