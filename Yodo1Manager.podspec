@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.5.3'
-    s.summary          = 'v3.5.3 - 2019-11-01
+    s.version          = '3.6.0'
+    s.summary          = 'v3.6.0 - 2019-11-12
                             1.更新支持各平台的iOS 13 ==>
                             ApplovinMAX 已适配 v6.9.5  
                             Chartboost  已适配 v8.0.3  
@@ -14,10 +14,14 @@ Pod::Spec.new do |s|
                             Vungle      已适配 v6.4.5
                             今日头条（TIKTOK）    已适配 v2.4.6.7    
                             Mintegral   已适配 v5.8.2
-                            Soomla v5.3.0
+                            AdColony    已适配 v4.1.2
+                            Soomla v5.3.2
                             2.更新微信，QQ SDK [支持iOS 13]
                             3.修复隐私UI的BUG [支持iOS 13]
                             4.更新Umeng V6.0.5 [去掉Dplus接口]
+                            5.更新TalkingData v4.0.40
+                            6.更新Swrve v6.3.0
+                            7.更新AppsFlyer v4.11.2
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -171,7 +175,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'PRIVACY'
         }
-        ss.dependency 'Yodo1AgePrivacy','3.0.2'
+        ss.dependency 'Yodo1AgePrivacy','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     ################# 统计 ##############
@@ -179,7 +183,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterAppsFlyer','3.1.1'
+        ss.dependency 'AnalyticsAdapterAppsFlyer','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -195,7 +199,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
         }
-        ss.dependency 'AnalyticsAdapterTalkingData','3.1.1'
+        ss.dependency 'AnalyticsAdapterTalkingData','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -220,7 +224,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
         }
-        ss.dependency 'Yodo1Soomla','3.1.6'
+        ss.dependency 'Yodo1Soomla','3.1.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
