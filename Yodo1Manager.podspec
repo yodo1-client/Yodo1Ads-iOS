@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Analytics','3.0.5'
         ss.dependency 'Yodo1ThirdsAnalytics','3.1.1'
         ss.dependency 'Yodo1AdsConfig','3.1.1'
-        ss.dependency 'Yodo1Track','3.0.5'
+        ss.dependency 'Yodo1Track','3.0.6'
         ss.dependency 'Yodo1FeedbackError','3.0.0'
         ss.dependency 'Yodo1OnlineParameter','3.0.4'
         ss.dependency 'Yodo1AdvertSDK','3.0.6'
