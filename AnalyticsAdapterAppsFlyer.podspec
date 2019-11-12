@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterAppsFlyer'
-    s.version          = '3.1.1'
+    s.version          = '3.1.2'
     s.summary          = 'A short description of AnalyticsAdapterAppsFlyer.'
 
     s.description      = <<-DESC
@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AppsFlyer','3.1.0'
+    s.dependency 'Yodo1AppsFlyer','3.1.1'
 
 end
