@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AgePrivacy'
-    s.version          = '3.0.3'
-    s.summary          = '添加隐私，未成年提示功能,兼容iOS 13 [优化多语言选择]'
+    s.version          = '3.0.4'
+    s.summary          = '添加隐私，未成年提示功能,兼容iOS 13 [优化多语言选择]添加隐私协议字段'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
