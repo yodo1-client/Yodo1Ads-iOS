@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Track'
-    s.version          = '3.0.5'
+    s.version          = '3.0.6'
     s.summary          = 'A short description of Yodo1Track.'
 
     s.description      = <<-DESC
@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1Commons','3.1.0'
-    s.dependency 'Yodo1TalkingData','3.0.1'
+    s.dependency 'Yodo1TalkingData','3.0.2'
     s.dependency 'Yodo1AFNetworking','3.0.0'
 end
