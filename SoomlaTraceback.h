@@ -11,7 +11,7 @@
 #import "TracebackAdvertising.h"
 #import "SoomlaConfig.h"
 
-#define SOOMLA_TRACEBACK_VERSION    @"5.3.0"
+#define SOOMLA_TRACEBACK_VERSION    @"5.4.0"
 
 static NSString *SOOMLA_AGENT_TAG = @"SOOMLA Agent SDK";
 
