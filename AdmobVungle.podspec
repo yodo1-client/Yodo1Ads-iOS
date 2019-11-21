@@ -14,10 +14,10 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/VungleAdapter.framework/Versions/A/Headers/*.h'
-    s.preserve_paths = "#{s.version}" + '/VungleAdapter.framework/*'
+    s.source_files = "#{s.version}" + '/VungleAdapter.framework/Headers/*.h'
+    # s.preserve_paths = "#{s.version}" + '/VungleAdapter.framework/*'
     s.vendored_frameworks = "#{s.version}" + '/VungleAdapter.framework'
-    s.public_header_files = "#{s.version}" + '/VungleAdapter.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/VungleAdapter.framework/Headers/*.h'
 
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
