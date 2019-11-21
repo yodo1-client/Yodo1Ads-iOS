@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxInmobi'
-    s.version          = '3.1.3'
-    s.summary          = 'v6.9.5'
+    s.version          = '3.1.4'
+    s.summary          = 'v6.10.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
 
     # s.vendored_libraries = "#{s.version}" + '/*.a'
     
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
     s.requires_arc = true
 
     s.xcconfig = {
@@ -53,6 +54,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1ApplovinMaxInmobi','3.1.2'  
-    s.dependency 'YD1ApplovinMax','3.2.3'
+    s.dependency 'Yodo1AdsInmobi','3.2.0'  
+    s.dependency 'YD1ApplovinMax','3.2.4'
 end
