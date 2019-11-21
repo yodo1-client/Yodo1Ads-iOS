@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxFacebook'
-    s.version          = '3.1.3'
-    s.summary          = 'v6.9.5 更新Facebook的adapter v5.6.0'
+    s.version          = '3.1.4'
+    s.summary          = 'v6.10.1 更新Facebook的adapter v5.6.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     #s.public_header_files = "#{s.version}" +'/*.h'
 
     # s.vendored_libraries = "#{s.version}" + '/*.a'
-    
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
     s.requires_arc = true
 
     s.xcconfig = {
@@ -54,6 +54,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1ApplovinMaxFacebook','3.1.3'  
+
     s.dependency 'YD1ApplovinMax','3.2.3'
+    s.dependency 'Yodo1AdsFacebook','3.1.3'
 end
