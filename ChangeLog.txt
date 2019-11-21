@@ -1,8 +1,4 @@
 =============================================
-2019-11-20
-v7.52.0
-
-=============================================
 2019-09-19
 v7.51.0
 Minimum supported iOS version increased to iOS 9. Apps can still link against iOS 8, but ads will only load on iOS 9+.
