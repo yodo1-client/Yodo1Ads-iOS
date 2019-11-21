@@ -55,6 +55,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1ApplovinMaxToutiao','3.1.3'  
+    s.dependency 'Yodo1AdsToutiao','3.1.3'  
     s.dependency 'YD1ApplovinMax','3.2.4'
 end
