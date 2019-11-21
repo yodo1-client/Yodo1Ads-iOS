@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsToutiao'
-    s.version          = '3.1.2'
-    s.summary          = '头条sdk v2.4.6.7 fix bug [iOS13] '
+    s.version          = '3.1.3'
+    s.summary          = '头条sdk v2.5.1.5 fix bug [iOS13] '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -36,13 +36,16 @@ Pod::Spec.new do |s|
                     "SystemConfiguration",
                     "AdSupport",
                     "CoreMotion",
-                    "Photos"
+                    "Photos",
+                    "ImageIO",
+                    "Accelerate"
                     ]
 
     # s.weak_frameworks = 'AdSupport'
 
     s.libraries = ["c++",
                     "resolv.9",
-                    "z"
+                    "z",
+                    "sqlite3"
                     ]
 end
