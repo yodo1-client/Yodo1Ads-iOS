@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMintegral'
-    s.version          = '3.1.1'
-    s.summary          = '从v5.7.1 更新SDK v5.8.2 [iOS13]'
+    s.version          = '3.2.0'
+    s.summary          = 'SDK v5.8.4'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -15,17 +15,17 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '8.0'
 
     s.source_files = [
-        "#{s.version}" + '/MTGSDK.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKReward.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKInterstitialVideo.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKBidding.framework/Versions/A/Headers/*.h'
+        "#{s.version}" + '/*.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKReward.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKInterstitialVideo.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKBidding.framework/Versions/A/Headers/*.h'
     ]
 
     s.public_header_files = [
-        "#{s.version}" + '/MTGSDK.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKReward.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKInterstitialVideo.framework/Versions/A/Headers/*.h',
-        "#{s.version}" + '/MTGSDKBidding.framework/Versions/A/Headers/*.h'
+        "#{s.version}" + '/*.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKReward.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKInterstitialVideo.framework/Versions/A/Headers/*.h',
+        # "#{s.version}" + '/MTGSDKBidding.framework/Versions/A/Headers/*.h'
     ]
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
@@ -33,10 +33,10 @@ Pod::Spec.new do |s|
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
     s.vendored_frameworks = [
-        "#{s.version}" + '/MTGSDK.framework',
-        "#{s.version}" + '/MTGSDKReward.framework',
-        "#{s.version}" + '/MTGSDKInterstitialVideo.framework',
-        "#{s.version}" + '/MTGSDKBidding.framework'
+        "#{s.version}" + '/*.framework',
+        # "#{s.version}" + '/MTGSDKReward.framework',
+        # "#{s.version}" + '/MTGSDKInterstitialVideo.framework',
+        # "#{s.version}" + '/MTGSDKBidding.framework'
     ]
 
     s.requires_arc = false
