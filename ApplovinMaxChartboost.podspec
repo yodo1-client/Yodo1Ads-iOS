@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxChartboost'
-    s.version          = '3.1.4'
+    s.version          = '3.1.5'
     s.summary          = 'v6.10.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
