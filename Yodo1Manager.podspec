@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.6.1'
-    s.summary          = 'v3.6.1 - 2019-11-21
+    s.version          = '3.6.2'
+    s.summary          = 'v3.6.2 - 2019-12-02
                             ---------------------------
                             1.更新支持各平台的iOS 13
                             2.更新微信，QQ SDK [支持iOS 13]
@@ -20,6 +20,9 @@ Pod::Spec.new do |s|
                             7.更新 GDT 4.10.19
                             8.更新Soomla v5.4.2 [移除UIWebView]
                             备注:Tapjoy [iPad 有个冻结的BUG],微信SDK没有移除UIWebView
+                            ---------------------------
+                            1.修复Facebook 视频广告回调的BUG
+
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -408,7 +411,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1Facebook','3.2.3'
+        ss.dependency 'YD1Facebook','3.2.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -588,7 +591,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'ApplovinMaxChartboost','3.1.4'
+        ss.dependency 'ApplovinMaxChartboost','3.1.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
