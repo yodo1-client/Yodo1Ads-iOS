@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Facebook'
-    s.version          = '3.2.3'
-    s.summary          = 'FBAudienceNetwork SDK V5.6.0 [core v5.9.0]'
+    s.version          = '3.2.4'
+    s.summary          = 'FBAudienceNetwork SDK V5.6.0 [core v5.9.0] fix bug Reward callback.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
