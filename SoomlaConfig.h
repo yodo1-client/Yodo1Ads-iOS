@@ -12,6 +12,10 @@
 - (void)initFinishedSuccessfully:(BOOL)success;
 @end
 
+@protocol SoomlaSdkConfigDelegate <NSObject>
+- (void)onSdkConfigured;
+@end
+
 @interface SoomlaConfig : NSObject
 
 @property (nonatomic) NSString *userId;
@@ -19,7 +23,9 @@
 @property (nonatomic) BOOL collectIdfa;
 @property (nonatomic) BOOL validateVersions;
 @property (nonatomic) BOOL sendAttributionData;
+@property (nonatomic) BOOL loadConnectorsAfterConfig;
 @property (nonatomic, weak) id<SoomlaInitDelegate> initDelegate;
+@property (nonatomic, weak) id<SoomlaSdkConfigDelegate> sdkConfigDelegate;
 
 + (SoomlaConfig*)config;
 
