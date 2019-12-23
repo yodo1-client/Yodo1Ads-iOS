@@ -1,4 +1,11 @@
 =============================================
+2019-12-6
+6.11.0	2019/12/03	
+• Improve LevelPlay notification mechanism
+• Minor bug fixes
+• Important! This version supports latest adapter versions only. In case updating from older version, make sure to update all adapters to the latest versions available
+
+=============================================
 2019-11-14
 6.10.0	2019/11/06	
 • ironSource In-App Bidding, Rewarded Video + Interstitial
