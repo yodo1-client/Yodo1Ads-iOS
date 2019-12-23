@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobUnityAds'
-    s.version          = '3.0.1'
-    s.summary          = 'Admob 更新v7.52.0'
+    s.version          = '3.1.0'
+    s.summary          = 'Admob 更新v7.53.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -14,10 +14,10 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '8.0'
 
-    s.source_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
+    # s.source_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
     # s.preserve_paths = "#{s.version}" + '/*.framework/*'
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
-    s.public_header_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
+    # s.public_header_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
 
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.2.4'
-    s.dependency 'Yodo1AdsUnityAds','3.1.0'
+    s.dependency 'YD1Admob','3.2.5'
+    s.dependency 'Yodo1AdsUnityAds','3.2.0'
 
 end
