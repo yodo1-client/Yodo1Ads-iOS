@@ -1,6 +1,32 @@
 =============================================
+2019-12-23
+v7.53.1
+Renamed the kGADErrorAppIDMissing error code to kGADErrorApplicationIdentifierMissing.
+Rewarded Mediation: Fixed a bug where open bidding did not work when using the GADRewardedAd API.
+
+=============================================
+2019-12-18
+v7.53.0
+Interstitial/Rewarded Ads: Added the canPresentFromViewController: method. Multiscene applications can use this method to check whether the ad can still be presented when the scene changes size.
+Interstitial Ads: interstitialDidFailToPresentScreen: is now called when trying to present an ad that isn’t ready or an ad that was already presented.
+Native ads: Fixed a bug where a UI API was called on a background thread.
+Fixed the GADBlockSignalSource memory leak that occurred when loading ads.
+Native Mediation: Removed GADMediatedNativeAppInstallAd and GADMediatedNativeContentAd.
+Native Mediation: Added duration and currentTime properties into the GADMediatedUnifiedNativeAd protocol.
+
+
+=============================================
 2019-11-20
 v7.52.0
+1.AdColonyAdapter / 4.1.2.0
+2.AppLovinAdapter / 6.10.1.0
+3.ChartboostAdapter/8.0.4.0
+4.VungleAdapter / 6.4.6.0
+5.UnityAdsAdapter /3.3.0.0
+6.TapjoyAdapter /12.3.3.0
+7.IronSourceAdapter /6.8.7.0
+8.FacebookAdapter / 5.6.0.0
+9.InmobiAdapter /7.4.0.0
 
 =============================================
 2019-09-19
