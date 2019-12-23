@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ISUnityAds'
-    s.version          = '3.2.0'
-    s.summary          = 'Adapter和SDK分离,更新UnityAds v3.2.0'
+    s.version          = '3.3.0'
+    s.summary          = 'Adapter和SDK分离,更新UnityAds v3.4.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
     # s.public_header_files = "#{s.version}" + '/ISUnityAdsAdapter.framework/Versions/A/Headers/*.h'
 
 
-    # s.vendored_frameworks = "#{s.version}" + '/ISUnityAdsAdapter.framework'
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
 
     s.requires_arc = true
 
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'YD1IronSource','3.2.0'
+    s.dependency 'YD1IronSource','3.2.4'
 
-    s.dependency 'Yodo1IronSourceUnityAds','3.1.0'
+    s.dependency 'Yodo1AdsUnityAds','3.2.0'
 end
