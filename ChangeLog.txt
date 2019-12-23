@@ -1,4 +1,18 @@
 ============================================
+2019-12-18
+1.更新unityAds V3.4.0 
+Deprecations
+
+Deprecated Monetization class.
+Removed example app for Monetization.
+Deprecation of initialize method with listener as a param in favor of initialize method without a listener.
+Bug Fixes
+
+Fixed iOS isWiredHeadsetOn Memory Leak
+Fixed iOS callback unityAdsDidError is not triggered when initialize with invalid gameId
+Various other small bug fixes
+
+============================================
 2019-10-08
 1.更新unityAds V3.3.0 [支持iOS 13,去掉UIWebview]
 ============================================
