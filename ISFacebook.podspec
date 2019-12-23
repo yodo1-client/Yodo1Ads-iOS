@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISFacebook'
-    s.version          = '3.2.0'
+    s.version          = '3.3.0'
     s.summary          = 'Facebook SDK 和Adapter 分离'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
-    # s.vendored_frameworks = "#{s.version}" + '/ISFacebookAdapter.framework'
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
 
     s.requires_arc = true
 
@@ -58,8 +58,8 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'YD1IronSource','3.2.0'
+    s.dependency 'YD1IronSource','3.2.4'
 
-    s.dependency 'Yodo1IronSourceFacebook','3.1.1'
+    s.dependency 'Yodo1AdsFacebook','3.1.3'
     
 end
