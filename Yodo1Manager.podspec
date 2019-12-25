@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.6.4'
-    s.summary          = 'v3.6.4 - 2019-12-23
+    s.version          = '3.7.0'
+    s.summary          = 'v3.7.0 - 2019-12-25
                             ---------------------------
                             1.更新 支持各平台的iOS 13
                             2.更新 微信，QQ SDK [支持iOS 13]
