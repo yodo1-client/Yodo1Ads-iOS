@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
                             4.更新 IronSource v6.11.0
                             5.更新 Mintegral v5.8.6
                             6.更新 Inmobi 9.0.1
-                            7.更新 GDT 4.10.19
+                            7.更新 GDT 4.11.2
                             8.更新 Soomla v5.5.3 [移除UIWebView]
                             9.更新 UnityAds v3.4.0
                             10.更新 Tapjoy 12.4.0
@@ -423,7 +423,7 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
         }
-        ss.dependency 'YD1GDT','3.2.3'
+        ss.dependency 'YD1GDT','3.2.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
