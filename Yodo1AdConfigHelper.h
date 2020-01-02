@@ -95,15 +95,22 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (void)setInitedWithInitType:(SDKInitType)type
                      isInited:(BOOL)isInited;
 
+
+
+/// return YES 同意收集数据,默认是收集数据
+- (BOOL)isUserConsent;
+/// consent is YES 是同意收集数据，NO不同意收集数据
 - (void)setUserConsent:(BOOL)consent;
 
+/// consent is YES 是16岁以下，NO 默认是16岁以上
 - (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
-
-// return ture 同意收集数据
-- (BOOL)isUserConsent;
-
-// return true 表示16岁以下
+/// return true 表示16岁以下
 - (BOOL)isTagForUnderAgeOfConsent;
+
+/// return true 如果用户选择不出售其个人信息，请将以下标记设置为true。
+- (BOOL)isDoNotSell;
+/// 如果用户选择不出售其个人信息，请将以下标记设置为true。
+- (void)setDoNotSell:(BOOL)doNotSell;
 
 @end
 
