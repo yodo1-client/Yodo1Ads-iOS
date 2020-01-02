@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
                             ---------------------------
                             1.更新Admob 视频聚合新的API
                             ---------------------------
+                            1.添加CCPA接口
+                            ---------------------------
                           '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

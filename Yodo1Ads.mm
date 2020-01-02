@@ -14,13 +14,14 @@
 #import "Yodo1OnlineParameter.h"
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
-#import "YD1LogView.h"
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
+#import "YD1AdsManager.h"
+#import "YD1LogView.h"
 #import "Yodo1AdConfigHelper.h"
 #endif
 
@@ -466,6 +467,8 @@ typedef enum {
 @implementation Yodo1Ads
 
 static bool bYodo1AdsInited = false;
+static NSString* yd1AppKey = @"";
+
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
         NSLog(@"[Yodo1 Ads] has already been initialized");
@@ -474,7 +477,7 @@ static bool bYodo1AdsInited = false;
     bYodo1AdsInited = true;
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
-    
+    yd1AppKey = appKey;
     //初始化错误上报系统
     NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
     if ([feedback isEqualToString:@"on"]) {//默认是关
@@ -497,9 +500,18 @@ static bool bYodo1AdsInited = false;
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
+    
+    [[NSNotificationCenter defaultCenter] addObserver:[Yodo1Ads class]
+                                             selector:@selector(onlineParameterNF:)
+                                                 name:kYodo1OnlineConfigFinishedNotification
+                                               object:nil];
+}
+
++ (void)onlineParameterNF:(NSNotification*)nofi {
     if ([Yodo1OnlineParameter isTestDevice] && [Yodo1OnlineParameter isDeviceSourceFromPA]) {
-        [YD1LogView startLog:appKey];
+        [YD1LogView startLog:yd1AppKey];
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
 }
 
 + (void)setLogEnable:(BOOL)enable {
@@ -642,6 +654,12 @@ static bool bYodo1AdsInited = false;
 #endif
 }
 
++ (void)setDoNotSell:(BOOL)doNotSell {
+#ifdef YODO1_ADS
+    [[Yodo1AdConfigHelper instance]setDoNotSell:doNotSell];
+#endif
+}
+
 @end
 
 
@@ -740,6 +758,12 @@ extern "C" {
     {
         [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
     }
+
+void Unity3dSetDoNotSell(BOOL doNotSell)
+{
+    [Yodo1Ads setDoNotSell:doNotSell];
+}
+
 }
 
 #endif
@@ -851,4 +875,9 @@ void Yodo1AdsC::SetUserConsent(BOOL consent)
 void Yodo1AdsC::SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
 {
     [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
+}
+
+void Yodo1AdsC::SetDoNotSell(BOOL doNotSell)
+{
+    [Yodo1Ads setDoNotSell:doNotSell];
 }

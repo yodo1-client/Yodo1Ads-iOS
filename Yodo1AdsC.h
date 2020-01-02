@@ -143,6 +143,14 @@ public:
     * isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
     */
     static void SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge);
+    
+    /**
+     * Set whether or not user has opted out of the sale of their
+     * personal information.
+     * doNotSell 'YES' if the user has opted out of the sale of
+     * their personal information.
+     */
+    static void SetDoNotSell(BOOL doNotSell);
 };
 
 #endif /* Yodo1AdsC_h */

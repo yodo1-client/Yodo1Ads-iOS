@@ -113,4 +113,8 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
 + (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
 
+//Set whether or not user has opted out of the sale of their personal information.
+//doNotSell 'YES' if the user has opted out of the sale of their personal information.
++ (void)setDoNotSell:(BOOL)doNotSell;
+
 @end
