@@ -15,15 +15,13 @@
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 
-#import "YD1AdsManager.h"
-#import "YD1LogView.h"
-
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
 #import "Yodo1AdConfigHelper.h"
+#import "YD1LogView.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
