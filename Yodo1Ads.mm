@@ -14,6 +14,7 @@
 #import "Yodo1OnlineParameter.h"
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
+#import "YD1LogView.h"
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
@@ -21,7 +22,6 @@
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
 #import "Yodo1AdConfigHelper.h"
-#import "YD1LogView.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
@@ -466,8 +466,6 @@ typedef enum {
 @implementation Yodo1Ads
 
 static bool bYodo1AdsInited = false;
-static NSString* yd1AppKey = @"";
-
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
         NSLog(@"[Yodo1 Ads] has already been initialized");
@@ -476,7 +474,7 @@ static NSString* yd1AppKey = @"";
     bYodo1AdsInited = true;
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
-    yd1AppKey = appKey;
+    
     //初始化错误上报系统
     NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
     if ([feedback isEqualToString:@"on"]) {//默认是关
@@ -499,18 +497,9 @@ static NSString* yd1AppKey = @"";
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
-    
-    [[NSNotificationCenter defaultCenter] addObserver:[Yodo1Ads class]
-                                             selector:@selector(onlineParameterNF:)
-                                                 name:kYodo1OnlineConfigFinishedNotification
-                                               object:nil];
-}
-
-+ (void)onlineParameterNF:(NSNotification*)nofi {
     if ([Yodo1OnlineParameter isTestDevice] && [Yodo1OnlineParameter isDeviceSourceFromPA]) {
-        [YD1LogView startLog:yd1AppKey];
+        [YD1LogView startLog:appKey];
     }
-    [[NSNotificationCenter defaultCenter] removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
 }
 
 + (void)setLogEnable:(BOOL)enable {
