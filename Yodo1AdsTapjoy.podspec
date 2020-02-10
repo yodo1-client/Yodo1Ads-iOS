@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsTapjoy'
-    s.version          = '3.2.0'
-    s.summary          = '更新Tapjoy v12.4.0 fix bug'
+    s.version          = '3.2.1'
+    s.summary          = '更新Tapjoy v12.4.1 fix bug'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
