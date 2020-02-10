@@ -1,4 +1,26 @@
 =============================================
+2020-02-07
+v7.55.0
+1.AdColonyAdapter / 4.1.3.0
+2.AppLovinAdapter / 6.11.1.0
+3.ChartboostAdapter/8.0.4.0
+4.VungleAdapter / 6.4.6.0
+5.UnityAdsAdapter /3.4.0.0
+6.TapjoyAdapter /12.4.1.0
+7.IronSourceAdapter /6.13.1.0
+8.FacebookAdapter / 5.6.1.0
+9.InmobiAdapter /9.0.0.0
+=============================================
+2020-02-06
+v7.55.0	
+Removed all references to UIWebView. UIWebView is no longer supported.
+
+=============================================
+2020-02-04
+v7.54.0	
+Enabled WKWebView as the SDK default across all web views.
+
+=============================================
 2019-12-23
 v7.53.1
 Renamed the kGADErrorAppIDMissing error code to kGADErrorApplicationIdentifierMissing.
