@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsIronSource'
-    s.version          = '3.2.0'
-    s.summary          = 'IronSource更新v6.11.0.0'
+    s.version          = '3.2.1'
+    s.summary          = 'IronSource更新v6.14.0.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
