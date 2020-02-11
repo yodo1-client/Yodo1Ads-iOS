@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobFacebook'
-    s.version          = '3.2.6'
-    s.summary          = 'Admob 更新v7.53.1，Facebook SDK v5.6.0'
+    s.version          = '3.2.7'
+    s.summary          = 'Admob 更新v7.55.0，Facebook SDK v5.6.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -19,11 +19,15 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/FacebookAdapter.framework'
     s.public_header_files = "#{s.version}" + '/FacebookAdapter.framework/Versions/A/Headers/*.h'
 
+    valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
+
     s.requires_arc = true
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
