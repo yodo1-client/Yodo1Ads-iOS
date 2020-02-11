@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1ApplovinMax'
-    s.version          = '3.2.5'
-    s.summary          = 'ApplovinMax v6.11.0'
+    s.version          = '3.2.6'
+    s.summary          = 'ApplovinMax v6.11.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -23,10 +23,15 @@ Pod::Spec.new do |s|
     
     s.requires_arc = true
 
+
+
+    valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
 
     s.frameworks = [
@@ -56,5 +61,5 @@ Pod::Spec.new do |s|
     ]
     s.dependency 'Yodo1AdvertSDK','3.1.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AdsApplovin','3.3.0'
+    s.dependency 'Yodo1AdsApplovin','3.3.1'
 end
