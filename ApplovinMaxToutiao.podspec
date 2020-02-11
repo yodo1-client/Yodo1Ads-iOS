@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxToutiao'
-    s.version          = '3.2.0'
-    s.summary          = 'v6.11.0'
+    s.version          = '3.2.1'
+    s.summary          = 'v6.11.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -24,11 +24,15 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
     s.requires_arc = true
 
+   valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
+
 
    s.frameworks = [
         'Accounts', 
@@ -55,6 +59,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdsToutiao','3.1.3'  
-    s.dependency 'YD1ApplovinMax','3.2.5'
+    s.dependency 'Yodo1AdsToutiao','3.1.4'  
+    s.dependency 'YD1ApplovinMax','3.2.6'
 end
