@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobVungle'
-    s.version          = '3.2.6'
-    s.summary          = 'Admob 更新v7.53.1'
+    s.version          = '3.2.7'
+    s.summary          = 'Admob 更新v7.55.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -19,10 +19,13 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/VungleAdapter.framework'
     # s.public_header_files = "#{s.version}" + '/VungleAdapter.framework/Headers/*.h'
 
+     valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
     s.requires_arc = true
     s.frameworks = [
@@ -52,7 +55,7 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.2.5'
-    s.dependency 'Yodo1AdsVungle','3.1.1'
+    s.dependency 'YD1Admob','3.2.6'
+    s.dependency 'Yodo1AdsVungle','3.1.2'
 
 end
