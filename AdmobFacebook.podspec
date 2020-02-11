@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.2.5'
-    s.dependency 'Yodo1AdsFacebook','3.1.3'
+    s.dependency 'YD1Admob','3.2.6'
+    s.dependency 'Yodo1AdsFacebook','3.1.4'
 
 end
