@@ -1,34 +1,22 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.7.0'
-    s.summary          = 'v3.7.0 - 2019-12-25
+    s.version          = '3.8.0.pre'
+    s.summary          = 'v3.8.0 - 2020-02-11
                             ---------------------------
-                            1.更新 支持各平台的iOS 13
-                            2.更新 微信，QQ SDK [支持iOS 13]
-                            3.修复隐私UI的BUG [支持iOS 13]
-                            4.更新 Umeng V6.0.5 [去掉Dplus接口]
-                            5.更新 TalkingData v4.0.40
-                            6.更新 Swrve v6.3.0
-                            7.更新 AppsFlyer v4.11.2
-                            ---------------------------
-                            1.更新 Applovin v6.11.0
-                            2.更新 Admob v7.53.1
-                            3.更新 Toutiao v2.5.1.5
-                            4.更新 IronSource v6.11.0
-                            5.更新 Mintegral v5.8.6
-                            6.更新 Inmobi 9.0.1
-                            7.更新 GDT 4.11.2
-                            8.更新 Soomla v5.5.3 [移除UIWebView]
-                            9.更新 UnityAds v3.4.0
-                            10.更新 Tapjoy 12.4.0
-                            备注:Tapjoy [iPad 有个冻结的BUG],微信SDK没有移除UIWebView
-                            ---------------------------
-                            1.修复Facebook 视频广告回调的BUG
+                            1.AdColony  v4.1.3
+                            2.Admob v7.55.0
+                            3.Applovin v6.11.1
+                            4.Vungle v6.5.1
+                            5.UnityAds v3.4.2
+                            6.Facebook v5.6.1
+                            7.GDT v4.11.3
+                            8.Inmobi v9.0.4.0
+                            9.IronSource v6.14.0.0
+                            10.Mintegral v5.8.8
+                            11.Toutiao v2.7.5.2
+                            12.Tapjoy v12.4.1
 
-                            ---------------------------
-                            1.更新Admob 视频聚合新的API
-                            ---------------------------
-                            1.添加CCPA接口
+                            13.更新 Soomla v5.6.6 [移除UIWebView]
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -43,6 +31,8 @@ Pod::Spec.new do |s|
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
+    
+    valid_archs = ['armv7', 'x86_64', 'arm64']
 
     s.subspec 'Yodo1_Manager' do |ss|
         ss.source_files = "#{s.version}" + '/*.{h,mm}'
@@ -56,7 +46,8 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "OTHER_LDFLAGS" => "-ObjC",
             "ENABLE_BITCODE" => "NO",
-            "ONLY_ACTIVE_ARCH" => "NO"
+            "ONLY_ACTIVE_ARCH" => "NO",
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1KeyInfo','3.0.0'
         ss.dependency 'Yodo1Commons','3.1.0'
@@ -79,7 +70,8 @@ Pod::Spec.new do |s|
         ss.xcconfig = {
             "OTHER_LDFLAGS" => "-ObjC",
             "ENABLE_BITCODE" => "NO",
-            "ONLY_ACTIVE_ARCH" => "NO"
+            "ONLY_ACTIVE_ARCH" => "NO",
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
     end
 
@@ -88,14 +80,16 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'UNITY_PROJECT',
             "OTHER_LDFLAGS" => "-ObjC",
             "ENABLE_BITCODE" => "NO",
-            "ONLY_ACTIVE_ARCH" => "NO"
+            "ONLY_ACTIVE_ARCH" => "NO",
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Yodo1_UCenter' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_UCCENTER',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1UCenter','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -103,7 +97,8 @@ Pod::Spec.new do |s|
     
     s.subspec 'Yodo1_Analytics' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1Analytics','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -111,7 +106,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_ThirdsAnalytics' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1ThirdsAnalytics','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -127,7 +123,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_Share' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1Share','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -135,15 +132,17 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_FBSDKCoreKit' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_FACEBOOK_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_FACEBOOK_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'Yodo1FBSDKCoreKit','3.1.2'
+        ss.dependency 'Yodo1FBSDKCoreKit','3.2.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Yodo1_iRate' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'IRATE'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'IRATE',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1iRate','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -151,21 +150,24 @@ Pod::Spec.new do |s|
 
      s.subspec 'Yodo1_GameCenter' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'GAMECENTER'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'GAMECENTER',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1GameCenter','3.0.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
      s.subspec 'Yodo1_iCloud' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'ICLOUD'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'ICLOUD',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1iCloud','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Yodo1_Notification' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'NOTIFICATION'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'NOTIFICATION',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1Notification','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -173,7 +175,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_Replay' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'REPLAY'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'REPLAY',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1Replay','3.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -181,7 +184,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'Yodo1_AgePrivacy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'PRIVACY'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'PRIVACY',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'Yodo1AgePrivacy','3.0.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -189,7 +193,8 @@ Pod::Spec.new do |s|
     ################# 统计 ##############
      s.subspec 'Analytics_AppsFlyer' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'AnalyticsAdapterAppsFlyer','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -205,7 +210,8 @@ Pod::Spec.new do |s|
     
     s.subspec 'Analytics_TalkingData' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'AnalyticsAdapterTalkingData','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -213,7 +219,8 @@ Pod::Spec.new do |s|
     
     s.subspec 'Analytics_Umeng' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'AnalyticsAdapterUmeng','3.1.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -221,7 +228,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'Analytics_Swrve' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ANALYTICS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'AnalyticsAdapterSwrve','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -230,9 +238,10 @@ Pod::Spec.new do |s|
     ################# Soomla ##############
     s.subspec 'Yodo1_Soomla' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SOOMLA',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'Yodo1Soomla','3.2.1'
+        ss.dependency 'Yodo1Soomla','3.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -335,79 +344,89 @@ Pod::Spec.new do |s|
     ################# YD1 广告 ##############
     s.subspec 'YD1_Admob' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Admob','3.2.5'
+        ss.dependency 'YD1Admob','3.2.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Applovin' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Applovin','3.2.5'
+        ss.dependency 'YD1Applovin','3.2.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_IronSource' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1IronSource','3.2.4'
+        ss.dependency 'YD1IronSource','3.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Inmobi' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Inmobi','3.2.2'
+        ss.dependency 'YD1Inmobi','3.2.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Mintegral' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Mintegral','3.2.4'
+        ss.dependency 'YD1Mintegral','3.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Tapjoy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Tapjoy','3.2.3'
+        ss.dependency 'YD1Tapjoy','3.2.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_UnityAds' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1UnityAds','3.2.2'
+        ss.dependency 'YD1UnityAds','3.2.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Vungle' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Vungle','3.2.2'
+        ss.dependency 'YD1Vungle','3.2.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Toutiao' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Toutiao','3.2.3'
+        ss.dependency 'YD1Toutiao','3.2.4'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Baidu' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
         ss.dependency 'YD1Baidu','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
@@ -415,111 +434,133 @@ Pod::Spec.new do |s|
 
     s.subspec 'YD1_Facebook' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Facebook','3.2.4'
+        ss.dependency 'YD1Facebook','3.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_GDT' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1GDT','3.2.4'
+        ss.dependency 'YD1GDT','3.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
     s.subspec 'YD1_ApplovinMax' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1ApplovinMax','3.2.5'
+        ss.dependency 'YD1ApplovinMax','3.2.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_Chartboost' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1Chartboost','3.2.2'
+        ss.dependency 'YD1Chartboost','3.2.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'YD1_AdColony' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1AdColony','3.0.0'
+        ss.dependency 'YD1AdColony','3.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
+    s.subspec 'YD1_MyTarget' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
+        }
+        ss.dependency 'YD1MyTarget','3.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     ######## YD1 Admob ########
     s.subspec 'Admob_Facebook' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobFacebook','3.2.6'
+        ss.dependency 'AdmobFacebook','3.2.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_IronSource' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobIronSource','3.2.6'
+        ss.dependency 'AdmobIronSource','3.2.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_Tapjoy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobTapjoy','3.2.6'
+        ss.dependency 'AdmobTapjoy','3.2.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_Vungle' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobVungle','3.2.6'
+        ss.dependency 'AdmobVungle','3.2.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Admob_Inmobi' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobInmobi','3.2.6'
+        ss.dependency 'AdmobInmobi','3.2.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Admob_UnityAds' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobUnityAds','3.1.0'
+        ss.dependency 'AdmobUnityAds','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Admob_Chartboost' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobChartboost','3.1.0'
+        ss.dependency 'AdmobChartboost','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'Admob_AppLovin' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobAppLovin','3.1.0'
+        ss.dependency 'AdmobAppLovin','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
    s.subspec 'Admob_AdColony' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobAdColony','3.1.0'
+        ss.dependency 'AdmobAdColony','3.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -527,136 +568,162 @@ Pod::Spec.new do |s|
 
     s.subspec 'ApplovinMax_Facebook' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxFacebook','3.2.0'
+        ss.dependency 'ApplovinMaxFacebook','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_Admob' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxAdmob','3.2.0'
+        ss.dependency 'ApplovinMaxAdmob','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_Inmobi' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxInmobi','3.2.0'
+        ss.dependency 'ApplovinMaxInmobi','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_IronSource' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxIronSource','3.2.0'
+        ss.dependency 'ApplovinMaxIronSource','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Mintegral' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxMintegral','3.2.0'
+        ss.dependency 'ApplovinMaxMintegral','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_Tapjoy' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxTapjoy','3.2.0'
+        ss.dependency 'ApplovinMaxTapjoy','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_UnityAds' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxUnityAds','3.2.0'
+        ss.dependency 'ApplovinMaxUnityAds','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Vungle' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxVungle','3.2.0'
+        ss.dependency 'ApplovinMaxVungle','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_Toutiao' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxToutiao','3.2.0'
+        ss.dependency 'ApplovinMaxToutiao','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_Chartboost' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxChartboost','3.2.0'
+        ss.dependency 'ApplovinMaxChartboost','3.2.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
     s.subspec 'ApplovinMax_AdColony' do |ss|
         ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxAdColony','3.2.0'
+        ss.dependency 'ApplovinMaxAdColony','3.2.1'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'ApplovinMax_MyTarget' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            "VALID_ARCHS" =>  valid_archs.join(' '),
+        }
+        ss.dependency 'ApplovinMaxMyTarget','3.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     ######## YD1ISource ########
 
     ##已经启用IronSource聚合
-    s.subspec 'IS_Facebook' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISFacebook','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_Facebook' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISFacebook','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
     
-    s.subspec 'IS_Admob' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISAdmob','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_Admob' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISAdmob','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
     
-    s.subspec 'IS_Vungle' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISVungle','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_Vungle' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISVungle','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
     
-    s.subspec 'IS_UnityAds' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISUnityAds','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_UnityAds' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISUnityAds','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
 
-    s.subspec 'IS_Tapjoy' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISTapjoy','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_Tapjoy' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISTapjoy','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
     
-    s.subspec 'IS_AppLovin' do |ss|
-        ss.xcconfig = {
-            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS'
-        }
-        ss.dependency 'ISAppLovin','3.3.0'
-        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    end
+    # s.subspec 'IS_AppLovin' do |ss|
+    #     ss.xcconfig = {
+    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+    #         "VALID_ARCHS" =>  valid_archs.join(' '),
+    #     }
+    #     ss.dependency 'ISAppLovin','3.3.0'
+    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    # end
 
 end
