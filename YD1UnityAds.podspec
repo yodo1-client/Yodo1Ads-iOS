@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1UnityAds'
-    s.version          = '3.2.2'
-    s.summary          = '更新UnityAds V3.4.0'
+    s.version          = '3.2.3'
+    s.summary          = '更新UnityAds V3.4.2'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
     
     s.dependency 'Yodo1AdvertSDK','3.1.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AdsUnityAds','3.2.0'
+    s.dependency 'Yodo1AdsUnityAds','3.2.1'
 end
