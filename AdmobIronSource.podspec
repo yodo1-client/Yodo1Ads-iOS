@@ -18,11 +18,14 @@ Pod::Spec.new do |s|
     s.preserve_paths = "#{s.version}" + '/IronSourceAdapter.framework/*'
     s.vendored_frameworks = "#{s.version}" + '/IronSourceAdapter.framework'
     s.public_header_files = "#{s.version}" + '/IronSourceAdapter.framework/Versions/A/Headers/*.h'
+    
+    valid_archs = ['armv7', 'x86_64', 'arm64']
 
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
     s.requires_arc = true
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
