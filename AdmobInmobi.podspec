@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
         'ONLY_ACTIVE_ARCH' => 'NO',
         'VALID_ARCHS' =>  valid_archs.join(' '),
     }
-    
+
     s.requires_arc = true
     s.frameworks = [
         'Accounts', 
@@ -57,6 +57,6 @@ Pod::Spec.new do |s|
     s.libraries = 'z'
     
     s.dependency 'YD1Admob','3.2.6'
-    s.dependency 'Yodo1AdsInmobi','3.2.1'
+    s.dependency 'Yodo1AdsInmobi','3.2.0'
 
 end
