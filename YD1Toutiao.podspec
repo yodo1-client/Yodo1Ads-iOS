@@ -23,10 +23,13 @@ Pod::Spec.new do |s|
     s.vendored_libraries = "#{s.version}" + '/*.a'
     s.requires_arc = true
 
+    valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
 
     s.frameworks = [
