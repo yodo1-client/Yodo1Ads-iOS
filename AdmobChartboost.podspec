@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobChartboost'
-    s.version          = '3.1.0'
-    s.summary          = 'Admob 更新v7.53.1'
+    s.version          = '3.1.1'
+    s.summary          = 'Admob 更新v7.55.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.2.5'
-    s.dependency 'Yodo1AdsChartboost','3.1.1'
+    s.dependency 'YD1Admob','3.2.6'
+    s.dependency 'Yodo1AdsChartboost','3.1.2'
 
 end
