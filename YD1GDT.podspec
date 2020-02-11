@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1GDT'
-    s.version          = '3.2.4'
-    s.summary          = 'GDTMob[广点通] v4.11.2'
+    s.version          = '3.2.5'
+    s.summary          = 'GDTMob[广点通] v4.11.3'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -23,10 +23,13 @@ Pod::Spec.new do |s|
     s.vendored_libraries = "#{s.version}" + '/*.a'
     s.requires_arc = true
 
+    valid_archs = ['armv7', 'x86_64', 'arm64']
+
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
         'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        'ONLY_ACTIVE_ARCH' => 'NO',
+        'VALID_ARCHS' =>  valid_archs.join(' '),
     }
 
     s.frameworks = [
@@ -56,5 +59,5 @@ Pod::Spec.new do |s|
     ]
     s.dependency 'Yodo1AdvertSDK','3.1.0'
     s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AdsGDT','3.2.0'
+    s.dependency 'Yodo1AdsGDT','3.2.1'
 end
