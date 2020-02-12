@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '3.1.2'
+    s.version          = '4.0.0'
     s.summary          = '添加Instagram 分享功能.修复Twwitter 初始化崩溃BUG'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/*.h'
 
@@ -25,10 +25,12 @@ Pod::Spec.new do |s|
 
     s.vendored_libraries = "#{s.version}" + '/*.a'
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
 
     s.compiler_flags = '-Dunix'
@@ -41,14 +43,14 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Commons','3.1.0'
-    s.dependency 'Yodo1YYModel','3.0.1'
-    s.dependency 'Yodo1Reachability', '3.0.0'
-    s.dependency 'Yodo1Qrencode', '3.0.0'
+    s.dependency 'Yodo1Commons','4.0.0'
+    s.dependency 'Yodo1YYModel','4.0.0'
+    s.dependency 'Yodo1Reachability', '4.0.0'
+    s.dependency 'Yodo1Qrencode', '4.0.0'
 
-    s.dependency 'Yodo1QQSDK','3.0.2'
-    s.dependency 'Yodo1WeChatSDK','3.0.2'
-    s.dependency 'Yodo1WeiboSDK','3.0.3.1'
-    s.dependency 'Yodo1FBSDKShareKit','3.2.0'
-    s.dependency 'Yodo1TwitterKit','3.0.0'
+    s.dependency 'Yodo1QQSDK','4.0.0'
+    s.dependency 'Yodo1WeChatSDK','4.0.0'
+    s.dependency 'Yodo1WeiboSDK','4.0.0'
+    s.dependency 'Yodo1FBSDKShareKit','4.0.0'
+    s.dependency 'Yodo1TwitterKit','4.0.0'
 end
