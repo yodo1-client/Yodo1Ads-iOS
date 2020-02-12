@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Soomla'
-    s.version          = '3.2.2'
+    s.version          = '4.0.0'
     s.summary          = '更新Soomla sdk v5.6.6 移除UIWebView [大更新 去掉了各平台adapter] 支持iOS 13 暂时不支持Inmobi v7.4.0'
 
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ TODO: Add long description of the pod here.
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files  = ["#{s.version}" + '/*.h']
     
@@ -26,10 +26,12 @@ TODO: Add long description of the pod here.
     
     s.requires_arc = true
     
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
    
     s.frameworks = [
