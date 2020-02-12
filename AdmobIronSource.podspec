@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobIronSource'
-    s.version          = '3.2.7'
+    s.version          = '4.0.0'
     s.summary          = 'Admob 更新v7.55.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -12,26 +12,25 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1Admob/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/IronSourceAdapter.framework/Versions/A/Headers/*.h'
     s.preserve_paths = "#{s.version}" + '/IronSourceAdapter.framework/*'
     s.vendored_frameworks = "#{s.version}" + '/IronSourceAdapter.framework'
     s.public_header_files = "#{s.version}" + '/IronSourceAdapter.framework/Versions/A/Headers/*.h'
     
-    valid_archs = ['armv7', 'x86_64', 'arm64']
-
+     valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO',
-        'VALID_ARCHS' =>  valid_archs.join(' '),
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
     s.requires_arc = true
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','3.2.6'
-    s.dependency 'Yodo1AdsIronSource','3.2.1'
+    s.dependency 'YD1Admob','4.0.0'
+    s.dependency 'Yodo1AdsIronSource','4.0.0'
 
 end
