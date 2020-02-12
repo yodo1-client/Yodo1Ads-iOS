@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1FeedbackError'
-    s.version          = '3.0.0'
+    s.version          = '4.0.0'
     s.summary          = '反馈上传错误报告'
 
     s.description      = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/*.h'
 
@@ -25,10 +25,12 @@ Pod::Spec.new do |s|
 
     s.requires_arc = false
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
 
     s.frameworks = ['Accounts',
@@ -63,8 +65,8 @@ Pod::Spec.new do |s|
 
     s.libraries = ['sqlite3.0','z']
 
-    s.dependency 'Yodo1AFNetworking','3.0.0'
-    s.dependency 'Yodo1YYModel','3.0.1'
-    s.dependency 'Yodo1Reachability','3.0.0'
+    s.dependency 'Yodo1AFNetworking','4.0.0'
+    s.dependency 'Yodo1YYModel','4.0.0'
+    s.dependency 'Yodo1Reachability','4.0.0'
     
 end
