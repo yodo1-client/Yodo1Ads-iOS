@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1TwitterKit'
-    s.version          = '3.0.0'
+    s.version          = '4.0.0'
     s.summary          = 'TwitterKit SDK 分享,TwitterKit v3.2.1,TwitterCore v3.0.2'
 
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/Fabric.framework/Headers/*.h',"#{s.version}" + '/TwitterCore.framework/Headers/*.h',"#{s.version}" + '/TwitterKit.framework/Headers/*.h'
 
@@ -25,10 +25,12 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/Fabric.framework',"#{s.version}" + '/TwitterCore.framework',"#{s.version}" + '/TwitterKit.framework'
     s.libraries = 'sqlite3', 'z', 'stdc++'
     s.compiler_flags = '-Dunix'
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
