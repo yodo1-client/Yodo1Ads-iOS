@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxInmobi'
-    s.version          = '3.2.1'
+    s.version          = '4.0.0'
     s.summary          = 'v6.11.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1ApplovinMax/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     #s.source_files = "#{s.version}" +'/*.{h,m}'
     #s.public_header_files = "#{s.version}" +'/*.h'
@@ -25,13 +25,12 @@ Pod::Spec.new do |s|
     s.requires_arc = true
 
    
-    valid_archs = ['armv7', 'x86_64', 'arm64']
-
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO',
-        'VALID_ARCHS' =>  valid_archs.join(' '),
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
 
     s.frameworks = [
@@ -59,6 +58,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdsInmobi','3.2.0'  
-    s.dependency 'YD1ApplovinMax','3.2.6'
+    s.dependency 'Yodo1AdsInmobi','4.0.0'
+    s.dependency 'YD1ApplovinMax','4.0.0'
 end
