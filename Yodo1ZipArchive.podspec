@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ZipArchive'
-    s.version          = '3.0.0'
+    s.version          = '4.0.0'
     s.summary          = 'A short description of ZipArchive.'
 
     s.description      = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '7.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/*.{h,m}',"#{s.version}" + '/minizip/crypt.h',"#{s.version}" + '/minizip/ioapi.{c,h}',"#{s.version}" + '/minizip/mztools.{c,h}',"#{s.version}" + '/minizip/unzip.{c,h}',"#{s.version}" + '/minizip/zip.{c,h}'
     s.public_header_files = "#{s.version}" + '/*.h',"#{s.version}" + '/minizip/crypt.h', "#{s.version}" + '/minizip/ioapi.h', "#{s.version}" + '/minizip/mztools.h', "#{s.version}" + '/minizip/unzip.h', "#{s.version}" + '/minizip/zip.h'
@@ -22,10 +22,12 @@ Pod::Spec.new do |s|
     s.requires_arc = true
     s.compiler_flags = '-Dunix'
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
 
 end
