@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdmob'
-    s.version          = '3.2.1'
+    s.version          = '4.0.0'
     s.summary          = 'Admob sdk v7.55.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/GoogleMobileAds.framework/Headers/**/*.h',"#{s.version}" + '/GoogleUtilities.framework/Headers/*.h',"#{s.version}" + '/nanopb.framework/Headers/*.h'
 
@@ -32,10 +32,12 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','JavaScriptCore','WebKit'
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
     s.libraries = 'sqlite3.0','z','c++'
     
