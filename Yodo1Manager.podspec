@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.8.0.pre'
+    s.version          = '3.8.0'
     s.summary          = 'v3.8.0 - 2020-02-11
                             ---------------------------
                             1.AdColony  v4.1.3
@@ -33,7 +33,15 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '9.0'
     
     valid_archs = ['armv7','arm64','x86_64']
-
+    s.pod_target_xcconfig = {
+        'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
+    }
+    s.xcconfig = {
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' '),
+    }
     s.subspec 'Yodo1_Manager' do |ss|
         ss.source_files = "#{s.version}" + '/*.{h,mm}'
         ss.public_header_files = "#{s.version}" + '/*.h'
