@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Tapjoy'
-    s.version          = '3.2.4'
+    s.version          = '4.0.0'
     s.summary          = '更新Tapjoy sdk 12.4.1 [remove UIWebView]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     #s.source_files = "#{s.version}" +'/*.{h,m}'
 
@@ -22,12 +22,13 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
-
     s.frameworks = [
         'Accounts', 
         'AssetsLibrary',
@@ -53,7 +54,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdvertSDK','3.1.0'
-    s.dependency 'Yodo1ThirdsAnalytics','3.1.1'
-    s.dependency 'Yodo1AdsTapjoy','3.2.1'
+    s.dependency 'Yodo1AdvertSDK','4.0.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.0.0'
+    s.dependency 'Yodo1AdsTapjoy','4.0.0'
 end
