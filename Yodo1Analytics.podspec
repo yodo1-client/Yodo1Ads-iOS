@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Analytics'
-    s.version          = '3.0.5'
+    s.version          = '4.0.0'
     s.summary          = 'v1.0.11'
 
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ TODO: Add long description of the pod here.
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files  = "#{s.version}" + '/*.h'
     
@@ -26,10 +26,12 @@ TODO: Add long description of the pod here.
     
     s.requires_arc = true
     
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
    
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
@@ -37,11 +39,11 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1YYCache','3.0.0'
-    s.dependency 'Yodo1AFNetworking','3.0.0'
-    s.dependency 'Yodo1Reachability','3.0.0'
-    s.dependency 'Yodo1OnlineParameter','3.0.4'
-    s.dependency 'Yodo1GDCTimer','3.0.0'
-    s.dependency 'Yodo1UDID','3.0.0'
+    s.dependency 'Yodo1YYCache','4.0.0'
+    s.dependency 'Yodo1AFNetworking','4.0.0'
+    s.dependency 'Yodo1Reachability','4.0.0'
+    s.dependency 'Yodo1OnlineParameter','4.0.0'
+    s.dependency 'Yodo1GDCTimer','4.0.0'
+    s.dependency 'Yodo1UDID','4.0.0'
 
 end
