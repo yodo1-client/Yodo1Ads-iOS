@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Replay'
-    s.version          = '3.0.5'
+    s.version          = '4.0.0'
     s.summary          = 'A short description of Yodo1Replay.'
 
 
@@ -15,18 +15,19 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/foundation/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files = "#{s.version}" + '/*.{h,mm}'
     
     s.public_header_files = "#{s.version}" + '/*.h'
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO"
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
-    
     
     s.frameworks = 'UIKit'
     
@@ -34,6 +35,6 @@ Pod::Spec.new do |s|
     
     s.weak_frameworks = 'ReplayKit'
 
-    s.dependency 'Yodo1Commons','3.1.0'
+    s.dependency 'Yodo1Commons','4.0.0'
 
 end
