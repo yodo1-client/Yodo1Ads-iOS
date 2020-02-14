@@ -1,4 +1,56 @@
 =============================================
+2020-02-13
+1.Applovin V6.11.3
+
+=============================================
+2020-02-3
+1.Applovin V6.11.1
+
+=============================================
+2019-12-23
+1.Applovin V6.11.0
+Add "Do Not Sell" APIs.
+
+=============================================
+2019-12-18
+1.Applovin V6.10.3
+Fixed a bug introduced in iOS SDK 6.10.2.
+Fix ad:didDismissFullscreenForAdView: ALAdView delegate method not being called when app is built from Xcode 10.
+Support for Google Ad Manager adapter.
+
+=============================================
+2019-11-20
+1.Applovin V6.10.1 
+.Mediation debugger will check for outdated adapter versions. 
+	PLEASE ENSURE YOU ARE ON THE LATEST VERSIONS.
+.Fix -[ALTaskManager execute:onQueue:] crash.
+
+=============================================
+2019-10-14
+1.Applovin V6.9.5 [支持iOS 13]
+
+=============================================
+2019-10-14
+1.Applovin V6.9.4 [支持iOS 13]
+
+=============================================
+2019-09-19
+1.Applovin V6.9.3 [支持iOS 13]
+
+
+=============================================
+2019-09-19
+1.Applovin V6.9.2 [支持iOS 13]
+
+=============================================
+2019-09-19
+1.Applovin V6.9.1 [支持iOS 13]
+
+=============================================
+2019-09-11
+1.Applovin V6.8.1 [支持iOS 13]
+
+=============================================
 2019-06-25
 1.Applovin V6.7.1
 

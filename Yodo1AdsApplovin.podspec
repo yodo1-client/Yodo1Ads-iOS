@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsApplovin'
-    s.version          = '3.0.6'
-    s.summary          = 'sdk v6.6.0 更新到 v6.7.1'
+    s.version          = '4.0.0'
+    s.summary          = 'sdk v6.11.3'
     s.description      = <<-DESC
                         TODO: Add long description of the pod here.
                        DESC
@@ -11,27 +11,31 @@ Pod::Spec.new do |s|
     s.author           = { 'yixian huang' => 'huangyixian@yodo1.com' }
     s.source           = { :http => "https://cocoapods.yodo1api.com/thirdsdks/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     s.source_files =  "#{s.version}" + '/AppLovinSDK.framework/headers/*.h'
 
     s.public_header_files =  "#{s.version}" + '/AppLovinSDK.framework/headers/*.h'
 
     # s.vendored_libraries =  "#{s.version}" + '/*.a'
-    
+    s.resource = "#{s.version}" + '/*.bundle'
     s.vendored_frameworks = "#{s.version}" + '/AppLovinSDK.framework'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
     s.requires_arc = false
 
+    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => 'NO',
-        'ONLY_ACTIVE_ARCH' => 'NO'
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
+        "ONLY_ACTIVE_ARCH" => "NO",
+        'VALID_ARCHS' =>  valid_archs.join(' ')
     }
-
-    s.frameworks = 'AdSupport', 'AVFoundation', 'CoreTelephony', 'CoreGraphics', 'CoreMedia', 'StoreKit', 'SystemConfiguration', 'UIKit','WebKit'
+    s.pod_target_xcconfig = {
+        'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
+    }
+    s.frameworks = 'AdSupport', 'AVFoundation', 'CoreTelephony', 'CoreGraphics', 'CoreMedia', 'StoreKit', 'SystemConfiguration', 'UIKit','WebKit','AudioToolbox'
 
     s.weak_frameworks = 'SafariServices'
 

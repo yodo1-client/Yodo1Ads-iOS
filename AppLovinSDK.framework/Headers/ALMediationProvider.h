@@ -6,7 +6,6 @@
 //  Copyright © 2019 AppLovin Corporation. All rights reserved.
 //
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -22,6 +21,7 @@ extern NSString *const ALMediationProviderFyber;
 extern NSString *const ALMediationProviderHeyzap;
 extern NSString *const ALMediationProviderHyperMX;
 extern NSString *const ALMediationProviderIronsource;
+extern NSString *const ALMediationProviderMAX;
 extern NSString *const ALMediationProviderMoPub;
 extern NSString *const ALMediationProviderTapdaq;
 
