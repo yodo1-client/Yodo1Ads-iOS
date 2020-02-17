@@ -1,7 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MobClick'
     s.version          = '4.0.0'
-    s.summary          = 'UMAnalytics 更新 V6.0.5+G_917526b7bc_20190701161549 [大更新]'
+    s.summary          = 'UMAnalytics 更新 V6.0.5+G_917526b7bc_20190701161549 [大更新];
+                          6.1.0+G_0a2678de36_20191217134700
+                        '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
