@@ -66,12 +66,6 @@ typedef enum {
  */
 + (void)onStart:(NSString *)appId withChannelId:(NSString *)channelId;
 
-/**
- *	@method	onEvent     自定义事件
- *	@param 	eventId     事件ID    类型:NSString
- *	@param 	eventData   事件参数   类型:键值对(key只支持NSString, value支持NSString和NSNumber)
- */
-+ (void)onEvent:(NSString *)eventId eventData:(NSDictionary *)eventData;
 
 /**
  *  @method setLatitude 设置经纬度
@@ -80,18 +74,6 @@ typedef enum {
  */
 + (void)setLatitude:(double)latitude longitude:(double)longitude;
 
-/**
- *  @method setDeviceToken 设置DeviceToken
- *  @param  deviceToken    从Apple获取的DeviceToken
- */
-+ (void)setDeviceToken:(NSData *)deviceToken;
-
-/**
- *  @method handleTDGAPushMessage 处理来自TalkingData的Push消息
- *  @param  message               收到的消息
- *  @return YES 来自TalkingData的消息，SDK已处理    NO 其他来源消息，开发者需自行处理
- */
-+ (BOOL)handleTDGAPushMessage:(NSDictionary *)message;
 
 @end
 
