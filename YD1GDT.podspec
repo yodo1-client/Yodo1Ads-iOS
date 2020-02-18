@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1GDT'
-    s.version          = '4.0.0'
-    s.summary          = 'GDTMob[广点通] v4.11.3'
+    s.version          = '4.0.1'
+    s.summary          = 'GDTMob[广点通] v4.11.3,fix bug'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
