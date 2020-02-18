@@ -454,7 +454,7 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
             'VALID_ARCHS' =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1GDT','4.0.0'
+        ss.dependency 'YD1GDT','4.0.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
