@@ -1,22 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.8.0'
-    s.summary          = 'v3.8.0 - 2020-02-11
+    s.version          = '3.8.1'
+    s.summary          = 'v3.8.1 - 2020-03-02
                             ---------------------------
-                            1.AdColony  v4.1.3
-                            2.Admob v7.55.0
-                            3.Applovin v6.11.1
-                            4.Vungle v6.5.1
-                            5.UnityAds v3.4.2
-                            6.Facebook v5.6.1
-                            7.GDT v4.11.3
-                            8.Inmobi v9.0.4.0
-                            9.IronSource v6.14.0.0
-                            10.Mintegral v5.8.8
-                            11.Toutiao v2.7.5.2
-                            12.Tapjoy v12.4.1
-
-                            13.更新 Soomla v5.6.6 [移除UIWebView]
+                            1.添加Yandex 广告 v2.14.0
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -493,6 +480,15 @@ Pod::Spec.new do |s|
         ss.dependency 'YD1MyTarget','4.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
+
+    s.subspec 'YD1_Yandex' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'VALID_ARCHS' =>  valid_archs.join(' '),
+        }
+        ss.dependency 'YD1Yandex','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     ######## YD1 Admob ########
     s.subspec 'Admob_Facebook' do |ss|
         ss.xcconfig = {
@@ -677,6 +673,16 @@ Pod::Spec.new do |s|
         ss.dependency 'ApplovinMaxMyTarget','4.0.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
+    
+    s.subspec 'ApplovinMax_Yandex' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'VALID_ARCHS' =>  valid_archs.join(' '),
+        }
+        ss.dependency 'ApplovinMaxYandex','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
     ######## YD1ISource ########
 
     ##已经启用IronSource聚合
