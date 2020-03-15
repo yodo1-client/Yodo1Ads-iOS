@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.8.1'
-    s.summary          = 'v3.8.1 - 2020-03-02
+    s.version          = '3.9.0'
+    s.summary          = 'v3.9.0 - 2020-03-13
                             ---------------------------
                             1.添加Yandex 广告 v2.14.0
                             ---------------------------
