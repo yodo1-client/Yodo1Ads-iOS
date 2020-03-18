@@ -27,6 +27,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 @interface AppStoreAdapter()<SKPaymentTransactionObserver,SKProductsRequestDelegate,SKRequestDelegate>
 {
     NSMutableDictionary*   dictProducts;
+    BOOL isRequesting;
 }
 
 @property (nonatomic,copy) NSString* extra;
@@ -50,12 +51,6 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
  判断是否可以购买
  */
 - (BOOL)paymentsAllowed;
-
-/*
- 带产品信息请求代理回调
- */
-- (void)requestProduct:(NSArray*)productIds
-              delegate:(NSObject<SKProductsRequestDelegate>*)_delegate;
 
 /*
  请求所有产品信息
@@ -89,7 +84,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 - (AppStoreProduct*)productWithChannelProductId:(NSString*)channelProductId;
 
 - (void)checkProductInfoWithChannelProductId:(NSString*)channelProductId
-                              bRestorePayment:(BOOL)bRestorePayment;
+                             bRestorePayment:(BOOL)bRestorePayment;
 
 @end
 
@@ -111,9 +106,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 + (void)load
 {
-	if(NSClassFromString(@"AppStoreAdapter") != nil) {
-		[[Yodo1Registry sharedRegistry] registerClass:self withRegistryType:@"platformType"];
-	}
+    if(NSClassFromString(@"AppStoreAdapter") != nil) {
+        [[Yodo1Registry sharedRegistry] registerClass:self withRegistryType:@"platformType"];
+    }
 }
 
 - (void)dealloc
@@ -224,15 +219,15 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (NSString *)language {
-     NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
-     NSArray * langArrayWord = [lang componentsSeparatedByString:@"-"];
-     NSString* langString = [langArrayWord objectAtIndex:0];
-     if (langArrayWord.count >= 3) {
-         langString = [NSString stringWithFormat:@"%@-%@",
-                   [langArrayWord objectAtIndex:0],
-                   [langArrayWord objectAtIndex:1]];
-     }
-     return langString;
+    NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSArray * langArrayWord = [lang componentsSeparatedByString:@"-"];
+    NSString* langString = [langArrayWord objectAtIndex:0];
+    if (langArrayWord.count >= 3) {
+        langString = [NSString stringWithFormat:@"%@-%@",
+                      [langArrayWord objectAtIndex:0],
+                      [langArrayWord objectAtIndex:1]];
+    }
+    return langString;
 }
 
 - (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString {
@@ -259,7 +254,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 - (NSString*)periodUnitWithProduct:(SKProduct*)product
 {
     if (@available(iOS 11.2, *)) {
-       
+        
         NSString* unit = @"";
         int numberOfUnits = (int)product.subscriptionPeriod.numberOfUnits;
         switch (product.subscriptionPeriod.unit)
@@ -274,7 +269,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                     unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionDay" withDefault:@"每%d天"],numberOfUnits];
                 }
             }
-            break;
+                break;
             case SKProductPeriodUnitWeek:
             {
                 if (numberOfUnits == 1) {
@@ -283,7 +278,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                     unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionWeeks" withDefault:@"每%d周"],numberOfUnits];
                 }
             }
-            break;
+                break;
             case SKProductPeriodUnitMonth:
             {
                 if (numberOfUnits == 1) {
@@ -292,7 +287,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                     unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionMonths" withDefault:@"每%d个月"],numberOfUnits];
                 }
             }
-            break;
+                break;
             case SKProductPeriodUnitYear:
             {
                 if (numberOfUnits == 1) {
@@ -301,7 +296,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                     unit = [NSString stringWithFormat:[self localizedStringForKey:@"SubscriptionYears" withDefault:@"每%d年"],numberOfUnits];
                 }
             }
-            break;
+                break;
         }
         return unit;
     } else {
@@ -325,7 +320,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 {
     if([UCenterManager sharedInstance].loginOutCompletionBlock){
         [UCenterManager sharedInstance].loginOutCompletionBlock();
-    } 
+    }
 }
 
 - (BOOL)isLogined
@@ -334,7 +329,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (void)handleOpenURL:(NSURL *)url
-             sourceApplication:(NSString *)sourceApplication
+    sourceApplication:(NSString *)sourceApplication
 {
     [UCSNS handleOpenUrl:url];
 }
@@ -385,7 +380,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     
     if([paymentProduct.productType intValue] == Auto_Subscription){
         NSString* mes = [self localizedStringForKey:@"SubscriptionAlertMessage"
-                                                withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
+                                        withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
         NSString* message = [NSString stringWithFormat:mes,paymentProduct.price,paymentProduct.currency,paymentProduct.periodUnit];
         
         NSString* title = [self localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
@@ -403,13 +398,13 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 NSLog(@"IS pad");
                 uiAlertControllerStyle = UIAlertControllerStyleAlert;
             }
-
+            
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiAlertControllerStyle];
             
             NSString* privacyPolicyUrl = [self localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
-                                                                 withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
+                                                         withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
             NSString* termsServiceUrl = [self localizedStringForKey:@"SubscriptionTermsServiceURL"
-                                                                withDefault:@"https://www.yodo1.com/cn/user_agreement"];
+                                                        withDefault:@"https://www.yodo1.com/cn/user_agreement"];
             
             UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
@@ -418,7 +413,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
             }];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                 [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentCannel,@"购买取消",self.extra);
+                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentCannel,@"购买取消",self.extra);
             }];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 [self requestPaymentWithProduct:product];
@@ -438,9 +433,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString* privacyPolicyUrl = [self localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
-                                                         withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
+                                                 withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
     NSString* termsServiceUrl = [self localizedStringForKey:@"SubscriptionTermsServiceURL"
-                                                        withDefault:@"https://www.yodo1.com/cn/user_agreement"];
+                                                withDefault:@"https://www.yodo1.com/cn/user_agreement"];
     switch (buttonIndex) {
         case 1:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
@@ -452,7 +447,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             [self requestPaymentWithProduct:[dictProducts objectForKey:self.currentUniformProductId]];
             break;
         default:
-             [UCenterManager sharedInstance].paymentCompletionBlock(self.currentUniformProductId,PaymentCannel,@"购买取消",self.extra);
+            [UCenterManager sharedInstance].paymentCompletionBlock(self.currentUniformProductId,PaymentCannel,@"购买取消",self.extra);
             break;
     }
 }
@@ -477,7 +472,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 NSDictionary* extra =[responseDic objectForKey:@"extra"];
                 NSArray* latest_receipt_infos =[extra objectForKey:@"latest_receipt_info"];
                 NSTimeInterval serverTime = [[responseDic objectForKey:@"timestamp"] doubleValue];
-
+                
                 for (int i = 0; i < [latest_receipt_infos count]; i++) {
                     NSDictionary* latest_receipt_info =[latest_receipt_infos objectAtIndex:i];
                     NSTimeInterval expires_date_ms = [[latest_receipt_info objectForKey:@"expires_date_ms"] doubleValue];
@@ -542,53 +537,53 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                      gameRegionCode:paymentProduct.gameRegionCode
                                                         productType:paymentProduct.productType
                                                     completionBlock:^(BOOL success, Yodo1OGPaymentError *error, NSString *response){
-                                                        NSLog(@"response:%@",response);
-                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                            if (success) {
-                                                                if (response) {
-                                                                    NSDictionary* dic = (NSDictionary*)[Yodo1Commons JSONObjectWithString:response error:nil];
-                                                                    NSString* stOrderId = [dic objectForKey:ORDER_ID];//苹果订单id
-                                                                    NSString* itemCode = [dic objectForKey:@"item_code"];
-                                                                    if (stOrderId) {
-                                                                        [lossOrder setObject:itemCode forKey:stOrderId];
-                                                                    }
-                                                                    NSLog(@"验证成功orderid:%@",stOrderId);
-                                                                }
-                                                            } else {
-                                                                NSDictionary* dic = (NSDictionary*)[Yodo1Commons JSONObjectWithString:response error:nil];
-                                                                NSString* stOrderId = [dic objectForKey:ORDER_ID];//苹果订单id
-                                                                
-                                                                if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
-                                                                    [self removeVerifyingRequestWithTransactionIdentifier:stOrderId];
-                                                                    NSLog(@"苹果收据验证失败OrderId:%@",stOrderId);
-                                                                }
-                                                            }
-                                                            
-                                                            lossOrderReceiveCount++;
-                                                            if (lossOrderReceiveCount==lossOrderCount) {
-                                                                
-                                                                if ([UCenterManager sharedInstance].lossOrderCompletionBlock) {
-                                                                    NSArray* orderIds = [lossOrder allKeys];
-                                                                    if ([orderIds count] > 0) {
-                                                                        for (int i = 0; i < orderIds.count; i++) {
-                                                                            NSString* key = [orderIds objectAtIndex:i];
-                                                                            if (![self removeVerifyingRequestWithTransactionIdentifier:key]) {
-                                                                                [lossOrder removeObjectForKey:key];
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    NSArray* tempItemCode = [NSArray arrayWithArray:[lossOrder allValues]];
-                                                                    for (NSString* itemCode in tempItemCode) {
-                                                                        [self checkProductInfoWithChannelProductId:itemCode bRestorePayment:NO];
-                                                                    }
-                                                                    [UCenterManager sharedInstance].lossOrderCompletionBlock(self.lossOrderIdArray,success,LossOrderTypeLossOrder,@"");
-                                                                    [lossOrder release];
-                                                                }
-                                                                
-                                                            }
-                                                        });
-                                                        
-                                                    }];
+                NSLog(@"response:%@",response);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (success) {
+                        if (response) {
+                            NSDictionary* dic = (NSDictionary*)[Yodo1Commons JSONObjectWithString:response error:nil];
+                            NSString* stOrderId = [dic objectForKey:ORDER_ID];//苹果订单id
+                            NSString* itemCode = [dic objectForKey:@"item_code"];
+                            if (stOrderId) {
+                                [lossOrder setObject:itemCode forKey:stOrderId];
+                            }
+                            NSLog(@"验证成功orderid:%@",stOrderId);
+                        }
+                    } else {
+                        NSDictionary* dic = (NSDictionary*)[Yodo1Commons JSONObjectWithString:response error:nil];
+                        NSString* stOrderId = [dic objectForKey:ORDER_ID];//苹果订单id
+                        
+                        if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
+                            [self removeVerifyingRequestWithTransactionIdentifier:stOrderId];
+                            NSLog(@"苹果收据验证失败OrderId:%@",stOrderId);
+                        }
+                    }
+                    
+                    lossOrderReceiveCount++;
+                    if (lossOrderReceiveCount==lossOrderCount) {
+                        
+                        if ([UCenterManager sharedInstance].lossOrderCompletionBlock) {
+                            NSArray* orderIds = [lossOrder allKeys];
+                            if ([orderIds count] > 0) {
+                                for (int i = 0; i < orderIds.count; i++) {
+                                    NSString* key = [orderIds objectAtIndex:i];
+                                    if (![self removeVerifyingRequestWithTransactionIdentifier:key]) {
+                                        [lossOrder removeObjectForKey:key];
+                                    }
+                                }
+                            }
+                            NSArray* tempItemCode = [NSArray arrayWithArray:[lossOrder allValues]];
+                            for (NSString* itemCode in tempItemCode) {
+                                [self checkProductInfoWithChannelProductId:itemCode bRestorePayment:NO];
+                            }
+                            [UCenterManager sharedInstance].lossOrderCompletionBlock(self.lossOrderIdArray,success,LossOrderTypeLossOrder,@"");
+                            [lossOrder release];
+                        }
+                        
+                    }
+                });
+                
+            }];
         }
     }else{
         if ([UCenterManager sharedInstance].lossOrderCompletionBlock) {
@@ -652,7 +647,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             [dict setObject:[NSNumber numberWithInt:productInfo.productType] forKey:@"ProductType"];
             [dict setObject:productInfo.currency == nil?@"":productInfo.currency forKey:@"currency"];
             [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
-    
+            
             [_productsInfoIdArray addObject:dict];
         }
         callback(_productsInfoIdArray);
@@ -681,9 +676,9 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         yodo1PaymentProductData = [NSKeyedArchiver archivedDataWithRootObject:productsObject];
     }
     if (yodo1PaymentProductData) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:yodo1PaymentProductData forKey:key];
-    [defaults synchronize];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:yodo1PaymentProductData forKey:key];
+        [defaults synchronize];
     }else{
         NSLog(@"[ Yodo1 ] 保存数据为nil");
     }
@@ -701,7 +696,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     if (@available(iOS 11.0, *)) {
         content = [NSKeyedUnarchiver unarchivedObjectOfClasses:sets fromData:yodo1PaymentProductData error:&error];
         if (error) {
-           NSLog(@"[ Yodo1 ] load数据error:%@",error);
+            NSLog(@"[ Yodo1 ] load数据error:%@",error);
         }
     } else {
         content = [NSKeyedUnarchiver unarchiveObjectWithData:yodo1PaymentProductData];
@@ -714,8 +709,8 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     NSDictionary *preVerifyingProductListInfo = [self loadPaymentProducts:VERIFYING_REQUEST_LIST];
     NSMutableDictionary *verifyingProductListInfo = [[NSMutableDictionary alloc] initWithDictionary:preVerifyingProductListInfo];
     if([[verifyingProductListInfo allKeys]containsObject:transactionIdentifier]){
-    [verifyingProductListInfo removeObjectForKey:transactionIdentifier];
-    [self savePaymentProducts:verifyingProductListInfo key:VERIFYING_REQUEST_LIST];
+        [verifyingProductListInfo removeObjectForKey:transactionIdentifier];
+        [self savePaymentProducts:verifyingProductListInfo key:VERIFYING_REQUEST_LIST];
         return YES;
     }
     return NO;
@@ -723,26 +718,18 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 - (BOOL)paymentsAllowed
 {
-	return [SKPaymentQueue canMakePayments];
+    return [SKPaymentQueue canMakePayments];
 }
 
 #pragma mark - appstore request product
 
-- (void)requestProduct:(NSArray*)productIds
-              delegate:(NSObject<SKProductsRequestDelegate> *)delegate_
-{
-	NSSet *productIds_ = [NSSet setWithArray:productIds];
-	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:productIds_];
-	request.delegate = delegate_;
-	[request start];
-}
-
 - (void)requestProducts:(NSArray *)productIds
 {
-	NSSet *productIds_ = [NSSet setWithArray:productIds];
-	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:productIds_];
-	request.delegate = self;
-	[request start];
+    isRequesting = YES;
+    NSSet *productIds_ = [NSSet setWithArray:productIds];
+    SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:productIds_];
+    request.delegate = self;
+    [request start];
 }
 
 - (SKProduct*)productInfoWithProductId:(NSString *)productId
@@ -764,7 +751,11 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         SKPayment *payment = [SKPayment paymentWithProduct:productItem];
         [[SKPaymentQueue defaultQueue] addPayment:payment];
     }else{
-        NSString* info = [self localizedStringForKey:ucBuyItemError withDefault:@"购买的产品无效或不存在！"];
+        //重新去请求产品信息
+        if (_channelProductIdArray.count > 0 && !isRequesting) {
+            [self requestProducts:_channelProductIdArray];
+        }
+        NSString* info = [self localizedStringForKey:ucBuyItemError withDefault:@"购买的产品无效，请稍候重试！"];
         NSString* ok =  [self localizedStringForKey:ucBuyItemOK withDefault:@"确定"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:info
@@ -774,7 +765,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         [alert show];
         [alert release];
         if ([UCenterManager sharedInstance].paymentCompletionBlock) {
-            [UCenterManager sharedInstance].paymentCompletionBlock(product.uniformProductId,PaymentFail,@"购买的产品无效或不存在！",self.extra);
+            [UCenterManager sharedInstance].paymentCompletionBlock(product.uniformProductId,PaymentFail,@"购买的产品无效，请稍候重试！",self.extra);
         }
     }
 }
@@ -830,7 +821,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 }
 
 - (void)checkProductInfoWithChannelProductId:(NSString*)channelProductId
-                              bRestorePayment:(BOOL)bRestorePayment
+                             bRestorePayment:(BOOL)bRestorePayment
 {
     if (channelProductId == nil) {
         return;
@@ -872,7 +863,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 - (PaymentProduct*)removeAppstoreRequestListWithProductId:(NSString*)productId withUserId:(NSString*)gameUserId isSaveVerifyList:(SKPaymentTransaction *)transaction
 {
     NSArray *preSaveProductListInfo = [self loadPaymentProducts:APPSTORE_REQUEST_LIST];
-
+    
     if (preSaveProductListInfo == nil)
     {
         assert("APPSTORE_REQUEST_LIST is empty...");
@@ -928,7 +919,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         }else{
             gameUserId = [UCenterManager sharedInstance].gameUserId;
         }
-
+        
         PaymentProduct* paymentProduct = [self removeAppstoreRequestListWithProductId:transaction.payment.productIdentifier
                                                                            withUserId:gameUserId
                                                                      isSaveVerifyList:transaction];
@@ -944,11 +935,11 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                                            price:productInfo.productPrice
                                                                         currency:productInfo.currency
                                                                    transactionId:transaction.transactionIdentifier];
-                                  
+            
             //Swrve 统计
             SKProduct* sk = [self productInfoWithProductId:productInfo.channelProductId];
             [[Yodo1AnalyticsManager sharedInstance]swrveTransactionProcessed:transaction
-                                                             productBought:sk];
+                                                               productBought:sk];
         }];
         if ([UCenterManager sharedInstance].validatePaymentBlock) {
             NSDictionary* extra = @{@"productIdentifier":paymentProduct.channelProductId,
@@ -978,21 +969,21 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                                                      gameRegionCode:paymentProduct.gameRegionCode
                                                         productType:paymentProduct.productType
                                                     completionBlock:^(BOOL success, Yodo1OGPaymentError *error, NSString *response) {
-                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            if (success) {
-                                                                if ([self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier]) {
-                                                                    [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentSuccess,response,[UCenterManager sharedInstance].extra);
-                                                                }else{
-                                                                    [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,response,[UCenterManager sharedInstance].extra);
-                                                                }
-                                                            }else{
-                                                                [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentValidationFail,response,[UCenterManager sharedInstance].extra);
-                                                                if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
-                                                                    [self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier];
-                                                                }
-                                                            }
-                                                        });
-                                                    }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (success) {
+                        if ([self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier]) {
+                            [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentSuccess,response,[UCenterManager sharedInstance].extra);
+                        }else{
+                            [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,response,[UCenterManager sharedInstance].extra);
+                        }
+                    }else{
+                        [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId, PaymentValidationFail,response,[UCenterManager sharedInstance].extra);
+                        if ([error errorCode] == VERIFYING_PAYMENT_ERROR_CODE) {
+                            [self removeVerifyingRequestWithTransactionIdentifier:paymentProduct.transactionIdentifier];
+                        }
+                    }
+                });
+            }];
             
         }
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
@@ -1007,7 +998,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     if (self.restoreProductIdArray) {
         [self checkProductInfoWithChannelProductId:transaction.payment.productIdentifier bRestorePayment:YES];
     }
-	[[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
 
 #pragma mark- completeTransaction交易失败
@@ -1032,8 +1023,8 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         else
             [UCenterManager sharedInstance].paymentCompletionBlock(paymentProduct.uniformProductId,PaymentFail,@"购买失败",self.extra);
     }
-  
-	[[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     
 }
 
@@ -1041,22 +1032,23 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
+    isRequesting = NO;
     self.products = response.products;
-	NSArray *invalid = response.invalidProductIdentifiers;
-	
-	for (NSString *invalidPID in invalid) {
+    NSArray *invalid = response.invalidProductIdentifiers;
+    
+    for (NSString *invalidPID in invalid) {
 #ifdef DEBUG
-	      NSLog(@"%@ is invalid", invalidPID);
+        NSLog(@"[ Yodo1 ]:%@ is invalid", invalidPID);
 #endif
-
-	}
-	for(SKProduct *product in self.products) {
+        
+    }
+    for(SKProduct *product in self.products) {
 #ifdef DEBUG
-        NSLog(@"ID:%@: Title:%@ (%@) - %@ %@", product.productIdentifier,
+        NSLog(@"[ Yodo1 ] ID:%@: Title:%@ (%@) - %@ %@", product.productIdentifier,
               product.localizedTitle, product.localizedDescription, [self productPrice:product],[self currencyCode:product.priceLocale]);
-
+        
 #endif
-	}
+    }
     
 }
 
@@ -1064,19 +1056,19 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-  
-	for (SKPaymentTransaction *transaction in transactions) {
+    
+    for (SKPaymentTransaction *transaction in transactions) {
         if (transaction == nil) {
             continue;
         }
-		switch (transaction.transactionState) {
-			case SKPaymentTransactionStatePurchasing:
+        switch (transaction.transactionState) {
+            case SKPaymentTransactionStatePurchasing:
             {
-				NSLog(@"Transaction started!");
+                NSLog(@"Transaction started!");
             }
-				break;
-				
-			case SKPaymentTransactionStatePurchased:
+                break;
+                
+            case SKPaymentTransactionStatePurchased:
             {
 #ifdef DEBUG
                 NSLog(@"Transaction successful!");
@@ -1085,14 +1077,14 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 [self completeTransaction:transaction];
                 
             }
-				break;
-				
-			case SKPaymentTransactionStateFailed:
+                break;
+                
+            case SKPaymentTransactionStateFailed:
             {
                 NSLog(@"Transaction failed!");
-				[self failedTransaction:transaction];
+                [self failedTransaction:transaction];
             }
-				break;
+                break;
             case SKPaymentTransactionStateRestored:
             {
                 NSLog(@"Transaction restored!");
@@ -1104,13 +1096,13 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 NSLog(@"Transaction Deferred!");
                 break;
             }
-			default: {
+            default: {
                 
             }
-				break;
-		}
-	}
-	
+                break;
+        }
+    }
+    
 }
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
