@@ -613,6 +613,10 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
     }else{
         productInfo.productPrice = product.productPrice;
         productInfo.priceDisplay = product.priceDisplay;
+        
+        if(_channelProductIdArray.count>0){
+            [self requestProducts:_channelProductIdArray];
+        }
     }
     callback(uniformProductId,productInfo);
 }
@@ -623,6 +627,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         if ([_productsInfoIdArray count] > 0 ) {
             [_productsInfoIdArray removeAllObjects];
         }
+        BOOL hasError = NO;
         NSArray* allAppStoreProduct = [dictProducts allValues];
         for (AppStoreProduct *productInfo in allAppStoreProduct) {
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -639,6 +644,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 productInfo.periodUnit = [self periodUnitWithProduct:skProduct];
             }else{
                 price = productInfo.productPrice;
+                hasError = YES;
             }
             
             [dict setObject:productInfo.priceDisplay == nil?@"":productInfo.priceDisplay forKey:@"priceDisplay"];
@@ -649,6 +655,10 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
             [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
             
             [_productsInfoIdArray addObject:dict];
+        }
+        
+        if(hasError && _channelProductIdArray.count>0){
+            [self requestProducts:_channelProductIdArray];
         }
         callback(_productsInfoIdArray);
     }else{
