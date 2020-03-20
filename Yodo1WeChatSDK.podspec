@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1WeChatSDK'
-    s.version          = '4.0.0'
-    s.summary          = 'v1.8.6.1 移除UIWebview'
+    s.version          = '4.0.1'
+    s.summary          = 'v1.8.6.2 移除UIWebview'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
