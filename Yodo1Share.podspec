@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '4.0.1'
-    s.summary          = '添加Instagram 分享功能.修复Twwitter 初始化崩溃BUG'
+    s.version          = '4.0.1.1'
+    s.summary          = '移除Twitter'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -52,5 +52,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1WeChatSDK','4.0.1'
     s.dependency 'Yodo1WeiboSDK','4.0.0'
     s.dependency 'Yodo1FBSDKShareKit','4.0.0'
-    s.dependency 'Yodo1TwitterKit','4.0.0'
+    # s.dependency 'Yodo1TwitterKit','4.0.0'
 end
