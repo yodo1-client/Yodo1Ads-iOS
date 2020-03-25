@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.9.1'
-    s.summary          = 'v3.9.1 - 2020-03-17
+    s.version          = '3.9.2'
+    s.summary          = 'v3.9.2 - 2020-03-25
                             ---------------------------
-                            1.添加 Smaato 广告 v21.3.0
+                            1.移除Twitter
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -121,7 +121,7 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_SNS',
             'VALID_ARCHS' =>  valid_archs.join(' '),
         }
-        ss.dependency 'Yodo1Share','4.0.0'
+        ss.dependency 'Yodo1Share','4.0.1.1'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
