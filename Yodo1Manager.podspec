@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.9.2'
-    s.summary          = 'v3.9.2 - 2020-03-25
+    s.version          = '3.10.0.pre'
+    s.summary          = 'v3.10.0.pre - 2020-03-26
                             ---------------------------
-                            1.移除Twitter
+                            1.添加神策数据统计
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -56,6 +56,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1OnlineParameter','4.0.0'
         ss.dependency 'Yodo1AdvertSDK','4.0.0'
         ss.dependency 'Yodo1UDID','4.0.0'
+        ss.dependency 'Yodo1SaAnalytics','4.0.0'
 
     end
 
