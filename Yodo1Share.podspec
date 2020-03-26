@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '4.0.1.1'
+    s.version          = '4.0.2'
     s.summary          = '移除Twitter'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
