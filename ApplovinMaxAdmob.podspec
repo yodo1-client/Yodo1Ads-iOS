@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxAdmob'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'v6.11.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -58,6 +58,6 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
     
-    s.dependency 'YD1ApplovinMax','4.0.0'
+    s.dependency 'YD1ApplovinMax','4.0.1'
     s.dependency 'Yodo1AdsAdmob','4.0.0'
 end
