@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Analytics'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'v1.0.11'
 
     s.description      = <<-DESC
@@ -42,7 +42,7 @@ TODO: Add long description of the pod here.
     s.dependency 'Yodo1YYCache','4.0.0'
     s.dependency 'Yodo1AFNetworking','4.0.0'
     s.dependency 'Yodo1Reachability','4.0.0'
-    s.dependency 'Yodo1OnlineParameter','4.0.0'
+    s.dependency 'Yodo1OnlineParameter','4.0.1'
     s.dependency 'Yodo1GDCTimer','4.0.0'
     s.dependency 'Yodo1UDID','4.0.0'
 
