@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Vungle'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = '更新VungleSDk 6.5.1,最低支持iOS 8,添加广告位 [ remove UIWebView]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
         'Security'
     ]
 
-    s.dependency 'Yodo1AdvertSDK','4.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.0'
+    s.dependency 'Yodo1AdvertSDK','4.0.1'
+    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
     s.dependency 'Yodo1AdsVungle','4.0.0'
 end
