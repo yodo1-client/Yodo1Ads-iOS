@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterAppsFlyer'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'A short description of AnalyticsAdapterAppsFlyer.'
 
     s.description      = <<-DESC
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
     s.dependency 'Yodo1AppsFlyer','4.0.0'
 
 end
