@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
@@ -74,6 +74,6 @@ TODO: Add long description of the pod here.
     
     s.dependency 'Yodo1Commons','4.0.0'
     s.dependency 'Yodo1KeyInfo','4.0.0'
-    s.dependency 'Yodo1OnlineParameter','4.0.0'
+    s.dependency 'Yodo1OnlineParameter','4.0.1'
 
 end
