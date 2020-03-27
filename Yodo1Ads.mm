@@ -15,6 +15,7 @@
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 #import "YD1LogView.h"
+#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
@@ -463,6 +464,16 @@ typedef enum {
 
 #pragma mark- ///OC实现
 
+@interface Yodo1Ads ()
+
++ (NSDictionary*)config;
+
++ (NSString*)publishType;
+
++ (NSString*)publishVersion;
+
+@end
+
 @implementation Yodo1Ads
 
 static bool bYodo1AdsInited = false;
@@ -472,13 +483,49 @@ static bool bYodo1AdsInited = false;
         return;
     }
     bYodo1AdsInited = true;
+    //初始化神策数据统计
+    BOOL bSensorsSwitch = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SWITCH"]boolValue];
+    if (bSensorsSwitch) {
+        NSString* serverUrl = [NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SERVERURL"];
+        BOOL bSensorsLogEnable = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_LOG_ENABLE"]boolValue];
+        if (!serverUrl) {
+            serverUrl = @"https://youdaoyi.cloud.sensorsdata.cn:4006/sa?token=7d89c1c8b84d30c8";
+        }
+        if (bSensorsLogEnable) {
+            [Yodo1SaManager initializeSdkServerURL:serverUrl debug:2];
+        }else{
+            [Yodo1SaManager initializeSdkServerURL:serverUrl debug:0];
+        }
+        
+        NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        if (!gameName) {
+            gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
+        }
+        NSString* gameVersion = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        
+        
+        [Yodo1SaManager profileSetOnce:@{@"yID":@"",
+                                         @"game":bundleId,
+                                         @"channel":@"appstore"}];
+        [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
+                                                  @"gameVersion":gameVersion,
+                                                  @"gameBundleId":bundleId,
+                                                  @"sdkType":[Yodo1Ads publishType],
+                                                  @"sdkVersion":[Yodo1Ads publishVersion],
+                                                  @"publishChannelCode":@"appstore"
+        }];
+        
+        [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
+    }
+    
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
     
     //初始化错误上报系统
     NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
     if ([feedback isEqualToString:@"on"]) {//默认是关
-        [[Yodo1ReportError instance]initWithAppKey:appKey channel:@"AppStore"];
+        [[Yodo1ReportError instance]initWithAppKey:appKey channel:@"appstore"];
         //每次启动游戏都会上传一次
         [[Yodo1ReportError instance]uploadReportError];
     }
@@ -486,7 +533,7 @@ static bool bYodo1AdsInited = false;
     //初始化数据统计
 //TODO
     [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
-    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"AppStore"];
+    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"appstore"];
 
 #ifdef YODO1_ADS
     //初始化Banner
@@ -500,6 +547,50 @@ static bool bYodo1AdsInited = false;
     if ([Yodo1OnlineParameter isTestDevice] && [Yodo1OnlineParameter isDeviceSourceFromPA]) {
         [YD1LogView startLog:appKey];
     }
+}
+
++ (void)onlineParamete:(NSNotification *)notif {
+    NSDictionary* object = [notif object];
+    if (object) {
+        NSString* result = [object objectForKey:@"result"];
+        int code = [[object objectForKey:@"code"]intValue];
+        [Yodo1SaManager track:@"onlineParameter"
+                   properties:@{@"result":result,
+                                @"errorCode":[NSNumber numberWithInt:code]}];
+    }
+    [NSNotificationCenter.defaultCenter removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
+}
+
++ (NSDictionary*)config {
+    NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle]
+                                                       pathForResource:@"Yodo1Ads"
+                                                       ofType:@"bundle"]];
+    if (bundle) {
+        NSString *configPath = [bundle pathForResource:@"config" ofType:@"plist"];
+        if (configPath) {
+            NSDictionary *config =[NSDictionary dictionaryWithContentsOfFile:configPath];
+            return config;
+        }
+    }
+    return nil;
+}
+
++ (NSString*)publishType {
+    NSDictionary* _config = [Yodo1Ads config];
+    NSString* _publishType = @"";
+    if (_config && [[_config allKeys]containsObject:@"PublishType"]) {
+        _publishType = (NSString*)[_config objectForKey:@"PublishType"];
+    }
+    return _publishType;
+}
+
++ (NSString*)publishVersion {
+    NSDictionary* _config = [Yodo1Ads config];
+    NSString* _publishVersion = @"";
+    if (_config && [[_config allKeys]containsObject:@"PublishVersion"]) {
+        _publishVersion = (NSString*)[_config objectForKey:@"PublishVersion"];
+    }
+    return _publishVersion;
 }
 
 + (void)setLogEnable:(BOOL)enable {
