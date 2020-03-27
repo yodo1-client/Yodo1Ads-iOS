@@ -13,6 +13,7 @@
 #import "Yodo1OnlineParameter.h"
 #import "AnalyticsYodo1Track.h"
 #import "Yodo1UDIDManager.h"
+#import "Bugly.h"
 
 #import "Yodo1Ads.h"
 
@@ -69,9 +70,10 @@ static BOOL isInitialized = false;
         return;
     }
     isInitialized = true;
-
+    //同意上传数据
     BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
-    
+    //16岁以上
+    BOOL isCCPA = [NSUserDefaults.standardUserDefaults boolForKey:@"below_age_data_consent"];
 #ifdef YODO1_SOOMLA
     if (!isGDPR) {
         [[SoomlaTraceback getInstance]setUserConsent:YES];
@@ -160,7 +162,60 @@ static BOOL isInitialized = false;
     [UCenterManager sharedInstance].gameRegionCode = sdkConfig.regionCode;
     [UCenterManager sharedInstance].channelId = kYodo1ChannelId;
 #endif
+    NSString* buglyAppId = [Yodo1OnlineParameter stringParams:@"BuglyAnalytic_AppId" defaultValue:@""];
+    if (buglyAppId.length > 0 && isGDPR && isCCPA) {
+        BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
+#ifdef DEBUG
+        buglyConfig.debugMode = YES;
+#endif
+        buglyConfig.channel = @"appstore";
+        
+        [Bugly startWithAppId:buglyAppId config:buglyConfig];
+        
+        NSString* sdkInfo = [NSString stringWithFormat:@"%@,%@",[Yodo1Manager publishType],[Yodo1Manager publishVersion]];
+        
+        [Bugly setUserIdentifier:Bugly.buglyDeviceId];
+        [Bugly setUserValue:@"appstore" forKey:@"ChannelCode"];
+        [Bugly setUserValue:sdkConfig.appKey forKey:@"GameKey"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"DeviceID"];
+        [Bugly setUserValue:sdkInfo forKey:@"SdkInfo"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"IDFA"];
+        [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
+        [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
+    }
     
+}
+
++ (NSDictionary*)config {
+    NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle]
+                                                       pathForResource:@"Yodo1Ads"
+                                                       ofType:@"bundle"]];
+    if (bundle) {
+        NSString *configPath = [bundle pathForResource:@"config" ofType:@"plist"];
+        if (configPath) {
+            NSDictionary *config =[NSDictionary dictionaryWithContentsOfFile:configPath];
+            return config;
+        }
+    }
+    return nil;
+}
+
++ (NSString*)publishType {
+    NSDictionary* _config = [Yodo1Manager config];
+    NSString* _publishType = @"";
+    if (_config && [[_config allKeys]containsObject:@"PublishType"]) {
+        _publishType = (NSString*)[_config objectForKey:@"PublishType"];
+    }
+    return _publishType;
+}
+    
++ (NSString*)publishVersion {
+    NSDictionary* _config = [Yodo1Manager config];
+    NSString* _publishVersion = @"";
+    if (_config && [[_config allKeys]containsObject:@"PublishVersion"]) {
+        _publishVersion = (NSString*)[_config objectForKey:@"PublishVersion"];
+    }
+    return _publishVersion;
 }
 
 #ifdef YODO1_ANALYTICS
