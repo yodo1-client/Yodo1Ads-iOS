@@ -47,7 +47,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.9.2";
+NSString* const kYodo1AdsVersion       = @"3.10.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -489,7 +489,7 @@ static bool bYodo1AdsInited = false;
         NSString* serverUrl = [NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SERVERURL"];
         BOOL bSensorsLogEnable = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_LOG_ENABLE"]boolValue];
         if (!serverUrl) {
-            serverUrl = @"https://youdaoyi.cloud.sensorsdata.cn:4006/sa?token=7d89c1c8b84d30c8";
+            serverUrl = @"https://youdaoyi.datasink.sensorsdata.cn/sa?project=production&token=7d89c1c8b84d30c8";
         }
         if (bSensorsLogEnable) {
             [Yodo1SaManager initializeSdkServerURL:serverUrl debug:2];

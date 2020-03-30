@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.10.0.pre'
-    s.summary          = 'v3.10.0.pre - 2020-03-26
+    s.version          = '3.10.0'
+    s.summary          = 'v3.10.0 - 2020-03-27
                             ---------------------------
                             1.添加神策数据统计
                             ---------------------------
