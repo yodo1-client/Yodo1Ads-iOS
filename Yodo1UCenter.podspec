@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '4.0.3'
-    s.summary          = '修复内购买iOS系统兼容BUG [ 更新QQ SDK ]修改多语言设置接口'
+    s.version          = '4.0.4'
+    s.summary          = '修复内购买iOS系统兼容BUG [ 更新QQ SDK ]修改多语言设置接口,添加网络变化检测。'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

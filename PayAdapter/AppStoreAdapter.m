@@ -13,6 +13,7 @@
 #import "Yodo1Commons.h"
 #import "SubscriptionInfo.h"
 #import "Yodo1AnalyticsManager.h"
+#import "Yodo1Reachability.h"
 
 #define APPSTORE_REQUEST_LIST @"appstore_request_list"
 #define VERIFYING_REQUEST_LIST @"verifing_request_list"
@@ -35,7 +36,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 @property (nonatomic,retain) NSMutableArray* channelProductIdArray;
 @property (nonatomic,retain) NSMutableArray* uniformProductIdArray;
 @property (nonatomic,retain) NSMutableArray* productsInfoIdArray;
-@property (nonatomic,retain) NSArray* products;
+@property (nonatomic,retain) NSMutableArray* products;
 @property (nonatomic,copy) NSString* transactionReceipt;
 @property (nonatomic,copy) NSString* transactionIdentifier;
 @property (nonatomic,copy) NSString* currentUniformProductId;
@@ -162,6 +163,7 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
         _productsInfoIdArray = [[NSMutableArray alloc] initWithCapacity:5];
         _restoreProductIdArray = [[NSMutableArray alloc] initWithCapacity:5];
         _lossOrderIdArray = [[NSMutableArray alloc] initWithCapacity:5];
+        _products = [[NSMutableArray alloc]initWithCapacity:5];
         
         NSString  *path=[[NSBundle mainBundle] pathForResource:@"Yodo1KeyConfig.bundle/Yodo1ProductInfo" ofType:@"plist"];
         _productIdDic =[NSMutableDictionary dictionaryWithContentsOfFile:path];
@@ -173,9 +175,16 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
                 [_channelProductIdArray addObject:[pay objectForKey:PRODUCT_ID]];
                 [_uniformProductIdArray addObject:key];
             }
-            if (_channelProductIdArray.count > 0) {
+            isRequesting = NO;
                 [self requestProducts:_channelProductIdArray];
+            
+            //网络变化监测
+            __weak typeof(self) weakSelf = self;
+            [Yodo1Reachability.reachability setNotifyBlock:^(Yodo1Reachability * _Nonnull reachability) {
+                if (reachability.reachable && !isRequesting) {
+                    [weakSelf requestProducts:_channelProductIdArray];
             }
+            }];
         }
     }
     return self;
@@ -735,6 +744,14 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 
 - (void)requestProducts:(NSArray *)productIds
 {
+    if ([productIds count] < 1) {
+        return;
+    }
+    
+    if (self.products.count == productIds.count) {
+        return;
+    }
+    
     isRequesting = YES;
     NSSet *productIds_ = [NSSet setWithArray:productIds];
     SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:productIds_];
@@ -1043,7 +1060,14 @@ NSString *const ucBuyItemOK = @"ucBuyItemOK";
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     isRequesting = NO;
-    self.products = response.products;
+    if (response.products > 0) {
+        for (SKProduct* product in response.products) {
+            if ([self.products containsObject:product]) {
+                continue;
+            }
+            [self.products addObject:product];
+        }
+    }
     NSArray *invalid = response.invalidProductIdentifiers;
     
     for (NSString *invalidPID in invalid) {
