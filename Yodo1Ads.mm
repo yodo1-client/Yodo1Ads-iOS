@@ -14,7 +14,6 @@
 #import "Yodo1OnlineParameter.h"
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
-#import "YD1LogView.h"
 #import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 
 #ifdef YODO1_ADS
@@ -22,6 +21,7 @@
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
+#import "YD1LogView.h"
 #import "Yodo1AdConfigHelper.h"
 #endif
 
@@ -477,6 +477,9 @@ typedef enum {
 @implementation Yodo1Ads
 
 static bool bYodo1AdsInited = false;
+static NSString* yd1AppKey = @"";
+static BOOL bSensorsSwitch = false;
+
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
         NSLog(@"[Yodo1 Ads] has already been initialized");
@@ -484,7 +487,7 @@ static bool bYodo1AdsInited = false;
     }
     bYodo1AdsInited = true;
     //初始化神策数据统计
-    BOOL bSensorsSwitch = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SWITCH"]boolValue];
+    bSensorsSwitch = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SWITCH"]boolValue];
     if (bSensorsSwitch) {
         NSString* serverUrl = [NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SERVERURL"];
         BOOL bSensorsLogEnable = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_LOG_ENABLE"]boolValue];
@@ -521,7 +524,7 @@ static bool bYodo1AdsInited = false;
     
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
-    
+    yd1AppKey = appKey;
     //初始化错误上报系统
     NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
     if ([feedback isEqualToString:@"on"]) {//默认是关
@@ -551,7 +554,7 @@ static bool bYodo1AdsInited = false;
 
 + (void)onlineParamete:(NSNotification *)notif {
     NSDictionary* object = [notif object];
-    if (object) {
+    if (object && bSensorsSwitch) {
         NSString* result = [object objectForKey:@"result"];
         int code = [[object objectForKey:@"code"]intValue];
         [Yodo1SaManager track:@"onlineParameter"
