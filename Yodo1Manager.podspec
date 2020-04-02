@@ -1,9 +1,10 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.10.0'
-    s.summary          = 'v3.10.0 - 2020-03-27
+    s.version          = '3.10.1'
+    s.summary          = 'v3.10.1 - 2020-04-2
                             ---------------------------
                             1.添加神策数据统计
+                            2.更新UnityAds 库
                             ---------------------------
                           '
     s.description      = <<-DESC
