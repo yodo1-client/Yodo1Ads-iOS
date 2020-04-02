@@ -399,7 +399,7 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
             'VALID_ARCHS' =>  valid_archs.join(' '),
         }
-        ss.dependency 'YD1UnityAds','4.0.1'
+        ss.dependency 'YD1UnityAds','4.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -550,7 +550,7 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
             'VALID_ARCHS' =>  valid_archs.join(' '),
         }
-        ss.dependency 'AdmobUnityAds','4.0.1'
+        ss.dependency 'AdmobUnityAds','4.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -639,7 +639,7 @@ Pod::Spec.new do |s|
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
             'VALID_ARCHS' =>  valid_archs.join(' '),
         }
-        ss.dependency 'ApplovinMaxUnityAds','4.0.1'
+        ss.dependency 'ApplovinMaxUnityAds','4.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Vungle' do |ss|
