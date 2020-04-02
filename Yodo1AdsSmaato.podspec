@@ -33,9 +33,9 @@ Pod::Spec.new do |s|
         "OTHER_LDFLAGS" => "-ObjC",
         "ENABLE_BITCODE" => "NO",
         "ONLY_ACTIVE_ARCH" => "NO",
-        # 'VALID_ARCHS' =>  valid_archs.join(' ')
-        "VALID_ARCHS[sdk=iphoneos*]": "arm64 armv7",
-        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        'VALID_ARCHS' =>  valid_archs.join(' ')
+        # "VALID_ARCHS[sdk=iphoneos*]": "arm64 armv7",
+        # "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
 
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth','JavaScriptCore'
