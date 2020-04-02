@@ -32,9 +32,9 @@ Pod::Spec.new do |s|
         "ONLY_ACTIVE_ARCH" => "NO",
         'VALID_ARCHS' =>  valid_archs.join(' ')
     }
-    s.pod_target_xcconfig = {
-        'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
-    }
+    # s.pod_target_xcconfig = {
+    #     'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
+    # }
     s.frameworks = 'AdSupport', 'AVFoundation', 'CoreTelephony', 'CoreGraphics', 'CoreMedia', 'StoreKit', 'SystemConfiguration', 'UIKit','WebKit','AudioToolbox'
 
     s.weak_frameworks = 'SafariServices'
