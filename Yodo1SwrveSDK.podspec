@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1SwrveSDK'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = 'Swrve 统计SDK [SDK v6.3.0]自己创建工程导出.a'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -35,12 +35,12 @@ Pod::Spec.new do |s|
     s.compiler_flags = '-Dunix'
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
     s.frameworks = [  
         'UIKit', 
