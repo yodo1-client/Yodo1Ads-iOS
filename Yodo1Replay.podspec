@@ -36,6 +36,6 @@ Pod::Spec.new do |s|
     
     s.weak_frameworks = 'ReplayKit'
 
-    s.dependency 'Yodo1Commons','4.0.0'
+    s.dependency 'Yodo1Commons','4.1.0'
 
 end
