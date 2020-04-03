@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsApplovin'
-    s.version          = '4.0.1'
+    s.version          = '4.0.0'
     s.summary          = 'sdk v6.11.6'
     s.description      = <<-DESC
                         TODO: Add long description of the pod here.
