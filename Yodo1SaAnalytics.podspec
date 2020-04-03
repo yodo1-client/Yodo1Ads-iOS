@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = 'Yodo1SaAnalytics'
-    s.version           = '4.0.0'
+    s.version           = '4.1.0'
     s.summary           = 'Sa SDK  v1.0.0'
     s.description       = <<-DESC
     TODO: Add long description of the pod here.
@@ -24,16 +24,15 @@ Pod::Spec.new do |s|
 
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
 
-
-    valid_archs = ['armv7','arm64','x86_64']
-    s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
-    }
-
     s.requires_arc = true
+
+    s.xcconfig = {
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+    }
 
     s.frameworks = 'UIKit', 'Security','SystemConfiguration','CoreGraphics','CoreTelephony','ImageIO','CloudKit','GameKit','WebKit'
 
