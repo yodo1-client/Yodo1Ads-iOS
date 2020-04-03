@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Replay'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = 'A short description of Yodo1Replay.'
 
 
@@ -21,17 +21,18 @@ Pod::Spec.new do |s|
     
     s.public_header_files = "#{s.version}" + '/*.h'
 
-    valid_archs = ['armv7','arm64','x86_64']
+    s.requires_arc = true
+
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
     
     s.frameworks = 'UIKit'
     
-    s.requires_arc = true
     
     s.weak_frameworks = 'ReplayKit'
 
