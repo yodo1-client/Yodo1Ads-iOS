@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ZipArchive'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = 'A short description of ZipArchive.'
 
     s.description      = <<-DESC
@@ -19,15 +19,15 @@ Pod::Spec.new do |s|
     s.public_header_files = "#{s.version}" + '/*.h',"#{s.version}" + '/minizip/crypt.h', "#{s.version}" + '/minizip/ioapi.h', "#{s.version}" + '/minizip/mztools.h', "#{s.version}" + '/minizip/unzip.h', "#{s.version}" + '/minizip/zip.h'
 
     s.libraries = 'z'
+    
     s.requires_arc = true
-    s.compiler_flags = '-Dunix'
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
 
 end
