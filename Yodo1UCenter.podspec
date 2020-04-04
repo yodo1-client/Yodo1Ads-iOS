@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '4.0.4'
+    s.version          = '4.1.0'
     s.summary          = '修复内购买iOS系统兼容BUG [ 更新QQ SDK ]修改多语言设置接口,添加网络变化检测。'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -26,26 +26,28 @@ Pod::Spec.new do |s|
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    valid_archs = ['armv7','arm64','x86_64']
+    s.requires_arc = true
+
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
+
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
     s.libraries = 'sqlite3', 'z'
-    s.requires_arc = false
     s.compiler_flags = '-Dunix'
     
-    s.dependency 'Yodo1Commons','4.0.0'
-    s.dependency 'Yodo1WeiboSDK','4.0.0'
-    s.dependency 'Yodo1QQSDK','4.0.0'
-    s.dependency 'Yodo1AFNetworking','4.0.0'
-    s.dependency 'Yodo1Reachability','4.0.0'
-    s.dependency 'Yodo1KeyInfo','4.0.0'
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
+    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1WeiboSDK','4.1.0'
+    s.dependency 'Yodo1QQSDK','4.1.0'
+    s.dependency 'Yodo1AFNetworking','4.1.0'
+    s.dependency 'Yodo1Reachability','4.1.0'
+    s.dependency 'Yodo1KeyInfo','4.1.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
 end
