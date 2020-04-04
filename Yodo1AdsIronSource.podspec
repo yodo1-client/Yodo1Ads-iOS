@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsIronSource'
-    s.version          = '4.0.0'
-    s.summary          = 'IronSource更新v6.14.0.0'
+    s.version          = '4.1.0'
+    s.summary          = 'IronSource更新v6.15.0.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -20,14 +20,16 @@ Pod::Spec.new do |s|
     s.public_header_files = "#{s.version}" + '/IronSource.framework/Versions/A/Headers/*.h'
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
 
-    valid_archs = ['armv7','arm64','x86_64']
+     s.requires_arc = true
+
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
-    s.requires_arc = true
+
     s.frameworks = [
         'Accounts', 
         'AssetsLibrary',

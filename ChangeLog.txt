@@ -1,4 +1,10 @@
 =============================================
+2020-03-31
+v6.15.0.1
+Bug fix: Resolved potential deadlock
+• Integration helper fix
+
+=============================================
 2020-02-6
 v6.14.0
 • Add ‘Do Not Sell’ support for ironSource mediation and network 
