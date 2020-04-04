@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MobClick'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = 'UMAnalytics 更新 V6.0.5+G_917526b7bc_20190701161549 [大更新];
                           6.1.0+G_0a2678de36_20191217134700
                         '
@@ -22,15 +22,15 @@ Pod::Spec.new do |s|
   
     s.vendored_frameworks = "#{s.version}" +'/*.framework'
 
-    valid_archs = ['armv7','arm64','x86_64']
-    s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
-    }
+    s.requires_arc = true
 
-    s.requires_arc = false
+    s.xcconfig = {
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+    }
 
     s.frameworks = 'CoreTelephony','SystemConfiguration','UIKit','Foundation'
 
