@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.5
+//  myTargetSDK 5.4.8
 //
 // Created by Timur on 5/25/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -79,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak, nullable) id <MTRGInstreamAudioAdDelegate> delegate;
 @property(nonatomic, nullable) id <MTRGInstreamAudioAdPlayer> player;
+@property(nonatomic, readonly, nullable) MTRGInstreamAudioAdBanner *currentBanner;
 @property(nonatomic, readonly, copy) NSArray<NSNumber *> *midpoints;
 @property(nonatomic) NSUInteger loadingTimeout;
 @property(nonatomic) float volume;

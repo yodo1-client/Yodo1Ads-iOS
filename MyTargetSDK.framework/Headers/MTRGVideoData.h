@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.5
+//  myTargetSDK 5.4.8
 //
 // Created by Timur on 2/9/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -12,13 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGVideoData : MTRGMediaData
 
-@property(nonatomic, readonly, copy, nullable) NSString *path;
+@property(nonatomic, readonly, nullable) NSString *path;
 @property(nonatomic, readonly) BOOL isCacheable;
 
 + (nullable MTRGVideoData *)chooseBestFromArray:(NSArray<MTRGVideoData *> *)videoDatas videoQuality:(NSUInteger)videoQuality;
 
 + (instancetype)videoDataWithUrl:(NSString *)url size:(CGSize)size;
 
+- (nullable NSURL *)createVideoUrl;
 @end
 
 NS_ASSUME_NONNULL_END
