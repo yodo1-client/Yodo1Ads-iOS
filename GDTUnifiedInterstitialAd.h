@@ -142,10 +142,24 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadAd;
 
 /**
+*  插屏全屏视频广告发起请求方法
+*  详解：[必选]发起拉取广告请求
+*/
+- (void)loadFullScreenAd;
+
+
+/**
  *  广告展示方法
  *  详解：[必选]发起展示广告请求, 必须传入用于显示插播广告的UIViewController
  */
+
 - (void)presentAdFromRootViewController:(UIViewController *)rootViewController;
+
+/**
+*  插屏视频全屏广告展示方法
+*  详解：[必选]发起展示广告请求, 必须传入用于显示插播广告的UIViewController
+*/
+- (void)presentFullScreenAdFromRootViewController:(UIViewController *)rootViewController;
 
 /**
  返回广告的eCPM，单位：分

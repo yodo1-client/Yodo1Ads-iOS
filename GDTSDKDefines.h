@@ -23,7 +23,7 @@
 
 #define GDTScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define GDTScreenWidth  ([UIScreen mainScreen].bounds.size.width)
-
+#define GDTTangramSchemePrefix  @"gdtmsg://e.qq.com/"
 /**
  *  视频播放器状态
  *

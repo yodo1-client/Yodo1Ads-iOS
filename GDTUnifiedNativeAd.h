@@ -85,5 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
  @return 当使用流量分配功能时，用于区分广告平台；未使用时为空字符串
  */
 - (NSString *)adNetworkName;
+
+/**
+ * 当需要支持 VAST 广告时，需流量自行配置 adapter 的 vastClassName
+ */
+- (void)setVastClassName:(NSString *)vastClassName;
+
 @end
 NS_ASSUME_NONNULL_END

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSInteger expiredTimestamp;
 @property (nonatomic, weak) id <GDTRewardedVideoAdDelegate> delegate;
 @property (nonatomic, readonly) NSString *placementId;
-
+@property (nonatomic, readonly) NSString *adId;
 /**
  构造方法
 

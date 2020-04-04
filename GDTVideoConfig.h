@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GDTVideoConfig : NSObject
 
 /**
- 视频自动播放策略，默认 GDTVideoAutoPlayPolicyWIFI,
+ 视频自动播放策略，默认 GDTVideoAutoPlayPolicyAlways,
  选择 GDTVideoAutoPlayPolicyNever 策略时，需要开发者调用 GDTMediaView 的 play\pause 方法触发视频播、暂停，
  或者开启 userControlEnable 设置，让用户点击 MediaView 控制播放状态
  */
