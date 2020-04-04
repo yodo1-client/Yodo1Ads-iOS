@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1MyTarget'
     s.version          = '4.1.0'
-    s.summary          = '更新 MyTarget 5.4.5'
+    s.summary          = '更新 MyTarget 5.4.8'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
     #s.public_header_files = "#{s.version}" +'/*.h'
     
     s.vendored_libraries = "#{s.version}" + '/*.a'
+    
     s.requires_arc = true
 
     s.xcconfig = {
