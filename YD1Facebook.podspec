@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Facebook'
-    s.version          = '4.0.1'
+    s.version          = '4.1.0'
     s.summary          = 'FBAudienceNetwork SDK V5.6.1 [core v6.0.0] fix bug Reward callback.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -24,16 +24,14 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
-    # s.pod_target_xcconfig = {
-    #     'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
-    # }
+
     s.frameworks = [
         'Accounts', 
         'AssetsLibrary',
@@ -67,7 +65,7 @@ Pod::Spec.new do |s|
         'GameKit'
     ]
 
-    s.dependency 'Yodo1AdvertSDK','4.0.1'
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
-    s.dependency 'Yodo1AdsFacebook','4.0.0'
+    s.dependency 'Yodo1AdvertSDK','4.1.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
+    s.dependency 'Yodo1AdsFacebook','4.1.0'
 end
