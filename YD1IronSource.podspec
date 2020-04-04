@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1IronSource'
-    s.version          = '4.0.1'
+    s.version          = '4.1.0'
     s.summary          = 'IronSource sdk v6.14.0.0'
 
     s.description      = <<-DESC
@@ -20,22 +20,22 @@ Pod::Spec.new do |s|
 
     #s.public_header_files = "#{s.version}" +'/*.h'
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
-
     s.requires_arc = true
-    valid_archs = ['armv7','arm64','x86_64']
+
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
+
 
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1AdvertSDK','4.0.1'
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
-    s.dependency 'Yodo1AdsIronSource','4.0.0'
+    s.dependency 'Yodo1AdvertSDK','4.1.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
+    s.dependency 'Yodo1AdsIronSource','4.1.0'
 end
