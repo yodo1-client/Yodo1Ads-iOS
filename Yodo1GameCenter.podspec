@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1GameCenter'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = 'A short description of Yodo1GameCenter.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -21,16 +21,16 @@ Pod::Spec.new do |s|
     
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
 
     s.frameworks = 'UIKit','GameKit'
-    s.dependency 'Yodo1Commons','4.0.0'
-    s.dependency 'Yodo1Reachability','4.0.0'
+    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Reachability','4.1.0'
 
 end
