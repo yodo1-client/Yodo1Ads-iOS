@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobTapjoy'
-    s.version          = '4.0.1'
+    s.version          = '4.1.0'
     s.summary          = 'Admob 更新v7.55.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -19,15 +19,16 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/TapjoyAdapter.framework'
     s.public_header_files = "#{s.version}" + '/TapjoyAdapter.framework/Versions/A/Headers/*.h'
 
-    valid_archs = ['armv7','arm64','x86_64']
+    s.requires_arc = true
+
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
 
-    s.requires_arc = true
     s.frameworks = [
         'Accounts', 
         'AssetsLibrary',
@@ -56,7 +57,7 @@ Pod::Spec.new do |s|
 
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','4.0.1'
-    s.dependency 'Yodo1AdsTapjoy','4.0.0'
+    s.dependency 'YD1Admob','4.1.0'
+    s.dependency 'Yodo1AdsTapjoy','4.1.0'
 
 end
