@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1GDT'
-    s.version          = '4.0.2'
+    s.version          = '4.1.0'
     s.summary          = 'GDTMob[广点通] v4.11.3,fix bug'
 
     s.description      = <<-DESC
@@ -21,15 +21,17 @@ Pod::Spec.new do |s|
     #s.public_header_files = "#{s.version}" +'/*.h'
     
     s.vendored_libraries = "#{s.version}" + '/*.a'
+   
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
+
 
     s.frameworks = [
         'Accounts', 
@@ -56,7 +58,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdvertSDK','4.0.1'
-    s.dependency 'Yodo1ThirdsAnalytics','4.0.1'
-    s.dependency 'Yodo1AdsGDT','4.0.0'
+    s.dependency 'Yodo1AdvertSDK','4.1.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
+    s.dependency 'Yodo1AdsGDT','4.1.0'
 end
