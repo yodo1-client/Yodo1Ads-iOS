@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    s.requires_arc = true
+    s.requires_arc = false
 
     s.xcconfig = {
         'OTHER_LDFLAGS' => '-ObjC',
