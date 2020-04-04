@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsTapjoy'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = '更新Tapjoy v12.4.2 fix bug'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -26,19 +26,16 @@ Pod::Spec.new do |s|
     
     s.vendored_frameworks = "#{s.version}" + '/Tapjoy.framework'
 
-    s.requires_arc = false
-
-    valid_archs = ['armv7','arm64','x86_64']
-    s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
-    }
     
-    # s.pod_target_xcconfig = {
-    #     'ARCHS[sdk=iphonesimulator*]'=>'$(ARCHS_STANDARD_64_BIT)'
-    # }
+    s.requires_arc = true
+
+    s.xcconfig = {
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+    }
 
     s.frameworks = [
         'Accounts', 
