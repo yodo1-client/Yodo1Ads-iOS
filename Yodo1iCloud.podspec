@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1iCloud'
-    s.version          = '4.0.0'
+    s.version          = '4.1.0'
     s.summary          = '更新到v3.0.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -20,13 +20,13 @@ Pod::Spec.new do |s|
     
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
     s.frameworks = 'UIKit', 'CloudKit'
-    s.dependency 'Yodo1Commons','4.0.0'
+    s.dependency 'Yodo1Commons','4.1.0'
 end
