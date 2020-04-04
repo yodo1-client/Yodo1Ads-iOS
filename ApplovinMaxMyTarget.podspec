@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxMyTarget'
-    s.version          = '4.0.1'
+    s.version          = '4.1.0'
     s.summary          = 'v6.11.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -24,13 +24,14 @@ Pod::Spec.new do |s|
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
     s.requires_arc = true
 
-    valid_archs = ['armv7','arm64','x86_64']
     s.xcconfig = {
-        "OTHER_LDFLAGS" => "-ObjC",
-        "ENABLE_BITCODE" => "NO",
-        "ONLY_ACTIVE_ARCH" => "NO",
-        'VALID_ARCHS' =>  valid_archs.join(' ')
+        'OTHER_LDFLAGS' => '-ObjC',
+        'ENABLE_BITCODE' => "NO",
+        "VALID_ARCHS": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
+
     
     s.frameworks = [
         'Accounts', 
@@ -58,6 +59,6 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
 
-    s.dependency 'Yodo1AdsMyTarget','4.0.0'
-    s.dependency 'YD1ApplovinMax','4.0.1'
+    s.dependency 'Yodo1AdsMyTarget','4.1.0'
+    s.dependency 'YD1ApplovinMax','4.1.0'
 end
