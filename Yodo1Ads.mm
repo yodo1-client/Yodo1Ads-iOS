@@ -15,7 +15,9 @@
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 #import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
+#import <Bugly/Bugly.h>
 #import "YD1LogView.h"
+#import "Yodo1Commons.h"
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
@@ -518,10 +520,8 @@ static BOOL bSensorsSwitch = false;
                                                   @"sdkVersion":[Yodo1Ads publishVersion],
                                                   @"publishChannelCode":@"appstore"
         }];
-        
-        [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     }
-    
+    [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
     [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
     yd1AppKey = appKey;
@@ -562,6 +562,34 @@ static BOOL bSensorsSwitch = false;
                                 @"errorCode":[NSNumber numberWithInt:code]}];
     }
     [NSNotificationCenter.defaultCenter removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
+    
+    //同意上传数据
+    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
+    //16岁以上
+    BOOL isCCPA = [NSUserDefaults.standardUserDefaults boolForKey:@"below_age_data_consent"];
+    
+    ///Bugly
+    NSString* buglyAppId = [Yodo1OnlineParameter stringParams:@"BuglyAnalytic_AppId" defaultValue:@""];
+    if (buglyAppId.length > 0 && isGDPR && isCCPA) {
+        BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
+#ifdef DEBUG
+        buglyConfig.debugMode = YES;
+#endif
+        buglyConfig.channel = @"appstore";
+        
+        [Bugly startWithAppId:buglyAppId config:buglyConfig];
+        
+        NSString* sdkInfo = [NSString stringWithFormat:@"%@,%@",[Yodo1Ads publishType],[Yodo1Ads publishVersion]];
+        
+        [Bugly setUserIdentifier:Bugly.buglyDeviceId];
+        [Bugly setUserValue:@"appstore" forKey:@"ChannelCode"];
+        [Bugly setUserValue:yd1AppKey forKey:@"GameKey"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"DeviceID"];
+        [Bugly setUserValue:sdkInfo forKey:@"SdkInfo"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"IDFA"];
+        [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
+        [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
+    }
 }
 
 + (NSDictionary*)config {
