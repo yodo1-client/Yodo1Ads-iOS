@@ -39,6 +39,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Track','4.1.0'
         ss.dependency 'Yodo1OnlineParameter','4.1.0'
         ss.dependency 'Yodo1UDID','4.1.0'
+        ss.dependency 'Yodo1ThirdsAnalytics','4.1.0'
     end
 
     s.subspec 'Yodo1_ConfigKey' do |ss|
