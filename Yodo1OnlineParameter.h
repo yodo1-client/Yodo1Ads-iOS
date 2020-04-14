@@ -23,7 +23,7 @@ FOUNDATION_EXPORT NSString* const kOPSDKVersion;
 + (instancetype)initialize NS_UNAVAILABLE;
 
 + (void)initWithAppKey:(NSString *)appKey
-                channel:(NSString *)channel;
+               channel:(NSString *)channel;
 
 + (NSString *)stringParams:(NSString *)key defaultValue:(NSString *)defaultValue;
 
