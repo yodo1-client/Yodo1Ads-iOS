@@ -46,7 +46,7 @@ public:
      *  Init
      */
     static void InitWithAppKey(const char* appKey);
- 
+    
     /**
      *  Enable/Disable log
      */
@@ -68,7 +68,7 @@ public:
      *  Set banner's offset
      */
     static void SetBannerOffset(float x,float y);
-
+    
     /**
      *  Set the Banner Scale scaling factor x axis direction
      *  multiple sx,y axis direction multiple sy
@@ -126,6 +126,31 @@ public:
      */
     static void ShowVideo();
     
+    /**
+     * This can be used by the integrating App to indicate if
+     * the user falls in any of the GDPR applicable countries
+     * (European Economic Area).
+     * consent YES User consents (Behavioral and Contextual Ads).
+     * NO if they are not.
+     */
+    static void SetUserConsent(BOOL consent);
+    
+    /**
+     * In the US, the Children’s Online Privacy Protection Act (COPPA) imposes
+     * certain requirements on operators of online services that (a)
+     * have actual knowledge that the connected user is a child under 13 years of age,
+     * or (b) operate services (including apps) that are directed to children under 13.
+     * isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
+     */
+    static void SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge);
+    
+    /**
+     * Set whether or not user has opted out of the sale of their
+     * personal information.
+     * doNotSell 'YES' if the user has opted out of the sale of
+     * their personal information.
+     */
+    static void SetDoNotSell(BOOL doNotSell);
 };
 
 #endif /* Yodo1AdsC_h */
