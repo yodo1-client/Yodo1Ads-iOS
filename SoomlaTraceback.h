@@ -11,7 +11,7 @@
 #import "TracebackAdvertising.h"
 #import "SoomlaConfig.h"
 
-#define SOOMLA_TRACEBACK_VERSION    @"5.6.6"
+#define SOOMLA_TRACEBACK_VERSION    @"5.7.9"
 
 static NSString *SOOMLA_AGENT_TAG = @"SOOMLA Agent SDK";
 
@@ -57,8 +57,6 @@ static NSString *SOOMLA_AGENT_TAG = @"SOOMLA Agent SDK";
 - (void)addExtraUserId:(NSString *)userId;
 - (void)addTags:(NSArray*)tags;
 - (void)removeTags:(NSArray*)tags;
-- (void)getUserAdActions:(void (^)(NSArray *adActions))success
-                 failure:(void (^)(NSString *reason))failure;
 - (void)overrideCountryCode:(NSString*)countryCode;
 - (void)onInAppPurchaseCompletedOfItem:(NSString*)itemId withPrice:(NSNumber*)price andCurrency:(NSString*)currency;
 
