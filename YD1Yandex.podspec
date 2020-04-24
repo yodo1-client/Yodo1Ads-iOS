@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Yandex'
-    s.version          = '4.1.0'
+    s.version          = '4.1.1'
     s.summary          = '更新 MyTarget 2.14.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
