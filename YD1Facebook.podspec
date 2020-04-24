@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Facebook'
-    s.version          = '4.1.0'
-    s.summary          = 'FBAudienceNetwork SDK V5.6.1 [core v6.0.0] fix bug Reward callback.'
+    s.version          = '4.1.1'
+    s.summary          = 'FBAudienceNetwork SDK V5.8.0 [core v6.5.0] fix bug Reward callback.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -67,5 +67,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdvertSDK','4.1.0'
     s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
-    s.dependency 'Yodo1AdsFacebook','4.1.0'
+    s.dependency 'Yodo1AdsFacebook','4.1.1'
 end
