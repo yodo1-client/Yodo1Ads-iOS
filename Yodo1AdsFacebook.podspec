@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsFacebook'
-    s.version          = '4.1.0'
+    s.version          = '4.1.1'
     s.summary          = 'FBAudienceNetwork v5.8.0 [支持iOS13,removed UIWebView]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -39,5 +39,5 @@ Pod::Spec.new do |s|
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'xml2','c++'
     
-    s.dependency 'Yodo1FBSDKCoreKit','4.1.0'
+    s.dependency 'Yodo1FBSDKCoreKit','4.1.1'
 end
