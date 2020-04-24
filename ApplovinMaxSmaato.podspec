@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'ApplovinMaxSmaato'
-    s.version          = '4.1.0'
-    s.summary          = 'v6.11.3'
+    s.version          = '4.1.1'
+    s.summary          = 'v6.12.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -60,5 +60,5 @@ Pod::Spec.new do |s|
     ]
 
     s.dependency 'Yodo1AdsSmaato','4.1.0'
-    s.dependency 'YD1ApplovinMax','4.1.0'
+    s.dependency 'YD1ApplovinMax','4.1.1'
 end
