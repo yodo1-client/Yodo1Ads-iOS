@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Smaato'
-    s.version          = '4.1.0'
+    s.version          = '4.1.1'
     s.summary          = '更新 Smaato 21.3.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
