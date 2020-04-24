@@ -1,4 +1,16 @@
 =============================================
+2020-04-22
+v7.58.0
+1.AdColonyAdapter / 4.1.4.0
+2.AppLovinAdapter / 6.12.0.0
+3.ChartboostAdapter/8.0.4.0
+4.VungleAdapter / 6.5.3.0
+5.UnityAdsAdapter /3.4.2.0
+6.TapjoyAdapter /12.4.2.0
+7.IronSourceAdapter /6.16.0.0
+8.FacebookAdapter / 5.8.0.0
+9.InmobiAdapter /9.0.4.0
+=============================================
 2020-03-31
 v7.57.0
 1.AdColonyAdapter / 4.1.4.0

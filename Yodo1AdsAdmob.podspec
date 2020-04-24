@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdmob'
-    s.version          = '4.1.0'
-    s.summary          = 'Admob sdk v7.57.0'
+    s.version          = '4.1.1'
+    s.summary          = 'Admob sdk v7.58.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
