@@ -16,29 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "TargetConditionals.h"
+// Importing FBSDKCoreKit is tricky due to build variants.
+// SPM require that it is imported as <FBSDKCoreKit.h> while CocoaPods,
+// Carthage, Buck, and xcodebuild require <FBSDKCoreKit/FBSDKCoreKit.h>
+// This file is not exposed via SPM so non SPM users will use <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#if !TARGET_OS_TV
-
-#import <UIKit/UIKit.h>
-
-#import "FBSDKCoreKitImport.h"
-
-#import "FBSDKSharingButton.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-/**
-  A button to share content.
-
- Tapping the receiver will invoke the FBSDKShareDialog with the attached shareContent.  If the dialog cannot
- be shown, the button will be disabled.
- */
-NS_SWIFT_NAME(FBShareButton)
-@interface FBSDKShareButton : FBSDKButton <FBSDKSharingButton>
-
-@end
-
-NS_ASSUME_NONNULL_END
-
+// Even though this file is not available from projects using SPM,
+// it is available when building the packages themselves so we need to include this check.
+#if SWIFT_PACKAGE
+#import <FBSDKCoreKit.h>
+#else
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #endif
