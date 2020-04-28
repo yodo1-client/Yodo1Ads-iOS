@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     #s.source_files = "#{s.version}" +'/*.{h,m}'
 
     #s.public_header_files = "#{s.version}" +'/*.h'
-    
+    s.vendored_libraries = "#{s.version}"  + '/*.a'
     s.requires_arc = true
 
     s.xcconfig = {
