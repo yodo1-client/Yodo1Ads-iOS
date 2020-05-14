@@ -46,6 +46,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
     SDKInitTypeMopub,
     SDKInitTypeUnityAds,
     SDKInitTypeOneWay,
+    SDKInitTypeSmaato,
 };
 
 @interface Yodo1AdConfigHelper : NSObject
@@ -107,7 +108,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 /// return true 表示16岁以下
 - (BOOL)isTagForUnderAgeOfConsent;
 
-/// return true 如果用户选择不出售其个人信息，请将以下标记设置为true。
+/// return true 表示用户选择不出售其个人信息
 - (BOOL)isDoNotSell;
 /// 如果用户选择不出售其个人信息，请将以下标记设置为true。
 - (void)setDoNotSell:(BOOL)doNotSell;
