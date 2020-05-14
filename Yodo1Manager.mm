@@ -10,7 +10,8 @@
 #import "Yodo1Commons.h"
 #import "Yodo1KeyInfo.h"
 #import "Yodo1UnityTool.h"
-#import "Yodo1OnlineParameter.h"
+#import "Yd1OnlineParameter.h"
+#import "Yodo1Tool+Storage.h"
 #import "AnalyticsYodo1Track.h"
 #import "Yodo1UDIDManager.h"
 #import "Bugly.h"
@@ -30,7 +31,7 @@
 #endif
 
 #ifdef YODO1_UCCENTER
-#import "UCenterManager.h"
+#import "Yd1UCenterManager.h"
 #endif
 
 #ifdef YODO1_FACEBOOK_ANALYTICS
@@ -158,11 +159,12 @@ static BOOL isInitialized = false;
 #endif
     
 #ifdef YODO1_UCCENTER
-    [UCenterManager sharedInstance].appKey = sdkConfig.appKey;
-    [UCenterManager sharedInstance].gameRegionCode = sdkConfig.regionCode;
-    [UCenterManager sharedInstance].channelId = kYodo1ChannelId;
+    [Yd1OnlineParameter.shared cachedCompletionHandler:^{
+        YD1LOG(@"Online Parameter is Success!");
+        NSLog(@"%@",Yd1UCenterManager.shared);
+    }];
 #endif
-    NSString* buglyAppId = [Yodo1OnlineParameter stringParams:@"BuglyAnalytic_AppId" defaultValue:@""];
+    NSString* buglyAppId = [Yd1OnlineParameter.shared stringConfigWithKey:@"BuglyAnalytic_AppId" defaultValue:@""];
     if (buglyAppId.length > 0 && isGDPR && isCCPA) {
         BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
 #ifdef DEBUG
@@ -247,11 +249,6 @@ static BOOL isInitialized = false;
     }
 #endif
 
-#ifdef YODO1_UCCENTER
-    if ([[UCenterManager sharedInstance] isUCAuthorzie]) {
-        [[UCenterManager sharedInstance] handleOpenURL:url sourceApplication:sourceApplication];
-    }
-#endif
 }
 
 
@@ -269,12 +266,12 @@ extern "C" {
     char* UnityStringParams(const char* key,const char* defaultValue) {
         NSString* _defaultValue = Yodo1CreateNSString(defaultValue);
          NSString* _key = Yodo1CreateNSString(key);
-        NSString* param = [Yodo1OnlineParameter stringParams:_key defaultValue:_defaultValue];
+        NSString* param = [Yd1OnlineParameter.shared stringConfigWithKey:_key defaultValue:_defaultValue];
         return Yodo1MakeStringCopy([param cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     
     bool UnityBoolParams(const char* key,bool defaultValue) {
-        bool param = [Yodo1OnlineParameter boolParams:Yodo1CreateNSString(key) defaultValue:defaultValue];
+        bool param = [Yd1OnlineParameter.shared boolConfigWithKey:Yodo1CreateNSString(key) defaultValue:defaultValue];
         return param;
     }
     
@@ -293,12 +290,12 @@ extern "C" {
     }
 
     char* UnityGetDeviceId() {
-        const char* deviceId = [Yodo1Commons idfaString].UTF8String;
+        const char* deviceId = Yd1OpsTools.keychainDeviceId.UTF8String;
         return Yodo1MakeStringCopy(deviceId);
     }
 
     char* UnityUserId(){
-        const char* userId = Yodo1UDIDManager.value.UTF8String;
+        const char* userId = Yd1OpsTools.keychainUUID.UTF8String;
         return Yodo1MakeStringCopy(userId);
     }
 }

@@ -11,7 +11,7 @@
 #import "Yodo1AdsC.h"
 #import "Yodo1UnityTool.h"
 
-#import "Yodo1OnlineParameter.h"
+#import "Yd1OnlineParameter.h"
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 #import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
@@ -49,7 +49,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"3.12.0";
+NSString* const kYodo1AdsVersion       = @"3.13.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -523,10 +523,10 @@ static BOOL bSensorsSwitch = false;
     }
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
-    [Yodo1OnlineParameter initWithAppKey:appKey channel:@"appstore"];
+    [Yd1OnlineParameter.shared initWithAppKey:appKey channelId:@"AppStore"];
     yd1AppKey = appKey;
     //初始化错误上报系统
-    NSString* feedback = [Yodo1OnlineParameter stringParams:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
+    NSString* feedback = [Yd1OnlineParameter.shared stringConfigWithKey:@"Platform_Feedback_SwitchAd" defaultValue:@"off"];
     if ([feedback isEqualToString:@"on"]) {//默认是关
         [[Yodo1ReportError instance]initWithAppKey:appKey channel:@"appstore"];
         //每次启动游戏都会上传一次
@@ -547,7 +547,7 @@ static BOOL bSensorsSwitch = false;
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
-    if ([Yodo1OnlineParameter isTestDevice] && [Yodo1OnlineParameter isDeviceSourceFromPA]) {
+    if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
 }
@@ -569,7 +569,7 @@ static BOOL bSensorsSwitch = false;
     BOOL isCCPA = [NSUserDefaults.standardUserDefaults boolForKey:@"below_age_data_consent"];
     
     ///Bugly
-    NSString* buglyAppId = [Yodo1OnlineParameter stringParams:@"BuglyAnalytic_AppId" defaultValue:@""];
+    NSString* buglyAppId = [Yd1OnlineParameter.shared stringConfigWithKey:@"BuglyAnalytic_AppId" defaultValue:@""];
     if (buglyAppId.length > 0 && isGDPR && isCCPA) {
         BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
 #ifdef DEBUG
@@ -625,7 +625,6 @@ static BOOL bSensorsSwitch = false;
 }
 
 + (void)setLogEnable:(BOOL)enable {
-    [Yodo1OnlineParameter setDebugMode:enable];
     [[Yodo1Analytics instance]setDebugMode:enable];
 }
 
