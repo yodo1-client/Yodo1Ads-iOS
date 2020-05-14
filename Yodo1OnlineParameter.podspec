@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '4.1.0'
-    s.summary          = '添加通知附带请求结果,更新初始化优化'
+    s.version          = '4.2.0'
+    s.summary          = '最新版本v4.0.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -17,17 +17,17 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files = "#{s.version}" + '/*.h'
+    s.source_files = "#{s.version}" + "/*.h","#{s.version}" + "/Yodo1Tool/*.{h,m}","#{s.version}" + "/Yodo1Core/*.h"
 
-    s.public_header_files = "#{s.version}" + '/*.h'
+    s.public_header_files = "#{s.version}" + "/*.h","#{s.version}" + "/Yodo1Tool/*.h","#{s.version}" + "/Yodo1Core/*.h"
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    s.vendored_libraries = "#{s.version}" + "/*.a","#{s.version}" + "/Yodo1Core/*.a"
 
     s.requires_arc = true
 
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => "NO",
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
         "VALID_ARCHS": "armv7 arm64",
         "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
         "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
@@ -42,4 +42,5 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','4.1.0'
 
     s.dependency 'Yodo1YYCache','4.1.0'
+    s.dependency 'Yodo1Reachability','4.1.0'
 end
