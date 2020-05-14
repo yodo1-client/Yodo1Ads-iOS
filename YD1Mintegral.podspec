@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Mintegral'
-    s.version          = '4.1.1'
+    s.version          = '4.1.2'
     s.summary          = 'sdk v6.1.2'
 
     s.description      = <<-DESC
@@ -58,7 +58,7 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
 
-    s.dependency 'Yodo1AdvertSDK','4.1.0'
-    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
+    s.dependency 'Yodo1AdvertSDK','4.2.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.0'
     s.dependency 'Yodo1AdsMintegral','4.1.1'
 end
