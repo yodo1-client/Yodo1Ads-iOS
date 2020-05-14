@@ -7,7 +7,6 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <StoreKit/StoreKit.h>
 
 @interface AnalyticsInitConfig : NSObject
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions01;//GA统计自定义维度
@@ -15,15 +14,13 @@
 @property (nonatomic,strong) NSMutableArray *gaCustomDimensions03;
 @property (nonatomic,strong) NSMutableArray *gaResourceCurrencies;
 @property (nonatomic,strong) NSMutableArray *gaResourceItemTypes;
-@property (nonatomic,strong) NSString *appsflyerCustomUserId;//AppsFlyer自定义UserId
 @end
 
 typedef NS_ENUM(NSInteger, AnalyticsType) {
     AnalyticsTypeUmeng,         //友盟数据统计
     AnalyticsTypeTalkingData,   //TalkingData数据统计
     AnalyticsTypeGameAnalytics, //GameAnalytics数据统计
-    AnalyticsTypeAppsFlyer,     //AppsFlyer 数据统计
-    AnalyticsTypeSwrve          //Swrve统计
+    AnalyticsTypeAppsFlyer      //AppsFlyer 数据统计
 };
 
 @interface Yodo1AnalyticsManager : NSObject
@@ -102,26 +99,26 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  *  @param paymentType           支付类型    类型:NSString 比如：“支付宝”“苹果官方”“XX支付SDK”
  */
 - (void)chargeRequstAnalytics:(NSString*)orderId
-                          iapId:(NSString*)iapId
-                 currencyAmount:(double)currencyAmount
-                   currencyType:(NSString *)currencyType
-          virtualCurrencyAmount:(double)virtualCurrencyAmount
-                    paymentType:(NSString *)paymentType;
+                        iapId:(NSString*)iapId
+               currencyAmount:(double)currencyAmount
+                 currencyType:(NSString *)currencyType
+        virtualCurrencyAmount:(double)virtualCurrencyAmount
+                  paymentType:(NSString *)paymentType;
 
 /**
  *  花费人民币去购买虚拟货币成功
  *
  *  @param orderId 订单id     类型:NSString
  *  @param source  支付渠道   1 ~ 99的整数, 其中1..20 是预定义含义,其余21-99需要在网站设置
-                             数值	含义
-                             1	App Store
-                             2	支付宝
-                             3	网银
-                             4	财付通
-                             5	移动通信
-                             6	联通通信
-                             7	电信通信
-                             8	paypal
+ 数值	含义
+ 1	App Store
+ 2	支付宝
+ 3	网银
+ 4	财付通
+ 5	移动通信
+ 6	联通通信
+ 7	电信通信
+ 8	paypal
  */
 - (void)chargeSuccessAnalytics:(NSString *)orderId source:(int)source;
 
@@ -175,7 +172,7 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  */
 - (void)saveTrackWithEventName:(NSString *)eventName
                    propertyKey:(NSString *)propertyKey
-                 propertyIntValue:(int)propertyValue;
+              propertyIntValue:(int)propertyValue;
 
 /** Dplus增加事件 重载
  @param eventName 事件名
@@ -184,7 +181,7 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  */
 - (void)saveTrackWithEventName:(NSString *)eventName
                    propertyKey:(NSString *)propertyKey
-                 propertyFloatValue:(float)propertyValue;
+            propertyFloatValue:(float)propertyValue;
 
 /** Dplus增加事件 重载
  @param eventName 事件名
@@ -193,7 +190,7 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  */
 - (void)saveTrackWithEventName:(NSString *)eventName
                    propertyKey:(NSString *)propertyKey
-                 propertyDoubleValue:(double)propertyValue;
+           propertyDoubleValue:(double)propertyValue;
 
 /** Dplus增加事件:提交之前保存增加事件属性(一次性提交)
  @param eventName 事件名
@@ -253,22 +250,5 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
                                 price:(NSString*)price
                              currency:(NSString*)currency
                         transactionId:(NSString*)transactionId;
-
-/**
- *  Swrve 事件统计
- */
-- (void)swrveEventAnalyticsWithName:(NSString *)eventName
-                          eventData:(NSDictionary *)eventData;
-
-/**
- *  Swrve 更新用户数据事件
- */
-- (void)swrveUserUpdate:(NSDictionary *)eventData;
-
-/**
- *  Swrve 内付费验证和事件统计
- */
-- (void)swrveTransactionProcessed:(SKPaymentTransaction*) transaction
-                    productBought:(SKProduct*) product;
 
 @end
