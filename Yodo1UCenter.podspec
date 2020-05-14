@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '4.1.0'
-    s.summary          = '修复内购买iOS系统兼容BUG [ 更新QQ SDK ]修改多语言设置接口,添加网络变化检测。'
+    s.version          = '4.2.0'
+    s.summary          = '全新重构的UCenter'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -14,23 +14,23 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files  = "#{s.version}" + '/*.{h,mm,m}',"#{s.version}" + '/PayAdapter/*.{h,m}'
+    s.source_files  = "#{s.version}" + '/*.{h,mm,m}'
 
-    s.public_header_files = "#{s.version}" + '/*.h',"#{s.version}" + '/PayAdapter/*.h'
+    s.public_header_files = "#{s.version}" + '/*.h'
 
     #s.vendored_frameworks = tags + '/UCenter.framework'
     
-    s.vendored_libraries = "#{s.version}" + '/*.a'
+    # s.vendored_libraries = "#{s.version}" + '/*.a'
 
     s.resources = "#{s.version}" + '/*.bundle'
 
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
-    s.requires_arc = false
+    s.requires_arc = true
 
     s.xcconfig = {
-        'OTHER_LDFLAGS' => '-ObjC',
-        'ENABLE_BITCODE' => "NO",
+        "OTHER_LDFLAGS" => "-ObjC",
+        "ENABLE_BITCODE" => "NO",
         "VALID_ARCHS": "armv7 arm64",
         "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
         "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
@@ -44,10 +44,7 @@ Pod::Spec.new do |s|
     s.compiler_flags = '-Dunix'
     
     s.dependency 'Yodo1Commons','4.1.0'
-    s.dependency 'Yodo1WeiboSDK','4.1.0'
-    s.dependency 'Yodo1QQSDK','4.1.0'
-    s.dependency 'Yodo1AFNetworking','4.1.0'
-    s.dependency 'Yodo1Reachability','4.1.0'
-    s.dependency 'Yodo1KeyInfo','4.1.0'
-    s.dependency 'Yodo1ThirdsAnalytics','4.1.0'
+    s.dependency 'Yodo1YYModel','4.1.0'
+    s.dependency 'Yodo1OnlineParameter','4.2.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.0'
 end
