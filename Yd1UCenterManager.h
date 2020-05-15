@@ -14,6 +14,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum {
+    Yodo1U3dSDK_ResulType_Payment = 2001,
+    Yodo1U3dSDK_ResulType_RestorePayment = 2002,
+    Yodo1U3dSDK_ResulType_RequestProductsInfo = 2003,
+    Yodo1U3dSDK_ResulType_VerifyProductsInfo = 2004,
+    Yodo1U3dSDK_ResulType_LossOrderIdQuery = 2005,
+    Yodo1U3dSDK_ResulType_QuerySubscriptions = 2006,
+    Yodo1U3dSDK_ResulType_FetchPromotionVisibility = 2007,
+    Yodo1U3dSDK_ResulType_FetchStorePromotionOrder = 2008,
+    Yodo1U3dSDK_ResulType_UpdateStorePromotionVisibility = 2009,
+    Yodo1U3dSDK_ResulType_UpdateStorePromotionOrder = 2010,
+    Yodo1U3dSDK_ResulType_GetPromotionProduct = 2011,
+    Yodo1U3dSDK_ResulType_ValidatePayment = 2012,
+}Yodo1U3dSDKResulType;
+
+typedef enum {
     PaymentCannel = 0,      //取消支付
     PaymentSuccess,         //支付成功
     PaymentFail,            //支付失败
@@ -54,6 +69,15 @@ typedef void (^ProductsInfoCallback) (NSArray<Product*> *productInfo);
  */
 typedef void (^QuerySubscriptionCallback)(NSArray* subscriptions, NSTimeInterval serverTime, BOOL success,NSString* _Nullable error);
 
+/**
+ *@brief
+ *   苹果支付订单验证票据回调方法
+ *@param uniformProductId 产品ID
+ *@param response json格式 @{@"productIdentifier":@"苹果产品id",
+ *  @"transactionIdentifier":@"订单号",@"transactionReceipt":@"验证票据"}
+ */
+typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* response);
+
 @interface Product : NSObject
 @property (nonatomic, strong) NSString* uniformProductId;
 @property (nonatomic, strong) NSString* channelProductId;
@@ -77,6 +101,8 @@ typedef void (^QuerySubscriptionCallback)(NSArray* subscriptions, NSTimeInterval
 
 @property (nonatomic,assign)__block BOOL isLogined;
 @property (nonatomic,strong)__block YD1User* user;
+/// 苹果支付票据回调
+@property (nonatomic,copy)ValidatePaymentBlock  validatePaymentBlock;
 
 /**
  * 购买产品
@@ -137,7 +163,7 @@ typedef void (^QuerySubscriptionCallback)(NSArray* subscriptions, NSTimeInterval
 /**
  *  准备继续购买促销
  */
-- (void)readyToContinuePurchaseFromPromot;
+- (void)readyToContinuePurchaseFromPromot:(PaymentCallback)callback;
 
 /**
  *  取消购买

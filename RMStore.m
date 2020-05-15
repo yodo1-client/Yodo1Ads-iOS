@@ -200,6 +200,17 @@ typedef void (^RMStoreSuccessBlock)(void);
     [self addPayment:productIdentifier user:nil success:successBlock failure:failureBlock];
 }
 
+- (void)addPaymentWithPayment:(SKPayment*)payment
+                      success:(void (^)(SKPaymentTransaction *transaction))successBlock
+                      failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock {
+    
+    RMAddPaymentParameters *parameters = [[RMAddPaymentParameters alloc] init];
+    parameters.successBlock = successBlock;
+    parameters.failureBlock = failureBlock;
+    _addPaymentParameters[payment.productIdentifier] = parameters;
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+}
+
 - (void)addPayment:(NSString*)productIdentifier
               user:(NSString*)userIdentifier
            success:(void (^)(SKPaymentTransaction *transaction))successBlock
