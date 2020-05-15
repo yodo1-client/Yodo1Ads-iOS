@@ -1249,6 +1249,34 @@ extern "C" {
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         
         [Yd1UCenterManager.shared readyToContinuePurchaseFromPromot:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull orderId, NSString * _Nonnull channelOrderid, PaymentState paymentState, NSString * _Nonnull response) {
+            if (paymentState == PaymentSuccess) {
+                Yd1UCenter.shared.itemInfo.orderId = orderId;
+                Yd1UCenter.shared.itemInfo.extra = @"";
+                [Yd1UCenter.shared clientCallback:Yd1UCenter.shared.itemInfo
+                                         callbakc:^(BOOL success, NSString * _Nonnull error) {
+                    if (success) {
+                        YD1LOG(@"上报成功");
+                    } else {
+                        YD1LOG(@"上报失败");
+                    }
+                }];
+            } else {
+                if ([channelOrderid length] > 0 && [orderId length] > 0) {
+                    Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
+                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid;
+                    Yd1UCenter.shared.itemInfo.orderId = orderId;
+                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
+                    Yd1UCenter.shared.itemInfo.statusMsg = response;
+                    [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
+                                                callbakc:^(BOOL success, NSString * _Nonnull error) {
+                        if (success) {
+                            YD1LOG(@"上报失败，成功");
+                        } else {
+                            YD1LOG(@"上报失败");
+                        }
+                    }];
+                }
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -1549,6 +1577,34 @@ extern "C" {
         NSString* _extra = Yodo1CreateNSString(extra);
         
         [Yd1UCenterManager.shared paymentWithUniformProductId:_uniformProductId callback:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull orderId, NSString * _Nonnull channelOrderid, PaymentState paymentState, NSString * _Nonnull response) {
+            if (paymentState == PaymentSuccess) {
+                Yd1UCenter.shared.itemInfo.orderId = orderId;
+                Yd1UCenter.shared.itemInfo.extra = @"";
+                [Yd1UCenter.shared clientCallback:Yd1UCenter.shared.itemInfo
+                                         callbakc:^(BOOL success, NSString * _Nonnull error) {
+                    if (success) {
+                        YD1LOG(@"上报成功");
+                    } else {
+                        YD1LOG(@"上报失败:%@",error);
+                    }
+                }];
+            } else {
+                if ([channelOrderid length] > 0 && [orderId length] > 0) {
+                    Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
+                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid;
+                    Yd1UCenter.shared.itemInfo.orderId = orderId;
+                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
+                    Yd1UCenter.shared.itemInfo.statusMsg = response;
+                    [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
+                                                callbakc:^(BOOL success, NSString * _Nonnull error) {
+                        if (success) {
+                            YD1LOG(@"上报失败，成功");
+                        } else {
+                            YD1LOG(@"上报失败");
+                        }
+                    }];
+                }
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -1582,7 +1638,7 @@ extern "C" {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                    [dict setObject:(uniformProductId? :@"") forKey:@"uniformProductId"];
+                    [dict setObject:(_uniformProductId? :@"") forKey:@"uniformProductId"];
                     [dict setObject:(response? :@"") forKey:@"response"];
                     [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_ValidatePayment] forKey:@"resulType"];
                     NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:nil];
@@ -1593,6 +1649,41 @@ extern "C" {
             });
         }];
     }
+    
+    /**
+     *  购买成功发货通知
+     */
+    void UnitySendGoodsOver(const char* orders,const char* gameObjectName, const char* methodName)
+    {
+        NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
+        NSString* ocMethodName = Yodo1CreateNSString(methodName);
+        NSString* ocOrders = Yodo1CreateNSString(orders);
+        [Yd1UCenter.shared sendGoodsOver:ocOrders callback:^(BOOL success, NSString * _Nonnull error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(ocGameObjName && ocMethodName){
+                    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                    
+                    [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_SendGoodsOver] forKey:@"resulType"];
+                    [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                    [dict setObject:(error == nil?@"":error) forKey:@"error"];
+                    
+                    NSError* parseJSONError = nil;
+                    NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    if(parseJSONError){
+                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_SendGoodsOver] forKey:@"resulType"];
+                        [dict setObject:[NSNumber numberWithBool:success] forKey:@"code"];
+                        [dict setObject:(error == nil?@"":error) forKey:@"error"];
+                        [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                        msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    }
+                    UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                }
+            });
+        }];
+    }
+    
 }
 
 #endif
