@@ -1671,7 +1671,7 @@ extern "C" {
                     NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                     if(parseJSONError){
                         [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_SendGoodsOver] forKey:@"resulType"];
-                        [dict setObject:[NSNumber numberWithBool:success] forKey:@"code"];
+                        [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
                         [dict setObject:(error == nil?@"":error) forKey:@"error"];
                         [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
                         msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
