@@ -66,6 +66,9 @@ extern NSInteger const RMStoreErrorCodeUnableToCompleteVerification;
            success:(void (^)(SKPaymentTransaction *transaction))successBlock
            failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock;
 
+/**
+ *  Request payment of the product. `successBlock` will be called if the payment is successful, `failureBlock` if it isn't.
+ */
 - (void)addPaymentWithPayment:(SKPayment*)payment
                       success:(void (^)(SKPaymentTransaction *transaction))successBlock
                       failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock;

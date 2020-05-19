@@ -18,6 +18,9 @@
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
+        _playerid = [decoder decodeObjectForKey:@"playerid"];
+        _nickname = [decoder decodeObjectForKey:@"nickname"];
+        _ucuid = [decoder decodeObjectForKey:@"ucuid"];
         _yid = [decoder decodeObjectForKey:@"yid"];
         _uid = [decoder decodeObjectForKey:@"uid"];
         _token = [decoder decodeObjectForKey:@"token"];
@@ -31,6 +34,15 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    if (self.playerid) {
+        [coder encodeObject:self.playerid forKey:@"playerid"];
+    }
+    if (self.nickname) {
+        [coder encodeObject:self.nickname forKey:@"nickname"];
+    }
+    if (self.ucuid) {
+        [coder encodeObject:self.ucuid forKey:@"ucuid"];
+    }
     [coder encodeObject:self.yid forKey:@"yid"];
     [coder encodeObject:self.uid forKey:@"uid"];
     [coder encodeObject:self.token forKey:@"token"];
@@ -238,11 +250,11 @@
         @"carrier":Yd1OpsTools.networkOperatorName,
     };
     NSDictionary* data = @{
-        Yd1OpsTools.gameAppKey:Yd1OParameter.appKey,
-        Yd1OpsTools.channelCode:Yd1OParameter.channelId,
-        Yd1OpsTools.regionCode:self.regionCode,
-        Yd1OpsTools.sdkType:Yd1OParameter.publishType,
-        Yd1OpsTools.sdkVersion:Yd1OParameter.publishVersion,
+        @"game_appkey":Yd1OParameter.appKey,
+        @"channel_code":Yd1OParameter.channelId,
+        @"region_code":self.regionCode,
+        @"sdkType":Yd1OParameter.publishType,
+        @"sdkVersion":Yd1OParameter.publishVersion,
         @"pr_channel_code":@"AppStore",
         @"orderid":orderId,
         @"item_code":itemCode,
@@ -310,20 +322,20 @@
     
     NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"payment%@",itemInfo.orderId]];
     NSDictionary* data = @{
-        Yd1OpsTools.gameAppKey:Yd1OParameter.appKey,
-        Yd1OpsTools.channelCode:Yd1OParameter.channelId,
-        Yd1OpsTools.regionCode:self.regionCode,
-        Yd1OpsTools.orderId:itemInfo.orderId,
-        @"channelOrderid":itemInfo.channelOrderid,
-        @"exclude_old_transactions":itemInfo.exclude_old_transactions,
-        @"product_type":itemInfo.product_type,
-        @"item_code":itemInfo.item_code,
-        @"uid":itemInfo.uid,
-        @"ucuid":itemInfo.ucuid,
-        @"deviceid":itemInfo.deviceid,
-        @"trx_receipt":itemInfo.trx_receipt,
-        @"is_sandbox":itemInfo.is_sandbox,
-        @"extra":itemInfo.extra,
+        Yd1OpsTools.gameAppKey:Yd1OParameter.appKey? :@"",
+        Yd1OpsTools.channelCode:Yd1OParameter.channelId? :@"",
+        Yd1OpsTools.regionCode:self.regionCode? :@"",
+        Yd1OpsTools.orderId:itemInfo.orderId? :@"",
+        @"channelOrderid":itemInfo.channelOrderid? :@"",
+        @"exclude_old_transactions":itemInfo.exclude_old_transactions? :@"false",
+        @"product_type":itemInfo.product_type? :@"0",
+        @"item_code":itemInfo.item_code? :@"",
+        @"uid":itemInfo.uid? :@"",
+        @"ucuid":itemInfo.ucuid? :@"",
+        @"deviceid":itemInfo.deviceid? :@"",
+        @"trx_receipt":itemInfo.trx_receipt? :@"",
+        @"is_sandbox":itemInfo.is_sandbox? :@"",
+        @"extra":itemInfo.extra? :@"",
     };
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:data forKey:Yd1OpsTools.data];
@@ -353,6 +365,13 @@
     manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    if (!itemInfo.trx_receipt) {
+        NSError* error = [NSError errorWithDomain:@"com.yodo1.querySubscriptions"
+                                             code:-1
+                                         userInfo:@{NSLocalizedDescriptionKey:@"receipt is nil!"}];
+        callback(false,itemInfo.orderId,error);
+        return;
+    }
     NSString* eightReceipt = [itemInfo.trx_receipt substringToIndex:8];
     NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"payment%@",eightReceipt]];
     NSDictionary* data = @{

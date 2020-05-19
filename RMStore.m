@@ -53,7 +53,7 @@ NSString* const RMStoreNotificationTransactions = @"transactions";
 NSString* const RMStoreNotificationPromotion = @"promotionPayment";
 
 #if DEBUG
-#define RMStoreLog(...) NSLog(@"RMStore: %@", [NSString stringWithFormat:__VA_ARGS__]);
+#define RMStoreLog(...) NSLog(@"[ Yodo1 ]: %@", [NSString stringWithFormat:__VA_ARGS__]);
 #else
 #define RMStoreLog(...)
 #endif

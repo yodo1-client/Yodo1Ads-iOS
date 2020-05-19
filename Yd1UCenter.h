@@ -14,6 +14,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YD1User : NSObject <NSSecureCoding>
+/// 玩家Id
+@property(nonatomic,strong)NSString* playerid;
+/// 玩家昵称
+@property(nonatomic,strong)NSString* nickname;
+/// ucuid
+@property(nonatomic,strong)NSString* ucuid;
+
 /// 用户在每个游戏中对应的id
 @property(nonatomic,strong)NSString* yid;
 /// 用户的唯一id
@@ -34,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface YD1ItemInfo : NSObject
+/// 产品ID
+@property (nonatomic,strong)NSString *productId;
 /// payment订单号
 @property (nonatomic,strong)NSString *orderId;
 /// 订单号(苹果transaction_id)
@@ -44,8 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *exclude_old_transactions;
 /// 道具代码(同IAP代码)
 @property (nonatomic,strong)NSString *item_code;
+/// playerid
+@property (nonatomic,strong)NSString *playerid;
 /// 用户id
 @property (nonatomic,strong)NSString *uid;
+/// yid
+@property (nonatomic,strong)NSString *yid;
 /// 登录时，返回的ucuid（登陆uc的情况使用）
 @property (nonatomic,strong)NSString *ucuid;
 /// 例如idfa等设备id
