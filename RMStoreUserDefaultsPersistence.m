@@ -21,6 +21,7 @@
 #import "RMStoreUserDefaultsPersistence.h"
 #import "RMStoreTransaction.h"
 #import "Yd1UCenter.h"
+#import "Yodo1Tool+Storage.h"
 
 NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
 
@@ -40,7 +41,24 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     NSMutableArray *updatedTransactions = [NSMutableArray arrayWithArray:transactions];
     
     RMStoreTransaction *transaction = [[RMStoreTransaction alloc] initWithPaymentTransaction:paymentTransaction];
-    transaction.orderId = Yd1UCenter.shared.itemInfo.orderId;
+    
+    NSArray* oldOrderId = (NSArray *)[Yd1OpsTools.cached objectForKey:productIdentifier];
+    NSMutableArray* newOrderId = [NSMutableArray array];
+    if (oldOrderId) {
+        [newOrderId setArray:oldOrderId];
+    }
+    for (NSString* oderid in oldOrderId) {
+        if ([oderid isEqualToString:Yd1UCenter.shared.itemInfo.orderId]) {
+            transaction.orderId = oderid;
+            [newOrderId removeObject:oderid];
+            break;
+        }
+        transaction.orderId = oderid;
+        [newOrderId removeObject:oderid];
+        break;
+    }
+    [Yd1OpsTools.cached setObject:newOrderId forKey:productIdentifier];
+    
     NSData *data = [self dataWithTransaction:transaction];
     [updatedTransactions addObject:data];
     [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];

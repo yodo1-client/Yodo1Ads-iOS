@@ -396,7 +396,6 @@ typedef void (^RMStoreSuccessBlock)(void);
                 [self didFailTransaction:transaction queue:queue error:transaction.error];
                 break;
             case SKPaymentTransactionStateRestored:
-                NSLog(@"productIdentifier:%@",transaction.payment.productIdentifier);
                 [self didRestoreTransaction:transaction queue:queue];
                 break;
             case SKPaymentTransactionStateDeferred:
