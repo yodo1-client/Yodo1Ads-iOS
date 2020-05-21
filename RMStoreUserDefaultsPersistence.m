@@ -22,6 +22,7 @@
 #import "RMStoreTransaction.h"
 #import "Yd1UCenter.h"
 #import "Yodo1Tool+Storage.h"
+#import "Yodo1Tool+Commons.h"
 
 NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
 
@@ -42,7 +43,8 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     
     RMStoreTransaction *transaction = [[RMStoreTransaction alloc] initWithPaymentTransaction:paymentTransaction];
     
-    NSArray* oldOrderId = (NSArray *)[Yd1OpsTools.cached objectForKey:productIdentifier];
+    NSString* oldOrderIdStr = [Yd1OpsTools keychainWithService:productIdentifier];
+    NSArray* oldOrderId = (NSArray *)[Yd1OpsTools JSONObjectWithString:oldOrderIdStr error:nil];
     NSMutableArray* newOrderId = [NSMutableArray array];
     if (oldOrderId) {
         [newOrderId setArray:oldOrderId];
@@ -57,8 +59,13 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
         [newOrderId removeObject:oderid];
         break;
     }
-    [Yd1OpsTools.cached setObject:newOrderId forKey:productIdentifier];
+    NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
+    [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
     
+    if (!transaction.orderId) {
+        YD1LOG(@"无效订单--> productIdentifier:%@,不做存储！，transactionIdentifier:%@",transaction.productIdentifier,transaction.transactionIdentifier);
+        return;
+    }
     NSData *data = [self dataWithTransaction:transaction];
     [updatedTransactions addObject:data];
     [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];

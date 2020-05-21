@@ -73,20 +73,19 @@
     if (user) {
         self.user = user;
         Yd1UCenter.shared.itemInfo.uid = user.uid;
-        Yd1UCenter.shared.itemInfo.ucuid = user.yid;
+        Yd1UCenter.shared.itemInfo.ucuid = user.ucuid? : user.uid;
         Yd1UCenter.shared.itemInfo.yid = user.yid;
         Yd1UCenter.shared.itemInfo.playerid = user.playerid;
     } else {
         _user = [[YD1User alloc]init];
     }
-    //取出上一次的订单id
-//    Yd1UCenter.shared.itemInfo.orderId = (NSString *)[Yd1OpsTools.cached objectForKey:@"__orderid__"]? :@"";
-    
+
     //设备登录
     __weak typeof(self) weakSelf = self;
     [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
         if (user) {
             weakSelf.user.yid = user.yid;
+            weakSelf.user.ucuid = user.ucuid? : user.uid;
             weakSelf.user.uid = user.uid;
             weakSelf.user.token = user.token;
             weakSelf.user.isOLRealName = user.isOLRealName;
@@ -153,6 +152,33 @@
         callback(product.uniformProductId,@"",@"",PaymentFail,@"products request failed with error Error");
         return;
     }
+    if (!self.isLogined) {
+        callback(product.uniformProductId,@"",@"",PaymentFail,@"device is not login!");
+        [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
+            if (user) {
+                weakSelf.user.yid = user.yid;
+                weakSelf.user.uid = user.uid;
+                weakSelf.user.ucuid = user.ucuid? : user.uid;
+                weakSelf.user.token = user.token;
+                weakSelf.user.isOLRealName = user.isOLRealName;
+                weakSelf.user.isRealName = user.isRealName;
+                weakSelf.user.isnewuser = user.isnewuser;
+                weakSelf.user.isnewyaccount = user.isnewyaccount;
+                weakSelf.user.extra = user.extra;
+                [Yd1OpsTools.cached setObject:weakSelf.user forKey:@"yd1User"];
+            }
+            if (user && !error) {
+                weakSelf.isLogined = YES;
+                Yd1UCenter.shared.itemInfo.uid = self.user.uid;
+                Yd1UCenter.shared.itemInfo.yid = self.user.yid;
+                Yd1UCenter.shared.itemInfo.ucuid = self.user.ucuid? :self.user.uid;
+            }else{
+                weakSelf.isLogined = NO;
+                YD1LOG(@"%@",error.localizedDescription);
+            }
+        }];
+        return;
+    }
     //创建订单号
     [Yd1UCenter.shared generateOrderId:^(NSString * _Nullable orderId, NSError * _Nullable error) {
         if (!orderId || [orderId isEqualToString:@""]) {
@@ -163,13 +189,16 @@
         Yd1UCenter.shared.itemInfo.orderId = orderId;
         
         //保存orderId
-        NSArray* oldOrderId = (NSArray *)[Yd1OpsTools.cached objectForKey:product.channelProductId];
+        NSString* oldOrderIdStr = [Yd1OpsTools keychainWithService:product.channelProductId];
+        NSArray* oldOrderId = (NSArray *)[Yd1OpsTools JSONObjectWithString:oldOrderIdStr error:nil];
         NSMutableArray* newOrderId = [NSMutableArray array];
         if (oldOrderId) {
             [newOrderId setArray:oldOrderId];
         }
         [newOrderId addObject:orderId];
         [Yd1OpsTools.cached setObject:newOrderId forKey:product.channelProductId];
+        NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
+        [Yd1OpsTools saveKeychainWithService:product.channelProductId str:orderidJson];
         
         Yd1UCenter.shared.itemInfo.product_type = [NSString stringWithFormat:@"%d",product.productType];
         Yd1UCenter.shared.itemInfo.item_code = product.channelProductId;
@@ -201,6 +230,8 @@
         
         [parameters setObject:weakSelf.user.yid? :@"" forKey:@"yid"];
         [parameters setObject:weakSelf.user.uid? :@"" forKey:@"ucuid"];
+        
+        Yd1UCenter.shared.itemInfo.ucuid = weakSelf.user.ucuid? :weakSelf.user.uid;
         
         if (weakSelf.user.playerid) {
             [parameters setObject:weakSelf.user.playerid forKey:@"playerId"];
@@ -739,15 +770,16 @@
 
 - (void)storePaymentTransactionFailed:(NSNotification*)notification {
     YD1LOG(@"");
-    NSString* productId = notification.rm_payment.productIdentifier;
-    if (!productId) {
+    NSString* productIdentifier = notification.rm_productIdentifier;
+    if (!productIdentifier) {
         Product* pr = [productInfos objectForKey:self.currentUniformProductId];
         if (pr.channelProductId) {
-            productId = pr.channelProductId;
+            productIdentifier = pr.channelProductId;
         }
     }
-    if (productId) {
-        NSArray* oldOrderId = (NSArray *)[Yd1OpsTools.cached objectForKey:productId];
+    if (productIdentifier) {
+        NSString* oldOrderIdStr = [Yd1OpsTools keychainWithService:productIdentifier];
+        NSArray* oldOrderId = (NSArray *)[Yd1OpsTools JSONObjectWithString:oldOrderIdStr error:nil];
         NSMutableArray* newOrderId = [NSMutableArray array];
         if (oldOrderId) {
             [newOrderId setArray:oldOrderId];
@@ -758,7 +790,8 @@
                 break;
             }
         }
-        [Yd1OpsTools.cached setObject:newOrderId forKey:productId];
+        NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
+        [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
     }
     
     if (paymentCallback) {
