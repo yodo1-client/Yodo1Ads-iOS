@@ -23,6 +23,7 @@
 #import "Yd1UCenter.h"
 #import "Yodo1Tool+Storage.h"
 #import "Yodo1Tool+Commons.h"
+#import "Yd1UCenterManager.h"
 
 NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
 
@@ -41,7 +42,7 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     NSArray *transactions = purchases[productIdentifier] ? : @[];
     NSMutableArray *updatedTransactions = [NSMutableArray arrayWithArray:transactions];
     
-    RMStoreTransaction *transaction = [[RMStoreTransaction alloc] initWithPaymentTransaction:paymentTransaction];
+    __block RMStoreTransaction *transaction = [[RMStoreTransaction alloc] initWithPaymentTransaction:paymentTransaction];
     
     NSString* oldOrderIdStr = [Yd1OpsTools keychainWithService:productIdentifier];
     NSArray* oldOrderId = (NSArray *)[Yd1OpsTools JSONObjectWithString:oldOrderIdStr error:nil];
@@ -61,10 +62,17 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     }
     NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
     [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
-    if (!transaction.orderId) {
-        YD1LOG(@"无效订单--> productIdentifier:%@,不做存储！，transactionIdentifier:%@",transaction.productIdentifier,transaction.transactionIdentifier);
-        return;
+    if (!transaction.orderId) { //杀死进程/重新安装应用
+        NSString* uniformProductId = [Yd1UCenterManager.shared uniformProductIdWithChannelProductId:productIdentifier];
+        [Yd1UCenterManager.shared createOrderIdWithUniformProductId:uniformProductId callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
+            if (success) {
+                transaction.orderId = orderid;
+            }else{
+                YD1LOG(@"error:%@",error);
+            }
+        }];
     }
+    
     NSData *data = [self dataWithTransaction:transaction];
     [updatedTransactions addObject:data];
     [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];

@@ -102,7 +102,7 @@
         _itemInfo.deviceid = Yd1OpsTools.keychainDeviceId;
         _itemInfo.extra = @"";
         _itemInfo.is_sandbox = @"false";
-        _itemInfo.statusCode = @"";
+        _itemInfo.statusCode = @"1";
         _itemInfo.statusMsg = @"";
         _itemInfo.exclude_old_transactions = @"false";
     }
@@ -328,7 +328,7 @@
         Yd1OpsTools.orderId:itemInfo.orderId? :@"",
         @"channelOrderid":itemInfo.channelOrderid? :@"",
         @"exclude_old_transactions":itemInfo.exclude_old_transactions? :@"false",
-        @"product_type":itemInfo.product_type? :@"0",
+        @"product_type":[NSNumber numberWithInt:itemInfo.product_type],
         @"item_code":itemInfo.item_code? :@"",
         @"uid":itemInfo.uid? :@"",
         @"ucuid":itemInfo.ucuid? :@"",
@@ -507,7 +507,7 @@
         @"orderId":itemInfo.orderId,
         @"channelCode":itemInfo.channelCode? :@"AppStore",
         @"channelOrderid":itemInfo.channelOrderid,
-        @"statusCode":itemInfo.statusCode? :@"",
+        @"statusCode":itemInfo.statusCode,
         @"statusMsg":itemInfo.statusMsg? :@""
     };
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];

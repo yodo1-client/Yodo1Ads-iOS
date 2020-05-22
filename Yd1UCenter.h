@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 订单号(苹果transaction_id)
 @property (nonatomic,strong)NSString *channelOrderid;
 /// 不传默认0 商品类型,0-不可消耗;1-可消耗;2-自动订阅;3-非自动订阅
-@property (nonatomic,strong)NSString *product_type;
+@property (nonatomic,assign)int product_type;
 /// 是否获得所有数据
 @property (nonatomic,strong)NSString *exclude_old_transactions;
 /// 道具代码(同IAP代码)

@@ -41,11 +41,11 @@
     NSMutableDictionary* productInfos;
     NSMutableArray* channelProductIds;
     RMStoreUserDefaultsPersistence *persistence;
-    PaymentCallback paymentCallback;
 }
 
 @property (nonatomic,strong) NSString* currentUniformProductId;
 @property (nonatomic,retain) SKPayment* addedStorePayment;//promot Appstore Buy
+@property (nonatomic,copy)PaymentCallback paymentCallback;
 
 - (Product *)productWithChannelProductId:(NSString *)channelProductId;
 - (NSArray *)productInfoWithProducts:(NSArray *)products;
@@ -141,21 +141,19 @@
 }
 
 - (void)paymentWithUniformProductId:(NSString *)uniformProductId callback:(nonnull PaymentCallback)callback {
+    
+    self.paymentCallback = callback;
+    
     if (!RMStore.canMakePayments) {
         YD1LOG(@"This device is not able or allowed to make payments!");
-        callback(uniformProductId,@"",@"",PaymentFail,@"This device is not able or allowed to make payments!");
+        self.paymentCallback(uniformProductId,@"",@"",PaymentFail,@"This device is not able or allowed to make payments!");
         return;
     }
     __weak typeof(self) weakSelf = self;
-    self.currentUniformProductId = uniformProductId;
-    __block Product* product = [productInfos objectForKey:uniformProductId];
-    SKProduct* skp = [RMStore.defaultStore productForIdentifier:product.channelProductId];
-    if (!skp) {
-        callback(product.uniformProductId,@"",@"",PaymentFail,@"products request failed with error Error");
-        return;
-    }
     if (!self.isLogined) {
-        callback(product.uniformProductId,@"",@"",PaymentFail,@"device is not login!");
+        if (self.paymentCallback) {
+            self.paymentCallback(uniformProductId,@"",@"",PaymentFail,@"device is not login!");
+        }
         [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
             if (user) {
                 weakSelf.user.yid = user.yid;
@@ -181,11 +179,74 @@
         }];
         return;
     }
+    
+    [self createOrderIdWithUniformProductId:uniformProductId
+                                   callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
+        Product* product = [self->productInfos objectForKey:uniformProductId];
+        if (success) {
+            if (product.productType == Auto_Subscription) {
+                NSString* msg = [weakSelf localizedStringForKey:@"SubscriptionAlertMessage"
+                                                withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
+                NSString* message = [NSString stringWithFormat:msg,product.productPrice,product.currency,product.periodUnit];
+                
+                NSString* title = [weakSelf localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
+                NSString* cancelTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
+                NSString* okTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"启用"];
+                NSString* privateTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私协议"];
+                NSString* serviceTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertService" withDefault:@"服务条款"];
+                UIAlertControllerStyle uiStyle = UIAlertControllerStyleActionSheet;
+                if([Yd1OpsTools isIPad]){
+                    uiStyle = UIAlertControllerStyleAlert;
+                }
+                
+                UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiStyle];
+                
+                NSString* privacyPolicyUrl = [weakSelf localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
+                                                             withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
+                NSString* termsServiceUrl = [weakSelf localizedStringForKey:@"SubscriptionTermsServiceURL"
+                                                            withDefault:@"https://www.yodo1.com/cn/user_agreement"];
+                
+                UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
+                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                }];
+                UIAlertAction *serviceAction = [UIAlertAction actionWithTitle:serviceTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
+                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                }];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                }];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    [weakSelf paymentProduct:product];
+                }];
+                [alertController addAction:okAction];
+                [alertController addAction:serviceAction];
+                [alertController addAction:privateAction];
+                [alertController addAction:cancelAction];
+                [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertController animated:YES completion:nil];
+            } else {
+                [weakSelf paymentProduct:product];
+            }
+        }
+    }];
+}
+
+- (void)createOrderIdWithUniformProductId:(NSString *)uniformProductId
+                                 callback:(void (^)(bool, NSString * _Nonnull,NSString * _Nonnull))callback {
+    self.currentUniformProductId = uniformProductId;
+    __weak typeof(self) weakSelf = self;
+    __block Product* product = [productInfos objectForKey:uniformProductId];
+    SKProduct* skp = [RMStore.defaultStore productForIdentifier:product.channelProductId];
+    if (!skp) {
+         callback(false,@"",@"products request failed with error Error");
+        return;
+    }
     //创建订单号
     [Yd1UCenter.shared generateOrderId:^(NSString * _Nullable orderId, NSError * _Nullable error) {
-        if (!orderId || [orderId isEqualToString:@""]) {
+        if ((!orderId || [orderId isEqualToString:@""])) {
             YD1LOG(@"%@",error.localizedDescription);
-            callback(uniformProductId,@"",@"",PaymentFail,error.localizedDescription);
+            callback(false,orderId,error.localizedDescription);
             return;
         }
         Yd1UCenter.shared.itemInfo.orderId = orderId;
@@ -201,7 +262,7 @@
         NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
         [Yd1OpsTools saveKeychainWithService:product.channelProductId str:orderidJson];
         
-        Yd1UCenter.shared.itemInfo.product_type = [NSString stringWithFormat:@"%d",product.productType];
+        Yd1UCenter.shared.itemInfo.product_type = product.productType;
         Yd1UCenter.shared.itemInfo.item_code = product.channelProductId;
         // 下单
         NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
@@ -252,61 +313,16 @@
                               callback:^(int error_code, NSString * _Nonnull error) {
             if (error_code == 0) {
                 YD1LOG(@"%@:下单成功",orderId);
-                
-                if (product.productType == Auto_Subscription) {
-                    NSString* msg = [weakSelf localizedStringForKey:@"SubscriptionAlertMessage"
-                                                    withDefault:@"确认启用后，您的iTunes账户将支付 %@ %@ 。%@自动续订此服务时您的iTunes账户也会支付相同费用。系统在订阅有效期结束前24小时会自动为您续订并扣费，除非您在有效期结束前取消服务。若需取消订阅，可前往设备设置-iTunes与App Store-查看Apple ID-订阅，管理或取消已经启用的服务。"];
-                    NSString* message = [NSString stringWithFormat:msg,product.productPrice,product.currency,product.periodUnit];
-                    
-                    NSString* title = [weakSelf localizedStringForKey:@"SubscriptionAlertTitle" withDefault:@"确认启用订阅服务"];
-                    NSString* cancelTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertCancel" withDefault:@"取消"];
-                    NSString* okTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertOK" withDefault:@"启用"];
-                    NSString* privateTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertPrivate" withDefault:@"隐私协议"];
-                    NSString* serviceTitle = [weakSelf localizedStringForKey:@"SubscriptionAlertService" withDefault:@"服务条款"];
-                    UIAlertControllerStyle uiStyle = UIAlertControllerStyleActionSheet;
-                    if([Yd1OpsTools isIPad]){
-                        uiStyle = UIAlertControllerStyleAlert;
-                    }
-                    
-                    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:uiStyle];
-                    
-                    NSString* privacyPolicyUrl = [weakSelf localizedStringForKey:@"SubscriptionPrivacyPolicyURL"
-                                                                 withDefault:@"https://www.yodo1.com/cn/privacy_policy"];
-                    NSString* termsServiceUrl = [weakSelf localizedStringForKey:@"SubscriptionTermsServiceURL"
-                                                                withDefault:@"https://www.yodo1.com/cn/user_agreement"];
-                    
-                    UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
-                        callback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
-                    }];
-                    UIAlertAction *serviceAction = [UIAlertAction actionWithTitle:serviceTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
-                        callback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
-                    }];
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                        callback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
-                    }];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                        [weakSelf paymentProduct:product callback:callback];
-                    }];
-                    [alertController addAction:okAction];
-                    [alertController addAction:serviceAction];
-                    [alertController addAction:privateAction];
-                    [alertController addAction:cancelAction];
-                    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertController animated:YES completion:nil];
-                } else {
-                    [weakSelf paymentProduct:product callback:callback];
-                }
+                callback(true,orderId,error);
             }else{
                 YD1LOG(@"%@",error);
-                callback(product.uniformProductId,@"",@"",PaymentFail,error);
+                callback(false,orderId,error);
             }
         }];
     }];
 }
 
-- (void)paymentProduct:(Product*)product callback:(PaymentCallback)callback {
-    paymentCallback = [callback copy];
+- (void)paymentProduct:(Product*)product {
     [RMStore.defaultStore addPayment:product.channelProductId];
 }
 
@@ -379,6 +395,7 @@
             [restoreProduct addObject:transaction];
         }
     }
+    
     if ([restoreProduct count] < 1) {
         callback(@[],@"no have loss order");
         return;
@@ -412,7 +429,7 @@
         Yd1UCenter.shared.itemInfo.channelOrderid = transaction.transactionIdentifier;
         Yd1UCenter.shared.itemInfo.orderId = transaction.orderId;
         Yd1UCenter.shared.itemInfo.item_code = transaction.productIdentifier;
-        Yd1UCenter.shared.itemInfo.product_type = [NSString stringWithFormat:@"%d",paymentProduct.productType];
+        Yd1UCenter.shared.itemInfo.product_type = paymentProduct.productType;
         
         [Yd1UCenter.shared verifyAppStoreIAPOrder:Yd1UCenter.shared.itemInfo
                                          callback:^(BOOL verifySuccess, NSString * _Nonnull response, NSError * _Nonnull error) {
@@ -426,6 +443,7 @@
                         if (orderId && itemCode) {
                             [lossOrder setObject:itemCode forKey:orderId];
                             [self->persistence consumeProductOfIdentifier:itemCode];
+                            [self->persistence rechargedProuctOfIdentifier:itemCode];
                         }
                         NSLog(@"验证成功orderid:%@",orderId);
                     } else {
@@ -639,14 +657,13 @@
 }
 
 - (void)readyToContinuePurchaseFromPromot:(PaymentCallback)callback {
-
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
-        paymentCallback = [callback copy];
+        self.paymentCallback = callback;
         if(self.addedStorePayment){
             [RMStore.defaultStore addPayment:self.addedStorePayment.productIdentifier];
         }else{
-            paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,@"",PaymentFail,@"promot is nil!");
+            self.paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,@"",PaymentFail,@"promot is nil!");
         }
     }
 #endif
@@ -663,6 +680,10 @@
         return product;
     }
     return nil;
+}
+
+- (NSString *)uniformProductIdWithChannelProductId:(NSString *)channelProductId {
+    return [self productWithChannelProductId:channelProductId].uniformProductId? :@"";
 }
 
 - (Product*)productWithChannelProductId:(NSString*)channelProductId {
@@ -802,12 +823,12 @@
         [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
     }
     
-    if (paymentCallback) {
+    if (self.paymentCallback) {
         NSString* channelOrderid = notification.rm_transaction.transactionIdentifier;
         if (!channelOrderid) {
             channelOrderid = @"";
         }
-        paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,channelOrderid,PaymentFail,notification.rm_storeError.localizedDescription);
+        self.paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,channelOrderid,PaymentFail,notification.rm_storeError.localizedDescription);
     }
 }
 
@@ -846,6 +867,7 @@
     SKProduct* skp = [RMStore.defaultStore productForIdentifier:productIdentifier];
     [Yodo1AnalyticsManager.sharedInstance swrveTransactionProcessed:notification.rm_transaction
                                                       productBought:skp];
+    __weak typeof(self) weakSelf = self;
     [Yd1UCenter.shared verifyAppStoreIAPOrder:Yd1UCenter.shared.itemInfo
                                      callback:^(BOOL verifySuccess, NSString * _Nonnull response, NSError * _Nonnull error) {
         NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
@@ -859,8 +881,8 @@
         }
         YD1LOG(@"error_code:%d",error_code);
         if (verifySuccess) {
-            if (self->paymentCallback) {
-                self->paymentCallback(self.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentSuccess,response);
+            if (weakSelf.paymentCallback) {
+                weakSelf.paymentCallback(weakSelf.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentSuccess,response);
             }
             
             [self->persistence consumeProductOfIdentifier:itemCode];
@@ -868,8 +890,8 @@
             if (error_code == 20) {
                 [self->persistence consumeProductOfIdentifier:itemCode];
             }
-            if (self->paymentCallback) {
-                self->paymentCallback(self.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentFail,response);
+            if (weakSelf.paymentCallback) {
+                weakSelf.paymentCallback(weakSelf.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentFail,response);
             }
         }
     }];
@@ -1065,7 +1087,8 @@ extern "C" {
         [Yd1UCenterManager.shared cancelPromotion];
     }
 
-    void UnityGetPromotionProduct(const char* gameObjectName, const char* methodName){
+    void UnityGetPromotionProduct(const char* gameObjectName, const char* methodName)
+    {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         Product* product = [Yd1UCenterManager.shared promotionProduct];
@@ -1116,12 +1139,12 @@ extern "C" {
                     }
                 }];
             } else {
-                if ([channelOrderid length] > 0 && [orderId length] > 0) {
+                if ([orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
-                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid;
-                    Yd1UCenter.shared.itemInfo.orderId = orderId;
+                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = orderId? :@"";
                     Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
-                    Yd1UCenter.shared.itemInfo.statusMsg = response;
+                    Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
                                                 callbakc:^(BOOL success, NSString * _Nonnull error) {
                         if (success) {
@@ -1226,7 +1249,8 @@ extern "C" {
         }];
     }
 
-    void UnityUpdateStorePromotionOrder(const char* productids, const char* gameObjectName, const char* methodName){
+    void UnityUpdateStorePromotionOrder(const char* productids, const char* gameObjectName, const char* methodName)
+    {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         [Yd1UCenterManager.shared updateStorePromotionOrder:[[NSString stringWithUTF8String:productids] componentsSeparatedByString:@","] callback:^(BOOL success, NSString * _Nonnull error) {
@@ -1249,7 +1273,8 @@ extern "C" {
         }];
     }
 
-    void UnityUpdateStorePromotionVisibility(bool visible, const char* uniformProductId, const char* gameObjectName, const char* methodName){
+    void UnityUpdateStorePromotionVisibility(bool visible, const char* uniformProductId, const char* gameObjectName, const char* methodName)
+    {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         [Yd1UCenterManager.shared  updateStorePromotionVisibility:visible product:[NSString stringWithUTF8String:uniformProductId] callback:^(BOOL success, NSString * _Nonnull error) {
@@ -1363,28 +1388,28 @@ extern "C" {
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         NSString* _uniformProductId = Yodo1CreateNSString(uniformProductId);
         [Yd1UCenterManager.shared productWithUniformProductId:_uniformProductId callback:^(NSArray<Product *> * _Nonnull productInfo) {
-           dispatch_async(dispatch_get_main_queue(), ^{
-               if(ocGameObjName && ocMethodName) {
-                   NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                   [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
-                   if([productInfo count] > 0){
-                       [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
-                       [dict setObject:productInfo forKey:@"data"];
-                   }else{
-                       [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                   }
-                   NSError* parseJSONError = nil;
-                   NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                   if(parseJSONError){
-                       [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
-                       [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                       [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
-                       msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                   }
-                   UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
-                                    [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
-                                    [msg cStringUsingEncoding:NSUTF8StringEncoding]);
-               }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(ocGameObjName && ocMethodName) {
+                    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                    [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
+                    if([productInfo count] > 0){
+                        [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
+                        [dict setObject:productInfo forKey:@"data"];
+                    }else{
+                        [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                    }
+                    NSError* parseJSONError = nil;
+                    NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    if(parseJSONError){
+                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
+                        [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                        [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                        msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    }
+                    UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                }
             });
         }];
     }

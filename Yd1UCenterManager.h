@@ -106,6 +106,17 @@ typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* respo
 @property (nonatomic,copy)ValidatePaymentBlock  validatePaymentBlock;
 
 /**
+ *  根据channelProductId 获取uniformProductId
+ */
+- (NSString *)uniformProductIdWithChannelProductId:(NSString *)channelProductId;
+
+/**
+ *  创建订单号和订单，返回订单号
+ */
+- (void)createOrderIdWithUniformProductId:(NSString *)uniformProductId
+                                 callback:(void (^)(bool success,NSString * orderid,NSString* error))callback;
+
+/**
  * 购买产品
  */
 - (void)paymentWithUniformProductId:(NSString *)uniformProductId
