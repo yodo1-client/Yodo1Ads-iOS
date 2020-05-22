@@ -24,10 +24,12 @@
 @interface RMStoreTransaction : NSObject<NSSecureCoding>
 
 @property(nonatomic, assign) BOOL consumed;
+@property(nonatomic, assign) BOOL recharged;
 @property(nonatomic, copy) NSString *productIdentifier;
 @property(nonatomic, copy) NSDate *transactionDate;
 @property(nonatomic, copy) NSString *transactionIdentifier;
 @property(nonatomic, copy) NSString *orderId;
+
 
 - (instancetype)initWithPaymentTransaction:(SKPaymentTransaction*)paymentTransaction;
 

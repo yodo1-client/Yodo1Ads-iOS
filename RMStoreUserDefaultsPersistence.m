@@ -61,7 +61,6 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     }
     NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
     [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
-    
     if (!transaction.orderId) {
         YD1LOG(@"无效订单--> productIdentifier:%@,不做存储！，transactionIdentifier:%@",transaction.productIdentifier,transaction.transactionIdentifier);
         return;
@@ -111,6 +110,27 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
                 [self consumeProductOfIdentifier:productIdentifier];
                 return YES;
             }
+        }
+    }
+    return NO;
+}
+
+- (BOOL)rechargedProuctOfIdentifier:(NSString *)productIdentifier {
+    NSUserDefaults *defaults = [self userDefaults];
+    NSDictionary *purchases = [defaults objectForKey:RMStoreTransactionsUserDefaultsKey] ? : @{};
+    NSArray *transactions = purchases[productIdentifier] ? : @[];
+    for (NSData *data in transactions)
+    {
+        RMStoreTransaction *transaction = [self transactionWithData:data];
+        if (!transaction.recharged)
+        {
+            transaction.recharged = YES;
+            NSData *updatedData = [self dataWithTransaction:transaction];
+            NSMutableArray *updatedTransactions = [NSMutableArray arrayWithArray:transactions];
+            NSInteger index = [updatedTransactions indexOfObject:data];
+            updatedTransactions[index] = updatedData;
+            [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
+            return YES;
         }
     }
     return NO;

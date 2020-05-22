@@ -36,10 +36,17 @@
  */
 - (BOOL)consumeProductOfIdentifier:(NSString*)productIdentifier;
 
-/**
-     Consume the given product if available. Intended for consumable products.
+/** Consume the given product if available. Intended for consumable products.
+ @param orderId Identifier of the product to be consumed.
+ @return YES if the product was consumed, NO otherwise.
  */
 - (BOOL)consumeProductOfOrderId:(NSString*)orderId;
+
+/** If you can, top up with the given product
+ @param  productIdentifier Identifier of the product to be consumed.
+ @return YES if the product was recharged, NO otherwise.
+ */
+- (BOOL)rechargedProuctOfIdentifier:(NSString*)productIdentifier;
 
 /** Returns the number of transactions for the given product that have not been consumed. Intended for consumable products.
  @return The number of transactions for the given product that have not been consumed.

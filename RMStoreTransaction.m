@@ -21,6 +21,7 @@
 #import "RMStoreTransaction.h"
 
 NSString* const RMStoreCoderConsumedKey = @"consumed";
+NSString* const RMStoreCoderRechargedKey = @"recharged";
 NSString* const RMStoreCoderProductIdentifierKey = @"productIdentifier";
 NSString* const RMStoreCoderTransactionDateKey = @"transactionDate";
 NSString* const RMStoreCoderTransactionIdentifierKey = @"transactionIdentifier";
@@ -44,6 +45,7 @@ NSString* const RMStoreCoderOrderIdKey = @"orderIdKey";
     if (self = [super init])
     {
         _consumed = [decoder decodeBoolForKey:RMStoreCoderConsumedKey];
+        _recharged = [decoder decodeBoolForKey:RMStoreCoderRechargedKey];
         _productIdentifier = [decoder decodeObjectForKey:RMStoreCoderProductIdentifierKey];
         _transactionDate = [decoder decodeObjectForKey:RMStoreCoderTransactionDateKey];
         _transactionIdentifier = [decoder decodeObjectForKey:RMStoreCoderTransactionIdentifierKey];
@@ -54,6 +56,7 @@ NSString* const RMStoreCoderOrderIdKey = @"orderIdKey";
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
+    [coder encodeBool:self.recharged forKey:RMStoreCoderRechargedKey];
     [coder encodeBool:self.consumed forKey:RMStoreCoderConsumedKey];
     [coder encodeObject:self.productIdentifier forKey:RMStoreCoderProductIdentifierKey];
     [coder encodeObject:self.transactionDate forKey:RMStoreCoderTransactionDateKey];

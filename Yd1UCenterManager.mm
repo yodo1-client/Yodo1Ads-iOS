@@ -54,6 +54,8 @@
 - (NSString *)productPrice:(SKProduct *)product;
 - (NSString *)periodUnitWithProduct:(SKProduct *)product;
 - (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString;
+- (void)rechargedProuct;
+
 @end
 
 @implementation Yd1UCenterManager
@@ -196,7 +198,6 @@
             [newOrderId setArray:oldOrderId];
         }
         [newOrderId addObject:orderId];
-        [Yd1OpsTools.cached setObject:newOrderId forKey:product.channelProductId];
         NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
         [Yd1OpsTools saveKeychainWithService:product.channelProductId str:orderidJson];
         
@@ -645,7 +646,7 @@
         if(self.addedStorePayment){
             [RMStore.defaultStore addPayment:self.addedStorePayment.productIdentifier];
         }else{
-            paymentCallback(self.currentUniformProductId,@"",@"",PaymentFail,@"promot is nil!");
+            paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,@"",PaymentFail,@"promot is nil!");
         }
     }
 #endif
@@ -763,6 +764,13 @@
                           defaultString:defaultString];
 }
 
+- (void)rechargedProuct {
+    Product* product = [productInfos objectForKey:self.currentUniformProductId];
+    if (self->persistence) {
+        [self->persistence rechargedProuctOfIdentifier:product.channelProductId];
+    }
+}
+
 #pragma mark- RMStoreObserver
 - (void)storePaymentTransactionDeferred:(NSNotification*)notification {
     YD1LOG(@"");
@@ -799,7 +807,7 @@
         if (!channelOrderid) {
             channelOrderid = @"";
         }
-        paymentCallback(self.currentUniformProductId,@"",channelOrderid,PaymentFail,notification.rm_storeError.localizedDescription);
+        paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,channelOrderid,PaymentFail,notification.rm_storeError.localizedDescription);
     }
 }
 
@@ -1416,11 +1424,11 @@ extern "C" {
     /**
      *支付
      */
-    void UnityPayNetGame(const char* uniformProductId,const char* extra, const char* gameObjectName, const char* methodName)
+    void UnityPayNetGame(const char* mUniformProductId,const char* extra, const char* gameObjectName, const char* methodName)
     {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
-        NSString* _uniformProductId = Yodo1CreateNSString(uniformProductId);
+        NSString* _uniformProductId = Yodo1CreateNSString(mUniformProductId);
         NSString* _extra = Yodo1CreateNSString(extra);
         
         [Yd1UCenterManager.shared paymentWithUniformProductId:_uniformProductId callback:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull orderId, NSString * _Nonnull channelOrderid, PaymentState paymentState, NSString * _Nonnull response) {
@@ -1436,12 +1444,12 @@ extern "C" {
                     }
                 }];
             } else {
-                if ([channelOrderid length] > 0 && [orderId length] > 0) {
+                if ([orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
-                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid;
-                    Yd1UCenter.shared.itemInfo.orderId = orderId;
+                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = orderId? :@"";
                     Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
-                    Yd1UCenter.shared.itemInfo.statusMsg = response;
+                    Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
                                                 callbakc:^(BOOL success, NSString * _Nonnull error) {
                         if (success) {
@@ -1526,6 +1534,9 @@ extern "C" {
                     UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
                                      [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
                                      [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                }
+                if (success) {
+                    [Yd1UCenterManager.shared rechargedProuct];
                 }
             });
         }];
