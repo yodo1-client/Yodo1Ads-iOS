@@ -11,8 +11,10 @@
 #import <MTGSDK/MTGAdSize.h>
 #import "MTGBannerAdViewDelegate.h"
 
-#define MTGBannerSDKVersion @"6.1.2"
+#define MTGBannerSDKVersion @"6.2.0"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface MTGBannerAdView : UIView
 
@@ -28,6 +30,11 @@
  MTGBoolNo means off,MTGBoolYes means on
  */
 @property(nonatomic,assign) MTGBool showCloseButton;
+
+/**
+placementId
+*/
+@property(nonatomic,copy,readonly) NSString *_Nullable placementId;
 
 /**
  unitId
@@ -48,11 +55,13 @@
  This is a method to initialize an MTGBannerAdView with the given unit id
 
  @param adSize The size of the banner view.
+ @param placementId The id of the ad placement id. You can create your ad placement from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param rootViewController The view controller that will be used to present full screen ads.
  @return
  */
 - (nonnull instancetype)initBannerAdViewWithAdSize:(CGSize)adSize
+                                       placementId:(nullable NSString *)placementId
                                             unitId:(nonnull NSString *) unitId
                                 rootViewController:(nullable UIViewController *)rootViewController;
 
@@ -60,11 +69,13 @@
  This is a method to initialize an MTGBannerAdView with the given unit id
  
  @param bannerSizeType please refer to enum MTGBannerSizeType.
+ @param placementId The id of the ad placement id. You can create your ad placement from our Portal.
  @param unitId The id of the ad unit. You can create your unit id from our Portal.
  @param rootViewController The view controller that will be used to present full screen ads.
  @return
  */
 - (nonnull instancetype)initBannerAdViewWithBannerSizeType:(MTGBannerSizeType)bannerSizeType
+                                               placementId:(nullable NSString *)placementId
                                             unitId:(nonnull NSString *) unitId
                                 rootViewController:(nullable UIViewController *)rootViewController;
 /**
@@ -89,3 +100,4 @@ NOTE: After calling this method, if you need to continue using the MTGBannerAdVi
 
 @end
 
+NS_ASSUME_NONNULL_END
