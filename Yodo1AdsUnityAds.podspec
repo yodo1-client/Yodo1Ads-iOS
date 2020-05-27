@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsUnityAds'
-    s.version          = '4.1.1'
+    s.version          = '4.1.2'
     s.summary          = 'UnityAds of v3.4.2,修改命名冲突和Unity引擎'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
