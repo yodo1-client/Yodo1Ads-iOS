@@ -11,7 +11,7 @@
 /**
  Optional parameters for advanced ad requests.
 */
-@interface SMAAdRequestParams : NSObject
+@interface SMAAdRequestParams : NSObject <NSCopying>
 
 /// Unified Bidding unique identifier (see Smaato's Unified Bidding Publisher Setup (iOS))
 @property (nonatomic, copy, nullable) NSString *ubUniqueId;
