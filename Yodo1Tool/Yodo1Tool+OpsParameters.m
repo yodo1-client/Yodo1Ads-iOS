@@ -8,13 +8,15 @@
 
 #import "Yodo1Tool+OpsParameters.h"
 
+#define __PRODUCT_EVN__  1
+
 @implementation Yodo1Tool (OpsParameters)
 
 - (NSString *)ucapDomain {
-#ifdef DEBUG
-    return @"https://api-ucap-test.yodo1.com/uc_ap";
-#else
+#if __PRODUCT_EVN__
     return @"https://uc-ap.yodo1api.com/uc_ap";
+#else
+    return @"https://api-ucap-test.yodo1.com/uc_ap";
 #endif
 }
 
@@ -23,7 +25,11 @@
 }
 
 - (NSString *)paymentDomain {
-    return @"https://api-payment-test.yodo1.com/";
+#if __PRODUCT_EVN__
+    return @"https://payment.yodo1api.com";
+#else
+    return @"https://api-payment-test.yodo1.com";
+#endif
 }
 
 - (NSString *)generateOrderIdURL {

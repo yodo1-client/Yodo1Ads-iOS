@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// keychain
 - (void)saveKeychainWithService:(NSString *)service str:(NSString *)str;
 - (NSString *)keychainWithService:(NSString *)service;
-- (NSString *)keychainUUID;
 
+- (NSString *)keychainUUID;
 /// device id
 - (NSString *)keychainDeviceId;
 

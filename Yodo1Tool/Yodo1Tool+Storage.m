@@ -20,16 +20,20 @@ static Yodo1YYCache* _sharedCached = nil;
     return _sharedCached;
 }
 
-- (void)saveKeychainWithService:(NSString *)service str:(NSString *)str{
+- (void)saveKeychainWithService:(NSString *)service str:(NSString *)str {
     [self save:service data:str];
 }
 
-- (NSString *)keychainWithService:(NSString *)service{
+- (NSString *)keychainWithService:(NSString *)service {
     NSString *str = (NSString *)[self load:service];
-    return str;
+    if ([str isKindOfClass:[NSString class]]) {
+        return str;
+    }
+    [self deleteKeyData:service];
+    return @"";
 }
 
-- (NSString *)keychainUUID{
+- (NSString *)keychainUUID {
     NSString *strUUID = (NSString *)[self load:Yd1OpsTools.appBid];
     //首次执行该方法时，uuid为空
     if ([strUUID isEqualToString:@""]|| !strUUID) {
