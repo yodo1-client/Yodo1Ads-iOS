@@ -494,7 +494,7 @@ static BOOL bSensorsSwitch = false;
         NSString* serverUrl = [NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SERVERURL"];
         BOOL bSensorsLogEnable = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_LOG_ENABLE"]boolValue];
         if (!serverUrl) {
-            serverUrl = @"https://youdaoyi.datasink.sensorsdata.cn/sa?project=production&token=7d89c1c8b84d30c8";
+            serverUrl = @"https://youdaoyi.datasink.sensorsdata.cn/sa?project=default&token=7d89c1c8b84d30c8";
         }
         if (bSensorsLogEnable) {
             [Yodo1SaManager initializeSdkServerURL:serverUrl debug:2];
@@ -507,19 +507,15 @@ static BOOL bSensorsSwitch = false;
         if (!gameName) {
             gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
         }
-        NSString* gameVersion = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        
-        
         [Yodo1SaManager profileSetOnce:@{@"yID":@"",
                                          @"game":bundleId,
                                          @"channel":@"appstore"}];
         [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
-                                                  @"gameVersion":gameVersion,
                                                   @"gameBundleId":bundleId,
                                                   @"sdkType":[Yodo1Ads publishType],
-                                                  @"sdkVersion":[Yodo1Ads publishVersion],
-                                                  @"publishChannelCode":@"appstore"
-        }];
+                                                  @"publishChannelCode":@"appstore",
+                                                  @"masSdkVersion":[Yodo1Ads publishVersion]}
+         ];
     }
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
@@ -550,6 +546,20 @@ static BOOL bSensorsSwitch = false;
     if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
+}
+
++ (void)startTime {
+    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
+    [Yodo1SaManager track:@"startup" properties:@{@"startTime":ti}];
+}
+
++ (void)endTime {
+    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
+    [Yodo1SaManager track:@"end" properties:@{@"endTime":ti}];
 }
 
 + (void)onlineParamete:(NSNotification *)notif {
