@@ -228,6 +228,8 @@
             } else {
                 [weakSelf paymentProduct:product];
             }
+        }else{
+            weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentFail,error);
         }
     }];
 }
@@ -262,7 +264,7 @@
         NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
         [Yd1OpsTools saveKeychainWithService:product.channelProductId str:orderidJson];
         
-        Yd1UCenter.shared.itemInfo.product_type = product.productType;
+        Yd1UCenter.shared.itemInfo.product_type = (int)product.productType;
         Yd1UCenter.shared.itemInfo.item_code = product.channelProductId;
         // 下单
         NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
@@ -274,7 +276,7 @@
             @"productCount":@"1",
             @"productDescription":product.productDescription? :@"",
             @"currency":product.currency? :@"",
-            @"productType":[NSString stringWithFormat:@"%d",product.productType]? :@"",
+            @"productType":[NSNumber numberWithInt:(int)product.productType],
             @"price":product.productPrice? :@"",
             @"channelItemCode":@"",
         };
@@ -372,7 +374,7 @@
         [dict setObject:priceDisplay == nil?@"":priceDisplay forKey:@"priceDisplay"];
         [dict setObject:price == nil?@"":price forKey:@"price"];
         [dict setObject:product.productDescription == nil?@"":product.productDescription forKey:@"description"];
-        [dict setObject:[NSNumber numberWithInt:product.productType] forKey:@"ProductType"];
+        [dict setObject:[NSNumber numberWithInt:(int)product.productType] forKey:@"ProductType"];
         [dict setObject:product.currency == nil?@"":product.currency forKey:@"currency"];
         [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
         [dict setObject:product.periodUnit == nil?@"":[self periodUnitWithProduct:skp] forKey:@"periodUnit"];
@@ -429,7 +431,7 @@
         Yd1UCenter.shared.itemInfo.channelOrderid = transaction.transactionIdentifier;
         Yd1UCenter.shared.itemInfo.orderId = transaction.orderId;
         Yd1UCenter.shared.itemInfo.item_code = transaction.productIdentifier;
-        Yd1UCenter.shared.itemInfo.product_type = paymentProduct.productType;
+        Yd1UCenter.shared.itemInfo.product_type = (int)paymentProduct.productType;
         
         [Yd1UCenter.shared verifyAppStoreIAPOrder:Yd1UCenter.shared.itemInfo
                                          callback:^(BOOL verifySuccess, NSString * _Nonnull response, NSError * _Nonnull error) {
@@ -477,6 +479,10 @@
     NSMutableArray* result = [NSMutableArray array];
     Yd1UCenter.shared.itemInfo.exclude_old_transactions = excludeOldTransactions?@"true":@"false";
     NSString* receipt = [[NSData dataWithContentsOfURL:RMStore.receiptURL] base64EncodedStringWithOptions:0];
+    if (!receipt) {
+         callback(result, -1, NO, @"App Store of receipt is nil");
+        return;
+    }
     Yd1UCenter.shared.itemInfo.trx_receipt = receipt;
     [Yd1UCenter.shared querySubscriptions:Yd1UCenter.shared.itemInfo
                                  callback:^(BOOL success, NSString * _Nullable response, NSError * _Nullable error) {
@@ -499,7 +505,21 @@
                     SubscriptionInfo* info = [[SubscriptionInfo alloc] initWithUniformProductId:uniformProductId channelProductId:channelProductId expires:expires_date_ms purchaseDate:purchase_date_ms];
                     [result addObject:info];
                 }
-                callback(result, serverTime, YES, nil);
+                //去重
+                NSMutableArray *rp = [NSMutableArray array];
+                for (SubscriptionInfo *model in result) {
+                    __block BOOL isExist = NO;
+                    [rp enumerateObjectsUsingBlock:^(SubscriptionInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if ([obj.channelProductId isEqual:model.channelProductId]) {
+                            *stop = YES;
+                            isExist = YES;
+                        }
+                    }];
+                    if (!isExist && model.channelProductId) {
+                        [rp addObject:model];
+                    }
+                }
+                callback(rp, serverTime, YES, nil);
             }
         }else{
             callback(result, -1, NO, response);
@@ -528,7 +548,7 @@
     [dict setObject:product.priceDisplay == nil?@"":product.priceDisplay forKey:@"priceDisplay"];
     [dict setObject:price == nil?@"":price forKey:@"price"];
     [dict setObject:product.productDescription == nil?@"":product.productDescription forKey:@"description"];
-    [dict setObject:[NSNumber numberWithInt:product.productType] forKey:@"ProductType"];
+    [dict setObject:[NSNumber numberWithInt:(int)product.productType] forKey:@"ProductType"];
     [dict setObject:product.currency == nil?@"":product.currency forKey:@"currency"];
     [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
     [products addObject:dict];
@@ -562,7 +582,7 @@
         [dict setObject:product.priceDisplay == nil?@"":product.priceDisplay forKey:@"priceDisplay"];
         [dict setObject:price == nil?@"":price forKey:@"price"];
         [dict setObject:product.productDescription == nil?@"":product.productDescription forKey:@"description"];
-        [dict setObject:[NSNumber numberWithInt:product.productType] forKey:@"ProductType"];
+        [dict setObject:[NSNumber numberWithInt:(int)product.productType] forKey:@"ProductType"];
         [dict setObject:product.currency == nil?@"":product.currency forKey:@"currency"];
         [dict setObject:[NSNumber numberWithInt:0] forKey:@"coin"];
         
@@ -833,8 +853,7 @@
 }
 
 - (void)storePaymentTransactionFinished:(NSNotification*)notification {
-    if (!Yd1UCenter.shared.itemInfo.product_type || [Yd1UCenter.shared.itemInfo.orderId isEqualToString:@""]) {
-        [SKPaymentQueue.defaultQueue finishTransaction:notification.rm_transaction];
+    if (!self.paymentCallback) {
         return;
     }
     NSString* channelOrderid = notification.rm_transaction.transactionIdentifier;
@@ -1142,7 +1161,7 @@ extern "C" {
                 if ([orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
                     Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
-                    Yd1UCenter.shared.itemInfo.orderId = orderId? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = orderId;
                     Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
                     Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
@@ -1472,7 +1491,7 @@ extern "C" {
                 if ([orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
                     Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
-                    Yd1UCenter.shared.itemInfo.orderId = orderId? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = orderId;
                     Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
                     Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo

@@ -62,20 +62,24 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     }
     NSString* orderidJson = [Yd1OpsTools stringWithJSONObject:newOrderId error:nil];
     [Yd1OpsTools saveKeychainWithService:productIdentifier str:orderidJson];
+    __weak typeof(self) weakSelf = self;
     if (!transaction.orderId) { //杀死进程/重新安装应用
         NSString* uniformProductId = [Yd1UCenterManager.shared uniformProductIdWithChannelProductId:productIdentifier];
         [Yd1UCenterManager.shared createOrderIdWithUniformProductId:uniformProductId callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
             if (success) {
                 transaction.orderId = orderid;
+                NSData *data = [weakSelf dataWithTransaction:transaction];
+                [updatedTransactions addObject:data];
+                [weakSelf setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
             }else{
-                YD1LOG(@"error:%@",error);
+                YD1LOG(@"[ 创建订单失败 ]error:%@",error);
             }
         }];
+    } else {
+        NSData *data = [self dataWithTransaction:transaction];
+        [updatedTransactions addObject:data];
+        [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
     }
-    
-    NSData *data = [self dataWithTransaction:transaction];
-    [updatedTransactions addObject:data];
-    [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
 }
 
 #pragma mark - Public
