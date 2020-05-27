@@ -1,4 +1,11 @@
 =============================================
+2020-05-26
+v6.16.1.0
+• Rewarded Video caching improvements for bidding flow
+• Bug Fix: Init event reporting
+• Crash protection in case of auction response decryption exception
+
+=============================================
 2020-04-22
 v6.16.0.0
 
