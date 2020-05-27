@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobFacebook'
-    s.version          = '4.1.2'
+    s.version          = '4.1.3'
     s.summary          = 'Admob 更新v7.58.0，Facebook SDK v6.5.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
     s.libraries = 'z'
     
     s.dependency 'YD1Admob','4.1.2'
-    s.dependency 'Yodo1AdsFacebook','4.1.1'
+    s.dependency 'Yodo1AdsFacebook','4.1.2'
 
 end
