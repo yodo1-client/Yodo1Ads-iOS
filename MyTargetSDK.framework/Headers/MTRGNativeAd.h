@@ -1,24 +1,17 @@
 //
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 // Created by Timur on 2/1/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "MTRGBaseAd.h"
+#import "MTRGNativeAdProtocol.h"
+#import "MTRGCachePolicy.h"
 
 @class MTRGNativeAd;
 @class MTRGNativePromoBanner;
 @class MTRGImageData;
-
-typedef enum : NSUInteger
-{
-	MTRGAdChoicesPlacementTopLeft,
-	MTRGAdChoicesPlacementTopRight,
-	MTRGAdChoicesPlacementBottomLeft,
-	MTRGAdChoicesPlacementBottomRight
-} MTRGAdChoicesPlacement;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,17 +41,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MTRGNativeAd : MTRGBaseAd
+@interface MTRGNativeAd : MTRGBaseAd <MTRGNativeAdProtocol>
 
-@property(nonatomic) BOOL autoLoadImages;
-@property(nonatomic) BOOL autoLoadVideo;
+@property(nonatomic) MTRGCachePolicy cachePolicy;
 @property(nonatomic) BOOL mediationEnabled;
 @property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic, weak, nullable) id <MTRGNativeAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGNativePromoBanner *banner;
 @property(nonatomic, readonly, nullable) NSString *adSource;
-
-+ (void)loadImage:(MTRGImageData *)imageData toView:(UIImageView *)imageView;
+@property(nonatomic, readonly) float adSourcePriority;
 
 + (instancetype)nativeAdWithSlotId:(NSUInteger)slotId;
 

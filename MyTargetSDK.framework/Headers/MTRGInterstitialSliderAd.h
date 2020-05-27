@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 // Created by Timur on 3/16/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -41,8 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)load;
 
 - (void)showWithController:(UIViewController *)controller;
-
-- (void)showModalWithController:(UIViewController *)controller;
 
 - (void)close;
 

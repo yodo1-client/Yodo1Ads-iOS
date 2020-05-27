@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 // Created by Timur on 3/22/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -48,6 +48,7 @@ typedef enum : NSUInteger
 @property(nonatomic) BOOL mediationEnabled;
 @property(nonatomic, readonly) MTRGAdSize adSize;
 @property(nonatomic, readonly, nullable) NSString *adSource;
+@property(nonatomic, readonly) float adSourcePriority;
 
 + (void)setDebugMode:(BOOL)enabled;
 

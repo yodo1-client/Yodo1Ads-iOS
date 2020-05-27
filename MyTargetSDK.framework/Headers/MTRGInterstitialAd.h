@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 // Created by Timur on 3/5/18.
 // Copyright (c) 2018 MailRu Group. All rights reserved.
@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) BOOL mediationEnabled;
 @property(nonatomic, weak, nullable) id <MTRGInterstitialAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) NSString *adSource;
+@property(nonatomic, readonly) float adSourcePriority;
 
 + (instancetype)interstitialAdWithSlotId:(NSUInteger)slotId;
 
@@ -47,8 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadFromBid:(NSString *)bidId;
 
 - (void)showWithController:(UIViewController *)controller;
-
-- (void)showModalWithController:(UIViewController *)controller;
 
 - (void)close;
 

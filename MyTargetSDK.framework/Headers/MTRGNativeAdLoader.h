@@ -1,6 +1,6 @@
 //
 //  MTRGNativeAdLoader.h
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 //  Created by Andrey Seredkin on 31.05.2018.
 //  Copyright © 2018 Mail.Ru Group. All rights reserved.
@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativeAdLoader : MTRGBaseAd
 
-@property(nonatomic) BOOL autoLoadImages;
-@property(nonatomic) BOOL autoLoadVideo;
+@property(nonatomic) MTRGCachePolicy cachePolicy;
 @property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 
 + (instancetype)loaderForCount:(NSUInteger)count slotId:(NSUInteger)slotId;

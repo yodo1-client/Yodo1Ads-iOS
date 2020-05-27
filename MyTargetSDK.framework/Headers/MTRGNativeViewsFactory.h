@@ -1,6 +1,6 @@
 //
 //  MTRGNativeViewsFactory.h
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 //  Created by Anton Bulankin on 17.11.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.
@@ -8,30 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MTRGNativePromoBanner.h"
-#import "MTRGNewsFeedAdView.h"
-#import "MTRGChatListAdView.h"
-#import "MTRGContentStreamAdView.h"
-#import "MTRGContentWallAdView.h"
-#import "MTRGMediaAdView.h"
-#import "MTRGContentStreamCardAdView.h"
-#import "MTRGPromoCardCollectionView.h"
+@class MTRGNativeBannerAdView;
+@class MTRGNativeAdView;
+@class MTRGMediaAdView;
+@class MTRGIconAdView;
+@class MTRGNativeCardAdView;
+@class MTRGPromoCardCollectionView;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativeViewsFactory : NSObject
 
-+ (MTRGNewsFeedAdView *)createNewsFeedViewWithBanner:(MTRGNativePromoBanner *)promoBanner;
++ (MTRGNativeBannerAdView *)createNativeBannerAdView;
 
-+ (MTRGChatListAdView *)createChatListViewWithBanner:(MTRGNativePromoBanner *)promoBanner;
++ (MTRGNativeAdView *)createNativeAdView;
 
-+ (MTRGContentStreamAdView *)createContentStreamViewWithBanner:(MTRGNativePromoBanner *)promoBanner;
-
-+ (MTRGContentWallAdView *)createContentWallViewWithBanner:(MTRGNativePromoBanner *)promoBanner;
++ (MTRGNativeAdView *)createNativeAdViewWithExtendedCard;
 
 + (MTRGMediaAdView *)createMediaAdView;
 
-+ (MTRGContentStreamCardAdView *)createContentStreamCardAdView;
++ (MTRGIconAdView *)createIconAdView;
+
++ (MTRGNativeCardAdView *)createNativeCardAdView;
 
 + (MTRGPromoCardCollectionView *)createPromoCardCollectionView;
 

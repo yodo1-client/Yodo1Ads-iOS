@@ -1,5 +1,5 @@
 //
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 // Created by Timur on 4/12/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.

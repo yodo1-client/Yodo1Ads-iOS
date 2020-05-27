@@ -1,12 +1,13 @@
 //
 //  MyTargetSDK.h
-//  myTargetSDK 5.4.8
+//  myTargetSDK 5.6.0
 //
 //  Created by Andrey Seredkin on 15.02.2018.
 //  Copyright © 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <MyTargetSDK/MTRGBaseAd.h>
+#import <MyTargetSDK/MTRGCachePolicy.h>
 #import <MyTargetSDK/MTRGCustomParams.h>
 #import <MyTargetSDK/MTRGManager.h>
 #import <MyTargetSDK/MTRGNavigationType.h>
@@ -23,15 +24,17 @@
 #import <MyTargetSDK/MTRGMediationAdConfig.h>
 
 #import <MyTargetSDK/MTRGNativeAd.h>
+#import <MyTargetSDK/MTRGNativeBannerAd.h>
 #import <MyTargetSDK/MTRGNativeAdLoader.h>
+#import <MyTargetSDK/MTRGNativeBannerAdLoader.h>
+#import <MyTargetSDK/MTRGNativeAdProtocol.h>
 #import <MyTargetSDK/MTRGNativeViewsFactory.h>
+#import <MyTargetSDK/MTRGNativeBanner.h>
 #import <MyTargetSDK/MTRGNativePromoBanner.h>
 #import <MyTargetSDK/MTRGNativePromoCard.h>
-#import <MyTargetSDK/MTRGChatListAdView.h>
-#import <MyTargetSDK/MTRGContentStreamAdView.h>
-#import <MyTargetSDK/MTRGContentStreamCardAdView.h>
-#import <MyTargetSDK/MTRGContentWallAdView.h>
-#import <MyTargetSDK/MTRGNewsFeedAdView.h>
+#import <MyTargetSDK/MTRGNativeAdView.h>
+#import <MyTargetSDK/MTRGNativeCardAdView.h>
+#import <MyTargetSDK/MTRGNativeBannerAdView.h>
 #import <MyTargetSDK/MTRGPromoCardCollectionView.h>
 #import <MyTargetSDK/MTRGPromoCardSliderProtocol.h>
 #import <MyTargetSDK/MTRGPromoCardViewProtocol.h>
@@ -39,6 +42,8 @@
 #import <MyTargetSDK/MTRGMediationNativeAdBanner.h>
 #import <MyTargetSDK/MTRGMediationNativeAdConfig.h>
 #import <MyTargetSDK/MTRGNativeAdContainer.h>
+#import <MyTargetSDK/MTRGAdChoicesPlacement.h>
+#import <MyTargetSDK/MTRGIconAdView.h>
 
 #import <MyTargetSDK/MTRGAdView.h>
 #import <MyTargetSDK/MTRGMediationStandardAdAdapter.h>
