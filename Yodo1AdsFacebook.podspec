@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsFacebook'
-    s.version          = '4.1.1'
-    s.summary          = 'FBAudienceNetwork v5.8.0 [支持iOS13,removed UIWebView]'
+    s.version          = '4.1.2'
+    s.summary          = 'FBAudienceNetwork v5.9.0 [支持iOS13,removed UIWebView]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
