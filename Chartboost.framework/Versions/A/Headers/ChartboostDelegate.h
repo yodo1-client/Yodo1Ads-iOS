@@ -137,6 +137,8 @@ typedef NS_ENUM(NSUInteger, CBLoadError) {
     CBLoadErrorInternetUnavailableAtShow = 25,
     /*! Error trying to present the ad. */
     CBLoadErrorAdPresentationFailure = 33,
+    /*! No cached ad ready to be shown. */
+    CBLoadErrorNoCachedAd = 34,
     /*! Publisher disabled. */
     CBLoadErrorPublisherDisabled = 35
 };
@@ -253,6 +255,7 @@ FOUNDATION_EXPORT CBLocation const CBLocationDefault;
  
  All of the delegate methods are optional.
  */
+DEPRECATED_MSG_ATTRIBUTE("This protocol is deprecated and will be removed in a future version. Please use CHBInterstitial, CHBRewarded, CHBBanner and their corresponding delegate protocols instead.")
 @protocol ChartboostDelegate <NSObject>
 
 @optional

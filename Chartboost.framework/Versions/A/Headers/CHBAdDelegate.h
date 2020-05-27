@@ -50,6 +50,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) UIViewController *viewController;
 @end
 
+/*!
+ @class CHBDismissEvent
+ @brief A CHBAdEvent subclass passed on dismiss-related delegate methods.
+ */
+@interface CHBDismissEvent : CHBAdEvent
+@end
+
+/*!
+ @class CHBRewardEvent
+ @brief A CHBAdEvent subclass passed on reward-related delegate methods.
+ */
+@interface CHBRewardEvent : CHBAdEvent
+/*!
+ @brief The earned reward.
+ */
+@property (nonatomic, readonly) NSInteger reward;
+@end
+
 
 // MARK: - Errors
 
@@ -143,7 +161,7 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
     if (error) {
         // Handle error
     } else {
-        [event.ad showFromViewController:self];
+        // At this point event.ad.isCached will be true, and the ad is ready to be shown.
     }
  }
  @endcode
@@ -153,21 +171,22 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
 /*!
  @brief Called after a showFromViewController: call, right before an ad is presented.
  @param event A show event with info related to the ad to be shown.
- @param error An error specifying the failure reason, or nil if the operation was successful.
  @discussion Implement to be notified of when an ad is about to be presented.
  
  A typical implementation would look like this:
  @code
- - (void)willShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error {
-    if (error) {
-        // Handle error
-    } else {
-        // Maybe pause ongoing processes like video or gameplay.
-    }
+ - (void)willShowAd:(CHBShowEvent *)event {
+    // Pause ongoing processes like video or gameplay.
  }
  @endcode
  */
-- (void)willShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error;
+- (void)willShowAd:(CHBShowEvent *)event;
+
+/*!
+ @brief This method is deprecated in favor of willShowAd:, the error parameter will always be nil.
+ If implemented, both willShowAd:error: and willShowAd: will be called when the corresponding event occurs.
+ */
+- (void)willShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error DEPRECATED_MSG_ATTRIBUTE("Please use willShowAd: instead. This method is deprecated and will be removed in a future version.");
 
 /*!
  @brief Called after a showFromViewController: call, either if the ad has been presented and an ad impression logged, or if the operation failed.
@@ -180,7 +199,7 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
  @code
  - (void)didShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error {
     if (error) {
-        // Handle error, possibly resuming processes paused in willShowAd:error:
+        // Handle error, possibly resuming processes paused in willShowAd:
     } else {
         [event.ad cache];
     }
@@ -254,6 +273,49 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
  @endcode
  */
 - (void)didFinishHandlingClick:(CHBClickEvent *)event error:(nullable CHBClickError *)error;
+
+@end
+
+/*!
+ @protocol CHBDismissableAdDelegate
+ @brief Delegate protocol for ads that can be dismissed.
+ @discussion Provides methods to receive notifications related to an ad's actions and to control its behavior.
+ */
+@protocol CHBDismissableAdDelegate <CHBAdDelegate>
+
+@optional
+
+/*!
+ @brief Called after an ad is dismissed.
+ @param event A dismiss event with info related to the dismissed ad.
+ @discussion Implement to be notified of when an ad is no longer displayed.
+ 
+ A typical implementation would look like this:
+ @code
+ - (void)didDismissAd:(CHBCacheEvent *)event {
+    // Resume processes paused in willShowAd:
+ }
+ @endcode
+ */
+- (void)didDismissAd:(CHBDismissEvent *)event;
+
+@end
+
+/*!
+ @protocol CHBRewardableAdDelegate
+ @brief Delegate protocol for ads that can provide a reward.
+ @discussion Provides methods to receive notifications related to an ad's actions and to control its behavior.
+ */
+@protocol CHBRewardableAdDelegate <CHBAdDelegate>
+
+@optional
+
+/*!
+ @brief Called when a rewarded ad has completed playing.
+ @param event A reward event with info related to the ad and the reward.
+ @discussion Implement to be notified when a reward is earned.
+ */
+- (void)didEarnReward:(CHBRewardEvent *)event;
 
 @end
 

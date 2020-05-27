@@ -1,4 +1,19 @@
 =============================================
+2020-05-26
+1. v8.1.0
+Improvements:
+New API for interstitial and rewarded ads: CHBInterstitial and CHBRewarded.
+Chartboost can now be used via multiple mediations in the same app, as long as they use these new APIs.
+Every ad has now its own delegate, and will hide the status bar automatically when shown if View Controller-based status bar appearance is enabled.
+New startWithAppId:appSignature:completion: SDK initialization method.
+SDK initialization is now immediate in most cases (for both the new and the deprecated initialization methods).
+New APIs for caching an ad using a Chartboost OpenRTB bid response.
+Fixes:
+If an ad is automatically dismissed right after clicked, the didClick delegate method is called before didDismiss now.
+Notes:
+Deprecated ChartboostDelegate, startWithAppId:appSignature:delegate:, isAnyViewVisible, hasInterstitial:, hasRewardedVideo:, cacheInterstitial:, showInterstitial:, cacheRewardedVideo:, showRewardedVideo:, setDelegate:, didPassAgeGate:, handleOpenURL:sourceApplication:, handleOpenURL:sourceApplication:annotation:, setShouldRequestInterstitialsInFirstSession:, setShouldPauseClickForConfirmation:, setAutoCacheAds:, getAutoCacheAds.
+
+=============================================
 2019-12-06
 1. v8.0.4.0
 
