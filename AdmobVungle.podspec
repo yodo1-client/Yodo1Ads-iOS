@@ -57,6 +57,6 @@ Pod::Spec.new do |s|
     s.libraries = 'z'
     
     s.dependency 'YD1Admob','4.1.3'
-    s.dependency 'Yodo1AdsVungle','4.1.1'
+    s.dependency 'Yodo1AdsVungle','4.1.2'
 
 end
