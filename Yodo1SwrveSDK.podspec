@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
         "#{s.version}" + '/Yodo1Swrve/*.h'
     ]
 
-    # s.resources = "#{s.version}" + '/*.bundle'
+    s.resources = "#{s.version}" + '/*.bundle'
 
     # s.vendored_frameworks = [
     #     "#{s.version}" + '/SwrveSDK.framework',
