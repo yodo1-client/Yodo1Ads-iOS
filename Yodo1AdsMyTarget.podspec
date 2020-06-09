@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsMyTarget'
     s.version          = '4.1.1'
-    s.summary          = 'A short description of Yodo1AdsMyTarget. v5.4.8'
+    s.summary          = 'A short description of Yodo1AdsMyTarget. v5.6.0'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
