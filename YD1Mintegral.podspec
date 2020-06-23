@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Mintegral'
-    s.version          = '4.1.3'
-    s.summary          = 'sdk v6.2.0'
+    s.version          = '4.1.4'
+    s.summary          = 'sdk v6.3.2'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -60,5 +60,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdvertSDK','4.2.0'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.0'
-    s.dependency 'Yodo1AdsMintegral','4.1.2'
+    s.dependency 'Yodo1AdsMintegral','4.1.3'
 end
