@@ -43,6 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, readonly, class) MAAdFormat *native;
 
+/**
+ * @return the size of the AdView format ad, or CGSizeZero otherwise.
+ */
+@property (nonatomic, assign, readonly) CGSize size;
 
 - (instancetype)init NS_UNAVAILABLE;
 
