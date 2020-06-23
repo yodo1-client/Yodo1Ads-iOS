@@ -43,7 +43,7 @@ typedef enum {
     TB_CREATIVE_VIDEO       = 2,
     TB_CREATIVE_PLAYABLE    = 3,
     TB_CREATIVE_WEBPAGE     = 4,
-    TB_CREATIVE_STATIC      = 5,
+    TB_CREATIVE_STATIC      = 5, // static native
     TB_CREATIVE_CAROUSEL    = 6
 } TracebackCreativeType;
 
@@ -54,3 +54,4 @@ typedef enum {
     TB_INTEGRATION_ERROR    = 2,
     TB_DEVICE_ERROR         = 3
 } TracebackAdError;
+
