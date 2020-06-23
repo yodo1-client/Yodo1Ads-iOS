@@ -33,8 +33,8 @@
 @property (nonatomic, assign) BOOL showLoadingView;
 
 /*!
- @property
- 
+@property
+
 @discussion ad current placementId .
 */
 

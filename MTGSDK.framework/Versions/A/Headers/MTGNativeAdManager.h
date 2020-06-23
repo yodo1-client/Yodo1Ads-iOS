@@ -39,8 +39,8 @@
 @property (nonatomic, readonly) BOOL videoSupport DEPRECATED_ATTRIBUTE;
 
 /*!
- @property
- 
+@property
+
 @discussion ad current placementId .
 */
 
@@ -73,9 +73,9 @@
  */
 - (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
                                      unitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                    forNumAdsRequested:(NSUInteger)numAdsRequested
-              presentingViewController:(nullable UIViewController *)viewController;
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                         forNumAdsRequested:(NSUInteger)numAdsRequested
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -90,10 +90,10 @@
  */
 - (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
                                      unitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                          videoSupport:(BOOL)videoSupport
-                    forNumAdsRequested:(NSUInteger)numAdsRequested
-              presentingViewController:(nullable UIViewController *)viewController;
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                               videoSupport:(BOOL)videoSupport
+                         forNumAdsRequested:(NSUInteger)numAdsRequested
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -109,11 +109,11 @@
  */
 - (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
                                      unitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                    supportedTemplates:(nullable NSArray *)templates
-                        autoCacheImage:(BOOL)autoCacheImage
-                            adCategory:(MTGAdCategory)adCategory
-              presentingViewController:(nullable UIViewController *)viewController;
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                         supportedTemplates:(nullable NSArray *)templates
+                             autoCacheImage:(BOOL)autoCacheImage
+                                 adCategory:(MTGAdCategory)adCategory
+                   presentingViewController:(nullable UIViewController *)viewController;
 
 /*!
  
@@ -142,12 +142,12 @@
  */
 - (nonnull instancetype)initWithPlacementId:(nullable NSString *)placementId
                                      unitID:(nonnull NSString *)unitId
-                         fbPlacementId:(nullable NSString *)fbPlacementId
-                              frameNum:(NSUInteger)frameNum
-                    supportedTemplates:(nullable NSArray *)templates
-                        autoCacheImage:(BOOL)autoCacheImage
-                            adCategory:(MTGAdCategory)adCategory
-              presentingViewController:(nullable UIViewController *)viewController DEPRECATED_ATTRIBUTE;
+                              fbPlacementId:(nullable NSString *)fbPlacementId
+                                   frameNum:(NSUInteger)frameNum
+                         supportedTemplates:(nullable NSArray *)templates
+                             autoCacheImage:(BOOL)autoCacheImage
+                                 adCategory:(MTGAdCategory)adCategory
+                   presentingViewController:(nullable UIViewController *)viewController DEPRECATED_ATTRIBUTE;
 
 
 /*!
