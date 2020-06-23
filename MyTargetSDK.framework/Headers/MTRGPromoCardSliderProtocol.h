@@ -1,6 +1,6 @@
 //
 //  MTRGPromoCardSliderProtocol.h
-//  myTargetSDK 5.6.0
+//  myTargetSDK 5.6.2
 //
 //  Created by Andrey Seredkin on 24.11.17.
 //  Copyright © 2017 Mail.ru Group. All rights reserved.
@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onCardClick:(MTRGNativePromoCard *)card;
 
 - (void)onSlideToVisibleCards:(NSArray<MTRGNativePromoCard *> *)cards;
+
+@optional
+
+- (void)onRenderCard:(MTRGNativePromoCard *)card;
 
 @end
 

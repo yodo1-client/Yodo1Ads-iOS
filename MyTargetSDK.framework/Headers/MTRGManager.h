@@ -1,6 +1,6 @@
 //
 //  MTRGManager.h
-//  myTargetSDK 5.6.0
+//  myTargetSDK 5.6.2
 //
 //  Created by Anton Bulankin on 18.09.15.
 //  Copyright © 2015 Mail.ru. All rights reserved.
@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGManager : NSObject
 
-+ (NSDictionary<NSString *, NSString *> *)getFingerprintParams;
-
-+ (void)trackUrl:(NSString *)url;
++ (NSString *)getBidderToken; // this method should be called on background thread
 
 @end
 
