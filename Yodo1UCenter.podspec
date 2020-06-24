@@ -46,5 +46,7 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1Commons','4.1.0'
     s.dependency 'Yodo1YYModel','4.1.0'
     s.dependency 'Yodo1OnlineParameter','4.2.1'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.0'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.1'
+    s.dependency 'Yodo1SaAnalytics', '4.1.0'
+
 end
