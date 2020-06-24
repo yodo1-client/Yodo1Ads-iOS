@@ -65,7 +65,9 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
     __weak typeof(self) weakSelf = self;
     if (!transaction.orderId) { //杀死进程/重新安装应用
         NSString* uniformProductId = [Yd1UCenterManager.shared uniformProductIdWithChannelProductId:productIdentifier];
-        [Yd1UCenterManager.shared createOrderIdWithUniformProductId:uniformProductId callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
+        [Yd1UCenterManager.shared createOrderIdWithUniformProductId:uniformProductId
+                                                            extra:@""
+                                                           callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
             if (success) {
                 transaction.orderId = orderid;
                 NSData *data = [weakSelf dataWithTransaction:transaction];
@@ -76,10 +78,10 @@ NSString* const RMStoreTransactionsUserDefaultsKey = @"RMStoreTransactions";
             }
         }];
     } else {
-        NSData *data = [self dataWithTransaction:transaction];
-        [updatedTransactions addObject:data];
-        [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
-    }
+    NSData *data = [self dataWithTransaction:transaction];
+    [updatedTransactions addObject:data];
+    [self setTransactions:updatedTransactions forProductIdentifier:productIdentifier];
+}
 }
 
 #pragma mark - Public

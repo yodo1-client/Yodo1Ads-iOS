@@ -27,6 +27,7 @@ typedef enum {
     Yodo1U3dSDK_ResulType_GetPromotionProduct = 2011,
     Yodo1U3dSDK_ResulType_ValidatePayment = 2012,
     Yodo1U3dSDK_ResulType_SendGoodsOver = 2013,
+    Yodo1U3dSDK_ResulType_SendGoodsOverFault = 2014,
 }Yodo1U3dSDKResulType;
 
 typedef enum {
@@ -50,10 +51,11 @@ typedef enum {
 }ProductType;
 
 @class Product;
+@class PaymentObject;
 
-typedef void (^PaymentCallback) (NSString *uniformProductId,NSString* orderId,NSString* channelOrderid,PaymentState paymentState,NSString* response);
-typedef void (^RestoreCallback)(NSArray *productIds,NSString* response);
-typedef void (^LossOrderCallback)(NSArray *productIds,NSString* response);
+typedef void (^PaymentCallback) (PaymentObject* payemntObject);
+typedef void (^RestoreCallback)(NSArray* productIds,NSString* response);
+typedef void (^LossOrderCallback)(NSArray* productIds,NSString* response);
 typedef void (^FetchStorePromotionOrderCallback) (NSArray<NSString *> *  storePromotionOrder, BOOL success, NSString*  error);
 typedef void (^FetchStorePromotionVisibilityCallback) (PromotionVisibility storePromotionVisibility, BOOL success, NSString*  error);
 typedef void (^UpdateStorePromotionOrderCallback) (BOOL success, NSString*  error);
@@ -79,6 +81,15 @@ typedef void (^QuerySubscriptionCallback)(NSArray* subscriptions, NSTimeInterval
  */
 typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* response);
 
+@interface PaymentObject : NSObject
+@property (nonatomic, strong) NSString* uniformProductId;
+@property (nonatomic, strong) NSString* orderId;
+@property (nonatomic, strong) NSString* channelOrderid;
+@property (nonatomic, assign) PaymentState paymentState;
+@property (nonatomic, strong) NSString* response;
+@property (nonatomic, strong) NSError* error;
+@end
+
 @interface Product : NSObject
 @property (nonatomic, strong) NSString* uniformProductId;
 @property (nonatomic, strong) NSString* channelProductId;
@@ -102,6 +113,9 @@ typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* respo
 
 @property (nonatomic,assign)__block BOOL isLogined;
 @property (nonatomic,strong)__block YD1User* user;
+@property (nonatomic,strong)NSMutableDictionary* superProperty;
+@property (nonatomic,strong)NSMutableDictionary* itemProperty;
+
 /// 苹果支付票据回调
 @property (nonatomic,copy)ValidatePaymentBlock  validatePaymentBlock;
 
@@ -114,12 +128,15 @@ typedef void (^ValidatePaymentBlock) (NSString *uniformProductId,NSString* respo
  *  创建订单号和订单，返回订单号
  */
 - (void)createOrderIdWithUniformProductId:(NSString *)uniformProductId
+                                    extra:(NSString*)extra
                                  callback:(void (^)(bool success,NSString * orderid,NSString* error))callback;
 
 /**
  * 购买产品
+ * extra 是字典json字符串 @{@"channelUserid":@""}
  */
 - (void)paymentWithUniformProductId:(NSString *)uniformProductId
+                              extra:(NSString*)extra
                            callback:(PaymentCallback)callback;
 
 /**

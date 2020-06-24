@@ -237,8 +237,14 @@
     NSString* gameType = [parameter objectForKey:@"gameType"];
     NSString* gameVersion = [parameter objectForKey:@"gameVersion"];
     NSString* gameExtra = [parameter objectForKey:@"gameExtra"];
-    NSString* extra = [parameter objectForKey:@"extra"];
     NSString* channelVersion = [parameter objectForKey:@"channelVersion"];
+    
+    NSString* extra = [parameter objectForKey:@"extra"];
+    NSDictionary* extraDic = (NSDictionary *)[Yd1OpsTools JSONObjectWithString:extra error:nil];
+    NSString* channelUserid = @"";
+    if (extraDic && [[extraDic allKeys]containsObject:@"channelUserid"]) {
+        channelUserid = [extraDic objectForKey:@"channelUserid"];
+    }
     
     NSDictionary* deviceInfo = @{
         @"platform":UIDevice.currentDevice.systemName,
@@ -273,7 +279,8 @@
         @"gameBundleId":Yd1OpsTools.appBid,
         @"paymentChannelVersion":Yd1OParameter.publishVersion,
         @"deviceInfo":deviceInfo,
-        @"productInfo":productInfo
+        @"productInfo":productInfo,
+        @"channelUserid":channelUserid
     };
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:data forKey:Yd1OpsTools.data];
@@ -449,6 +456,44 @@
     }];
 }
 
+- (void)sendGoodsOverForFault:(NSString *)orderIds
+                     callback:(void (^)(BOOL success,NSString* error))callback {
+    if (!orderIds || orderIds.length < 1) {
+        callback(false,@"order Ids is empty!");
+        return;
+    }
+    Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:Yd1OpsTools.paymentDomain]];
+    manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"yodo1%@",orderIds]];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:orderIds forKey:@"orderids"];
+    [parameters setObject:sign forKey:Yd1OpsTools.sign];
+    
+    YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+    [manager GET:Yd1OpsTools.sendGoodsOverFaultURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary* response = [Yd1OpsTools JSONObjectWithObject:responseObject];
+        int errorCode = -1;
+        NSString* error = @"";
+        if ([[response allKeys]containsObject:Yd1OpsTools.errorCode]) {
+            errorCode = [[response objectForKey:Yd1OpsTools.errorCode]intValue];
+        }
+        if ([[response allKeys]containsObject:Yd1OpsTools.error]) {
+            error = [response objectForKey:Yd1OpsTools.error];
+        }
+        if (errorCode == 0) {
+            callback(true,@"");
+        } else {
+            callback(false,error);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        YD1LOG(@"%@",error);
+        callback(false,error.localizedDescription);
+    }];
+}
+
 - (void)clientCallback:(YD1ItemInfo *)itemInfo callbakc:(void (^)(BOOL, NSString * _Nonnull))callback {
     if (!itemInfo) {
         callback(false,@"item info is empty!");
@@ -536,6 +581,124 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         YD1LOG(@"%@",error);
         callback(false,error.localizedDescription);
+    }];
+}
+
+- (void)clientNotifyForSyncUnityStatus:(NSArray *)orderIds
+                              callback:(nonnull void (^)(BOOL, NSArray * _Nonnull, NSArray * _Nonnull, NSString * _Nonnull))callback {
+    if (!orderIds || [orderIds count] < 1) {
+        callback(false,@[],@[],@"order Ids is empty!");
+        return;
+    }
+    
+    Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:Yd1OpsTools.paymentDomain]];
+    manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSString* timestamp = [Yd1OpsTools nowTimeTimestamp];
+    NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"payment%@",timestamp]];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *data = [NSMutableDictionary dictionary];
+    [data setObject:orderIds forKey:@"orderIds"];
+    [data setObject:timestamp forKey:@"timestamp"];
+    [parameters setObject:data forKey:@"data"];
+    [parameters setObject:sign forKey:Yd1OpsTools.sign];
+    
+    
+    YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+    [manager POST:Yd1OpsTools.clientNotifyForSyncUnityStatusURL
+      parameters:parameters
+        progress:nil
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary* response = [Yd1OpsTools JSONObjectWithObject:responseObject];
+        int errorCode = -1;
+        NSString* error = @"";
+        
+        if ([[response allKeys]containsObject:Yd1OpsTools.errorCode]) {
+            errorCode = [[response objectForKey:Yd1OpsTools.errorCode]intValue];
+        }
+        if ([[response allKeys]containsObject:Yd1OpsTools.error]) {
+            error = [response objectForKey:Yd1OpsTools.error];
+        }
+        NSMutableArray* notExistOrders = [NSMutableArray array];
+        NSMutableArray* notPayOrders = [NSMutableArray array];
+        if ([[response allKeys]containsObject:@"data"]) {
+            NSDictionary* data = [response objectForKey:@"data"];
+            if (data && [[data allKeys]containsObject:@"notExistOrders"]) {
+                NSArray* notExist = [data objectForKey:@"notExistOrders"];
+                [notExistOrders setArray:notExist];
+            }
+            if (data && [[data allKeys]containsObject:@"notPayOrders"]) {
+                NSArray* notPay = [data objectForKey:@"notPayOrders"];
+                [notPayOrders setArray:notPay];
+            }
+        }
+        if (errorCode == 0) {
+            callback(true,notExistOrders,notPayOrders,@"");
+        } else {
+            callback(false,notExistOrders,notPayOrders,error);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        YD1LOG(@"%@",error);
+        callback(false,@[],@[],error.localizedDescription);
+    }];
+}
+
+- (void)offlineMissorders:(YD1ItemInfo *)itemInfo
+                 callback:(nonnull void (^)(BOOL success, NSArray * _Nonnull missorders,NSString* _Nonnull error))callback {
+    if (!itemInfo.uid) {
+        callback(false,@[],@"uid  is nil!");
+        return;
+    }
+    
+    Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:Yd1OpsTools.paymentDomain]];
+    manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"payment%@",itemInfo.uid]];
+    NSDictionary* data = @{
+        @"uid":itemInfo.uid,
+        @"gameAppkey":Yd1OnlineParameter.shared.appKey,
+        @"channelCode":Yd1OnlineParameter.shared.channelId,
+        @"regionCode":Yd1UCenter.shared.regionCode
+    };
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:data forKey:Yd1OpsTools.data];
+    [parameters setObject:sign forKey:Yd1OpsTools.sign];
+    
+    YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+    [manager POST:Yd1OpsTools.offlineMissordersURL
+       parameters:parameters
+         progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary* response = [Yd1OpsTools JSONObjectWithObject:responseObject];
+        int errorCode = -1;
+        NSString* error = @"";
+        if ([[response allKeys]containsObject:Yd1OpsTools.errorCode]) {
+            errorCode = [[response objectForKey:Yd1OpsTools.errorCode]intValue];
+        }
+        if ([[response allKeys]containsObject:Yd1OpsTools.error]) {
+            error = [response objectForKey:Yd1OpsTools.error];
+        }
+        NSMutableArray* orders = [NSMutableArray array];
+        if ([[response allKeys]containsObject:@"data"]) {
+            NSArray* data = [response objectForKey:@"data"];
+            if ([data count] > 0) {
+                [orders setArray:data];
+            }
+        }
+        
+        if (errorCode == 0) {
+            callback(true,orders,error);
+        } else {
+            callback(false,orders,error);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        YD1LOG(@"%@",error);
+        callback(false,@[],error.localizedDescription);
     }];
 }
 

@@ -130,10 +130,17 @@ NS_ASSUME_NONNULL_BEGIN
                   callback:(void (^)(BOOL success,NSString* _Nullable response,NSError* _Nullable error))callback;
 
 /**
- * 通知已发货
+ * 通知已发货成功
  */
 - (void)sendGoodsOver:(NSString *)orderIds
              callback:(void (^)(BOOL success,NSString* error))callback;
+
+
+/**
+ * 通知已发货失败
+ */
+- (void)sendGoodsOverForFault:(NSString *)orderIds
+                     callback:(void (^)(BOOL success,NSString* error))callback;
 
 /**
  *  上报订单已支付成功接口
@@ -144,6 +151,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  上报支付失败接口
  */
 - (void)reportOrderStatus:(YD1ItemInfo *)itemInfo callbakc:(void (^)(BOOL success,NSString* error))callback;
+
+/**
+ *  客户端通知服务端已同步unity接口
+ */
+- (void)clientNotifyForSyncUnityStatus:(NSArray *)orderIds
+                              callback:(void (^)(BOOL success,NSArray* notExistOrders,NSArray* notPayOrders,NSString* error))callback;
+
+/**
+ *  查询漏单接口（单机版，支持SDK V4.0）
+ */
+- (void)offlineMissorders:(YD1ItemInfo *)itemInfo
+                 callback:(void (^)(BOOL success,NSArray* missorders,NSString* error))callback;
 
 @end
 

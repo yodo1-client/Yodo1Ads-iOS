@@ -15,6 +15,35 @@
 #import "RMStoreTransaction.h"
 #import "Yodo1UnityTool.h"
 #import "Yodo1AnalyticsManager.h"
+#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
+#import "Yd1OnlineParameter.h"
+
+/// 超级属性
+static NSString* const __gameName               = @"gameName";
+static NSString* const __gameVersion            = @"gameVersion";
+static NSString* const __gameBundleId           = @"gameBundleId";
+static NSString* const __sdkType                = @"sdkType";
+static NSString* const __sdkVersion             = @"sdkVersion";
+static NSString* const __publishChannelCode     = @"publishChannelCode";
+static NSString* const __masSdkVersion          = @"masSdkVersion";
+/// 付费方式属性
+static NSString* const __paymentChannelCode     = @"paymentChannelCode";
+static NSString* const __paymentChannelVersion  = @"paymentChannelVersion";
+/// IAP的公共属性
+static NSString* const __itemCode               = @"itemCode";
+static NSString* const __itemName               = @"itemName";
+static NSString* const __itemType               = @"itemType";
+static NSString* const __itemCurrency           = @"itemCurrency";
+static NSString* const __itemPrice              = @"itemPrice";
+static NSString* const __channelItemCode        = @"channelItemCode";
+/// 属性值
+static NSString* const __result                 = @"result";
+static NSString* const __success                = @"success";
+static NSString* const __fail                   = @"fail";
+static NSString* const __serverVersion          = @"serverVersion";
+static NSString* const __yodo1ErrorCode         = @"yodo1ErrorCode";
+static NSString* const __channelErrorCode       = @"channelErrorCode";
+static NSString* const __status                 = @"status";
 
 @implementation Product
 
@@ -37,10 +66,16 @@
 
 @end
 
+@implementation PaymentObject
+
+@end
+
 @interface Yd1UCenterManager ()<RMStoreObserver> {
     NSMutableDictionary* productInfos;
     NSMutableArray* channelProductIds;
     RMStoreUserDefaultsPersistence *persistence;
+    __block BOOL isBuying;
+    __block PaymentObject* po;
 }
 
 @property (nonatomic,strong) NSString* currentUniformProductId;
@@ -71,6 +106,22 @@
 }
 
 - (void)willInit {
+    _superProperty = [NSMutableDictionary dictionary];
+    _itemProperty = [NSMutableDictionary dictionary];
+    //公共属性
+    [_superProperty setObject:Yd1OpsTools.appName forKey:__gameName];
+    [_superProperty setObject:Yd1OpsTools.appVersion forKey:__gameVersion];
+    [_superProperty setObject:Yd1OpsTools.appBid forKey:__gameBundleId];
+    [_superProperty setObject:Yd1OParameter.publishType forKey:__sdkType];
+    [_superProperty setObject:Yd1OParameter.publishVersion forKey:__sdkVersion];
+    [_superProperty setObject:Yd1OParameter.channelId forKey:__publishChannelCode];
+    [_superProperty setObject:Yd1OParameter.publishVersion forKey:__masSdkVersion];
+    // 付费方式属性
+    [_superProperty setObject:Yd1OParameter.channelId forKey:__paymentChannelCode];
+    [_superProperty setObject:Yd1OParameter.publishVersion forKey:__paymentChannelVersion];
+    
+    po = [PaymentObject new];
+    
     YD1User* user = (YD1User*)[Yd1OpsTools.cached objectForKey:@"yd1User"];
     if (user) {
         self.user = user;
@@ -81,7 +132,8 @@
     } else {
         _user = [[YD1User alloc]init];
     }
-
+    
+    isBuying = false;
     //设备登录
     __weak typeof(self) weakSelf = self;
     [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
@@ -140,19 +192,85 @@
     [RMStore.defaultStore requestProducts:productIds];
 }
 
-- (void)paymentWithUniformProductId:(NSString *)uniformProductId callback:(nonnull PaymentCallback)callback {
+- (void)paymentWithUniformProductId:(NSString *)uniformProductId
+                           extra:(NSString*)extra
+                           callback:(nonnull PaymentCallback)callback {
     
+    if (isBuying) {
+        YD1LOG(@"product is buying ...");
+        return;
+    }
+    isBuying = true;
     self.paymentCallback = callback;
+    
+    if([self.itemProperty count] >0){
+        [self.itemProperty removeAllObjects];
+    }
+    __block Product* product = [productInfos objectForKey:uniformProductId];
+    [self.itemProperty setObject:product.channelProductId forKey:__itemCode];
+    [self.itemProperty setObject:product.productName forKey:__itemName];
+    [self.itemProperty setObject:[NSString stringWithFormat:@"%d",product.productType]  forKey:__itemType];
+    [self.itemProperty setObject:product.productPrice forKey:__itemPrice];
+    [self.itemProperty setObject:product.currency forKey:__itemCurrency];
+    [self.itemProperty setObject:@"" forKey:__channelItemCode];
+    
+    if (!uniformProductId) {
+        po.uniformProductId = uniformProductId;
+        po.channelOrderid = @"";
+        po.orderId = @"";
+        po.response = @"";
+        po.paymentState = PaymentFail;
+        po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                       code:2001
+                                   userInfo:@{NSLocalizedDescriptionKey:@"uniformProductId is nil!"}];
+        self.paymentCallback(po);
+         isBuying = false;
+        return;
+    }
     
     if (!RMStore.canMakePayments) {
         YD1LOG(@"This device is not able or allowed to make payments!");
-        self.paymentCallback(uniformProductId,@"",@"",PaymentFail,@"This device is not able or allowed to make payments!");
+        
+        po.uniformProductId = uniformProductId;
+        po.channelOrderid = @"";
+        po.orderId = @"";
+        po.response = @"";
+        po.paymentState = PaymentFail;
+        po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                       code:2002
+                                   userInfo:@{NSLocalizedDescriptionKey:@"This device is not able or allowed to make payments!"}];
+        self.paymentCallback(po);
+        isBuying = false;
         return;
     }
+    
+    if ([[Yd1OpsTools networkType]isEqualToString:@"NONE"]) {
+        po.uniformProductId = uniformProductId;
+        po.channelOrderid = @"";
+        po.orderId = @"";
+        po.response = @"";
+        po.paymentState = PaymentFail;
+        po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                       code:2003
+                                   userInfo:@{NSLocalizedDescriptionKey:@"The Network is noReachable!"}];
+        self.paymentCallback(po);
+        isBuying = false;
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     if (!self.isLogined) {
         if (self.paymentCallback) {
-            self.paymentCallback(uniformProductId,@"",@"",PaymentFail,@"device is not login!");
+            po.uniformProductId = uniformProductId;
+            po.channelOrderid = @"";
+            po.orderId = @"";
+            po.response = @"";
+            po.paymentState = PaymentFail;
+            po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                           code:2001
+                                       userInfo:@{NSLocalizedDescriptionKey:@"The device is not login!"}];
+            self.paymentCallback(po);
+            isBuying = false;
         }
         [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
             if (user) {
@@ -179,10 +297,9 @@
         }];
         return;
     }
-    
     [self createOrderIdWithUniformProductId:uniformProductId
+                                      extra:extra
                                    callback:^(bool success, NSString * _Nonnull orderid, NSString * _Nonnull error) {
-        Product* product = [self->productInfos objectForKey:uniformProductId];
         if (success) {
             if (product.productType == Auto_Subscription) {
                 NSString* msg = [weakSelf localizedStringForKey:@"SubscriptionAlertMessage"
@@ -208,14 +325,41 @@
                 
                 UIAlertAction *privateAction = [UIAlertAction actionWithTitle:privateTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:privacyPolicyUrl]];
-                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                    self->po.uniformProductId = uniformProductId;
+                    self->po.channelOrderid = @"";
+                    self->po.orderId = @"";
+                    self->po.response = @"";
+                    self->po.paymentState = PaymentCannel;
+                    self->po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                                         code:2001
+                                                     userInfo:@{NSLocalizedDescriptionKey:error? :@""}];
+                    weakSelf.paymentCallback(self->po);
+                    self->isBuying = false;
                 }];
                 UIAlertAction *serviceAction = [UIAlertAction actionWithTitle:serviceTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:termsServiceUrl]];
-                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                    self->po.uniformProductId = uniformProductId;
+                    self->po.channelOrderid = @"";
+                    self->po.orderId = @"";
+                    self->po.response = @"";
+                    self->po.paymentState = PaymentCannel;
+                    self->po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                                         code:2001
+                                                     userInfo:@{NSLocalizedDescriptionKey:error? :@""}];
+                    weakSelf.paymentCallback(self->po);
+                    self->isBuying = false;
                 }];
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentCannel,@"购买取消");
+                    self->po.uniformProductId = uniformProductId;
+                    self->po.channelOrderid = @"";
+                    self->po.orderId = @"";
+                    self->po.response = @"";
+                    self->po.paymentState = PaymentCannel;
+                    self->po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                                         code:2001
+                                                     userInfo:@{NSLocalizedDescriptionKey:error? :@""}];
+                    weakSelf.paymentCallback(self->po);
+                    self->isBuying = false;
                 }];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                     [weakSelf paymentProduct:product];
@@ -228,13 +372,23 @@
             } else {
                 [weakSelf paymentProduct:product];
             }
-        }else{
-            weakSelf.paymentCallback(product.uniformProductId,@"",@"",PaymentFail,error);
+        } else {
+            self->po.uniformProductId = uniformProductId;
+            self->po.channelOrderid = @"";
+            self->po.orderId = @"";
+            self->po.response = @"";
+            self->po.paymentState = PaymentFail;
+            self->po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                           code:2001
+                                       userInfo:@{NSLocalizedDescriptionKey:error? :@""}];
+            weakSelf.paymentCallback(self->po);
+            self->isBuying = false;
         }
     }];
 }
 
 - (void)createOrderIdWithUniformProductId:(NSString *)uniformProductId
+                                    extra:(NSString*)extra
                                  callback:(void (^)(bool, NSString * _Nonnull,NSString * _Nonnull))callback {
     self.currentUniformProductId = uniformProductId;
     __weak typeof(self) weakSelf = self;
@@ -249,6 +403,10 @@
         if ((!orderId || [orderId isEqualToString:@""])) {
             YD1LOG(@"%@",error.localizedDescription);
             callback(false,orderId,error.localizedDescription);
+            NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+            [properties addEntriesFromDictionary:weakSelf.superProperty];
+            [properties addEntriesFromDictionary:weakSelf.itemProperty];
+            [Yodo1SaManager track:@"order_Pending" properties:properties];
             return;
         }
         Yd1UCenter.shared.itemInfo.orderId = orderId;
@@ -308,7 +466,7 @@
         [parameters setObject:@"offline" forKey:@"gameType"];
         [parameters setObject:Yd1OpsTools.appVersion? :@"" forKey:@"gameVersion"];
         [parameters setObject:@"" forKey:@"gameExtra"];
-        [parameters setObject:@"" forKey:@"extra"];
+        [parameters setObject:extra? :@"" forKey:@"extra"];
         [parameters setObject:Yd1OpsTools.appVersion? :@"" forKey:@"channelVersion"];
         
         [Yd1UCenter.shared createOrder:parameters
@@ -316,10 +474,20 @@
             if (error_code == 0) {
                 YD1LOG(@"%@:下单成功",orderId);
                 callback(true,orderId,error);
-            }else{
+            } else {
                 YD1LOG(@"%@",error);
                 callback(false,orderId,error);
+                NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+                [properties addEntriesFromDictionary:weakSelf.superProperty];
+                [properties addEntriesFromDictionary:weakSelf.itemProperty];
+                [Yodo1SaManager track:@"order_Pending" properties:properties];
             }
+            NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+            [properties setObject:error_code==0?__success:__fail forKey:__result];
+            [properties addEntriesFromDictionary:weakSelf.superProperty];
+            [properties addEntriesFromDictionary:weakSelf.itemProperty];
+            YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
+            [Yodo1SaManager track:@"order_Request" properties:properties];
         }];
     }];
 }
@@ -416,7 +584,6 @@
             [rp addObject:model];
         }
     }
-
    
     NSString* receipt = [[NSData dataWithContentsOfURL:RMStore.receiptURL] base64EncodedStringWithOptions:0];
     Yd1UCenter.shared.itemInfo.trx_receipt = receipt;
@@ -447,7 +614,7 @@
                             [self->persistence consumeProductOfIdentifier:itemCode];
                             [self->persistence rechargedProuctOfIdentifier:itemCode];
                         }
-                        NSLog(@"验证成功orderid:%@",orderId);
+                        YD1LOG(@"验证成功orderid:%@",orderId);
                     } else {
                         if (errorcode == 20) {
                             [self->persistence consumeProductOfIdentifier:itemCode? :@""];
@@ -457,15 +624,33 @@
                 lossOrderReceiveCount++;
                 if (lossOrderReceiveCount == lossOrderCount) {
                     if (callback) {
-                        NSArray* orderIds = [lossOrder allValues];
-                        for (NSString* itemCode in orderIds) {
-                            Product* product = [weakSelf productWithChannelProductId:itemCode];
-                            if (product) {
-                                [lossOrderProduct addObject:product];
-                            }
-                        }
-                        NSArray* dics = [weakSelf productInfoWithProducts:lossOrderProduct];
-                        callback(dics,@"");
+#pragma mark- 单机查询服务器漏单
+                        [Yd1UCenter.shared offlineMissorders:Yd1UCenter.shared.itemInfo
+                                                    callback:^(BOOL success, NSArray * _Nonnull missorders, NSString * _Nonnull error) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                if (success && [missorders count] > 0) {
+                                    for (NSDictionary* item in missorders) {
+                                        NSString* productId2 = (NSString*)[item objectForKey:@"productId"];
+                                        NSString* orderId2 = (NSString*)[item objectForKey:@"orderId"];
+                                        if ([[lossOrder allKeys]containsObject:orderId2]) {
+                                            continue;
+                                        }
+                                        if (productId2 && orderId2) {
+                                            [lossOrder setObject:productId2 forKey:orderId2];
+                                        }
+                                    }
+                                }
+                                NSArray* orderIds = [lossOrder allValues];
+                                for (NSString* itemCode in orderIds) {
+                                    Product* product = [weakSelf productWithChannelProductId:itemCode];
+                                    if (product) {
+                                        [lossOrderProduct addObject:product];
+                                    }
+                                }
+                                NSArray* dics = [weakSelf productInfoWithProducts:lossOrderProduct];
+                                callback(dics,@"");
+                            });
+                        }];
                     }
                 }
             });
@@ -679,11 +864,19 @@
 - (void)readyToContinuePurchaseFromPromot:(PaymentCallback)callback {
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
-        self.paymentCallback = callback;
         if(self.addedStorePayment){
-            [RMStore.defaultStore addPayment:self.addedStorePayment.productIdentifier];
-        }else{
-            self.paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,@"",PaymentFail,@"promot is nil!");
+            NSString* uniformP = [self uniformProductIdWithChannelProductId:self.addedStorePayment.productIdentifier];
+            [self paymentWithUniformProductId:uniformP extra:@"" callback:callback];
+        } else {
+            po.uniformProductId = self.currentUniformProductId;
+            po.channelOrderid = @"";
+            po.orderId = Yd1UCenter.shared.itemInfo.orderId;
+            po.response = @"";
+            po.paymentState = PaymentCannel;
+            po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                                 code:2004
+                                             userInfo:@{NSLocalizedDescriptionKey:@"promot is nil!"}];
+            callback(po);
         }
     }
 #endif
@@ -848,7 +1041,16 @@
         if (!channelOrderid) {
             channelOrderid = @"";
         }
-        self.paymentCallback(self.currentUniformProductId,Yd1UCenter.shared.itemInfo.orderId,channelOrderid,PaymentFail,notification.rm_storeError.localizedDescription);
+        po.uniformProductId = self.currentUniformProductId;
+        po.channelOrderid = channelOrderid;
+        po.orderId = Yd1UCenter.shared.itemInfo.orderId;
+        po.response = @"";
+        po.paymentState = PaymentFail;
+        po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                       code:2001
+                                   userInfo:@{NSLocalizedDescriptionKey:notification.rm_storeError.localizedDescription? :@""}];
+        self.paymentCallback(po);
+        isBuying = false;
     }
 }
 
@@ -901,18 +1103,31 @@
         YD1LOG(@"error_code:%d",error_code);
         if (verifySuccess) {
             if (weakSelf.paymentCallback) {
-                weakSelf.paymentCallback(weakSelf.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentSuccess,response);
+                self->po.uniformProductId = weakSelf.currentUniformProductId;
+                self->po.channelOrderid = Yd1UCenter.shared.itemInfo.channelOrderid;
+                self->po.orderId = orderId;
+                self->po.response = response;
+                self->po.paymentState = PaymentSuccess;
+                weakSelf.paymentCallback(self->po);
             }
-            
             [self->persistence consumeProductOfIdentifier:itemCode];
         } else {
             if (error_code == 20) {
                 [self->persistence consumeProductOfIdentifier:itemCode];
             }
             if (weakSelf.paymentCallback) {
-                weakSelf.paymentCallback(weakSelf.currentUniformProductId,orderId,Yd1UCenter.shared.itemInfo.channelOrderid,PaymentFail,response);
+                self->po.uniformProductId = weakSelf.currentUniformProductId;
+                self->po.channelOrderid = Yd1UCenter.shared.itemInfo.channelOrderid;
+                self->po.orderId = orderId;
+                self->po.response = response;
+                self->po.paymentState = PaymentFail;
+                self->po.error = [NSError errorWithDomain:@"com.yodo1.payment"
+                                                     code:2
+                                                 userInfo:@{NSLocalizedDescriptionKey:error.localizedDescription}];
+                weakSelf.paymentCallback(self->po);
             }
         }
+        self->isBuying = false;
     }];
 }
 
@@ -1145,9 +1360,9 @@ extern "C" {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         
-        [Yd1UCenterManager.shared readyToContinuePurchaseFromPromot:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull orderId, NSString * _Nonnull channelOrderid, PaymentState paymentState, NSString * _Nonnull response) {
-            if (paymentState == PaymentSuccess) {
-                Yd1UCenter.shared.itemInfo.orderId = orderId;
+        [Yd1UCenterManager.shared readyToContinuePurchaseFromPromot:^(PaymentObject * _Nonnull payemntObject) {
+            if (payemntObject.paymentState == PaymentSuccess) {
+                Yd1UCenter.shared.itemInfo.orderId = payemntObject.orderId;
                 Yd1UCenter.shared.itemInfo.extra = @"";
                 [Yd1UCenter.shared clientCallback:Yd1UCenter.shared.itemInfo
                                          callbakc:^(BOOL success, NSString * _Nonnull error) {
@@ -1157,13 +1372,24 @@ extern "C" {
                         YD1LOG(@"上报失败");
                     }
                 }];
+                ///同步信息
+                [Yd1UCenter.shared clientNotifyForSyncUnityStatus:@[payemntObject.orderId]
+                                                         callback:^(BOOL success, NSArray * _Nonnull notExistOrders, NSArray * _Nonnull notPayOrders, NSString * _Nonnull error) {
+                    if (success) {
+                        YD1LOG(@"同步信息成功");
+                    } else {
+                        YD1LOG(@"同步信息失败:%@",error);
+                    }
+                    YD1LOG(@"notExistOrders:%@,notPayOrders:%@",
+                           notExistOrders,notPayOrders)
+                }];
             } else {
-                if ([orderId length] > 0) {
+                if ([payemntObject.orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
-                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
-                    Yd1UCenter.shared.itemInfo.orderId = orderId;
-                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
-                    Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
+                    Yd1UCenter.shared.itemInfo.channelOrderid = payemntObject.channelOrderid? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = payemntObject.orderId;
+                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",payemntObject.paymentState];
+                    Yd1UCenter.shared.itemInfo.statusMsg = payemntObject.response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
                                                 callbakc:^(BOOL success, NSString * _Nonnull error) {
                         if (success) {
@@ -1173,27 +1399,40 @@ extern "C" {
                         }
                     }];
                 }
+                //失败神策埋点
+                NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+                [properties setObject:@-1 forKey:@"channelErrorCode"];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared .superProperty];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared.itemProperty];
+                
+                NSNumber* errorCode = [NSNumber numberWithInt:2004];//默认是未知失败
+                if (payemntObject.error) {
+                    errorCode  = [NSNumber numberWithInteger:payemntObject.error.code];
+                }
+                [properties setObject:errorCode forKey:@"yodo1ErrorCode"];
+                YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
+                [Yodo1SaManager track:@"order_Error_FromSDK" properties:properties];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                    [dict setObject:(uniformProductId == nil?@"":uniformProductId) forKey:@"uniformProductId"];
+                    [dict setObject:payemntObject.uniformProductId ? :@"" forKey:@"uniformProductId"];
                     [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:(int)paymentState] forKey:@"code"];
-                    [dict setObject:(orderId == nil?@"":orderId) forKey:@"orderId"];
+                    [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                    [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
                     [dict setObject:@"extra" forKey:@"extra"];
-                    [dict setObject:(channelOrderid == nil?@"":channelOrderid) forKey:@"channelOrderid"];
+                    [dict setObject:payemntObject.channelOrderid ? :@"" forKey:@"channelOrderid"];
                     
                     NSError* parseJSONError = nil;
                     NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                     if(parseJSONError){
-                        [dict setObject:(uniformProductId == nil?@"":uniformProductId) forKey:@"uniformProductId"];
+                        [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
                         [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
-                        [dict setObject:[NSNumber numberWithInt:(int)paymentState] forKey:@"code"];
-                        [dict setObject:(response == nil?@"":response) forKey:@"data"];
-                        [dict setObject:(orderId == nil?@"":orderId) forKey:@"orderId"];
+                        [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                        [dict setObject:payemntObject.response? :@"" forKey:@"data"];
+                        [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
                         [dict setObject:@"extra" forKey:@"extra"];
-                        [dict setObject:(channelOrderid == nil?@"":channelOrderid) forKey:@"channelOrderid"];
+                        [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
                         [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
                         msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                     }
@@ -1407,28 +1646,28 @@ extern "C" {
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         NSString* _uniformProductId = Yodo1CreateNSString(uniformProductId);
         [Yd1UCenterManager.shared productWithUniformProductId:_uniformProductId callback:^(NSArray<Product *> * _Nonnull productInfo) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(ocGameObjName && ocMethodName) {
-                    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                    [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
-                    if([productInfo count] > 0){
-                        [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
-                        [dict setObject:productInfo forKey:@"data"];
-                    }else{
-                        [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    }
-                    NSError* parseJSONError = nil;
-                    NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                    if(parseJSONError){
-                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
-                        [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                        [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
-                        msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                    }
-                    UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
-                                     [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
-                                     [msg cStringUsingEncoding:NSUTF8StringEncoding]);
-                }
+           dispatch_async(dispatch_get_main_queue(), ^{
+               if(ocGameObjName && ocMethodName) {
+                   NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                   [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
+                   if([productInfo count] > 0){
+                       [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
+                       [dict setObject:productInfo forKey:@"data"];
+                   }else{
+                       [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                   }
+                   NSError* parseJSONError = nil;
+                   NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                   if(parseJSONError){
+                       [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_RequestProductsInfo] forKey:@"resulType"];
+                       [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                       [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                       msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                   }
+                   UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                    [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                    [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+               }
             });
         }];
     }
@@ -1475,10 +1714,12 @@ extern "C" {
         NSString* _uniformProductId = Yodo1CreateNSString(mUniformProductId);
         NSString* _extra = Yodo1CreateNSString(extra);
         
-        [Yd1UCenterManager.shared paymentWithUniformProductId:_uniformProductId callback:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull orderId, NSString * _Nonnull channelOrderid, PaymentState paymentState, NSString * _Nonnull response) {
-            if (paymentState == PaymentSuccess) {
-                Yd1UCenter.shared.itemInfo.orderId = orderId;
-                Yd1UCenter.shared.itemInfo.extra = @"";
+        [Yd1UCenterManager.shared paymentWithUniformProductId:_uniformProductId
+                                                        extra:_extra
+                                                     callback:^(PaymentObject * _Nonnull payemntObject) {
+            if (payemntObject.paymentState == PaymentSuccess) {
+                Yd1UCenter.shared.itemInfo.orderId = payemntObject.orderId;
+                Yd1UCenter.shared.itemInfo.extra = _extra? :@"";
                 [Yd1UCenter.shared clientCallback:Yd1UCenter.shared.itemInfo
                                          callbakc:^(BOOL success, NSString * _Nonnull error) {
                     if (success) {
@@ -1487,13 +1728,25 @@ extern "C" {
                         YD1LOG(@"上报失败:%@",error);
                     }
                 }];
+                ///同步信息
+                [Yd1UCenter.shared clientNotifyForSyncUnityStatus:@[payemntObject.orderId]
+                                                         callback:^(BOOL success, NSArray * _Nonnull notExistOrders, NSArray * _Nonnull notPayOrders, NSString * _Nonnull error) {
+                    if (success) {
+                        YD1LOG(@"同步信息成功");
+                    } else {
+                        YD1LOG(@"同步信息失败:%@",error);
+                    }
+                    YD1LOG(@"notExistOrders:%@,notPayOrders:%@",
+                           notExistOrders,notPayOrders)
+                }];
+                
             } else {
-                if ([orderId length] > 0) {
+                if ([payemntObject.orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
-                    Yd1UCenter.shared.itemInfo.channelOrderid = channelOrderid? :@"";
-                    Yd1UCenter.shared.itemInfo.orderId = orderId;
-                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",paymentState];
-                    Yd1UCenter.shared.itemInfo.statusMsg = response? :@"";
+                    Yd1UCenter.shared.itemInfo.channelOrderid = payemntObject.channelOrderid? :@"";
+                    Yd1UCenter.shared.itemInfo.orderId = payemntObject.orderId;
+                    Yd1UCenter.shared.itemInfo.statusCode = [NSString stringWithFormat:@"%d",payemntObject.paymentState];
+                    Yd1UCenter.shared.itemInfo.statusMsg = payemntObject.response? :@"";
                     [Yd1UCenter.shared reportOrderStatus:Yd1UCenter.shared.itemInfo
                                                 callbakc:^(BOOL success, NSString * _Nonnull error) {
                         if (success) {
@@ -1503,27 +1756,40 @@ extern "C" {
                         }
                     }];
                 }
+                //失败神策埋点
+                NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+                [properties setObject:@-1 forKey:@"channelErrorCode"];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared .superProperty];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared.itemProperty];
+                
+                NSNumber* errorCode = [NSNumber numberWithInt:2004];//默认是未知失败
+                if (payemntObject.error) {
+                    errorCode  = [NSNumber numberWithInteger:payemntObject.error.code];
+                }
+                [properties setObject:errorCode forKey:@"yodo1ErrorCode"];
+                YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
+                [Yodo1SaManager track:@"order_Error_FromSDK" properties:properties];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                    [dict setObject:(uniformProductId == nil?@"":uniformProductId) forKey:@"uniformProductId"];
+                    [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
                     [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:(int)paymentState] forKey:@"code"];
-                    [dict setObject:(orderId == nil?@"":orderId) forKey:@"orderId"];
-                    [dict setObject:(_extra == nil?@"":_extra) forKey:@"extra"];
-                    [dict setObject:(channelOrderid == nil?@"":channelOrderid) forKey:@"channelOrderid"];
+                    [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                    [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                    [dict setObject:_extra? :@"" forKey:@"extra"];
+                    [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
                     
                     NSError* parseJSONError = nil;
                     NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                     if(parseJSONError){
-                        [dict setObject:(uniformProductId == nil?@"":uniformProductId) forKey:@"uniformProductId"];
+                        [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
                         [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
-                        [dict setObject:[NSNumber numberWithInt:(int)paymentState] forKey:@"code"];
-                        [dict setObject:(response == nil?@"":response) forKey:@"data"];
-                        [dict setObject:(orderId == nil?@"":orderId) forKey:@"orderId"];
-                        [dict setObject:(_extra == nil?@"":_extra) forKey:@"extra"];
-                        [dict setObject:(channelOrderid == nil?@"":channelOrderid) forKey:@"channelOrderid"];
+                        [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                        [dict setObject:payemntObject.response? :@"" forKey:@"data"];
+                        [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                        [dict setObject:_extra? :@"" forKey:@"extra"];
+                        [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
                         [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
                         msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                     }
@@ -1550,7 +1816,7 @@ extern "C" {
     }
     
     /**
-     *  购买成功发货通知
+     *  购买成功发货通知成功
      */
     void UnitySendGoodsOver(const char* orders,const char* gameObjectName, const char* methodName)
     {
@@ -1581,6 +1847,47 @@ extern "C" {
                 }
                 if (success) {
                     [Yd1UCenterManager.shared rechargedProuct];
+                }
+                NSMutableDictionary* properties = [NSMutableDictionary dictionary];
+                [properties setObject:success?@"成功":@"失败" forKey:__status];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared .superProperty];
+                [properties addEntriesFromDictionary:Yd1UCenterManager.shared.itemProperty];
+                YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
+                [Yodo1SaManager track:@"order_Item_Delivered" properties:properties];
+            });
+        }];
+    }
+
+    /**
+     *  购买成功发货通知失败
+     */
+    void UnitySendGoodsOverFault(const char* orders,const char* gameObjectName, const char* methodName)
+    {
+        NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
+        NSString* ocMethodName = Yodo1CreateNSString(methodName);
+        NSString* ocOrders = Yodo1CreateNSString(orders);
+        [Yd1UCenter.shared sendGoodsOverForFault:ocOrders
+                                        callback:^(BOOL success, NSString * _Nonnull error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(ocGameObjName && ocMethodName){
+                    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                    
+                    [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_SendGoodsOverFault] forKey:@"resulType"];
+                    [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                    [dict setObject:(error == nil?@"":error) forKey:@"error"];
+                    
+                    NSError* parseJSONError = nil;
+                    NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    if(parseJSONError){
+                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_SendGoodsOverFault] forKey:@"resulType"];
+                        [dict setObject:[NSNumber numberWithBool:success] forKey:@"code"];
+                        [dict setObject:(error == nil?@"":error) forKey:@"error"];
+                        [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                        msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                    }
+                    UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                     [msg cStringUsingEncoding:NSUTF8StringEncoding]);
                 }
             });
         }];
