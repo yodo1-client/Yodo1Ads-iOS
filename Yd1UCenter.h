@@ -103,8 +103,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  设备登录
+ *  @param playerId 是玩家id
  */
-- (void)deviceLogin:(void(^)(YD1User* _Nullable user, NSError* _Nullable  error))callback;
+- (void)deviceLoginWithPlayerId:(NSString *)playerId
+                       callback:(void(^)(YD1User* _Nullable user, NSError* _Nullable  error))callback;
 
 /**
  *  创建订单号

@@ -136,7 +136,8 @@ static NSString* const __status                 = @"status";
     isBuying = false;
     //设备登录
     __weak typeof(self) weakSelf = self;
-    [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
+    [Yd1UCenter.shared deviceLoginWithPlayerId:@""
+                                      callback:^(YD1User * _Nullable user, NSError * _Nullable error) {
         if (user) {
             weakSelf.user.yid = user.yid;
             weakSelf.user.ucuid = user.ucuid? : user.uid;
@@ -272,7 +273,8 @@ static NSString* const __status                 = @"status";
             self.paymentCallback(po);
             isBuying = false;
         }
-        [Yd1UCenter.shared deviceLogin:^(YD1User * _Nullable user, NSError * _Nullable error) {
+        [Yd1UCenter.shared deviceLoginWithPlayerId:@""
+                                          callback:^(YD1User * _Nullable user, NSError * _Nullable error) {
             if (user) {
                 weakSelf.user.yid = user.yid;
                 weakSelf.user.uid = user.uid;

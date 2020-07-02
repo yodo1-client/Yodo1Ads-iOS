@@ -115,14 +115,20 @@
     return _regionCode;
 }
 
-- (void)deviceLogin:(void (^)(YD1User * _Nullable, NSError * _Nullable))callback {
+- (void)deviceLoginWithPlayerId:(NSString *)playerId
+                       callback:(void(^)(YD1User* _Nullable user, NSError* _Nullable  error))callback {
     Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:Yd1OpsTools.ucapDomain]];
     manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"yodo1.com%@%@",Yd1OpsTools.keychainDeviceId,Yd1OParameter.appKey]];
+    
+    NSString* deviceId = Yd1OpsTools.keychainDeviceId;
+    if (playerId && [playerId length] > 0) {
+        deviceId = playerId;
+    }
+    NSString* sign = [Yd1OpsTools signMd5String:[NSString stringWithFormat:@"yodo1.com%@%@",deviceId,Yd1OParameter.appKey]];
     NSDictionary* data = @{
-        Yd1OpsTools.gameAppKey:Yd1OParameter.appKey ,Yd1OpsTools.channelCode:Yd1OParameter.channelId,Yd1OpsTools.deviceId:Yd1OpsTools.keychainDeviceId,Yd1OpsTools.regionCode:self.regionCode };
+        Yd1OpsTools.gameAppKey:Yd1OParameter.appKey ,Yd1OpsTools.channelCode:Yd1OParameter.channelId,Yd1OpsTools.deviceId:deviceId,Yd1OpsTools.regionCode:self.regionCode };
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:data forKey:Yd1OpsTools.data];
     [parameters setObject:sign forKey:Yd1OpsTools.sign];
