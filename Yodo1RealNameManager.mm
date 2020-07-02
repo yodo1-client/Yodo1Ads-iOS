@@ -1,0 +1,386 @@
+//
+//  Yodo1RealNameManager.m
+//  Real-name
+//
+//  Created by yixian huang on 2020/1/2.
+//  Copyright © 2020 yixian huang. All rights reserved.
+//
+
+#import "Yodo1RealNameManager.h"
+#import "Yodo1Base.h"
+#import "Yd1UCenter.h"
+#import "Yodo1Tool+Storage.h"
+#import "RealNameCertification.h"
+#import "Yd1OnlineParameter.h"
+#import "Yodo1Tool+Commons.h"
+
+@interface Yodo1RealNameManager () {
+    BOOL isHaveYid;
+    int verifierMaxCount;
+    int verifierCount;
+    NSString* todayKey;
+    NSString* yesterdayKey;
+    NSDate* beginPlayDate;
+    BOOL isStartTime;
+    __block long playedTime;//已玩时长
+    __block long _remainingTime;//剩余时长
+    __block NSTimer* timer;
+    __block long tempRremainingTime;
+    __block long notifyTime;
+}
+
+- (NSString*)today;
+- (NSString*)yesterdayDay:(NSDate*)aDate;
+
+@end
+
+@implementation Yodo1RealNameManager
+
++ (instancetype)shared {
+    return [Yodo1Base.shared cc_registerSharedInstance:self block:^{
+        [Yodo1RealNameManager.shared willInit];
+    }];
+}
+
++ (void)load {
+    [Yodo1RealNameManager.shared addRNServer];
+}
+
+- (void)dealloc {
+    [Yodo1RealNameManager.shared removeRNServer];
+}
+
+- (void)addRNServer {
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(rnDidEnterBackgroundNotification:)//前台进入后台
+                                               name:UIApplicationDidEnterBackgroundNotification
+                                             object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(rnWillEnterForegroundNotification:)//后台进入前台->完全激活状态
+                                                name:UIApplicationWillEnterForegroundNotification
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(rnDidFinishLaunchingNotification:)//加载完毕
+                                                name:UIApplicationDidFinishLaunchingNotification
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(rnWillTerminateNotification:)//将会终止程序（将要离开激活状态->进入后台->终止程序）
+                                                name:UIApplicationWillTerminateNotification
+                                              object:nil];
+    
+}
+
+- (void)removeRNServer {
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:UIApplicationDidEnterBackgroundNotification
+                                                 object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:UIApplicationWillEnterForegroundNotification
+                                                 object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:UIApplicationDidFinishLaunchingNotification
+                                                 object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:UIApplicationWillTerminateNotification
+                                                 object:nil];
+}
+
+/// 进入后台
+- (void)rnDidEnterBackgroundNotification:(NSNotification*)notifi {
+    [self savePlayedTime];
+}
+
+///后台进入前台->完全激活状态
+- (void)rnWillEnterForegroundNotification:(NSNotification*)notifi {
+    if (isStartTime && beginPlayDate) {
+        beginPlayDate = NSDate.date;
+    }
+}
+
+///加载完毕
+- (void)rnDidFinishLaunchingNotification:(NSNotification*)notifi {
+    
+}
+
+///将要终止程序
+- (void)rnWillTerminateNotification:(NSNotification*)notifi {
+    [self savePlayedTime];
+}
+
+- (void)savePlayedTime {
+    if (isStartTime) {
+        NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
+        long playedTime = [self intervalWithBeginTime:beginPlayDate];
+        NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
+        playedTime += [oldPlayedTime longValue];
+        NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
+        [Yd1OpsTools.cached setObject:[NSNumber numberWithLong:playedTime]
+                               forKey:@"__playedTime__"];
+    }
+}
+
+- (void)willInit {
+    notifyTime = 3600;//默认一小时
+    isHaveYid = false;
+    verifierMaxCount = 3;
+    verifierCount = 0;
+    todayKey = [self today];
+    yesterdayKey = [self yesterdayDay:[NSDate date]];
+    [Yd1OpsTools.cached removeObjectForKey:yesterdayKey];
+    NSNumber* verifierCountNub = (NSNumber*)[Yd1OpsTools.cached objectForKey:todayKey];
+    verifierCount = [verifierCountNub intValue];
+    NSLog(@"[ Yodo1 ]  verifierCount:%d",verifierCount);
+    _yId = (NSString*)[[Yd1OpsTools cached] objectForKey:@"__yd1_yid__"];
+}
+
+- (void)realNameConfig {
+    [RealNameCertification realNameConfigAppKey:Yd1OParameter.appKey
+                                        channel:Yd1OParameter.channelId
+                                        version:Yd1OpsTools.appVersion
+                                       callback:^(OnlineRealNameConfig *config,NSString* errorMsg) {
+        if (config) {
+            self->_onlineConfig = config;
+        }
+        NSLog(@"[ Yodo1 ]  config of errorMsg:%@",errorMsg);
+        NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"防沉迷在线配置:验证方:%@,最大验证次数:%d,年龄验证开关:%d,是否强制实名认证:%d,实名验证开关:%d",config.verifier,config.max_count,config.verify_age_enabled,config.forced,config.verify_idcode_enabled]);
+    }];
+}
+
+/// get today
+- (NSString*)today {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime = [formatter stringFromDate:[NSDate date]];
+    return dateTime;
+}
+
+- (NSTimeInterval)intervalWithBeginTime:(NSDate*)begin {
+    NSDateFormatter * df = [[NSDateFormatter alloc] init];
+    df.dateFormat = @"yyyy-MM-dd HH:mm";
+    NSTimeInterval intervalTime = [NSDate.date timeIntervalSinceDate:begin];
+    return intervalTime;
+}
+
+/// get yesterday
+- (NSString*)yesterdayDay:(NSDate*)aDate {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday| NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:aDate];
+    [components setDay:([components day] - 1)];
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
+    [dateday setDateFormat:@"yyyy-MM-dd"];
+    return [dateday stringFromDate:beginningOfWeek];
+}
+
+/// 默认是1小时 通知
+- (void)playtimeNotifyTime:(long)seconds {
+    notifyTime = seconds;
+}
+
+- (void)indentifyUserId:(NSString *)userId
+         viewController:(UIViewController *)controller
+               callback:(void (^)(BOOL , int, NSError *))callback {
+    if (verifierCount >= verifierMaxCount) {
+        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
+        callback(false,-111,error);
+        return;
+    }
+    _userId = userId;
+    typeof(self) weakSelf = self;
+    if (_yId) {
+        __block NSString* _yid = _yId;
+        [RealNameCertification userRealNameVerifyYid:_yid
+                                            callback:^(BOOL success,int age, NSString *errorMsg) {
+            if (age > 0) {
+                if (callback) {
+                    self->_age = age;
+                    ///已经实名过
+                    callback(true,age,nil);
+                }
+            } else {
+                RealNameViewController * realName = [[RealNameViewController alloc]init];
+                realName.isSkipValidation = false;//weakSelf.config.forced;
+                self->verifierCount += 1;
+                [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:self->verifierCount] forKey:self->todayKey];
+                [controller presentViewController:realName animated:YES completion:nil];
+                [realName setBlock:^(RealNameParameterInfoRequestParameter *info) {
+                    if (info) {
+                        info.yId = _yid;
+                    }
+                    self->_age = info.age;
+                    [RealNameCertification realNameCertificationInfo:info
+                                                            callback:^(BOOL isRealName,int age, NSString *errorMsg) {
+                        NSError* error = nil;
+                        if (!isRealName && errorMsg) {
+                            error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorMsg}];
+                        }
+                        if (callback) {
+                            callback(isRealName,info.age,error);
+                        }
+                    }];
+                }];
+            }
+        }];
+        return;
+    }
+    if (isHaveYid) {
+        return;
+    }
+    isHaveYid = true;
+    [Yd1UCenter.shared deviceLoginWithPlayerId:_userId
+                                      callback:^(YD1User * _Nullable user, NSError * _Nullable error) {
+        if (callback) {
+            self->_yId = user.yid;
+            if (user.yid) {
+                [[Yd1OpsTools cached]setObject:user.yid forKey:@"__yd1_yid__"];
+            }
+            [weakSelf indentifyUserId:self->_userId viewController:controller callback:callback];
+        }
+    }];
+}
+
+/// 执行一次
+- (void)createImpubicProtectSystem:(int)age
+                          callback:(void (^)(BOOL, NSString *))callback {
+    //启动计时
+    beginPlayDate = NSDate.date;
+    isStartTime = true;
+    NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
+    playedTime = [oldPlayedTime longValue];
+    NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
+    
+    AntiConfigRequestParameter * parameter = [AntiConfigRequestParameter new];
+    parameter.age = age;
+    parameter.yId = self.yId;
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.play_time = playedTime;
+    [RealNameCertification antiAddictionConfig:parameter
+                                      callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        self->_remainingTime = remainingTime;
+        self->tempRremainingTime = remainingTime;
+        //重置
+        [Yd1OpsTools.cached setObject:@0 forKey:@"__playedTime__"];
+        if (callback) {
+            callback(success,errorMsg);
+        }
+    }];
+}
+
+- (void)handleTimer {
+    NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
+    if (_remainingTime == 0) {
+        [timer invalidate];
+        //时长消耗完 同步数据
+        AntiNotifyRequestParameter* parameter = [AntiNotifyRequestParameter new];
+        parameter.game_appkey = Yd1OParameter.appKey;
+        parameter.game_version = Yd1OpsTools.appVersion;
+        parameter.channel_code = Yd1OParameter.channelId;
+        parameter.yId = self.yId;
+        parameter.type = NotifyTypeDate;
+        parameter.consume_time = tempRremainingTime;
+        parameter.age = _age;
+        [RealNameCertification uploadAntiAddictionData:parameter
+                                              callback:^(BOOL success,NotifyType type,int errorCode,int remainingTime, int remainingCost, NSString *errorMsg) {
+            NSString* st = @"";
+            NSString* st2 = @"";
+            if (type == NotifyTypePay) {
+                st = @"支付查询";
+                st2 = [NSString stringWithFormat:@"剩余消费:%d",remainingCost];
+            }else if (type == NotifyTypeDate){
+                st = @"时长查询";
+                st2 = [NSString stringWithFormat:@"剩余时长:%d",remainingTime];
+            }
+            NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"%@,errorCode:%d,%@,errorMsg:%@",st,errorCode,st2,errorMsg]);
+        }];
+        return;
+    } else if(_remainingTime <= notifyTime) {//通知客户端
+        NSLog(@"[ Yodo1 ] 时间快到了！");
+        if (self.playTimeCallback) {
+            self.playTimeCallback((tempRremainingTime - _remainingTime), _remainingTime);
+        }
+    }
+    _remainingTime -= 1;
+}
+
+- (void)startPlaytimeKeeper {
+    if (!timer) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                 target:self
+                                               selector:@selector(handleTimer)
+                                               userInfo:nil
+                                                repeats:YES];
+    }
+}
+
+- (void)verifyPaymentAmount:(int)price {
+    PaymentCheckRequestParameter * parameter = [PaymentCheckRequestParameter new];
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.yId = self.yId;
+    parameter.age = self.age;
+    parameter.money = price*100;
+    typeof(self) weakSelf = self;
+    [RealNameCertification orderToVerify:parameter
+                                callback:^(BOOL success,int errorCode, NSString *errorMsg) {
+        if (weakSelf.verifyPaymentCallback) {
+            weakSelf.verifyPaymentCallback(errorCode, errorMsg);
+        }
+    }];
+}
+
+- (void)queryPlayerRemainingTime:(void (^)(int, NSString *, double))callback {
+    AntiConfigRequestParameter * parameter = [AntiConfigRequestParameter new];
+    parameter.age = self.age;
+    parameter.yId = self.yId;
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.play_time = (tempRremainingTime - _remainingTime);
+    [RealNameCertification antiAddictionConfig:parameter
+                                      callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+        NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        
+        if (callback) {
+            callback(success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingTime);
+        }
+    }];
+}
+
+- (void)queryPlayerRemainingCost:(void (^)(int, NSString *, double))callback {
+    AntiConfigRequestParameter * parameter = [AntiConfigRequestParameter new];
+    parameter.age = self.age;
+    parameter.yId = self.yId;
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.play_time = (tempRremainingTime - _remainingTime);
+    [RealNameCertification antiAddictionConfig:parameter
+                                      callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        if (callback) {
+            callback(success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingCost);
+        }
+    }];
+}
+
+- (void)queryImpubicProtectConfigWithCode:(int)code
+                                 callback:(void (^)(BOOL,int, NSString *, NSString *))callback {
+    TemplateDetailRequeseParameter *parameter = [TemplateDetailRequeseParameter new];
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.yId = self.yId;
+    parameter.code = code;
+    [RealNameCertification templateDetail:parameter
+                                 callback:^(BOOL success,int errorCode,NSString* response, NSString *errorMsg) {
+        if (callback) {
+            callback(success,errorCode,errorMsg,response);
+        }
+    }];
+}
+
+@end
