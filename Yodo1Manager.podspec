@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.0.0.pre'
-    s.summary          = 'v4.0.0.pre- 2020-06-23
+    s.version          = '3.13.4.pre'
+    s.summary          = 'v3.13.4.pre- 2020-07-2
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                                 Soomla v5.10.1
                                 UnityAds v3.4.6
                                 Inmobi v9.0.7
-
+                            4.防沉迷
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -100,7 +100,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1UCenter','4.2.1'
+        ss.dependency 'Yodo1UCenter','4.2.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -239,6 +239,20 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1AgePrivacy','4.2.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
+
+    s.subspec 'Yodo1_AntiAddiction' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'ANTI_ADDICTION',
+             'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'Yodo1AntiAddiction','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
     ################# 统计 ##############
      s.subspec 'Analytics_AppsFlyer' do |ss|
         ss.xcconfig = {
