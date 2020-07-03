@@ -113,9 +113,10 @@
     if (isStartTime) {
         NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
         long playedTime = [self intervalWithBeginTime:beginPlayDate];
-        NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
         playedTime += [oldPlayedTime longValue];
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
+#endif
         [Yd1OpsTools.cached setObject:[NSNumber numberWithLong:playedTime]
                                forKey:@"__playedTime__"];
     }
@@ -131,7 +132,6 @@
     [Yd1OpsTools.cached removeObjectForKey:yesterdayKey];
     NSNumber* verifierCountNub = (NSNumber*)[Yd1OpsTools.cached objectForKey:todayKey];
     verifierCount = [verifierCountNub intValue];
-    NSLog(@"[ Yodo1 ]  verifierCount:%d",verifierCount);
     _yId = (NSString*)[[Yd1OpsTools cached] objectForKey:@"__yd1_yid__"];
 }
 
@@ -143,8 +143,9 @@
         if (config) {
             self->_onlineConfig = config;
         }
-        NSLog(@"[ Yodo1 ]  config of errorMsg:%@",errorMsg);
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"防沉迷在线配置:验证方:%@,最大验证次数:%d,年龄验证开关:%d,是否强制实名认证:%d,实名验证开关:%d",config.verifier,config.max_count,config.verify_age_enabled,config.forced,config.verify_idcode_enabled]);
+#endif
     }];
 }
 
@@ -249,8 +250,9 @@
     isStartTime = true;
     NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
     playedTime = [oldPlayedTime longValue];
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
-    
+#endif
     AntiConfigRequestParameter * parameter = [AntiConfigRequestParameter new];
     parameter.age = age;
     parameter.yId = self.yId;
@@ -260,22 +262,27 @@
     parameter.play_time = playedTime;
     [RealNameCertification antiAddictionConfig:parameter
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
-        if (success) {
+#endif
+        if (success && remainingTime > 0) {
             self->_remainingTime = remainingTime;
             self->tempRremainingTime = remainingTime;
-            //重置
             [Yd1OpsTools.cached setObject:@0 forKey:@"__playedTime__"];
-            
+            if (callback) {
+                callback(success,errorMsg);
+            }
+        }else{
+            if (callback) { //创建防沉迷系统失败
+                callback(NO,errorMsg);
+            }
         }
-        if (callback) {
-            callback(success,errorMsg);
-        }
+        
     }];
 }
 
 - (void)handleTimer {
-    NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
+    
     if (_remainingTime == 0) {
         [timer invalidate];
         //时长消耗完 同步数据
@@ -298,16 +305,21 @@
                 st = @"时长查询";
                 st2 = [NSString stringWithFormat:@"剩余时长:%d",remainingTime];
             }
+            
+#ifdef DEBUG
             NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"%@,errorCode:%d,%@,errorMsg:%@",st,errorCode,st2,errorMsg]);
+#endif
             if (self.playtimeOverCallback) {
                 self.playtimeOverCallback(success,errorCode, errorMsg, self->tempRremainingTime);
             }
         }];
         return;
     } else if(_remainingTime <= notifyTime) {//通知客户端
-        NSLog(@"[ Yodo1 ] 时间快到了！");
+#ifdef DEBUG
+        NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
+#endif
         if (self.playTimeCallback) {
-            self.playTimeCallback(YES,(tempRremainingTime - _remainingTime), _remainingTime);
+            self.playTimeCallback(YES,(tempRremainingTime - _remainingTime), _remainingTime < 0? :0);
         }
     }
     _remainingTime -= 1;
@@ -350,8 +362,9 @@
     parameter.play_time = (tempRremainingTime - _remainingTime);
     [RealNameCertification antiAddictionConfig:parameter
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
-        
+#endif
         if (callback) {
             callback(success,success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingTime);
         }
@@ -368,7 +381,10 @@
     parameter.play_time = (tempRremainingTime - _remainingTime);
     [RealNameCertification antiAddictionConfig:parameter
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
+        
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+#endif
         if (callback) {
             callback(success,success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingCost);
         }

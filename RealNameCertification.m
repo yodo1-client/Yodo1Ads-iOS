@@ -172,14 +172,17 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
         @"game_version":gameVersion,
         @"sign":sign,
     };
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kRealNameConfigUrl
        parameters:parameters
          progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString* response = [Yd1OpsTools stringWithJSONObject:responseObject error:nil];
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ] response:%@",response);
+#endif
         if (response) {
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
             if ([[respo allKeys]containsObject:@"error_code"]) {
@@ -235,20 +238,22 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSDictionary* parameters = [parameter parameterInfo];
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kRealNameUrl
        parameters:parameters
          progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString* response = [Yd1OpsTools stringWithJSONObject:responseObject error:nil];
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ] response:%@",response);
+#endif
         if (response) {
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
             if ([[respo allKeys]containsObject:@"error_code"]) {
                 int error_code = [[respo objectForKey:@"error_code"]intValue];
                 if (error_code==0) {
-                    NSLog(@"real name is success!");
                     if (callback) {
                         callback(true,0,@"Real Name is Success!");
                     }
@@ -282,14 +287,17 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
         @"yid":yid,
         @"sign":sign,
     };
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kUserRealNameUrl
        parameters:parameters
          progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString* response = [Yd1OpsTools stringWithJSONObject:responseObject error:nil];
+#ifdef DEBUG
         NSLog(@"[ Yodo1 ] response:%@",response);
+#endif
         if (response) {
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
             if ([[respo allKeys]containsObject:@"error_code"]) {
@@ -346,8 +354,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSDictionary* parameters = [parameter parameterInfo];
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kAntiAddictionConfigUrl
        parameters:parameters
          progress:nil
@@ -399,8 +408,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSDictionary* parameters = [parameter parameterInfo];
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kNotifyUrl
        parameters:parameters
          progress:nil
@@ -450,7 +460,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"content-type"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     NSDictionary* parameters = [parameter parameterInfo];
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kPaymentCheckUrl
        parameters:parameters
          progress:nil
@@ -490,8 +502,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSDictionary* parameters = [parameter parameterInfo];
-    
+#ifdef DEBUG
     NSLog(@"[ Yodo1 ] parameters:%@",[Yd1OpsTools stringWithJSONObject:parameters error:nil]);
+#endif
     [manager POST:kTemplateDetailUrl
        parameters:parameters
          progress:nil
@@ -617,8 +630,6 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
                 NSString *JYM =@"10X98765432";
                 M = [JYM substringWithRange:NSMakeRange(Y,1)];// 3：获取校验位
                 NSString *lastStr = [value substringWithRange:NSMakeRange(17,1)];
-                NSLog(@"%@",M);
-                NSLog(@"%@",[value substringWithRange:NSMakeRange(17,1)]);
                 ///4：检测ID的校验位
                 if ([lastStr isEqualToString:@"x"]) {
                     if ([M isEqualToString:@"X"]) {
