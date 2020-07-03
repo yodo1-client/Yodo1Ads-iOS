@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
     s.version          = '3.13.4'
-    s.summary          = 'v3.13.4 - 2020-07-2
+    s.summary          = 'v3.13.4- 2020-07-3
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -40,6 +40,8 @@ Pod::Spec.new do |s|
         ss.preserve_path = "#{s.version}" + '/ChangeLog.txt'
         ss.resources = "#{s.version}" + '/Yodo1Ads.bundle'
         ss.requires_arc = true
+        
+        ss.frameworks = 'CoreTelephony'
 
         ss.xcconfig = {
             'OTHER_LDFLAGS' => '-ObjC',
