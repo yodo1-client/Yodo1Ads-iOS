@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.13.4.pre'
-    s.summary          = 'v3.13.4.pre- 2020-07-2
+    s.version          = '3.13.4'
+    s.summary          = 'v3.13.4 - 2020-07-2
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
