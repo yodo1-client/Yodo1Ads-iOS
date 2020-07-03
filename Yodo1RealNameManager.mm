@@ -515,14 +515,14 @@ void UnityStartPlaytimeKeeper(const char* gameObjectName, const char* methodName
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9003] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
                 [data setObject:[NSNumber numberWithLong:playedTime] forKey:@"played_time"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9003] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                    [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
                     [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
@@ -550,13 +550,13 @@ void UnityVerifyPaymentAmount(double price,const char* gameObjectName, const cha
             if(ocGameObjName && ocMethodName){
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
                 [dict setObject:msg? :@"" forKey:@"msg"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+                    [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
                     [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
@@ -658,6 +658,52 @@ void UnityQueryImpubicProtectConfig(const char* gameObjectName, const char* meth
 }
 
 
+void UnityUploadAntiAddictionData(const char* orderId,const char* money,const char* gameObjectName, const char* methodName)
+{
+    NSString* ocOrderId = Yodo1CreateNSString(orderId);
+    NSString* ocMoney = Yodo1CreateNSString(money);
+    NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
+    NSString* ocMethodName = Yodo1CreateNSString(methodName);
+    AntiNotifyRequestParameter* parameter = [AntiNotifyRequestParameter new];
+    parameter.game_appkey = Yd1OParameter.appKey;
+    parameter.game_version = Yd1OpsTools.appVersion;
+    parameter.channel_code = Yd1OParameter.channelId;
+    parameter.yId = Yodo1RealNameManager.shared.yId;
+    parameter.type = NotifyTypePay;
+    parameter.consume_time = 0;
+    //数组里面的字典
+    NSNumber* moneyNum = [NSNumber numberWithInt:ocMoney.intValue];
+    parameter.orders = @[@{kAntiConsumeOrderid:ocOrderId,
+                           kAntiConsumeMoney:moneyNum}];
+    parameter.age = Yodo1RealNameManager.shared.age;
+    
+    [RealNameCertification uploadAntiAddictionData:parameter
+                                          callback:^(BOOL success, NotifyType type, int errorCode, int remainingTime, int remainingCost, NSString *errorMsg) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(ocGameObjName && ocMethodName){
+                NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                NSMutableDictionary* data = [NSMutableDictionary dictionary];
+                [dict setObject:[NSNumber numberWithInt:9010] forKey:@"resulType"];
+                [dict setObject:[NSNumber numberWithInt:errorCode] forKey:@"code"];
+                [data setObject:[NSNumber numberWithInt:remainingCost] forKey:@"remaining_cost"];
+                [data setObject:errorMsg? :@"" forKey:@"msg"];
+                [dict setObject:data forKey:@"data"];
+                
+                NSError* parseJSONError = nil;
+                NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                if(parseJSONError){
+                    [dict setObject:[NSNumber numberWithInt:9010] forKey:@"resulType"];
+                    [dict setObject:[NSNumber numberWithInt:errorCode] forKey:@"code"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                }
+                UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                 [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                 [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+            }
+        });
+    }];;
+}
 
 }
 #endif
