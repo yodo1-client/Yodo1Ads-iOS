@@ -50,13 +50,13 @@ typedef enum : NSUInteger {
 } ImpubicProtectEvent;
 
 /// 实名制回调
-typedef void(^IndentifyUserCallback)(int resultCode,Indentify indentify,VerifiedStatus verifiedStatus,int age);
+typedef void(^IndentifyUserCallback)(BOOL success,int resultCode,Indentify indentify,VerifiedStatus verifiedStatus,int age);
 /// 当玩家剩余时长小于设定的时间（默认1小时）后，此接口开始每隔1秒触发一次
-typedef void(^ConsumePlaytimeCallback)(long playedTime, long remainingTime);
+typedef void(^ConsumePlaytimeCallback)(BOOL success,long playedTime, long remainingTime);
 /// 当玩家游戏时间已到时，会触发该接口
-typedef void(^PlaytimeOverCallback)(int resultCode, NSString* msg,long playedTime);
+typedef void(^PlaytimeOverCallback)(BOOL success,int resultCode, NSString* msg,long playedTime);
 /// 付费金额验证回调
-typedef void(^VerifyPaymentCallback)(int resultCode, NSString* msg);
+typedef void(^VerifyPaymentCallback)(BOOL success,int resultCode, NSString* msg);
 
 @class OnlineRealNameConfig;
 @interface Yodo1RealNameManager : NSObject
@@ -95,10 +95,10 @@ typedef void(^VerifyPaymentCallback)(int resultCode, NSString* msg);
 - (void)verifyPaymentAmount:(int)price;
 
 /// 查询玩家剩余可玩时长
-- (void)queryPlayerRemainingTime:(void (^)(int resultCode, NSString* msg, double time))callback;
+- (void)queryPlayerRemainingTime:(void (^)(BOOL success,int resultCode, NSString* msg, double remainingTime))callback;
 
 /// 查询玩家剩余的可花费金额
-- (void)queryPlayerRemainingCost:(void (^)(int resultCode, NSString* msg, double cost))callback;
+- (void)queryPlayerRemainingCost:(void (^)(BOOL success,int resultCode, NSString* msg, double cost))callback;
 
 /// 查询模板规则
 - (void)queryImpubicProtectConfigWithCode:(int)code

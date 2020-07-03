@@ -84,12 +84,12 @@ NSString* const kAntiAddictionConfigUrl = @"/config/antiAddictionConfig";
                        self.game_appkey,self.code];
     NSString* sign =  [Yd1OpsTools signMd5String:mSign];
     NSDictionary* param = @{
-        @"code":[NSNumber numberWithInt:self.code?self.code:0],
-        @"yid":self.yId?self.yId:@"",
-        @"game_appkey":self.game_appkey?self.game_appkey:@"",
-        @"channel_code":self.channel_code?self.channel_code:@"",
-        @"game_version":self.game_version?self.game_version:@"",
-        @"sign":sign?sign:@"",
+        @"code":[NSNumber numberWithInt:self.code? :0],
+        @"yid":self.yId? :@"",
+        @"game_appkey":self.game_appkey? :@"",
+        @"channel_code":self.channel_code? :@"",
+        @"game_version":self.game_version? :@"",
+        @"sign":sign? :@"",
     };
     return param;
 }
@@ -466,7 +466,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
                     errorMsg = (NSString *)[respo objectForKey:@"error"];
                 }
                 if (callback) {
-                    callback(YES,errorCode,errorMsg);
+                    callback(errorCode == 0,errorCode,errorMsg);
                 }
             }else{
                 if (callback) {
