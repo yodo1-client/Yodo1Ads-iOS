@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Tapjoy'
-    s.version          = '4.1.4'
+    s.version          = '4.1.5'
     s.summary          = '更新Tapjoy sdk 12.4.2 [remove UIWebView]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -57,5 +57,5 @@ Pod::Spec.new do |s|
     ]
     s.dependency 'Yodo1AdvertSDK','4.2.1'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.1'
-    s.dependency 'Yodo1AdsTapjoy','4.1.0'
+    s.dependency 'Yodo1AdsTapjoy','4.1.1'
 end
