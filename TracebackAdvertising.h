@@ -33,7 +33,9 @@ typedef enum {
     TB_AMAZON_ID        = 2,
     TB_ITUNES_ID        = 3,
     TB_APP_NAME         = 4,
-    TB_DIRECT           = 5
+    TB_DIRECT           = 5,
+    TB_BRAND_NAME       = 6,
+    TB_BUNDLE_ID        = 7
 } TracebackAdvertiserIdType;
 
 typedef enum {
