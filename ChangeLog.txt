@@ -1,16 +1,19 @@
 =============================================
-2020-05-25
+2020-07-3
+v7.60.1
+=============================================
+2020-06-23
 v7.60.0
 新添加一个库PromisesObjC.framework
 1.AdColonyAdapter / 4.1.4.1
-2.AppLovinAdapter / 6.12.6.0
+2.AppLovinAdapter / 6.12.8.0
 3.ChartboostAdapter/8.1.0.0
 4.VungleAdapter / 6.5.3.0
-5.UnityAdsAdapter /3.4.2.2
+5.UnityAdsAdapter /3.4.6.0
 6.TapjoyAdapter /12.4.2.1
-7.IronSourceAdapter /6.16.1.0
+7.IronSourceAdapter /6.16.3.0
 8.FacebookAdapter / 5.9.0.0
-9.InmobiAdapter /9.0.4.0
+9.InmobiAdapter /9.0.7.0
 =============================================
 2020-04-22
 v7.58.0
