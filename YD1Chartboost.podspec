@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Chartboost'
-    s.version          = '4.1.4'
+    s.version          = '4.1.5'
     s.summary          = 'A short description of YD1Chartboost.'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -59,5 +59,5 @@ Pod::Spec.new do |s|
     ]
     s.dependency 'Yodo1AdvertSDK','4.2.1'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.1'
-    s.dependency 'Yodo1AdsChartboost','4.1.2'
+    s.dependency 'Yodo1AdsChartboost','4.1.3'
 end
