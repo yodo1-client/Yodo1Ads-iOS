@@ -15,7 +15,6 @@
 #import "ISRewardedVideoDelegate.h"
 #import "ISOfferwallDelegate.h"
 #import "ISInterstitialDelegate.h"
-#import "ISRewardedInterstitialDelegate.h"
 #import "ISLogDelegate.h"
 #import "ISConfigurations.h"
 #import "ISPlacementInfo.h"
@@ -35,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define IS_OFFERWALL @"offerwall"
 #define IS_BANNER @"banner"
 
-static NSString * const MEDIATION_SDK_VERSION     = @"6.16.3";
-static NSString * GitHash = @"7f716c12b";
+static NSString * const MEDIATION_SDK_VERSION     = @"6.17.0";
+static NSString * GitHash = @"da2a62fec";
 
 @interface IronSource : NSObject
 
@@ -298,13 +297,6 @@ static NSString * GitHash = @"7f716c12b";
  @param delegate The 'ISInterstitialDelegate' for IronSource to send callbacks to.
  */
 + (void)setInterstitialDelegate:(id<ISInterstitialDelegate>)delegate;
-
-/**
- @abstract Sets the delegate for rewarded interstitial callbacks.
- 
- @param delegate The 'ISRewardedInterstitialDelegate' for IronSource to send callbacks to.
- */
-+ (void)setRewardedInterstitialDelegate:(id<ISRewardedInterstitialDelegate>)delegate;
 
 /**
  @abstract Loads an interstitial.
