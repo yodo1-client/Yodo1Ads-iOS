@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @protocol CHBRewardedDelegate
  @brief Rewarded delegate protocol that inherits from CHBAdDelegate.
  @discussion Provides methods to receive notifications related to a rewarded ad's actions and to control its behavior.
- In a typical integration you would implement willShowAd: and didDismissAd:, pausing and resuming ongoing processes (e.g: gameplay, video) there.
+ In a typical integration you would implement willShowAd:, didShowAd: and didDismissAd:, pausing and resuming ongoing processes (e.g: gameplay, video) there.
  The method didEarnReward: needs to be implemented in order to be notified when the user earns a reward.
  */
 @protocol CHBRewardedDelegate <CHBDismissableAdDelegate, CHBRewardableAdDelegate>
@@ -52,6 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
  
  - (void)willShowAd:(CHBShowEvent *)event {
     // Pause ongoing processes
+ }
+ 
+ - (void)didShowAd:(CHBShowEvent *)event error:(CHBShowError *)error {
+    if (error) {
+        // Resume paused processes. Note that if showing the ad fails didEarnReward: will not be called.
+    }
  }
 
  - (void)didDismissAd:(CHBDismissEvent *)event {

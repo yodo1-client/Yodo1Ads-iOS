@@ -41,7 +41,7 @@ FOUNDATION_EXPORT CHBBannerSize const CHBBannerSizeLeaderboard;
  The developer should not give the banner view object a frame size different than its CHBBannerSize property.
  If you are using AutoLayout just give the banner an X and Y position constraint and it will be automatically sized.
  
- By default a banner will automatically update its content on its own. This means you only need to call showFromViewController: once and the banner will get a new ads and show them, gracefully handling errors if they occur.
+ By default a banner will automatically update its content on its own. This means you only need to call showFromViewController: once and the banner will get new ads and show them, gracefully handling errors if they occur.
  
  You can create and present as many banners as you want at the same time.
  

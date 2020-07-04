@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ChartboostDelegate.h"
+#import "CHBDataUseConsent.h"
 #import "CHBInterstitial.h"
 #import "CHBRewarded.h"
 #import "CHBBanner.h"
@@ -33,6 +34,50 @@ FOUNDATION_EXPORT BOOL ChartboostInitialized(const char* function) DEPRECATED_MS
  used by Chartboost.
  */
 + (void)startWithAppId:(NSString*)appId appSignature:(NSString*)appSignature completion:(void (^)(BOOL))completion;
+
+/*!
+ @brief Use to restrict Chartboost's ability to collect personal data from the user.
+ @discussion This method can be called multiple times to set the consent for different privacy standards.
+ If a consent has already been set for a privacy standard, adding a consent object for that standard will overwrite the previous value.
+ 
+ This method should be called before starting the Chartboost SDK with startWithAppId:appSignature:completion: if possible.
+ The added consents are persisted, so you may just call this when the consent status needs to be updated.
+*/
++ (void)addDataUseConsent:(CHBDataUseConsent *)consent NS_SWIFT_NAME(addDataUseConsent(_:));
+
+/*!
+ @brief Clears the previously added consent for the desired privacy standard.
+ @param privacyStandard The privacy standard for which you want to clear the consent.
+ @discussion Chartboost persists the added consents, so you'll need to call this method if you want to withdraw a previously added consent.
+ If no consent was available for the indicated standard nothing will happen.
+*/
++ (void)clearDataUseConsentForPrivacyStandard:(CHBPrivacyStandard)privacyStandard NS_SWIFT_NAME(clearDataUseConsent(for:));
+
+/*!
+ @brief Returns the current consent status for the desired privacy standard.
+ @param privacyStandard The privacy standard for which you want to obtain the consent status.
+ @returns A CHBDataUseConsent subclass (the same one used to set the consent in addDataUseConsent:) or nil if no consent status is currently available.
+ @discussion Use this to check the current consent status, either set by a call to addDataUseConsent: or persisted from a call to the same method on a previous app run. You may need to cast the returned object to the proper CHBDataUseConsent subclass in order to read its consent value.
+ 
+ For example, to check if a consent is not set for GDPR:
+ @code
+ // Obj-C
+ if (![Chartboost dataUseConsentForPrivacyStandard:CHBPrivacyStandardGDPR]) { ... }
+ // Swift
+ if Chartboost.dataUseConsent(for: .GDPR) == nil { ... }
+ @endcode
+ 
+ To check the specific consent status for GDPR:
+ @code
+ // Obj-C
+ CHBGDPRDataUseConsent *gdpr = [Chartboost dataUseConsentForPrivacyStandard:CHBPrivacyStandardGDPR];
+ if (gdpr && gdpr.consent == CHBGDPRConsentNonBehavioral) { ... }
+ // Swift
+ let gdpr = Chartboost.dataUseConsent(for: .GDPR) as? CHBDataUseConsent.GDPR
+ if gdpr?.consent == .nonBehavioral { ... }
+ @endcode
+ */
++ (__kindof CHBDataUseConsent *)dataUseConsentForPrivacyStandard:(CHBPrivacyStandard)privacyStandard NS_SWIFT_NAME(dataUseConsent(for:));
 
 /*!
  @abstract
@@ -86,15 +131,10 @@ FOUNDATION_EXPORT BOOL ChartboostInitialized(const char* function) DEPRECATED_MS
 + (void)setChartboostWrapperVersion:(NSString*)chartboostWrapperVersion;
 
 /*!
- @abstract
- Set a custom framework suffix to append to the POST headers field.
- example setFramework:Unity withVersion:4.6, setFrameworkVersion:5.2.1
- 
- @param framework The suffix to send with all Chartbooost API server requets.
- @param version The platform version used for analytics. Example Unity should set Application.unityVersion
- 
- @discussion This is an internal method used via Chartboost's Unity and Corona SDKs
- to track their usage.
+ @brief Informs Chartboost of which environment it is running on, for tracking purposes.
+ @param framework The framework used, e.g: Unity, Corona, etc.
+ @param version The framework version.
+ @discussion It is preferred that this method is called before starting the Chartboost SDK.
  */
 + (void)setFramework:(CBFramework)framework withVersion:(NSString *)version;
 
@@ -127,23 +167,8 @@ FOUNDATION_EXPORT BOOL ChartboostInitialized(const char* function) DEPRECATED_MS
  */
 + (void)setMuted:(BOOL)mute;
 
-/*!
- @abstract
- Set to restrict Chartboost's ability to collect personal data from the device. See CBPIDataUseConsent declaration for details
- Note: This method should be called before starting the Chartboost SDK with startWithAppId:appSignature:delegate.
- @param consent set the consent level
- @discussion Default value is Unknown
- */
-+ (void)setPIDataUseConsent:(CBPIDataUseConsent)consent;
-
-/*!
- @abstract
- Get the current consent setting
- */
-+ (CBPIDataUseConsent)getPIDataUseConsent;
 
 #pragma mark - Deprecated
-+ (void)restrictDataCollection:(BOOL)shouldRestrict __attribute__((deprecated("Use setPIDataUseConsent:(CBPIDataUseConsent)consent instead")));
 + (void)setStatusBarBehavior:(CBStatusBarBehavior)statusBarBehavior __attribute__((deprecated("This method is deprecated and is a no-op")));
 + (void)setMediation:(CBMediation)library withVersion:(NSString*)libraryVersion DEPRECATED_MSG_ATTRIBUTE("Please use setMediation:withLibraryVersion:adapterVersion: instead.");
 + (void)cacheInPlay:(CBLocation)location DEPRECATED_MSG_ATTRIBUTE("This is a deprecated no-op method and will be removed in a future version.");
@@ -166,5 +191,7 @@ FOUNDATION_EXPORT BOOL ChartboostInitialized(const char* function) DEPRECATED_MS
 + (void)setAutoCacheAds:(BOOL)shouldCache DEPRECATED_MSG_ATTRIBUTE("This method is deprecated and will be removed in a future version.");
 + (BOOL)getAutoCacheAds DEPRECATED_MSG_ATTRIBUTE("This method is deprecated and will be removed in a future version.");
 + (void)setMediation:(CBMediation)library withLibraryVersion:(NSString*)libraryVersion adapterVersion:(NSString*)adapterVersion DEPRECATED_MSG_ATTRIBUTE("Please use CHBMediation as specified in Chartboost+Mediation.h instead.");
++ (CBPIDataUseConsent)getPIDataUseConsent DEPRECATED_MSG_ATTRIBUTE("This method is deprecated and will be removed in a future version.");
++ (void)setPIDataUseConsent:(CBPIDataUseConsent)consent DEPRECATED_MSG_ATTRIBUTE("Please use addDataUseConsent: passing a CHBDataUseConsent GDPR object instead.");
 
 @end

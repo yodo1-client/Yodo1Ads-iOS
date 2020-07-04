@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @protocol CHBInterstitialDelegate
  @brief Interstitial delegate protocol that inherits from CHBAdDelegate.
  @discussion Provides methods to receive notifications related to an interstitial's actions and to control its behavior.
- In a typical integration you would implement willShowAd: and didDismissAd:, pausing and resuming ongoing processes (e.g: gameplay, video) there.
+ In a typical integration you would implement willShowAd:, didShowAd: and didDismissAd:, pausing and resuming ongoing processes (e.g: gameplay, video) there.
  */
 @protocol CHBInterstitialDelegate <CHBDismissableAdDelegate>
 @end
@@ -26,18 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
  
  @discussion To show an interstitial it first needs to be cached. Trying to show an uncached intersitital will always fail, thus it is recommended to always check if the ad is cached first.
  
- You can create and cache as many interstitial as you want, but only one can be presented at the same time.
+ You can create and cache as many interstitial ads as you want, but only one can be presented at the same time.
  
  A basic implementation would look like this:
  @code
  - (void)createAndCacheInterstitial {
-    CHBInterstitial *interstitial = [[CHBInterstitial alloc] initWithLocation:CBLocationDefault delegate:self];
-    [interstitial cache];
+    self.interstitial = [[CHBInterstitial alloc] initWithLocation:CBLocationDefault delegate:self];
+    [self.interstitial cache];
  }
  
  - (void)showInterstitial {
-    if (interstitial.isCached) {
-        [interstitial showFromViewController:self];
+    if (self.interstitial.isCached) {
+        [self.interstitial showFromViewController:self];
     }
  }
  
@@ -51,6 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
  
  - (void)willShowAd:(CHBShowEvent *)event {
     // Pause ongoing processes
+ }
+ 
+ - (void)didShowAd:(CHBShowEvent *)event error:(CHBShowError *)error {
+    if (error) {
+        // Resume paused processes
+    }
  }
  
  - (void)didDismissAd:(CHBDismissEvent *)event {

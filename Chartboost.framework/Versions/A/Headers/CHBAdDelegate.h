@@ -55,6 +55,10 @@ NS_ASSUME_NONNULL_BEGIN
  @brief A CHBAdEvent subclass passed on dismiss-related delegate methods.
  */
 @interface CHBDismissEvent : CHBAdEvent
+/*!
+@brief The error that forced the ad dismissal, or nil if the user (or the ad itself) chose to dismiss the ad.
+*/
+@property (nonatomic, readonly, nullable) NSError *error;
 @end
 
 /*!
@@ -192,7 +196,9 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
  @brief Called after a showFromViewController: call, either if the ad has been presented and an ad impression logged, or if the operation failed.
  @param event A show event with info related to the ad shown.
  @param error An error specifying the failure reason, or nil if the operation was successful.
- @discussion Implement to be notified of when the ad presentation process has finished. Note that this method may be called more than once if some error occurs after the ad has been successfully shown.
+ @discussion Implement to be notified of when the ad presentation process has finished.
+ This method will be called once for each call to showFromViewController: on an interstitial or rewarded ad.
+ In contrast, this may be called multiple times after showing a banner, either if some error occurs after the ad has been successfully shown or as a result of the banner's automatic content refresh.
  
  A common practice consists of caching an ad here so there's an ad ready for the next time you need to show it.
  Note that this is not necessary for banners with automaticallyRefreshesContent set to YES.
@@ -221,7 +227,7 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
  
  A typical implementation would look like this:
  @code
- - (BOOL)shouldConfirmClick:(CHBClickEvent *)event confirmationHandler:(void(^)(BOOL))confirmationHandler
+ - (BOOL)shouldConfirmClick:(CHBClickEvent *)event confirmationHandler:(void(^)(BOOL))confirmationHandler {
     if (self.needsClickConfirmation) {
         MyAwesomeAgeGate *ageGate = [[MyAwesomeAgeGate alloc] initWithCompletion:^(BOOL confirmed) {
             [ageGate dismissViewControllerAnimated:YES completion:^{
@@ -289,10 +295,12 @@ typedef NS_ENUM(NSUInteger, CHBClickErrorCode) {
  @brief Called after an ad is dismissed.
  @param event A dismiss event with info related to the dismissed ad.
  @discussion Implement to be notified of when an ad is no longer displayed.
+ Note that this method won't get called for ads that failed to be shown. To handle that case implement didShowAd:error:
+ You may use the error property inside the event to know if the dismissal was expected or caused by an error.
  
  A typical implementation would look like this:
  @code
- - (void)didDismissAd:(CHBCacheEvent *)event {
+ - (void)didDismissAd:(CHBDismissEvent *)event {
     // Resume processes paused in willShowAd:
  }
  @endcode
