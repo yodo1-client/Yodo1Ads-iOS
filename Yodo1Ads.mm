@@ -530,9 +530,9 @@ static BOOL bSensorsSwitch = false;
     }
     
     //初始化数据统计
-//TODO
-    [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
-    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"appstore"];
+    //TODO 暂时停止Yodo1 统计
+//    [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
+//    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"appstore"];
 
 #ifdef YODO1_ADS
     //初始化Banner
