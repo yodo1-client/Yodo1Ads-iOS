@@ -18,7 +18,7 @@
 #import <MTGSDK/MTGMediaView.h>
 #import <MTGSDK/MTGUserInfo.h>
 
-#define MTGSDKVersion @"6.3.2"
+#define MTGSDKVersion @"6.3.3"
 
 
 @interface MTGSDK : NSObject
@@ -146,7 +146,7 @@
  Set YES to indicate the user's data will be collected otherwise NO. Default to be YES.
  
 @abstract According to the GDPR, set method of this property must be called before "setAppID: ApiKey:", or by default will collect user's information.
-@Attention Do not mix the usage of `setConsentStatus:` and `setUserPrivateInfoType:agree` simultaneously in your app.
+ @Attention Do not mix the usage of `setConsentStatus:` and `setUserPrivateInfoType:agree` simultaneously in your app.
  */
 @property (nonatomic, assign) BOOL consentStatus;
 
@@ -166,15 +166,6 @@
 
 - (void)setUserInfo:(nonnull MTGUserInfo *)userInfo;
 
-/**
- Show the privacy consent authorization tips view.
- 
- @abstract This method must be called before "setAppID: ApiKey:", Or by default will collect user information.
-
- @param callback A block that accepts a Bool and an NSError as input parameters. The NSError parameter which provides information on a failed consent update request, the Bool parameter which provides the updated consent status.
- */
-- (void)showConsentInfoTips:(nullable void (^)(BOOL consentStatus, NSError *_Nullable error))callback;
-
 
 /**
  *
@@ -187,6 +178,17 @@
  @param agree whether this type of data should be collect.
  */
 - (void)setUserPrivateInfoType:(MTGUserPrivateType)type agree:(BOOL)agree DEPRECATED_MSG_ATTRIBUTE("Use `[MTGSDK sharedInstance] setConsentStatus:` instead");
+
+
+
+/**
+ Show the privacy consent authorization tips view.
+ 
+ @abstract This method must be called before "setAppID: ApiKey:", Or by default will collect user information.
+
+ @param callback A block that accepts a Bool and an NSError as input parameters. The NSError parameter which provides information on a failed consent update request, the Bool parameter which provides the updated consent status.
+ */
+- (void)showConsentInfoTips:(nullable void (^)(BOOL consentStatus, NSError *_Nullable error))callback;
 
 /**
  *
