@@ -15,6 +15,7 @@
 #import "TapjoyConnectConstants.h"
 #import "TapjoyAuctionConstants.h"
 #import "TJPlacement.h"
+#import "TJPrivacyPolicy.h"
 
 #define TJC_DEPRECATION_WARNING(VERSION) __attribute__((deprecated("Go to dev.tapjoy.com for instructions on how to fix this warning")))
 #define TJ_DEPRECATED_CLASS     __attribute__((deprecated("TapjoyConnect Class is deprecated, use Tapjoy Class")))
@@ -483,7 +484,7 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  *
  * @param value "0" (User has not provided consent), "1" (User has provided consent) or a daisybit string as suggested in IAB's Transparency and Consent Framework
  **/
-+ (void)setUserConsent:(NSString*) value;
++ (void)setUserConsent:(NSString*) value TJC_DEPRECATION_WARNING(12.6.0);
 
 /**
  * This can be used by the integrating App to indicate if the user falls in any of the GDPR applicable countries
@@ -493,7 +494,7 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  *
  * @param gdprApplicability YES if the user is affected by GDPR, NO if they are not.
  */
-+(void)subjectToGDPR:(BOOL) gdprApplicability;
++(void)subjectToGDPR:(BOOL) gdprApplicability TJC_DEPRECATION_WARNING(12.6.0);
 
 /**
  * In the US, the Children’s Online Privacy Protection Act (COPPA) imposes certain requirements on operators of online services that (a)
@@ -509,7 +510,14 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
  *
  * @param isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
  */
-+(void)belowConsentAge:(BOOL) isBelowConsentAge;
++(void)belowConsentAge:(BOOL) isBelowConsentAge TJC_DEPRECATION_WARNING(12.6.0);
+
+/**
+ * Returns the TJPrivacyPolicy instance for calling methods to set GDPR, User's consent, below consent age ,and US Privacy policy flags
+ * 
+ * @return The globally accessible TJPrivacyPolicy singleton object.
+ */
++(id)getPrivacyPolicy;
 
 @end
 
