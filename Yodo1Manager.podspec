@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.13.4'
-    s.summary          = 'v3.13.4- 2020-07-3
+    s.version          = '3.13.5'
+    s.summary          = 'v3.13.5- 2020-07-7
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                                 Soomla v5.11.3
                                 UnityAds v3.4.6
                                 Inmobi v9.0.7
-                            4.防沉迷
+                            4.防沉迷 【fix bug】
                             ---------------------------
                           '
     s.description      = <<-DESC
