@@ -30,6 +30,7 @@
 @property(nonatomic,strong)NSString* idCode;///证件号
 @property(nonatomic,strong)NSString* name;///实名姓名
 @property(nonatomic,assign)int age;///年龄
+@property(nonatomic,assign)BOOL isSkip;///是否跳过
 - (NSDictionary *)parameterInfo;
 @end
 
@@ -135,7 +136,7 @@ typedef enum {
 @interface RealNameViewController : UIViewController
 
 @property(nonatomic,copy)RealNameViewBlock block;
-@property(nonatomic,assign)BOOL isSkipValidation;
+@property(nonatomic,assign)BOOL isSkipValidation;//是否允许跳过
 
 
 @end

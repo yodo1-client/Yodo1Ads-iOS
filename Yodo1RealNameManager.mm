@@ -142,6 +142,7 @@
                                        callback:^(OnlineRealNameConfig *config,NSString* errorMsg) {
         if (config) {
             self->_onlineConfig = config;
+            self->verifierMaxCount = config.max_count;
         }
 #ifdef DEBUG
         NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"防沉迷在线配置:验证方:%@,最大验证次数:%d,年龄验证开关:%d,是否强制实名认证:%d,实名验证开关:%d",config.verifier,config.max_count,config.verify_age_enabled,config.forced,config.verify_idcode_enabled]);
@@ -182,10 +183,17 @@
 
 - (void)indentifyUserId:(NSString *)userId
          viewController:(UIViewController *)controller
-               callback:(void (^)(BOOL , int, NSError *))callback {
+               callback:(void (^)(BOOL ,int, int, NSError *))callback {
+    if (!_onlineConfig) {
+        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"online config is not fetch!"}];
+        callback(NO,ResultCodeFailed,-100,error);
+        [self realNameConfig];
+        return;
+    }
+    
     if (verifierCount >= verifierMaxCount) {
         NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
-        callback(false,-111,error);
+        callback(false,ResultCodeFailed,-111,error);
         return;
     }
     _userId = userId;
@@ -198,15 +206,22 @@
                 if (callback) {
                     self->_age = age;
                     ///已经实名过
-                    callback(true,age,nil);
+                    callback(true,ResultCodeSuccess,age,nil);
                 }
             } else {
                 RealNameViewController * realName = [[RealNameViewController alloc]init];
-                realName.isSkipValidation = false;//weakSelf.config.forced;
-                self->verifierCount += 1;
-                [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:self->verifierCount] forKey:self->todayKey];
+                realName.isSkipValidation = !weakSelf.onlineConfig.forced;
                 [controller presentViewController:realName animated:YES completion:nil];
                 [realName setBlock:^(RealNameParameterInfoRequestParameter *info) {
+                    
+                    if (info.isSkip) {//可跳过，试玩？
+                        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"user is clicked skip button!"}];
+                        if (callback) {
+                            callback(NO,ResultCodeCancel,info.age,error);
+                        }
+                        return;
+                    }
+                    
                     if (info) {
                         info.yId = _yid;
                     }
@@ -218,8 +233,10 @@
                             error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorMsg}];
                         }
                         if (callback) {
-                            callback(isRealName,info.age,error);
+                            callback(isRealName,isRealName?ResultCodeSuccess:ResultCodeFailed,info.age,error);
                         }
+                        self->verifierCount += 1;
+                        [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:self->verifierCount] forKey:self->todayKey];
                     }];
                 }];
             }
@@ -424,16 +441,21 @@ void UnityIndentifyUser(const char *playerId,const char* gameObjectName, const c
     
     [Yodo1RealNameManager.shared indentifyUserId:ocPlayerId
                                   viewController:[Yodo1Commons getRootViewController]
-                                        callback:^(BOOL isRealName, int age, NSError *error) {
+                                        callback:^(BOOL isRealName,int resultCode, int age, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(ocGameObjName && ocMethodName){
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9001] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:isRealName?1:0] forKey:@"code"];
+                [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
                 [data setObject:[NSNumber numberWithInt:age] forKey:@"age"];
-                [data setObject:[NSNumber numberWithInt:IndentifyRealName] forKey:@"type"];
-                [data setObject:[NSNumber numberWithInt:ResumeGame] forKey:@"level"];
+                Indentify ify = IndentifyRealName;
+                if (!Yodo1RealNameManager.shared.onlineConfig.verify_idcode_enabled) {
+                    ify = IndentifyDisabled;
+                }
+                [data setObject:[NSNumber numberWithInt:(int)ify] forKey:@"type"];
+                int level = Yodo1RealNameManager.shared.onlineConfig.level;
+                [data setObject:[NSNumber numberWithInt:level] forKey:@"level"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];

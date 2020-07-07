@@ -78,7 +78,7 @@ typedef void(^VerifyPaymentCallback)(BOOL success,int resultCode, NSString* msg)
 /// 实名验证
 - (void)indentifyUserId:(NSString *)userId
          viewController:(UIViewController *)controller
-               callback:(void (^)(BOOL isRealName,int age,NSError* error))callback;
+               callback:(void (^)(BOOL isRealName,int resultCode,int age,NSError* error))callback;
 /**
  *  当玩家剩余时长小于设定的时间（默认1小时）后，此接口开始每隔1秒触发一次
  */

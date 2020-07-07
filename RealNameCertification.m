@@ -542,6 +542,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     UITextField* idName;
     UITextField* idNunbers;
     UILabel* tips;
+    BOOL bSkip;
 }
 
 @end
@@ -660,11 +661,11 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     //截取身份证的出生日期并转换为日期格式
     NSString *dateStr = [self subsIDStrToDate:str];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-mm-dd";
+    formatter.dateFormat = @"YYYY-MM-dd";//注意这里的字母大小写
     NSDate *birthDate =  [formatter dateFromString:dateStr];
     NSTimeInterval dateDiff = [birthDate timeIntervalSinceNow];
     // 计算年龄
-    int age  =  trunc(dateDiff/(60*60*24))/365;
+    int age = trunc(dateDiff/(60*60*24))/365;//trunc 取整
     NSString *ageStr = [NSString stringWithFormat:@"%d", -age];
     return ageStr;
 }
@@ -695,6 +696,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    bSkip = false;
     self.view.backgroundColor = UIColor.grayColor;
     UITapGestureRecognizer* gr = [UITapGestureRecognizer new];
     [gr addTarget:self action:@selector(cancel:)];
@@ -788,6 +790,16 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
 }
 
 - (void)close:(id)sender {
+    if (self.block) {
+        RealNameParameterInfoRequestParameter* info = [RealNameParameterInfoRequestParameter new];
+        info.idCode = idNunbers.text;
+        info.idType = @"1";
+        info.name = idName.text;
+        info.signinType = @"online";
+        info.age = -111;
+        info.isSkip = YES;
+        self.block(info);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -820,9 +832,10 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
         info.name = idName.text;
         info.signinType = @"online";
         info.age = [[self calculateAgeStr:idNunbers.text]intValue];
+        info.isSkip = false;
         self.block(info);
     }
-    [self close:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
