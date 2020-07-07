@@ -46,6 +46,10 @@
 #import "SoomlaTraceback.h"
 #endif
 
+#ifdef ANTI_ADDICTION
+#import "Yodo1RealNameManager.h"
+#endif
+
 #import "Yodo1Model.h"
 
 NSString* const kFacebookAppId      = @"FacebookAppId";
@@ -99,13 +103,11 @@ static BOOL isInitialized = false;
     [Yodo1Ads initWithAppKey:sdkConfig.appKey];
 #endif
     
-#ifdef YODO1_ANALYTICS
     kYodo1Config = sdkConfig;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onlineParameterPaNotifi:)
                                                  name:kYodo1OnlineConfigFinishedNotification
                                                object:nil];
-#endif
 
 #ifdef YODO1_SNS
     //初始化sns
@@ -188,7 +190,6 @@ static BOOL isInitialized = false;
         [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
         [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
     }
-    
 }
 
 + (NSDictionary*)config {
@@ -223,8 +224,9 @@ static BOOL isInitialized = false;
     return _publishVersion;
 }
 
-#ifdef YODO1_ANALYTICS
+
 + (void)onlineParameterPaNotifi:(NSNotification *)notif {
+#ifdef YODO1_ANALYTICS
     AnalyticsInitConfig * config = [[AnalyticsInitConfig alloc]init];
     config.gaCustomDimensions01 = kYodo1Config.gaCustomDimensions01;
     config.gaCustomDimensions02 = kYodo1Config.gaCustomDimensions02;
@@ -233,8 +235,12 @@ static BOOL isInitialized = false;
     config.gaResourceItemTypes = kYodo1Config.gaResourceItemTypes;
     config.appsflyerCustomUserId = kYodo1Config.appsflyerCustomUserId;
     [[Yodo1AnalyticsManager sharedInstance]initializeAnalyticsWithConfig:config];
-}
 #endif
+#ifdef ANTI_ADDICTION
+    [Yodo1RealNameManager.shared realNameConfig];
+#endif
+}
+
 
 - (void)dealloc {
 #ifdef YODO1_ANALYTICS
