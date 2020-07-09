@@ -253,13 +253,14 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
             if ([[respo allKeys]containsObject:@"error_code"]) {
                 int error_code = [[respo objectForKey:@"error_code"]intValue];
+                NSString* errorMsg = [respo objectForKey:@"error"];
                 if (error_code==0) {
                     if (callback) {
-                        callback(true,0,@"Real Name is Success!");
+                        callback(true,0,errorMsg);
                     }
                 }else{
                     if (callback) {
-                        callback(false,0,@"Real Name is fail!");
+                        callback(false,0,errorMsg);
                     }
                 }
             }
@@ -296,7 +297,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString* response = [Yd1OpsTools stringWithJSONObject:responseObject error:nil];
 #ifdef DEBUG
-        NSLog(@"[ Yodo1 ] response:%@",response);
+        NSLog(@"[ Yodo1 ] real name of response:%@",response);
 #endif
         if (response) {
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
@@ -311,7 +312,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
                     }
                 }else{
                     if (callback) {
-                        callback(YES,age,errorMsg);
+                        callback(NO,age,errorMsg);
                     }
                 }
             }
@@ -400,7 +401,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
 }
 
 + (void)uploadAntiAddictionData:(AntiNotifyRequestParameter *)parameter
-                       callback:(void (^)(bool,NotifyType, int, int, int, NSString *))callback {
+                       callback:(void (^)(BOOL, NotifyType, int, int, int, NSString *))callback {
     Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:kRealNameBaseUrl]];
     manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];

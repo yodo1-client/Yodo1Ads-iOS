@@ -29,6 +29,7 @@
     __block NSTimer* timer;
     __block long tempRremainingTime;
     __block long notifyTime;
+    NSString* __useId;
 }
 
 - (NSString*)today;
@@ -132,7 +133,7 @@
     [Yd1OpsTools.cached removeObjectForKey:yesterdayKey];
     NSNumber* verifierCountNub = (NSNumber*)[Yd1OpsTools.cached objectForKey:todayKey];
     verifierCount = [verifierCountNub intValue];
-    _yId = (NSString*)[[Yd1OpsTools cached] objectForKey:@"__yd1_yid__"];
+    __useId = (NSString*)[[Yd1OpsTools cached] objectForKey:@"__yd1_useId__"];
 }
 
 - (void)realNameConfig {
@@ -196,65 +197,69 @@
         callback(false,ResultCodeFailed,-111,error);
         return;
     }
+    if (__useId && ![userId isEqualToString:__useId]) {
+        //切换账户
+        verifierCount = 0;
+        [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:0] forKey:self->todayKey];
+    }
     _userId = userId;
+    __useId = userId;
+    [Yd1OpsTools.cached setObject:userId? :@"" forKey:@"__yd1_useId__"];
+    
     typeof(self) weakSelf = self;
-    if (_yId) {
-        __block NSString* _yid = _yId;
-        [RealNameCertification userRealNameVerifyYid:_yid
-                                            callback:^(BOOL success,int age, NSString *errorMsg) {
-            if (age > 0) {
-                if (callback) {
-                    self->_age = age;
-                    ///已经实名过
-                    callback(true,ResultCodeSuccess,age,nil);
-                }
-            } else {
-                RealNameViewController * realName = [[RealNameViewController alloc]init];
-                realName.isSkipValidation = !weakSelf.onlineConfig.forced;
-                [controller presentViewController:realName animated:YES completion:nil];
-                [realName setBlock:^(RealNameParameterInfoRequestParameter *info) {
-                    
-                    if (info.isSkip) {//可跳过，试玩？
-                        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"user is clicked skip button!"}];
-                        if (callback) {
-                            callback(NO,ResultCodeCancel,info.age,error);
-                        }
-                        return;
-                    }
-                    
-                    if (info) {
-                        info.yId = _yid;
-                    }
-                    self->_age = info.age;
-                    [RealNameCertification realNameCertificationInfo:info
-                                                            callback:^(BOOL isRealName,int age, NSString *errorMsg) {
-                        NSError* error = nil;
-                        if (!isRealName && errorMsg) {
-                            error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorMsg}];
-                        }
-                        if (callback) {
-                            callback(isRealName,isRealName?ResultCodeSuccess:ResultCodeFailed,info.age,error);
-                        }
-                        self->verifierCount += 1;
-                        [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:self->verifierCount] forKey:self->todayKey];
-                    }];
-                }];
-            }
-        }];
-        return;
-    }
-    if (isHaveYid) {
-        return;
-    }
-    isHaveYid = true;
     [Yd1UCenter.shared deviceLoginWithPlayerId:_userId
                                       callback:^(YD1User * _Nullable user, NSError * _Nullable error) {
         if (callback) {
             self->_yId = user.yid;
             if (user.yid) {
-                [[Yd1OpsTools cached]setObject:user.yid forKey:@"__yd1_yid__"];
+                __block NSString* _yid = user.yid;
+                [RealNameCertification userRealNameVerifyYid:_yid
+                                                    callback:^(BOOL success,int age, NSString *errorMsg) {
+                    if (age > 0) {
+                        if (callback) {
+                            self->_age = age;
+                            ///已经实名过
+                            callback(true,ResultCodeSuccess,age,nil);
+                        }
+                    } else {
+                        RealNameViewController * realName = [[RealNameViewController alloc]init];
+                        realName.isSkipValidation = !weakSelf.onlineConfig.forced;
+                        [controller presentViewController:realName animated:YES completion:nil];
+                        [realName setBlock:^(RealNameParameterInfoRequestParameter *info) {
+                            
+                            if (info.isSkip) {//可跳过，试玩？
+                                NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"user is clicked skip button!"}];
+                                if (callback) {
+                                    callback(NO,ResultCodeCancel,info.age,error);
+                                }
+                                return;
+                            }
+                            
+                            if (info) {
+                                info.yId = _yid;
+                            }
+                            self->_age = info.age;
+                            [RealNameCertification realNameCertificationInfo:info
+                                                                    callback:^(BOOL isRealName,int age, NSString *errorMsg) {
+                                NSError* error = nil;
+                                if (!isRealName && errorMsg) {
+                                    error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorMsg}];
+                                }
+                                if (callback) {
+                                    callback(isRealName,isRealName?ResultCodeSuccess:ResultCodeFailed,info.age,error);
+                                }
+                                self->verifierCount += 1;
+                                [Yd1OpsTools.cached setObject:[NSNumber numberWithInt:self->verifierCount] forKey:self->todayKey];
+                            }];
+                        }];
+                    }
+                }];
+            } else {
+                NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"Failed to get yId!"}];
+                if (callback) {
+                    callback(NO,ResultCodeFailed,-111,error);
+                }
             }
-            [weakSelf indentifyUserId:self->_userId viewController:controller callback:callback];
         }
     }];
 }
@@ -448,6 +453,8 @@ void UnityIndentifyUser(const char *playerId,const char* gameObjectName, const c
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9001] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
+                [dict setObject:error.localizedDescription? :@"" forKey:@"error"];
+                
                 [data setObject:[NSNumber numberWithInt:age] forKey:@"age"];
                 Indentify ify = IndentifyRealName;
                 if (!Yodo1RealNameManager.shared.onlineConfig.verify_idcode_enabled) {
@@ -462,7 +469,7 @@ void UnityIndentifyUser(const char *playerId,const char* gameObjectName, const c
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9001] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -484,13 +491,13 @@ void UnityCreateImpubicProtectSystem(int age,const char* gameObjectName, const c
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9008] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
-                [dict setObject:msg? :@"" forKey:@"msg"];
+                [dict setObject:msg? :@"" forKey:@"error"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9008] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -538,6 +545,8 @@ void UnityStartPlaytimeKeeper(const char* gameObjectName, const char* methodName
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9003] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
+                [dict setObject:msg? :@"" forKey:@"error"];
+                
                 [data setObject:[NSNumber numberWithLong:playedTime] forKey:@"played_time"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
@@ -573,13 +582,13 @@ void UnityVerifyPaymentAmount(double price,const char* gameObjectName, const cha
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
-                [dict setObject:msg? :@"" forKey:@"msg"];
+                [dict setObject:msg? :@"" forKey:@"error"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -603,6 +612,8 @@ void UnityQueryPlayerRemainingTime(const char* gameObjectName, const char* metho
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                [dict setObject:msg? :@"" forKey:@"error"];
+                
                 [data setObject:[NSNumber numberWithDouble:remainingTime] forKey:@"remaining_time"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
@@ -610,7 +621,7 @@ void UnityQueryPlayerRemainingTime(const char* gameObjectName, const char* metho
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -632,6 +643,8 @@ void UnityQueryPlayerRemainingCost(const char* gameObjectName, const char* metho
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                [dict setObject:msg? :@"" forKey:@"error"];
+                
                 [data setObject:[NSNumber numberWithDouble:cost] forKey:@"remaining_cost"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
@@ -639,7 +652,7 @@ void UnityQueryPlayerRemainingCost(const char* gameObjectName, const char* metho
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -662,13 +675,15 @@ void UnityQueryImpubicProtectConfig(const char* gameObjectName, const char* meth
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9007] forKey:@"resulType"];
                 [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
+                [dict setObject:msg? :@"" forKey:@"error"];
+                
                 [dict setObject:respo? :@{} forKey:@"data"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9007] forKey:@"resulType"];
                     [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
