@@ -380,7 +380,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
                         }
                     }
                     if (callback) {
-                        callback(YES,remaining_time,remaining_cost,@"");
+                        callback(YES,remaining_time,remaining_cost/100,@"");
                     }
                 }else{
                     NSString* errorMsg = @"";
