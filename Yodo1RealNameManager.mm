@@ -285,7 +285,7 @@
     [RealNameCertification antiAddictionConfig:parameter
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
 #ifdef DEBUG
-        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 元,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
 #endif
         if (success && remainingTime > 0) {
             self->_remainingTime = remainingTime;
@@ -385,7 +385,7 @@
     [RealNameCertification antiAddictionConfig:parameter
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
 #ifdef DEBUG
-        NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        NSLog(@"[ Yodo1 ]  %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 元,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
 #endif
         if (callback) {
             callback(success,success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingTime);
@@ -405,7 +405,7 @@
                                       callback:^(BOOL success,int remainingTime, int remainingCost, NSString *errorMsg) {
         
 #ifdef DEBUG
-        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 分,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
+        NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 元,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
 #endif
         if (callback) {
             callback(success,success?ResultCodeSuccess:ResultCodeFailed,errorMsg,remainingCost);
