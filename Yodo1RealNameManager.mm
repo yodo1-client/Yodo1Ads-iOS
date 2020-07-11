@@ -709,7 +709,7 @@ void UnityUploadAntiAddictionData(const char* orderId,const char* money,const ch
     parameter.type = NotifyTypePay;
     parameter.consume_time = 0;
     //数组里面的字典
-    NSNumber* moneyNum = [NSNumber numberWithInt:ocMoney.intValue];
+    NSNumber* moneyNum = [NSNumber numberWithInt:ocMoney.intValue*100];
     parameter.orders = @[@{kAntiConsumeOrderid:ocOrderId,
                            kAntiConsumeMoney:moneyNum}];
     parameter.age = Yodo1RealNameManager.shared.age;
