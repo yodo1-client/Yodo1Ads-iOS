@@ -63,6 +63,7 @@ NSString* const kSoomlaAppKey       = @"SoomlaAppKey";
 
 static SDKConfig* kYodo1Config = nil;
 static BOOL isInitialized = false;
+static NSString* __kAppKey = @"";
 
 @interface Yodo1Manager ()
 
@@ -77,30 +78,23 @@ static BOOL isInitialized = false;
         NSLog(@"[Yodo1 SDK] has already been initialized!");
         return;
     }
+    __kAppKey = sdkConfig.appKey;
     isInitialized = true;
-    //同意上传数据
-    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
-    //16岁以上
-    BOOL isCCPA = [NSUserDefaults.standardUserDefaults boolForKey:@"below_age_data_consent"];
 #ifdef YODO1_SOOMLA
-    if (!isGDPR) {
-        [[SoomlaTraceback getInstance]setUserConsent:YES];
-    } else {
-        [[SoomlaTraceback getInstance]setUserConsent:NO];
-    }
-    NSString *appKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:kSoomlaAppKey];
+    [[SoomlaTraceback getInstance]setUserConsent:[Yodo1Ads isUserConsent]];
+    NSString *soomlaAppKey = [[Yodo1KeyInfo shareInstance]configInfoForKey:kSoomlaAppKey];
     SoomlaConfig *config = [SoomlaConfig config];
-    [[SoomlaTraceback getInstance] initializeWithAppKey:appKey andConfig:config];
+    [[SoomlaTraceback getInstance] initializeWithAppKey:soomlaAppKey andConfig:config];
 #endif
 
     //初始化Yodo1Track
     NSString* trackAppId = [[Yodo1KeyInfo shareInstance]configInfoForKey:kAdTrachingAppId];
-    [AnalyticsYodo1Track setAppkey:sdkConfig.appKey];
+    [AnalyticsYodo1Track setAppkey:__kAppKey];
     [AnalyticsYodo1Track initAdTrackingWithAppId:trackAppId
                                        channelId:kYodo1ChannelId];
 #ifndef UNITY_PROJECT
     //初始化广告，在线参数
-    [Yodo1Ads initWithAppKey:sdkConfig.appKey];
+    [Yodo1Ads initWithAppKey:__kAppKey];
 #endif
     
     kYodo1Config = sdkConfig;
@@ -169,27 +163,6 @@ static BOOL isInitialized = false;
         NSLog(@"%@",Yd1UCenterManager.shared);
     }];
 #endif
-    NSString* buglyAppId = [Yd1OnlineParameter.shared stringConfigWithKey:@"BuglyAnalytic_AppId" defaultValue:@""];
-    if (buglyAppId.length > 0 && isGDPR && isCCPA) {
-        BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
-#ifdef DEBUG
-        buglyConfig.debugMode = YES;
-#endif
-        buglyConfig.channel = @"appstore";
-        
-        [Bugly startWithAppId:buglyAppId config:buglyConfig];
-        
-        NSString* sdkInfo = [NSString stringWithFormat:@"%@,%@",[Yodo1Manager publishType],[Yodo1Manager publishVersion]];
-        
-        [Bugly setUserIdentifier:Bugly.buglyDeviceId];
-        [Bugly setUserValue:@"appstore" forKey:@"ChannelCode"];
-        [Bugly setUserValue:sdkConfig.appKey forKey:@"GameKey"];
-        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"DeviceID"];
-        [Bugly setUserValue:sdkInfo forKey:@"SdkInfo"];
-        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"IDFA"];
-        [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
-        [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
-    }
 }
 
 + (NSDictionary*)config {
@@ -238,6 +211,30 @@ static BOOL isInitialized = false;
 #endif
 #ifdef ANTI_ADDICTION
     [Yodo1RealNameManager.shared realNameConfig];
+#endif
+    
+#ifndef YODO1_ADS
+    NSString* buglyAppId = [Yd1OnlineParameter.shared stringConfigWithKey:@"BuglyAnalytic_AppId" defaultValue:@""];
+    if (buglyAppId.length > 0 && [Yodo1Ads isUserConsent] && ![Yodo1Ads isTagForUnderAgeOfConsent]) {
+        BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
+#ifdef DEBUG
+        buglyConfig.debugMode = YES;
+#endif
+        buglyConfig.channel = @"appstore";
+        
+        [Bugly startWithAppId:buglyAppId config:buglyConfig];
+        
+        NSString* sdkInfo = [NSString stringWithFormat:@"%@,%@",[Yodo1Manager publishType],[Yodo1Manager publishVersion]];
+        
+        [Bugly setUserIdentifier:Bugly.buglyDeviceId];
+        [Bugly setUserValue:@"appstore" forKey:@"ChannelCode"];
+        [Bugly setUserValue:__kAppKey forKey:@"GameKey"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"DeviceID"];
+        [Bugly setUserValue:sdkInfo forKey:@"SdkInfo"];
+        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"IDFA"];
+        [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
+        [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
+    }
 #endif
 }
 

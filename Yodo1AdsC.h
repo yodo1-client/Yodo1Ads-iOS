@@ -136,6 +136,12 @@ public:
     static void SetUserConsent(BOOL consent);
     
     /**
+     *  return YES
+     *  Agrees to collect data. The default is to collect data
+     */
+    static bool IsUserConsent();
+    
+    /**
     * In the US, the Children’s Online Privacy Protection Act (COPPA) imposes
     * certain requirements on operators of online services that (a)
     * have actual knowledge that the connected user is a child under 13 years of age,
@@ -145,12 +151,26 @@ public:
     static void SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge);
     
     /**
+     *  return YES
+     *  It means
+     *  under the age of 16
+     */
+    static bool IsTagForUnderAgeOfConsent();
+    
+    /**
      * Set whether or not user has opted out of the sale of their
      * personal information.
      * doNotSell 'YES' if the user has opted out of the sale of
      * their personal information.
      */
     static void SetDoNotSell(BOOL doNotSell);
+    
+    /**
+     *  return YES
+     *  Indicates that the user has chosen not to
+     * sell their personal information
+     */
+    static bool IsDoNotSell();
 };
 
 #endif /* Yodo1AdsC_h */

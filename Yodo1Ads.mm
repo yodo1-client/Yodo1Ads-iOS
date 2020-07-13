@@ -86,7 +86,7 @@ typedef enum {
 }
 
 + (UIViewController*)getRootViewController {
-     UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray* windows = [[UIApplication sharedApplication] windows];
         for (UIWindow* _window in windows) {
@@ -259,7 +259,7 @@ typedef enum {
         if (finished) {
             s_videoCallback(Yodo1AdsEventFinish,nil);
         }else{
-             s_videoCallback(Yodo1AdsEventClose,nil);
+            s_videoCallback(Yodo1AdsEventClose,nil);
         }
     }
     if (finished) {
@@ -531,9 +531,9 @@ static BOOL bSensorsSwitch = false;
     
     //初始化数据统计
     //TODO 暂时停止Yodo1 统计
-//    [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
-//    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"appstore"];
-
+    //    [[Yodo1Analytics instance]releaseSDKVersion:kYodo1AdsVersion];
+    //    [[Yodo1Analytics instance]initWithAppKey:appKey channelId:@"appstore"];
+    
 #ifdef YODO1_ADS
     //初始化Banner
     [[Yodo1BannerManager sharedInstance]initBannerSDK:[Yodo1AdsBannerDelegate instance]];
@@ -572,15 +572,9 @@ static BOOL bSensorsSwitch = false;
                                 @"errorCode":[NSNumber numberWithInt:code]}];
     }
     [NSNotificationCenter.defaultCenter removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
-    
-    //同意上传数据
-    BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
-    //16岁以上
-    BOOL isCCPA = [NSUserDefaults.standardUserDefaults boolForKey:@"below_age_data_consent"];
-    
     ///Bugly
     NSString* buglyAppId = [Yd1OnlineParameter.shared stringConfigWithKey:@"BuglyAnalytic_AppId" defaultValue:@""];
-    if (buglyAppId.length > 0 && isGDPR && isCCPA) {
+    if (buglyAppId.length > 0 && [Yodo1Ads isUserConsent] && ![Yodo1Ads isTagForUnderAgeOfConsent]) {
         BuglyConfig* buglyConfig = [[BuglyConfig alloc]init];
 #ifdef DEBUG
         buglyConfig.debugMode = YES;
@@ -756,7 +750,7 @@ static BOOL bSensorsSwitch = false;
 #ifdef YODO1_ADS
     [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]
                                           awardBlock:^(bool finished) {
-                                            
+        
     }];
 #endif
 }
@@ -767,16 +761,37 @@ static BOOL bSensorsSwitch = false;
 #endif
 }
 
++ (BOOL)isUserConsent {
+#ifdef YODO1_ADS
+    return [Yodo1AdConfigHelper.instance isUserConsent];
+#endif
+    return YES;
+}
+
 + (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge {
 #ifdef YODO1_ADS
     [[Yodo1AdConfigHelper instance]setTagForUnderAgeOfConsent:isBelowConsentAge];
 #endif
 }
 
++ (BOOL)isTagForUnderAgeOfConsent {
+#ifdef YODO1_ADS
+    return [Yodo1AdConfigHelper.instance isTagForUnderAgeOfConsent];
+#endif
+    return NO;
+}
+
 + (void)setDoNotSell:(BOOL)doNotSell {
 #ifdef YODO1_ADS
     [[Yodo1AdConfigHelper instance]setDoNotSell:doNotSell];
 #endif
+}
+
++ (BOOL)isDoNotSell {
+#ifdef YODO1_ADS
+    return [Yodo1AdConfigHelper.instance isDoNotSell];
+#endif
+    return NO;
 }
 
 @end
@@ -787,104 +802,120 @@ static BOOL bSensorsSwitch = false;
 #ifdef __cplusplus
 
 extern "C" {
-    void Unity3dInitWithAppKey(const char *appKey,const char* gameObject)
-    {
-        NSString* m_appKey = Yodo1CreateNSString(appKey);
-        NSCAssert(m_appKey != nil, @"AppKey 没有设置!");
-        
-        NSString* m_gameObject = Yodo1CreateNSString(gameObject);
-        if (m_gameObject) {
-            kYodo1AdsGameObject = m_gameObject;
-        }
-        NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
-        
-        [Yodo1Ads initWithAppKey:m_appKey];
-    }
+
+void Unity3dInitWithAppKey(const char *appKey,const char* gameObject)
+{
+    NSString* m_appKey = Yodo1CreateNSString(appKey);
+    NSCAssert(m_appKey != nil, @"AppKey 没有设置!");
     
-    void Unity3dSetLogEnable(BOOL enable)
-    {
-        [Yodo1Ads setLogEnable:enable];
+    NSString* m_gameObject = Yodo1CreateNSString(gameObject);
+    if (m_gameObject) {
+        kYodo1AdsGameObject = m_gameObject;
     }
+    NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
+    
+    [Yodo1Ads initWithAppKey:m_appKey];
+}
+
+void Unity3dSetLogEnable(BOOL enable)
+{
+    [Yodo1Ads setLogEnable:enable];
+}
 
 #pragma mark - Unity3dBanner
-    
-    void Unity3dSetBannerAlign(Yodo1AdsCBannerAdAlign align)
-    {
-        [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
-    }
-    
-    void Unity3dSetBannerOffset(float x,float y)
-    {
-        [Yodo1Ads setBannerOffset:CGPointMake(x,y)];
-    }
-    
-    void Unity3dSetBannerScale(float sx,float sy)
-    {
-        [Yodo1Ads setBannerScale:sx sy:sy];
-    }
-    
-    void UnityShowBanner()
-    {
-        [Yodo1Ads showBanner];
-    }
-    
-    void Unity3dHideBanner()
-    {
-        [Yodo1Ads hideBanner];
-    }
-    
-    void Unity3dRemoveBanner()
-    {
-        [Yodo1Ads removeBanner];
-    }
+
+void Unity3dSetBannerAlign(Yodo1AdsCBannerAdAlign align)
+{
+    [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
+}
+
+void Unity3dSetBannerOffset(float x,float y)
+{
+    [Yodo1Ads setBannerOffset:CGPointMake(x,y)];
+}
+
+void Unity3dSetBannerScale(float sx,float sy)
+{
+    [Yodo1Ads setBannerScale:sx sy:sy];
+}
+
+void UnityShowBanner()
+{
+    [Yodo1Ads showBanner];
+}
+
+void Unity3dHideBanner()
+{
+    [Yodo1Ads hideBanner];
+}
+
+void Unity3dRemoveBanner()
+{
+    [Yodo1Ads removeBanner];
+}
 
 
 #pragma mark - Unity3dInterstitial
-    
-    bool Unity3dInterstitialIsReady()
-    {
-        return [Yodo1Ads interstitialIsReady];
 
-    }
+bool Unity3dInterstitialIsReady()
+{
+    return [Yodo1Ads interstitialIsReady];
     
-    
-    void Unity3dShowInterstitial()
-    {
-        [Yodo1Ads showInterstitial];
-    }
-    
+}
+
+
+void Unity3dShowInterstitial()
+{
+    [Yodo1Ads showInterstitial];
+}
+
 
 #pragma mark - Unity3dVideo
-    
-    bool Unity3dVideoIsReady()
-    {
-        return [Yodo1Ads videoIsReady];
-    }
-    
-    void Unity3dShowVideo()
-    {
-        [Yodo1Ads showVideo];
-    }
+
+bool Unity3dVideoIsReady()
+{
+    return [Yodo1Ads videoIsReady];
+}
+
+void Unity3dShowVideo()
+{
+    [Yodo1Ads showVideo];
+}
 
 #pragma mark - Privacy
 
-    void Unity3dSetUserConsent(BOOL consent)
-    {
-        [Yodo1Ads setUserConsent:consent];
-    }
+void Unity3dSetUserConsent(BOOL consent)
+{
+    [Yodo1Ads setUserConsent:consent];
+}
 
-    void Unity3dSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
-    {
-        [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
-    }
+bool Unity3dIsUserConsent()
+{
+    return [Yodo1Ads isUserConsent];
+}
+
+void Unity3dSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
+{
+    [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
+}
+
+bool Unity3dIsTagForUnderAgeOfConsent()
+{
+    return [Yodo1Ads isTagForUnderAgeOfConsent];
+}
 
 void Unity3dSetDoNotSell(BOOL doNotSell)
 {
     [Yodo1Ads setDoNotSell:doNotSell];
 }
 
+bool Unity3dIsDoNotSell()
+{
+    return [Yodo1Ads isDoNotSell];
 }
 
+
+}
 #endif
 
 
@@ -991,12 +1022,27 @@ void Yodo1AdsC::SetUserConsent(BOOL consent)
     [Yodo1Ads setUserConsent:consent];
 }
 
+bool Yodo1AdsC::IsUserConsent()
+{
+    return [Yodo1Ads isUserConsent];
+}
+
 void Yodo1AdsC::SetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
 {
     [Yodo1Ads setTagForUnderAgeOfConsent:isBelowConsentAge];
 }
 
+bool Yodo1AdsC::IsTagForUnderAgeOfConsent()
+{
+    return [Yodo1Ads isTagForUnderAgeOfConsent];
+}
+
 void Yodo1AdsC::SetDoNotSell(BOOL doNotSell)
 {
     [Yodo1Ads setDoNotSell:doNotSell];
+}
+
+bool Yodo1AdsC::IsDoNotSell()
+{
+    return [Yodo1Ads isDoNotSell];
 }

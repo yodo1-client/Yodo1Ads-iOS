@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
                                 UnityAds v3.4.6
                                 Inmobi v9.0.7
                             4.防沉迷 【fix bug】
+                            5.fix bug of Bugly
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -63,7 +64,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1AdvertSDK','4.2.1'
         ss.dependency 'Yodo1UDID','4.1.0'
         ss.dependency 'Yodo1SaAnalytics','4.1.0'
-        ss.dependency 'Yodo1Bugly','4.1.0'
+        ss.dependency 'Yodo1Bugly','4.1.1'
         ss.dependency 'Yodo1Reachability', '4.1.0'
         ss.dependency 'Yodo1AFNetworking', '4.1.0'
 

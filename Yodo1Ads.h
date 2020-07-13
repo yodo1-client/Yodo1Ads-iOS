@@ -106,6 +106,10 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //NO if they are not.
 + (void)setUserConsent:(BOOL)consent;
 
+// return YES
+// Agrees to collect data. The default is to collect data
++ (BOOL)isUserConsent;
+
 //In the US, the Children’s Online Privacy Protection Act (COPPA) imposes
 //certain requirements on operators of online services that (a)
 //have actual knowledge that the connected user is a child under 13 years of age,
@@ -113,8 +117,17 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
 + (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
 
+// return YES It means
+// under the age of 16
++ (BOOL)isTagForUnderAgeOfConsent;
+
 //Set whether or not user has opted out of the sale of their personal information.
 //doNotSell 'YES' if the user has opted out of the sale of their personal information.
 + (void)setDoNotSell:(BOOL)doNotSell;
+
+// return YES
+// Indicates that the user has chosen not to
+// sell their personal information
++ (BOOL)isDoNotSell;
 
 @end
