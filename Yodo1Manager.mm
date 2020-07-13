@@ -139,7 +139,7 @@ static NSString* __kAppKey = @"";
     
 #ifdef YODO1_FACEBOOK_ANALYTICS
     //初始化Facebook（启动统计激活）
-    if (!isGDPR) {
+    if (![Yodo1Ads isUserConsent]) {
         [FBSDKSettings setAutoInitEnabled:YES];
         [FBSDKSettings setAutoLogAppEventsEnabled:YES];
         [FBSDKSettings setLimitEventAndDataUsage:NO];
