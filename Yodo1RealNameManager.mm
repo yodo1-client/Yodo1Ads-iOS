@@ -442,7 +442,7 @@ void UnityIndentifyUser(const char *playerId,const char* gameObjectName, const c
     NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
     NSString* ocMethodName = Yodo1CreateNSString(methodName);
     
-    NSString* ocPlayerId = Yodo1CreateNSString(playerId);
+    NSString* ocPlayerId = @"dfmjdisi";//Yodo1CreateNSString(playerId);
     
     [Yodo1RealNameManager.shared indentifyUserId:ocPlayerId
                                   viewController:[Yodo1Commons getRootViewController]

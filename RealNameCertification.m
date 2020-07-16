@@ -276,7 +276,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
 }
 
 + (void)userRealNameVerifyYid:(NSString *)yid
-                     callback:(void (^)(bool,int, NSString *))callback {
+                     callback:(void (^)(BOOL,int, NSString *))callback {
     Yodo1AFHTTPSessionManager *manager = [[Yodo1AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:kRealNameBaseUrl]];
     manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
@@ -751,6 +751,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     idName.layer.masksToBounds = YES;
     idName.layer.borderColor = [[UIColor grayColor]CGColor];
     idName.layer.borderWidth = 0.5f;
+    idName.textColor = UIColor.blackColor;
+    idName.backgroundColor = UIColor.whiteColor;
+    
     [background addSubview:idName];
     
     idNunbers = [UITextField new];
@@ -765,6 +768,9 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     idNunbers.layer.masksToBounds = YES;
     idNunbers.layer.borderColor = [[UIColor grayColor]CGColor];
     idNunbers.layer.borderWidth = 0.5f;
+    idNunbers.textColor = UIColor.blackColor;
+    idNunbers.backgroundColor = UIColor.whiteColor;
+    
     [background addSubview:idNunbers];
     
     tips = [UILabel new];
@@ -826,6 +832,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
         tips.hidden = NO;
         return;
     }
+    
     if (self.block) {
         RealNameParameterInfoRequestParameter* info = [RealNameParameterInfoRequestParameter new];
         info.idCode = idNunbers.text;
@@ -845,10 +852,6 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     return YES;
 }
@@ -859,7 +862,6 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason  API_AVAILABLE(ios(10.0)){
-    
     tips.text = @"";
     tips.hidden = YES;
 }
@@ -869,12 +871,10 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     return YES;
 }
 
-- (void)textFieldDidChangeSelection:(UITextField *)textField API_AVAILABLE(ios(13.0), tvos(13.0)) {
-}
-
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     return YES;
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
