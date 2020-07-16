@@ -9,9 +9,9 @@
 #import "RealNameCertification.h"
 #import <Yodo1AFNetworking/Yodo1AFNetworking.h>
 #import "Yodo1Tool+Commons.h"
-#define RNDEBUG     1
+#define RNDEBUG     0
 
-#if RNDEBUG == 0
+#if RNDEBUG == 1
 NSString* const kRealNameBaseUrl = @"http://olc-test.yodo1.int:8080";
 #else
 NSString* const kRealNameBaseUrl = @"https://anti.yodo1api.com";
