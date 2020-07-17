@@ -69,6 +69,8 @@ typedef void(^VerifyPaymentCallback)(BOOL success,int resultCode, NSString* msg)
 @property (nonatomic,strong)ConsumePlaytimeCallback playTimeCallback;
 @property (nonatomic,strong)PlaytimeOverCallback playtimeOverCallback;
 @property (nonatomic,strong)VerifyPaymentCallback verifyPaymentCallback;
+@property (nonatomic,assign,readonly)long playerRemainingTime;
+@property (nonatomic,assign,readonly)int playerRemainingCost;
 
 + (instancetype)shared;
 

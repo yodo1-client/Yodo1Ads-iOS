@@ -790,7 +790,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
     if (_isSkipValidation) {
         UIButton* close = [UIButton buttonWithType:UIButtonTypeSystem];
         close.frame = CGRectMake(w - 44, 10, 44, 30);
-        [close setTitle:@"跳过" forState:UIControlStateNormal];
+        [close setTitle:@"体验" forState:UIControlStateNormal];
         [close addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
         [background addSubview:close];
     }

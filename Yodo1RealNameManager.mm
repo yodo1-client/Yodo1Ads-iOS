@@ -287,6 +287,9 @@
 #ifdef DEBUG
         NSLog(@"[ Yodo1 ] %@",[NSString stringWithFormat:@"剩余可玩时长:%d 秒,剩余可用的购买金额:%d 元,errorMsg:%@",remainingTime,remainingCost,errorMsg]);
 #endif
+        if (remainingCost > 0) {
+            self->_playerRemainingCost = remainingCost;
+        }
         if (success && remainingTime > 0) {
             self->_remainingTime = remainingTime;
             self->tempRremainingTime = remainingTime;
@@ -345,6 +348,10 @@
         }
     }
     _remainingTime -= 1;
+    _playerRemainingTime = _remainingTime;
+#ifdef DEBUG
+    NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
+#endif
 }
 
 - (void)startPlaytimeKeeper {
@@ -370,6 +377,9 @@
                                 callback:^(BOOL success,int errorCode, NSString *errorMsg) {
         if (weakSelf.verifyPaymentCallback) {
             weakSelf.verifyPaymentCallback(success,errorCode, errorMsg);
+        }
+        if (success) {
+            weakSelf->_playerRemainingCost -=  price;
         }
     }];
 }
@@ -605,16 +615,14 @@ void UnityQueryPlayerRemainingTime(const char* gameObjectName, const char* metho
 {
     NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
     NSString* ocMethodName = Yodo1CreateNSString(methodName);
-    [Yodo1RealNameManager.shared queryPlayerRemainingTime:^(BOOL success,int resultCode, NSString *msg, double remainingTime) {
-        dispatch_async(dispatch_get_main_queue(), ^{
             if(ocGameObjName && ocMethodName){
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
-                [dict setObject:msg? :@"" forKey:@"error"];
-                
-                [data setObject:[NSNumber numberWithDouble:remainingTime] forKey:@"remaining_time"];
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
+        [dict setObject:@"" forKey:@"error"];
+        [data setObject:[NSNumber numberWithDouble:Yodo1RealNameManager.shared.playerRemainingTime] forKey:@"remaining_time"];
+        NSLog(@"[ Yodo1 ]:剩余时长->%ld 秒",Yodo1RealNameManager.shared.playerRemainingTime);
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
@@ -628,24 +636,21 @@ void UnityQueryPlayerRemainingTime(const char* gameObjectName, const char* metho
                                  [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [msg cStringUsingEncoding:NSUTF8StringEncoding]);
             }
-        });
-    }];
 }
 
 void UnityQueryPlayerRemainingCost(const char* gameObjectName, const char* methodName)
 {
     NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
     NSString* ocMethodName = Yodo1CreateNSString(methodName);
-    [Yodo1RealNameManager.shared queryPlayerRemainingCost:^(BOOL success, int resultCode, NSString *msg, double cost) {
-        dispatch_async(dispatch_get_main_queue(), ^{
             if(ocGameObjName && ocMethodName){
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:success?1:0] forKey:@"code"];
-                [dict setObject:msg? :@"" forKey:@"error"];
-                
-                [data setObject:[NSNumber numberWithDouble:cost] forKey:@"remaining_cost"];
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
+        [dict setObject:@"" forKey:@"error"];
+        int remainConst = Yodo1RealNameManager.shared.playerRemainingCost;
+        [data setObject:[NSNumber numberWithInt:remainConst] forKey:@"remaining_cost"];
+         NSLog(@"[ Yodo1 ]:剩余消费->%d元",remainConst);
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
@@ -659,8 +664,6 @@ void UnityQueryPlayerRemainingCost(const char* gameObjectName, const char* metho
                                  [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [msg cStringUsingEncoding:NSUTF8StringEncoding]);
             }
-        });
-    }];
 }
 
 void UnityQueryImpubicProtectConfig(const char* gameObjectName, const char* methodName)
