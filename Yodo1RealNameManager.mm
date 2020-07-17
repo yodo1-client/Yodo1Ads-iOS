@@ -340,18 +340,12 @@
         }];
         return;
     } else if(_remainingTime <= notifyTime) {//通知客户端
-#ifdef DEBUG
-        NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
-#endif
         if (self.playTimeCallback) {
             self.playTimeCallback(YES,(tempRremainingTime - _remainingTime), _remainingTime < 0? :0);
         }
     }
     _remainingTime -= 1;
     _playerRemainingTime = _remainingTime;
-#ifdef DEBUG
-    NSLog(@"[ Yodo1 ]  已玩时间:%ld,剩余多少时间:%ld",(tempRremainingTime - _remainingTime),_remainingTime);
-#endif
 }
 
 - (void)startPlaytimeKeeper {
