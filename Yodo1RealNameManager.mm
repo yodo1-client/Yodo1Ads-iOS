@@ -192,11 +192,6 @@
         return;
     }
     
-    if (verifierCount >= verifierMaxCount) {
-        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
-        callback(false,ResultCodeFailed,-111,error);
-        return;
-    }
     if (__useId && ![userId isEqualToString:__useId]) {
         //切换账户
         verifierCount = 0;
@@ -222,6 +217,11 @@
                             callback(true,ResultCodeSuccess,age,nil);
                         }
                     } else {
+                        if (self->verifierCount >= self->verifierMaxCount) {
+                               NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
+                               callback(false,ResultCodeFailed,-111,error);
+                               return;
+                        }
                         RealNameViewController * realName = [[RealNameViewController alloc]init];
                         realName.isSkipValidation = !weakSelf.onlineConfig.forced;
                         [controller presentViewController:realName animated:YES completion:nil];

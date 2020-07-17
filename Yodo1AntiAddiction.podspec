@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiAddiction'
-    s.version          = '4.0.6'
+    s.version          = '4.0.7'
     s.summary          = '灵活使用在线配置,fix bug/ 转换为元'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
