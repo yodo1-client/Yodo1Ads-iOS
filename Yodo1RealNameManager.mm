@@ -378,9 +378,6 @@
         if (weakSelf.verifyPaymentCallback) {
             weakSelf.verifyPaymentCallback(success,errorCode, errorMsg);
         }
-        if (success) {
-            weakSelf->_playerRemainingCost -=  price;
-        }
     }];
 }
 
@@ -721,6 +718,9 @@ void UnityUploadAntiAddictionData(const char* orderId,const char* money,const ch
                                           callback:^(BOOL success, NotifyType type, int errorCode, int remainingTime, int remainingCost, NSString *errorMsg) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(ocGameObjName && ocMethodName){
+                if (success) {
+                    Yodo1RealNameManager.shared.playerRemainingCost -= [ocMoney intValue];
+                }
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 NSMutableDictionary* data = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9010] forKey:@"resulType"];
