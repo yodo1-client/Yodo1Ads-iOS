@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '3.13.5'
-    s.summary          = 'v3.13.5- 2020-07-7
+    s.version          = '4.0.0'
+    s.summary          = 'v4.0.0- 2020-07-20
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
                                 Inmobi v9.0.7
                             4.防沉迷 【fix bug】
                             5.fix bug of Bugly
+                            6.降低vungle sdk 版本v6.5.3
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -432,7 +433,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1Vungle','4.1.5'
+        ss.dependency 'YD1Vungle','4.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -612,7 +613,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobVungle','4.1.5'
+        ss.dependency 'AdmobVungle','4.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -779,7 +780,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxVungle','4.1.5'
+        ss.dependency 'ApplovinMaxVungle','4.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
