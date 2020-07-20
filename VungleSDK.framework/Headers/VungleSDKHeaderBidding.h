@@ -25,13 +25,6 @@
  */
 - (NSString *)bidTokenForPlacement:(NSString *)placement;
 
-/**
- * This is a synchronous method to fetch super token. This method
- * will return nil if it is unable to find an available token.
- *
- */
-- (NSString *)currentSuperToken;
-
 @end
 
 @protocol VungleSDKHeaderBidding
