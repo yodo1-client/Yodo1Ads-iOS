@@ -582,19 +582,20 @@ void UnityVerifyPaymentAmount(double price,const char* gameObjectName, const cha
             if(ocGameObjName && ocMethodName){
                 NSMutableDictionary* dict = [NSMutableDictionary dictionary];
                 [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
-                [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
+                [dict setObject:[NSNumber numberWithInt:success?1:resultCode] forKey:@"code"];
                 [dict setObject:msg? :@"" forKey:@"error"];
                 NSError* parseJSONError = nil;
                 NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 if(parseJSONError){
                     [dict setObject:[NSNumber numberWithInt:9004] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:resultCode] forKey:@"code"];
+                    [dict setObject:[NSNumber numberWithInt:success?1:resultCode] forKey:@"code"];
                     [dict setObject:@"Convert result to json failed!" forKey:@"error"];
                     msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
                 }
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                NSLog(@"msg = %@", msg);
             }
         });
     }];
