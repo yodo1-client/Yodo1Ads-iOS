@@ -747,21 +747,36 @@ bool UnityIsChineseMainland()
     CTCarrier *carrier = [info subscriberCellularProvider];
     //运营商可用
     BOOL use = carrier.allowsVOIP;
+    BOOL isCNTerritory = true;
+    BOOL isCNSimKa = true;
+    BOOL isCNIP = true;
+    if(![[Yodo1Commons territory]isEqualToString:@"CN"]){//地域
+        isCNTerritory = false;
+    }
+    if (Yodo1RealNameManager.shared.onlineConfig.remaining_time == -1 ||Yodo1RealNameManager.shared.onlineConfig.remaining_cost == -1 ) {//IP
+        isCNIP = false;
+    }
+    
     if(use){
         NSString *code = carrier.isoCountryCode;
-        if([code isEqualToString:@"cn"]){
-            return true;
+        if(![code isEqualToString:@"cn"]){//Sim卡
+            isCNSimKa = false;
         }
-    }
-    if([[Yodo1Commons territory]isEqualToString:@"CN"]){
+        if (!isCNSimKa) {
+            return false;
+        }
+        if (!isCNIP) {
+            return false;
+        }
         return true;
     }
-    
-    if (Yodo1RealNameManager.shared.playerRemainingCost != -1 ||Yodo1RealNameManager.shared.playerRemainingTime != -1 ) {
-        return true;
+    if (!isCNTerritory) {
+        return false;
     }
-    
-    return false;
+    if (!isCNIP) {
+        return false;
+    }
+    return true;
 }
 
 }
