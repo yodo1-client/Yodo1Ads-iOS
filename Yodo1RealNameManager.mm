@@ -595,7 +595,6 @@ void UnityVerifyPaymentAmount(double price,const char* gameObjectName, const cha
                 UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
                                  [msg cStringUsingEncoding:NSUTF8StringEncoding]);
-                NSLog(@"msg = %@", msg);
             }
         });
     }];
