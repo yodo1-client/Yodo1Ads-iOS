@@ -15,6 +15,8 @@
 #import "Yodo1Tool+Commons.h"
 #import "Yodo1UnityTool.h"
 #import "Yodo1Commons.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @interface Yodo1RealNameManager () {
     BOOL isHaveYid;
@@ -737,6 +739,29 @@ void UnityUploadAntiAddictionData(const char* orderId,const char* money,const ch
             }
         });
     }];;
+}
+
+bool UnityIsChineseMainland()
+{
+    CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [info subscriberCellularProvider];
+    //运营商可用
+    BOOL use = carrier.allowsVOIP;
+    if(use){
+        NSString *code = carrier.isoCountryCode;
+        if([code isEqualToString:@"cn"]){
+            return true;
+        }
+    }
+    if([[Yodo1Commons territory]isEqualToString:@"CN"]){
+        return true;
+    }
+    
+    if (Yodo1RealNameManager.shared.playerRemainingCost != -1 ||Yodo1RealNameManager.shared.playerRemainingTime != -1 ) {
+        return true;
+    }
+    
+    return false;
 }
 
 }

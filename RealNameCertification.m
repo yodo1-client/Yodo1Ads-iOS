@@ -11,14 +11,23 @@
 #import "Yodo1Tool+Commons.h"
 #define RNDEBUG     0
 
-#if RNDEBUG == 1
+#if RNDEBUG == 1 //测试环境
 NSString* const kRealNameBaseUrl = @"http://olc-test.yodo1.int:8080";
+#elif RNDEBUG == 2 //准生产环境
+NSString* const kRealNameBaseUrl = @"https://anti-stg.yodo1api.com";
 #else
 NSString* const kRealNameBaseUrl = @"https://anti.yodo1api.com";
 #endif
 
 /// 实名验证BaseUrl
+#if RNDEBUG == 1 //测试环境
+NSString* const kRNBaseUrl = @"https://api-ucap-test.yodo1.com";
+#elif RNDEBUG == 2 //准生产环境
+NSString* const kRNBaseUrl = @"https://uc-ap-stg.yodo1api.com";
+#else
 NSString* const kRNBaseUrl = @"https://uc-ap.yodo1api.com";
+#endif
+
 /// 实名验证
 NSString* const kRealNameUrl = @"/uc_ap/channel/yodo1/signInRealName";
 
@@ -203,6 +212,14 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
                         config.verifier = verifier;
                         config.max_count = max_count;
                         config.level = level;
+                        if ([[data allKeys]containsObject:@"remaining_cost"]) {
+                            config.remaining_cost = [[data objectForKey:@"remaining_cost"]intValue];
+                        }
+                        
+                        if ([[data allKeys]containsObject:@"remaining_time"]) {
+                            config.remaining_time = [[data objectForKey:@"remaining_time"]intValue];
+                        }
+                        
                         if (callback) {
                             callback(config,@"");
                         }

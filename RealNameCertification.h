@@ -19,6 +19,8 @@
 @property (nonatomic,strong)NSString* verifier;//验证方:client，server
 @property (nonatomic,assign)int max_count;//最大验证次数
 @property (nonatomic,assign)int level;//0 表示不可以进游戏，1可以进游戏
+@property (nonatomic,assign)int remaining_time;//-1 表示海外，不需要实名验证
+@property (nonatomic,assign)int remaining_cost;//-1 表示海外，不需要实名验证
 @end
 
 @interface RealNameParameterInfoRequestParameter : NSObject
