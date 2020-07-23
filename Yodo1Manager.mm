@@ -16,9 +16,6 @@
 #import "Yodo1UDIDManager.h"
 #import "Bugly.h"
 
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCarrier.h>
-
 #import "Yodo1Ads.h"
 
 #ifdef YODO1_ANALYTICS
@@ -303,24 +300,6 @@ extern "C" {
     char* UnityUserId(){
         const char* userId = Yd1OpsTools.keychainUUID.UTF8String;
         return Yodo1MakeStringCopy(userId);
-    }
-
-    bool UnityIsChineseMainland()
-    {
-        CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
-        CTCarrier *carrier = [info subscriberCellularProvider];
-            //运营商可用
-        BOOL use = carrier.allowsVOIP;
-        if(use){
-            NSString *code = carrier.isoCountryCode;
-            if([code isEqualToString:@"cn"]){
-                return true;
-            }
-        }
-        if([[Yodo1Commons territory]isEqualToString:@"CN"]){
-            return true;
-        }
-        return false;
     }
 }
 

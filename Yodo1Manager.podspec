@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.0.0'
-    s.summary          = 'v4.0.0- 2020-07-20
+    s.version          = '4.0.1'
+    s.summary          = 'v4.0.1- 2020-07-23
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
                             4.防沉迷 【fix bug】
                             5.fix bug of Bugly
                             6.降低vungle sdk 版本v6.5.3
+                            7.修复判断中国大陆的接口
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -104,7 +105,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1UCenter','4.2.2'
+        ss.dependency 'Yodo1UCenter','4.2.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -253,7 +254,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1AntiAddiction','4.0.9'
+        ss.dependency 'Yodo1AntiAddiction','4.1.0'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
