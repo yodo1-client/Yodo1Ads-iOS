@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '4.2.2'
+    s.version          = '4.2.3'
     s.summary          = '全新重构的UCenter,添加Yodo1Tool+OpsParameters引用'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
