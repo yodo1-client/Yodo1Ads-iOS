@@ -756,10 +756,9 @@ bool UnityIsChineseMainland()
     if (Yodo1RealNameManager.shared.onlineConfig.remaining_time == -1 ||Yodo1RealNameManager.shared.onlineConfig.remaining_cost == -1 ) {//IP
         isCNIP = false;
     }
-    
-    if(use){
         NSString *code = carrier.isoCountryCode;
-        if(![code isEqualToString:@"cn"]){//Sim卡
+    if(use && code){//有Sim卡
+        if(![code isEqualToString:@"cn"]){
             isCNSimKa = false;
         }
         if (!isCNSimKa) {
