@@ -24,6 +24,7 @@
     int verifierCount;
     NSString* todayKey;
     NSString* yesterdayKey;
+    NSString* playerTimeKey;
     NSDate* beginPlayDate;
     BOOL isStartTime;
     __block long playedTime;//已玩时长
@@ -114,14 +115,14 @@
 
 - (void)savePlayedTime {
     if (isStartTime) {
-        NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
+        NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:playerTimeKey];
         long playedTime = [self intervalWithBeginTime:beginPlayDate];
         playedTime += [oldPlayedTime longValue];
 #ifdef DEBUG
         NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
 #endif
         [Yd1OpsTools.cached setObject:[NSNumber numberWithLong:playedTime]
-                               forKey:@"__playedTime__"];
+                               forKey:playerTimeKey];
     }
 }
 
@@ -132,7 +133,13 @@
     verifierCount = 0;
     todayKey = [self today];
     yesterdayKey = [self yesterdayDay:[NSDate date]];
-    [Yd1OpsTools.cached removeObjectForKey:yesterdayKey];
+    NSLog(@"todayKey:%@",todayKey);
+    NSLog(@"yesterdayKey:%@",yesterdayKey);
+    playerTimeKey = [NSString stringWithFormat:@"playerTime%@",todayKey];
+    
+    [Yd1OpsTools.cached removeObjectForKey:yesterdayKey];//移除昨天的已验证次数
+    [Yd1OpsTools.cached removeObjectForKey:[NSString stringWithFormat:@"playerTime%@",yesterdayKey]];//移除昨天的已玩时间
+    
     NSNumber* verifierCountNub = (NSNumber*)[Yd1OpsTools.cached objectForKey:todayKey];
     verifierCount = [verifierCountNub intValue];
     __useId = (NSString*)[[Yd1OpsTools cached] objectForKey:@"__yd1_useId__"];
@@ -272,7 +279,7 @@
     //启动计时
     beginPlayDate = NSDate.date;
     isStartTime = true;
-    NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:@"__playedTime__"];
+    NSNumber* oldPlayedTime = (NSNumber*)[Yd1OpsTools.cached objectForKey:playerTimeKey];
     playedTime = [oldPlayedTime longValue];
 #ifdef DEBUG
     NSLog(@"[ Yodo1 ]  playedTime:%ld",playedTime);
@@ -295,7 +302,7 @@
         if (success && remainingTime > 0) {
             self->_remainingTime = remainingTime;
             self->tempRremainingTime = remainingTime;
-            [Yd1OpsTools.cached setObject:@0 forKey:@"__playedTime__"];
+            [Yd1OpsTools.cached setObject:@0 forKey:self->playerTimeKey];
             if (callback) {
                 callback(success,errorMsg);
             }
@@ -756,7 +763,7 @@ bool UnityIsChineseMainland()
     if (Yodo1RealNameManager.shared.onlineConfig.remaining_time == -1 ||Yodo1RealNameManager.shared.onlineConfig.remaining_cost == -1 ) {//IP
         isCNIP = false;
     }
-        NSString *code = carrier.isoCountryCode;
+    NSString *code = carrier.isoCountryCode;
     if(use && code){//有Sim卡
         if(![code isEqualToString:@"cn"]){
             isCNSimKa = false;
