@@ -22,6 +22,7 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     StopGame,
     ResumeGame,
+    ForeignIP
 } VerifiedStatus;
 
 typedef enum : NSUInteger {

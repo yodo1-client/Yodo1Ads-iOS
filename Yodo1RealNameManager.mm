@@ -200,6 +200,17 @@
         [self realNameConfig];
         return;
     }
+    if (self.onlineConfig.remaining_cost == -1||self.onlineConfig.remaining_time == -1) {
+        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-3 userInfo:@{NSLocalizedDescriptionKey:@"online config is Foreign IP"}];
+        callback(NO,ResultCodeFailed,-1001,error);
+        return;
+    }
+    
+    if (!self.onlineConfig.verify_idcode_enabled) {//无实名规则
+        NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-2 userInfo:@{NSLocalizedDescriptionKey:@"id code of online config is disable"}];
+        callback(NO,ResultCodeFailed,-1002,error);
+        return;
+    }
     
     if (__useId && ![userId isEqualToString:__useId]) {
         //切换账户
@@ -227,9 +238,9 @@
                         }
                     } else {
                         if (self->verifierCount >= self->verifierMaxCount) {
-                               NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
-                               callback(false,ResultCodeFailed,-111,error);
-                               return;
+                            NSError* error = [NSError errorWithDomain:@"com.yodo1.realname" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"今天已经达到实名验证次数上限"}];
+                            callback(false,ResultCodeFailed,-101,error);
+                            return;
                         }
                         RealNameViewController * realName = [[RealNameViewController alloc]init];
                         realName.isSkipValidation = !weakSelf.onlineConfig.forced;
@@ -472,6 +483,12 @@ void UnityIndentifyUser(const char *playerId,const char* gameObjectName, const c
                 }
                 [data setObject:[NSNumber numberWithInt:(int)ify] forKey:@"type"];
                 int level = Yodo1RealNameManager.shared.onlineConfig.level;
+                if (age == -1001) {//海外IP
+                    level = 2;
+                }else if (age == -1002){//无实名规则
+                    level = 1;
+                }
+                
                 [data setObject:[NSNumber numberWithInt:level] forKey:@"level"];
                 [dict setObject:data forKey:@"data"];
                 NSError* parseJSONError = nil;
@@ -615,55 +632,55 @@ void UnityQueryPlayerRemainingTime(const char* gameObjectName, const char* metho
 {
     NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
     NSString* ocMethodName = Yodo1CreateNSString(methodName);
-            if(ocGameObjName && ocMethodName){
-                NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                NSMutableDictionary* data = [NSMutableDictionary dictionary];
-                [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
+    if(ocGameObjName && ocMethodName){
+        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+        NSMutableDictionary* data = [NSMutableDictionary dictionary];
+        [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
         [dict setObject:@"" forKey:@"error"];
         [data setObject:[NSNumber numberWithDouble:Yodo1RealNameManager.shared.playerRemainingTime] forKey:@"remaining_time"];
         NSLog(@"[ Yodo1 ]:剩余时长->%ld 秒",Yodo1RealNameManager.shared.playerRemainingTime);
-                [dict setObject:data forKey:@"data"];
-                NSError* parseJSONError = nil;
-                NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                if(parseJSONError){
-                    [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
-                    msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                }
-                UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
-                                 [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
-                                 [msg cStringUsingEncoding:NSUTF8StringEncoding]);
-            }
+        [dict setObject:data forKey:@"data"];
+        NSError* parseJSONError = nil;
+        NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+        if(parseJSONError){
+            [dict setObject:[NSNumber numberWithInt:9005] forKey:@"resulType"];
+            [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+            [dict setObject:@"Convert result to json failed!" forKey:@"error"];
+            msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+        }
+        UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                         [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                         [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
 }
 
 void UnityQueryPlayerRemainingCost(const char* gameObjectName, const char* methodName)
 {
     NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
     NSString* ocMethodName = Yodo1CreateNSString(methodName);
-            if(ocGameObjName && ocMethodName){
-                NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-                NSMutableDictionary* data = [NSMutableDictionary dictionary];
-                [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
+    if(ocGameObjName && ocMethodName){
+        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+        NSMutableDictionary* data = [NSMutableDictionary dictionary];
+        [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"code"];
         [dict setObject:@"" forKey:@"error"];
         int remainConst = Yodo1RealNameManager.shared.playerRemainingCost;
         [data setObject:[NSNumber numberWithInt:remainConst] forKey:@"remaining_cost"];
-         NSLog(@"[ Yodo1 ]:剩余消费->%d元",remainConst);
-                [dict setObject:data forKey:@"data"];
-                NSError* parseJSONError = nil;
-                NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                if(parseJSONError){
-                    [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
-                    [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
-                    [dict setObject:@"Convert result to json failed!" forKey:@"error"];
-                    msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
-                }
-                UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
-                                 [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
-                                 [msg cStringUsingEncoding:NSUTF8StringEncoding]);
-            }
+        NSLog(@"[ Yodo1 ]:剩余消费->%d元",remainConst);
+        [dict setObject:data forKey:@"data"];
+        NSError* parseJSONError = nil;
+        NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+        if(parseJSONError){
+            [dict setObject:[NSNumber numberWithInt:9006] forKey:@"resulType"];
+            [dict setObject:[NSNumber numberWithInt:0] forKey:@"code"];
+            [dict setObject:@"Convert result to json failed!" forKey:@"error"];
+            msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+        }
+        UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                         [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                         [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
 }
 
 void UnityQueryImpubicProtectConfig(const char* gameObjectName, const char* methodName)
@@ -756,12 +773,8 @@ bool UnityIsChineseMainland()
     BOOL use = carrier.allowsVOIP;
     BOOL isCNTerritory = true;
     BOOL isCNSimKa = true;
-    BOOL isCNIP = true;
     if(![[Yodo1Commons territory]isEqualToString:@"CN"]){//地域
         isCNTerritory = false;
-    }
-    if (Yodo1RealNameManager.shared.onlineConfig.remaining_time == -1 ||Yodo1RealNameManager.shared.onlineConfig.remaining_cost == -1 ) {//IP
-        isCNIP = false;
     }
     NSString *code = carrier.isoCountryCode;
     if(use && code){//有Sim卡
@@ -771,15 +784,9 @@ bool UnityIsChineseMainland()
         if (!isCNSimKa) {
             return false;
         }
-        if (!isCNIP) {
-            return false;
-        }
         return true;
     }
     if (!isCNTerritory) {
-        return false;
-    }
-    if (!isCNIP) {
         return false;
     }
     return true;
