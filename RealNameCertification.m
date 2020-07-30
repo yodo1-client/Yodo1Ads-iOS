@@ -12,7 +12,7 @@
 #define RNDEBUG     0
 
 #if RNDEBUG == 1 //测试环境
-NSString* const kRealNameBaseUrl = @"https://api-olconfig-test.yodo1.com";
+NSString* const kRealNameBaseUrl = @"http://olc-test.yodo1.int:8080";
 #elif RNDEBUG == 2 //准生产环境
 NSString* const kRealNameBaseUrl = @"https://anti-stg.yodo1api.com";
 #else
@@ -314,7 +314,7 @@ NSString* const kAntiConsumeOrderid = @"consume_orderid";
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString* response = [Yd1OpsTools stringWithJSONObject:responseObject error:nil];
 #ifdef DEBUG
-        NSLog(@"[ Yodo1 ]查询 real name of response:%@",response);
+        NSLog(@"[ Yodo1 ] real name of response:%@",response);
 #endif
         if (response) {
             NSDictionary* respo = [Yd1OpsTools JSONObjectWithString:response error:nil];
