@@ -57,3 +57,8 @@ typedef enum {
     TB_DEVICE_ERROR         = 3
 } TracebackAdError;
 
+@interface TracebackAdvertising : NSObject
+
++ (NSString *)adTypeEnumToString:(TracebackAdType)adType;
+
+@end

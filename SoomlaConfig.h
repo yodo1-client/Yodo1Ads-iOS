@@ -36,6 +36,7 @@ typedef enum {
 @property (nonatomic) TracebackLogLevel logLevel;
 @property (nonatomic, weak) id<SoomlaInitDelegate> initDelegate;
 @property (nonatomic, weak) id<SoomlaSdkConfigDelegate> sdkConfigDelegate;
+@property (nonatomic) BOOL liveEventsLogEnabled;
 
 + (SoomlaConfig*)config;
 
