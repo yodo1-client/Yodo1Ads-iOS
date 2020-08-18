@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsBaidu'
-    s.version          = '4.1.0'
-    s.summary          = 'Baidu v4.65,[ 还没有明显支持Https]'
+    s.version          = '4.1.1'
+    s.summary          = 'Baidu v4.70 [ 还没有明显支持Https]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC

@@ -36,22 +36,37 @@
 /**
  * 模版高度，仅用于信息流模版广告
  */
-@property (nonatomic ,retain)  NSNumber *baiduMobAdsHeight ;
+@property (nonatomic ,strong) NSNumber *baiduMobAdsHeight;
 
 /**
  * 模版宽度，仅用于信息流模版广告
  */
-@property (nonatomic ,retain)  NSNumber *baiduMobAdsWidth ;
+@property (nonatomic ,strong) NSNumber *baiduMobAdsWidth;
 
 /**
  *  使用controller present 落地页
  */
-@property (nonatomic, strong)  UIViewController *presentAdViewController;
+@property (nonatomic ,weak) UIViewController *presentAdViewController;
+
+/**
+ * 广告请求成功后是否缓存视频物料，YES:缓存 NO:不缓存。默认缓存
+ */
+@property (nonatomic ,assign) BOOL isCacheVideo;
+
+/**
+ * 广告请求超时时间，默认30s，单位s
+ */
+@property (nonatomic ,assign) NSTimeInterval timeout;
 
 /**
  *  请求原生广告
  *  注意广告的展示存在有效期，单次检索后须在一定时间内展示在页面上
  */
 - (void)requestNativeAds;
+
+/**
+ *  预加载视频素材  如果有多条素材会在所以素材均缓存完毕后回调nativeVideoAdCacheSuccess
+ */
+- (void)preloadVideoMaterial;
 
 @end
