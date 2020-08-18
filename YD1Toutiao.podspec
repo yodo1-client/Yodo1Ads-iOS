@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Toutiao'
-    s.version          = '4.1.5'
-    s.summary          = 'UMAdSDK V3.0.0.2 添加iPad 在Info.plist配置广告位的需求,修复banner广告'
+    s.version          = '4.1.6'
+    s.summary          = 'UMAdSDK V3.1.0.9 添加iPad 在Info.plist配置广告位的需求,修复banner广告'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdvertSDK','4.2.1'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.1'
-    s.dependency 'Yodo1AdsToutiao','4.1.3'
+    s.dependency 'Yodo1AdvertSDK','4.2.2'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.2'
+    s.dependency 'Yodo1AdsToutiao','4.1.4'
 end
