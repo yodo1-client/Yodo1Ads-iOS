@@ -30,6 +30,10 @@ FOUNDATION_EXPORT NSString* const kPlatform_VideoAdMasterSwitch;
 FOUNDATION_EXPORT NSString* const kRatio;
 FOUNDATION_EXPORT NSString* const kMaxShowTimes;
 
+FOUNDATION_EXPORT NSString* const kSensors_Switch;
+FOUNDATION_EXPORT NSString* const kSensors_Switch_DebugMode;
+FOUNDATION_EXPORT NSString* const kSensors_ServerUrl;
+
 typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
     Yodo1ConfigTypeBanner,
     Yodo1ConfigTypeInterstitial,
@@ -74,6 +78,9 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 ///获取权重数组
 - (NSArray*)configWeightWithType:(Yodo1ConfigType)type;
 
+- (NSArray *)placement_ids:(Yodo1ConfigType)type;
+
+- (NSDictionary *)report_fields;
 
 ///和JSONObjectWithString 方法成对出现
 + (NSString*)stringWithJSONObject:(id)obj error:(NSError**)error;
@@ -100,7 +107,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 
 /// return YES 同意收集数据,默认是收集数据
 - (BOOL)isUserConsent;
-/// consent is YES 是同意收集数据，NO不同意收集数据
+/// consent is YES 是同意收集数据，NO 不同意收集数据
 - (void)setUserConsent:(BOOL)consent;
 
 /// consent is YES 是16岁以下，NO 默认是16岁以上
@@ -112,6 +119,8 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (BOOL)isDoNotSell;
 /// 如果用户选择不出售其个人信息，请将以下标记设置为true。
 - (void)setDoNotSell:(BOOL)doNotSell;
+
+- (NSDictionary *)sensorsConfig;
 
 @end
 

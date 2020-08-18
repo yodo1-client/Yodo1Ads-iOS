@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsConfig'
-    s.version          = '4.2.1'
+    s.version          = '4.2.2'
     s.summary          = 'Yodo1AdsConfig'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -38,6 +38,6 @@ Pod::Spec.new do |s|
 
     s.libraries = 'sqlite3.0','z','c++'
     
-    s.dependency 'Yodo1OnlineParameter','4.2.1'
+    s.dependency 'Yodo1OnlineParameter','4.2.2'
 
 end
