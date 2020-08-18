@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobVungle'
-    s.version          = '4.1.6'
+    s.version          = '4.1.7'
     s.summary          = 'Admob 更新v7.61.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
@@ -14,10 +14,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    # s.source_files = "#{s.version}" + '/VungleAdapter.framework/Headers/*.h'
-    # s.preserve_paths = "#{s.version}" + '/VungleAdapter.framework/*'
-    s.vendored_frameworks = "#{s.version}" + '/VungleAdapter.framework'
-    # s.public_header_files = "#{s.version}" + '/VungleAdapter.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/*.framework/Headers/*.h'
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
+    s.public_header_files = "#{s.version}" + '/*.framework/Headers/*.h'
 
     s.requires_arc = true
 
@@ -56,7 +55,7 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','4.1.5'
-    s.dependency 'Yodo1AdsVungle','4.1.4'
+    s.dependency 'YD1Admob','4.1.6'
+    s.dependency 'Yodo1AdsVungle','4.1.5'
 
 end
