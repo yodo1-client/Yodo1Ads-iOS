@@ -1,4 +1,18 @@
 =============================================
+2020-08-14
+1.Vungle V6.7.1 
+
+released:08/19/2020
+CCPA Support – Compliance with new government regulations while assuring your users their personal data is being used the way they want
+Multiple banner ad support – Display multiple banners on the screen txo leverage more ways to monetize your inventory and attract Premium Buyers
+Stability enhancements to continually ensure high performance
+Improved real-time ad play callbacks for click and rewarded events for a better end-user experience
+Improvements to orientation handling to improve end-user experience
+Backend performance improvements to continually optimize your monetization efforts
+Removed Moat
+Various bug fixes
+
+=============================================
 2020-03-31
 1.Vungle V6.5.3 [支持 iOS13]
 
