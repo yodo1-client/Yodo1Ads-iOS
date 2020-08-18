@@ -1,12 +1,13 @@
 //
-//  myTargetSDK 5.6.3
+//  MTRGAudioData.h
+//  myTargetSDK 5.7.4
 //
 // Created by Timur on 2/9/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MTRGMediaData.h"
+#import <MyTargetSDK/MTRGMediaData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

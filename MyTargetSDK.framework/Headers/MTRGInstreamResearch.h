@@ -1,13 +1,13 @@
 //
 //  MTRGInstreamResearch.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 19/02/2019.
 //  Copyright © 2019 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGBaseAd.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
 
 @class MTRGInstreamResearch;
 

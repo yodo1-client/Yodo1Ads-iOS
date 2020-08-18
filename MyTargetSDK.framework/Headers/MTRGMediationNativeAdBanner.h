@@ -1,17 +1,18 @@
 //
 //  MTRGMediationNativeAdBanner.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 18/04/2019.
 //  Copyright © 2019 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MTRGNavigationType.h"
+#import <MyTargetSDK/MTRGNavigationType.h>
 
 @class MTRGImageData;
 @class MTRGNativePromoCard;
 @class MTRGNativePromoBanner;
+@class MTRGNativeBanner;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) BOOL hasVideo;
 
 - (MTRGNativePromoBanner *)createNativePromoBanner;
+
+- (MTRGNativeBanner *)createNativeBanner;
 
 @end
 

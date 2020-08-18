@@ -1,12 +1,13 @@
 //
-//  myTargetSDK 5.6.3
+//  MTRGInterstitialSliderAd.h
+//  myTargetSDK 5.7.4
 //
 // Created by Timur on 3/16/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGBaseAd.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
 
 @class MTRGInterstitialSliderAd;
 

@@ -1,9 +1,14 @@
 //
+//  MTRGMediationAdConfig.h
+//  myTargetSDK 5.7.4
+//
 // Copyright (c) 2019 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MTRGCustomParams.h"
+#import <MyTargetSDK/MTRGCustomParams.h>
+
+@class MTRGPrivacy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,22 +19,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) NSDictionary<NSString *, NSString *> *serverParams;
 @property(nonatomic, readonly, nullable) NSNumber *age;
 @property(nonatomic, readonly) MTRGGender gender;
-@property(nonatomic, readonly) BOOL userConsentSpecified;
-@property(nonatomic, readonly) BOOL userConsent;
-@property(nonatomic, readonly) BOOL userAgeRestricted;
+@property(nonatomic, readonly) MTRGPrivacy *privacy;
 @property(nonatomic, readonly) BOOL trackLocationEnabled;
 
 + (instancetype)configWithPlacementId:(NSString *)placementId
-                              payload:(nullable NSString *)payload
-                         serverParams:(NSDictionary<NSString *, NSString *> *)serverParams
-                                  age:(nullable NSNumber *)age
-                               gender:(MTRGGender)gender
-                 userConsentSpecified:(BOOL)userConsentSpecified
-                          userConsent:(BOOL)userConsent
-                    userAgeRestricted:(BOOL)userAgeRestricted
-                 trackLocationEnabled:(BOOL)trackLocationEnabled;
+							  payload:(nullable NSString *)payload
+						 serverParams:(NSDictionary<NSString *, NSString *> *)serverParams
+								  age:(nullable NSNumber *)age
+							   gender:(MTRGGender)gender
+							  privacy:(MTRGPrivacy *)privacy
+				 trackLocationEnabled:(BOOL)trackLocationEnabled;
 
 - (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface MTRGMediationAdConfig (MTRGDeprecated)
+
+@property(nonatomic, readonly) BOOL userConsentSpecified;
+@property(nonatomic, readonly) BOOL userConsent;
+@property(nonatomic, readonly) BOOL userAgeRestricted;
 
 @end
 

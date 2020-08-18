@@ -1,14 +1,14 @@
 //
 //  MTRGPromoCardCollectionView.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 02.11.16.
 //  Copyright © 2016 Mail.ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGNativePromoCard.h"
-#import "MTRGPromoCardSliderProtocol.h"
+#import <MyTargetSDK/MTRGNativePromoCard.h>
+#import <MyTargetSDK/MTRGPromoCardSliderProtocol.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

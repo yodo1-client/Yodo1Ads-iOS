@@ -1,13 +1,13 @@
 //
-//  myTargetSDK 5.6.3
+//  MTRGNativeAd.h
+//  myTargetSDK 5.7.4
 //
 // Created by Timur on 2/1/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import "MTRGBaseAd.h"
-#import "MTRGNativeAdProtocol.h"
-#import "MTRGCachePolicy.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
+#import <MyTargetSDK/MTRGNativeAdProtocol.h>
 
 @class MTRGNativeAd;
 @class MTRGNativePromoBanner;
@@ -43,13 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativeAd : MTRGBaseAd <MTRGNativeAdProtocol>
 
-@property(nonatomic) MTRGCachePolicy cachePolicy;
-@property(nonatomic) BOOL mediationEnabled;
 @property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic, weak, nullable) id <MTRGNativeAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGNativePromoBanner *banner;
-@property(nonatomic, readonly, nullable) NSString *adSource;
-@property(nonatomic, readonly) float adSourcePriority;
 
 + (instancetype)nativeAdWithSlotId:(NSUInteger)slotId;
 

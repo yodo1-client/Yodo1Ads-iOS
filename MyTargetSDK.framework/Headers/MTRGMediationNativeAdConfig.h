@@ -1,17 +1,18 @@
 //
+//  MTRGMediationNativeAdConfig.h
+//  myTargetSDK 5.7.4
+//
 // Copyright (c) 2019 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MTRGMediationAdConfig.h"
-#import "MTRGNativeAd.h"
+#import <MyTargetSDK/MTRGMediationAdConfig.h>
+#import <MyTargetSDK/MTRGNativeAd.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGMediationNativeAdConfig : MTRGMediationAdConfig
 
-@property(nonatomic, readonly) BOOL autoLoadImages; // Deprecated
-@property(nonatomic, readonly) BOOL autoLoadVideo; // Deprecated
 @property(nonatomic, readonly) MTRGCachePolicy cachePolicy;
 @property(nonatomic, readonly) MTRGAdChoicesPlacement adChoicesPlacement;
 
@@ -20,12 +21,17 @@ NS_ASSUME_NONNULL_BEGIN
 						 serverParams:(NSDictionary<NSString *, NSString *> *)serverParams
 								  age:(nullable NSNumber *)age
 							   gender:(MTRGGender)gender
-				 userConsentSpecified:(BOOL)userConsentSpecified
-						  userConsent:(BOOL)userConsent
-					userAgeRestricted:(BOOL)userAgeRestricted
+							  privacy:(MTRGPrivacy *)privacy
 				 trackLocationEnabled:(BOOL)trackLocationEnabled
 						  cachePolicy:(MTRGCachePolicy)cachePolicy
 				   adChoicesPlacement:(MTRGAdChoicesPlacement)adChoicesPlacement;
+
+@end
+
+@interface MTRGMediationNativeAdConfig (MTRGDeprecated)
+
+@property(nonatomic, readonly) BOOL autoLoadImages;
+@property(nonatomic, readonly) BOOL autoLoadVideo;
 
 @end
 

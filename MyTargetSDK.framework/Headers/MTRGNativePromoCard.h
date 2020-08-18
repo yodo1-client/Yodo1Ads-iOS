@@ -1,13 +1,13 @@
 //
 //  MTRGNativePromoCard.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 18.10.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MTRGImageData.h"
+#import <MyTargetSDK/MTRGImageData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

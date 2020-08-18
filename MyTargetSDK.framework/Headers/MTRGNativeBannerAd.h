@@ -1,14 +1,13 @@
 //
 //  MTRGNativeBannerAd.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 10/02/2020.
 //  Copyright © 2020 Mail.Ru Group. All rights reserved.
 //
 
-#import "MTRGBaseAd.h"
-#import "MTRGNativeAdProtocol.h"
-#import "MTRGCachePolicy.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
+#import <MyTargetSDK/MTRGNativeAdProtocol.h>
 
 @class MTRGNativeBannerAd;
 @class MTRGNativeBanner;
@@ -38,7 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativeBannerAd : MTRGBaseAd <MTRGNativeAdProtocol>
 
-@property(nonatomic) MTRGCachePolicy cachePolicy;
 @property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic, weak, nullable) id <MTRGNativeBannerAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGNativeBanner *banner;

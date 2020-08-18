@@ -1,12 +1,13 @@
 //
-//  myTargetSDK 5.6.3
+//  MTRGNativeAppwallAd.h
+//  myTargetSDK 5.7.4
 //
 // Created by Timur on 4/12/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGBaseAd.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
 
 @class MTRGNativeAppwallAd;
 @class MTRGImageData;

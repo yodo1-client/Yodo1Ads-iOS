@@ -1,19 +1,24 @@
 //
 //  MTRGNativeAdProtocol.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 10/02/2020.
 //  Copyright © 2020 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGAdChoicesPlacement.h"
+#import <MyTargetSDK/MTRGCachePolicy.h>
+#import <MyTargetSDK/MTRGAdChoicesPlacement.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MTRGNativeAdProtocol <NSObject>
 
+@property(nonatomic) MTRGCachePolicy cachePolicy;
 @property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
+@property(nonatomic) BOOL mediationEnabled;
+@property(nonatomic, readonly, nullable) NSString *adSource;
+@property(nonatomic, readonly) float adSourcePriority;
 
 - (instancetype)initWithSlotId:(NSUInteger)slotId;
 

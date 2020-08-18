@@ -1,10 +1,13 @@
 //
+//  MTRGMediationNativeAdAdapter.h
+//  myTargetSDK 5.7.4
+//
 // Copyright (c) 2019 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGMediationAdapter.h"
-#import "MTRGNativeAd.h"
+#import <MyTargetSDK/MTRGMediationAdapter.h>
+#import <MyTargetSDK/MTRGNativeAd.h>
 
 @class MTRGMediationNativeAdConfig;
 @protocol MTRGMediationNativeAdAdapter;

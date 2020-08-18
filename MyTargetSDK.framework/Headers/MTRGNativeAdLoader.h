@@ -1,12 +1,12 @@
 //
 //  MTRGNativeAdLoader.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 31.05.2018.
 //  Copyright © 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import "MTRGNativeAd.h"
+#import <MyTargetSDK/MTRGNativeAd.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -1,12 +1,13 @@
 //
-//  myTargetSDK 5.6.3
+//  MTRGInstreamAd.h
+//  myTargetSDK 5.7.4
 //
 // Created by Timur on 5/4/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "MTRGBaseAd.h"
+#import <MyTargetSDK/MTRGBaseAd.h>
 
 @protocol MTRGInstreamAdPlayer;
 @class MTRGInstreamAd;

@@ -1,6 +1,6 @@
 //
 //  MTRGPrivacy.h
-//  myTargetSDK 5.6.3
+//  myTargetSDK 5.7.4
 //
 //  Created by Andrey Seredkin on 28.05.2018.
 //  Copyright © 2018 Mail.Ru Group. All rights reserved.
@@ -12,15 +12,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGPrivacy : NSObject
 
-+ (BOOL)isConsentSpecified;
+@property(nonatomic, readonly) BOOL isConsent;
+@property(nonatomic, readonly) BOOL userAgeRestricted;
+@property(nonatomic, readonly, nullable) NSNumber *userConsent;
+@property(nonatomic, readonly, nullable) NSNumber *ccpaUserConsent;
+@property(nonatomic, readonly, nullable) NSNumber *iABUserConsent;
 
-+ (BOOL)userConsent;
++ (instancetype)currentPrivacy;
 
-+ (void)setUserConsent:(BOOL)userConsent;
++ (void)setUserConsent:(BOOL)isConsent;
 
-+ (BOOL)userAgeRestricted;
++ (void)setCcpaUserConsent:(BOOL)isConsent;
 
-+ (void)setUserAgeRestricted:(BOOL)userAgeRestricted;
++ (void)setIABUserConsent:(BOOL)isConsent;
+
++ (void)setUserAgeRestricted:(BOOL)isAgeRestricted;
+
++ (instancetype)new NS_UNAVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
