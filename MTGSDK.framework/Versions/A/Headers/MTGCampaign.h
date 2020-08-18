@@ -107,6 +107,13 @@ typedef NS_ENUM(NSInteger, MTGAdTemplateType) {
 @property (nonatomic) CGSize adChoiceIconSize;
 
 /*!
+@property
+
+@abstract The video  duration of the campaign
+*/
+@property (nonatomic,assign) NSInteger     videoLength;
+
+/*!
  @method
  
  @abstract

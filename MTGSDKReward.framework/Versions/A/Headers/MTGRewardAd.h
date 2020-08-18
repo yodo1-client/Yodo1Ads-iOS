@@ -10,7 +10,7 @@
 #import <MTGSDK/MTGRewardAdInfo.h>
 
 
-#define MTGRewardVideoSDKVersion @"6.3.3"
+#define MTGRewardVideoSDKVersion @"6.4.0"
 
 
 /**

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MTGSDK/MTGRewardAdInfo.h>
 
-#define MTGInterstitialVideoSDKVersion @"6.3.3"
+#define MTGInterstitialVideoSDKVersion @"6.4.0"
 
 
 /**

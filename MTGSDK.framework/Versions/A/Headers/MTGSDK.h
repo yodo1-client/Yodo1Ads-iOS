@@ -18,7 +18,7 @@
 #import <MTGSDK/MTGMediaView.h>
 #import <MTGSDK/MTGUserInfo.h>
 
-#define MTGSDKVersion @"6.3.3"
+#define MTGSDKVersion @"6.4.0"
 
 
 @interface MTGSDK : NSObject
