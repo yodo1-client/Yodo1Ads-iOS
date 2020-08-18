@@ -1,4 +1,32 @@
 =============================================
+2020-08-17
+Admob v7.64.0 [支持iOS 14]
+
+1.AdColonyAdapter v4.3.0.0
+2.AppLovinAdapter v6.13.0.0
+3.ChartboostAdapter v8.2.1.0
+4.VungleAdapter  v6.7.0.0
+5.UnityAdsAdapter v3.4.8.0
+6.TapjoyAdapter v12.6.1.0
+7.IronSourceAdapter v6.18.0.2
+8.FacebookAdapter v5.10.1.0
+9.InmobiAdapter v9.0.7.2
+10.0 MyTarget v5.7.3.0
+
+
+=============================================
+2020-07-27
+1.AdColonyAdapter v4.1.5.0
+2.AppLovinAdapter v6.13.0.0
+3.ChartboostAdapter v8.2.0.0
+4.VungleAdapter  v6.7.0.0
+5.UnityAdsAdapter v3.4.6.0
+6.TapjoyAdapter v12.6.1.0
+7.IronSourceAdapter v6.16.3.0
+8.FacebookAdapter v5.10.0.0
+9.InmobiAdapter v9.0.7.2
+10.0 MyTarget v5.7.2.0
+=============================================
 2020-07-3
 v7.60.1
 =============================================
