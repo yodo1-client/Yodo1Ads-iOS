@@ -14,10 +14,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files = "#{s.version}" + '/TapjoyAdapter.framework/Versions/A/Headers/*.h'
-    s.preserve_paths = "#{s.version}" + '/TapjoyAdapter.framework/*'
-    s.vendored_frameworks = "#{s.version}" + '/TapjoyAdapter.framework'
-    s.public_header_files = "#{s.version}" + '/TapjoyAdapter.framework/Versions/A/Headers/*.h'
+    s.source_files = "#{s.version}" + '/*.framework/Headers/*.h'
+    s.vendored_frameworks = "#{s.version}" + '/*.framework'
+    s.public_header_files = "#{s.version}" + '/*.framework/Headers/*.h'
 
     s.requires_arc = true
 
