@@ -141,5 +141,4 @@
  @param viewController Modal `UIViewController`.
  */
 - (void)adViewDidDismissScreen:(UIViewController *)viewController;
-
 @end

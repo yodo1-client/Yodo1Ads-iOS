@@ -142,5 +142,4 @@
  @param webBrowser The in-app browser.
  */
 - (void)interstitialWillPresentScreen:(UIViewController *)webBrowser;
-
 @end

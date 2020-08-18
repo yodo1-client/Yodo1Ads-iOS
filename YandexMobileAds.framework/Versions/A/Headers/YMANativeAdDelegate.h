@@ -42,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param viewController Modal `UIViewController`.
  */
 - (void)nativeAd:(null_unspecified id)ad didDismissScreen:(nullable UIViewController *)viewController;
-
 /**
  Notifies that the user has chosen a reason for closing the ad and the ad must be hidden.
  @warning Advertising will not be hidden.

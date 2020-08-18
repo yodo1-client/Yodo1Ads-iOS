@@ -9,9 +9,9 @@
 #define __YMA_VERSION_H__
 
 #define YMA_VERSION_MAJOR 2
-#define YMA_VERSION_MINOR 15
+#define YMA_VERSION_MINOR 17
 #define YMA_VERSION_PATCH 0
 
-#define YMA_BUILD_NUMBER 13182
+#define YMA_BUILD_NUMBER 15077
 
 #endif // __YMA_VERSION_H__

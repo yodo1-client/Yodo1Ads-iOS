@@ -156,5 +156,4 @@
  @param viewController The in-app browser.
  */
 - (void)rewardedAd:(YMARewardedAd *)rewardedAd willPresentScreen:(UIViewController *)viewController;
-
 @end
