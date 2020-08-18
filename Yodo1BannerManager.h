@@ -35,7 +35,7 @@ typedef enum {
 - (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy;
 
 ///显示Banner广告
-- (void)showBanner;
+- (void)showBanner:(NSString *)placement_id;
 
 ///隐藏广告:不移除
 - (void)hideBanner;

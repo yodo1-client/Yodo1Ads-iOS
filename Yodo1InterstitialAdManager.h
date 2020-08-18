@@ -65,7 +65,7 @@
 - (void)initInterstitalSDK:(id<InterstitialAdDelegate>)delegate;
 
 ///显示插屏广告
-- (void)showAd:(UIViewController*)viewcontroller;
+- (void)showAd:(UIViewController*)viewcontroller placement:(NSString *)placement_id;
 
 ///插屏广告是否已经准备好
 - (BOOL)interstitialAdReady;

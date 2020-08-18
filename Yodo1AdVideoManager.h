@@ -39,7 +39,7 @@
  *  @param controller 为RootViewController
  *  @param block      回调
  */
-- (void)showAdVideo:(UIViewController*)controller
+- (void)showAdVideo:(UIViewController*)controller placement:(NSString *)placement_id
          awardBlock:(void (^)(bool finished))block;
 
 @end
