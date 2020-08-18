@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsChartboost'
-    s.version          = '4.1.3'
-    s.summary          = 'Chartboost. sdk v8.2.0支持iOS 13 [大改接口版本]'
+    s.version          = '4.1.4'
+    s.summary          = 'Chartboost. sdk v8.2.1支持iOS 13 [大改接口版本]'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
