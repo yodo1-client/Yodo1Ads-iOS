@@ -11,9 +11,17 @@
 #import <UIKit/UIKit.h>
 
 #import <SmaatoSDKCore/SMAAdRequestParams.h>
+#import <SmaatoSDKCore/SMABannerNetworkEvent.h>
+#import <SmaatoSDKCore/SMACSMAdapterPlugin.h>
+#import <SmaatoSDKCore/SMACSMBannerPlugin.h>
+#import <SmaatoSDKCore/SMACSMInterstitialPlugin.h>
+#import <SmaatoSDKCore/SMACSMRewardedPlugin.h>
 #import <SmaatoSDKCore/SMAConfiguration.h>
 #import <SmaatoSDKCore/SMAErrors.h>
+#import <SmaatoSDKCore/SMAInterstitialNetworkEvent.h>
 #import <SmaatoSDKCore/SMAKeyValuePairs.h>
 #import <SmaatoSDKCore/SMALocation.h>
 #import <SmaatoSDKCore/SMALoggerConfiguration.h>
+#import <SmaatoSDKCore/SMANetworkEvent.h>
+#import <SmaatoSDKCore/SMARewardedNetworkEvent.h>
 #import <SmaatoSDKCore/SmaatoSDK.h>

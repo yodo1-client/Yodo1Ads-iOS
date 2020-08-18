@@ -17,6 +17,15 @@
 @property (nonatomic, copy, nullable) NSString *ubUniqueId;
 
 /**
+ Dictionary that keeps additional data for the 3rd party ad networks. AdMob ad network is supported in-built. The supported extra objects
+ are \c contentUrl (value type: NSString), \c testDevices (value type: NSArray<NSString>), \ctagForChildDirectedTreatment (value type:
+ NSNumber withBool) , \c tagForUnderAgeOfConsent (value type: NSNumber withBool). All these parameters are passed to the AdMob request. In
+ order to use this additional data inside AdMob request, pusblishers must create and pass a dictionary (key-value) where the key should be
+ the property name and the value should be the data that needs to be passed to AdMob.
+ */
+@property (nonatomic, copy, nullable) NSDictionary *objectExtras;
+
+/**
  An adapter class name from where ad request originates. Default is \c nil
 
  @warning       The parameter should only be passed when Smaato SDK is secondary.
@@ -42,5 +51,11 @@
  application.
  */
 @property (nonatomic, nullable, copy) NSString *mediationNetworkSDKVersion;
+
+/**
+    Skip the end card when the video is skiped
+ Default value: NO
+ */
+@property (nonatomic, assign) BOOL skipEndCardOnSkipVideo;
 
 @end
