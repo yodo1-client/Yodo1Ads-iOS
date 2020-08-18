@@ -85,6 +85,8 @@ typedef void (^OPCachedCompletionHandler)(void);
 ///priority
 - (NSArray*)configPriorityType:(Yd1AdsConfigType)type;
 
+- (NSArray*)reportFields;
+
 ///ads is eanble
 - (BOOL)eableAdsType:(Yd1AdsConfigType)type;
 
