@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)archiveObject:(id)object path:(NSString *)path;
 
-- (id)unarchiveClass:(NSSet*)class path:(NSString *)path;
+- (id)unarchiveClass:(NSSet*)classes path:(NSString *)path;
 
 @end
 

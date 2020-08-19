@@ -320,11 +320,11 @@
     return YES;
 }
 
-- (id)unarchiveClass:(NSSet*)class path:(NSString *)path {
+- (id)unarchiveClass:(NSSet*)classes path:(NSString *)path {
     NSError *error;
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
     if (@available(iOS 11.0, *)) {
-        id content = [NSKeyedUnarchiver unarchivedObjectOfClasses:class fromData:data error:&error];
+        id content = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
         if (error) {
             return nil;
         }
