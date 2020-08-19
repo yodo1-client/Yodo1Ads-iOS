@@ -1384,6 +1384,34 @@ extern "C" {
                     }
                     YD1LOG(@"notExistOrders:%@,notPayOrders:%@",
                            notExistOrders,notPayOrders)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(ocGameObjName && ocMethodName){
+                        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                        [dict setObject:payemntObject.uniformProductId ? :@"" forKey:@"uniformProductId"];
+                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
+                        [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                        [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                        [dict setObject:@"extra" forKey:@"extra"];
+                        [dict setObject:payemntObject.channelOrderid ? :@"" forKey:@"channelOrderid"];
+                        
+                        NSError* parseJSONError = nil;
+                        NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                        if(parseJSONError){
+                            [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
+                            [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
+                            [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                            [dict setObject:payemntObject.response? :@"" forKey:@"data"];
+                            [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                            [dict setObject:@"extra" forKey:@"extra"];
+                            [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
+                            [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                            msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                        }
+                        UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                         [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                         [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                    }
+                });
                 }];
             } else {
                 if ([payemntObject.orderId length] > 0) {
@@ -1414,7 +1442,7 @@ extern "C" {
                 [properties setObject:errorCode forKey:@"yodo1ErrorCode"];
                 YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
                 [Yodo1SaManager track:@"order_Error_FromSDK" properties:properties];
-            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -1443,6 +1471,8 @@ extern "C" {
                                      [msg cStringUsingEncoding:NSUTF8StringEncoding]);
                 }
             });
+        }
+        
         }];
     }
 
@@ -1740,8 +1770,35 @@ extern "C" {
                     }
                     YD1LOG(@"notExistOrders:%@,notPayOrders:%@",
                            notExistOrders,notPayOrders)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(ocGameObjName && ocMethodName){
+                        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                        [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
+                        [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
+                        [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                        [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                        [dict setObject:_extra? :@"" forKey:@"extra"];
+                        [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
+                        
+                        NSError* parseJSONError = nil;
+                        NSString* msg = [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                        if(parseJSONError){
+                            [dict setObject:payemntObject.uniformProductId? :@"" forKey:@"uniformProductId"];
+                            [dict setObject:[NSNumber numberWithInt:Yodo1U3dSDK_ResulType_Payment] forKey:@"resulType"];
+                            [dict setObject:[NSNumber numberWithInt:(int)payemntObject.paymentState] forKey:@"code"];
+                            [dict setObject:payemntObject.response? :@"" forKey:@"data"];
+                            [dict setObject:payemntObject.orderId? :@"" forKey:@"orderId"];
+                            [dict setObject:_extra? :@"" forKey:@"extra"];
+                            [dict setObject:payemntObject.channelOrderid? :@"" forKey:@"channelOrderid"];
+                            [dict setObject:@"Convert result to json failed!" forKey:@"msg"];
+                            msg =  [Yd1OpsTools stringWithJSONObject:dict error:&parseJSONError];
+                        }
+                        UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
+                                         [ocMethodName cStringUsingEncoding:NSUTF8StringEncoding],
+                                         [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+                    }
+                });
                 }];
-                
             } else {
                 if ([payemntObject.orderId length] > 0) {
                     Yd1UCenter.shared.itemInfo.channelCode = @"AppStore";
@@ -1771,7 +1828,7 @@ extern "C" {
                 [properties setObject:errorCode forKey:@"yodo1ErrorCode"];
                 YD1LOG(@"%@",[Yd1OpsTools stringWithJSONObject:properties error:nil]);
                 [Yodo1SaManager track:@"order_Error_FromSDK" properties:properties];
-            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(ocGameObjName && ocMethodName){
                     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -1800,6 +1857,7 @@ extern "C" {
                                      [msg cStringUsingEncoding:NSUTF8StringEncoding]);
                 }
             });
+        }
         }];
         [Yd1UCenterManager.shared setValidatePaymentBlock:^(NSString * _Nonnull uniformProductId, NSString * _Nonnull response) {
             dispatch_async(dispatch_get_main_queue(), ^{
