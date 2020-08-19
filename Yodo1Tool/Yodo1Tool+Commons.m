@@ -303,4 +303,36 @@
 - (NSString *)sign { return @"sign"; }
 - (NSString *)orderId { return @"orderid"; }
 
+- (BOOL)archiveObject:(id)object path:(NSString *)path {
+    if (!object){
+        return NO;
+    }
+    NSError *error;
+    if (@available(iOS 11.0, *)) {
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:&error];
+        if (error){
+            return NO;
+        }
+        [data writeToFile:path atomically:YES];
+    } else {
+        [NSKeyedArchiver archiveRootObject:object toFile:path];
+    }
+    return YES;
+}
+
+- (id)unarchiveClass:(NSSet*)class path:(NSString *)path {
+    NSError *error;
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    if (@available(iOS 11.0, *)) {
+        id content = [NSKeyedUnarchiver unarchivedObjectOfClasses:class fromData:data error:&error];
+        if (error) {
+            return nil;
+        }
+        return content;
+    } else {
+        id content = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        return content;
+    }
+}
+
 @end

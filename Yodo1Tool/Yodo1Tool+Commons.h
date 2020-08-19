@@ -60,6 +60,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)sign;
 - (NSString *)orderId;
 
+- (BOOL)archiveObject:(id)object path:(NSString *)path;
+
+- (id)unarchiveClass:(NSSet*)class path:(NSString *)path;
+
 @end
 
 NS_ASSUME_NONNULL_END
