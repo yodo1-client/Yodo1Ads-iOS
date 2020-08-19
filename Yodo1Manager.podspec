@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.0.3'
-    s.summary          = 'v4.0.3- 2020-08-18
+    s.version          = '4.0.5'
+    s.summary          = 'v4.0.5- 2020-08-18
                             ---------------------------
                             1.更新在线参数
                             2.更新UCenter
@@ -78,7 +78,6 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Bugly','4.1.1'
         ss.dependency 'Yodo1Reachability', '4.1.0'
         ss.dependency 'Yodo1AFNetworking', '4.1.0'
-        ss.dependency 'Yodo1AdsConfig','4.2.2'
 
     end
 
