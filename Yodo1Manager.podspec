@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
                             6.降低vungle sdk 版本v6.5.3
                             7.修复判断中国大陆的接口
                             8.修复防沉迷BUG
+                            9.修改Yodo1数据统计支持iOS 14
+                            10.修改错误上报支持iOS 14
                             ---------------------------
                           '
     s.description      = <<-DESC
@@ -70,7 +72,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Analytics','4.2.2'
         ss.dependency 'Yodo1ThirdsAnalytics','4.2.2'
         ss.dependency 'Yodo1Track','4.1.0'
-        ss.dependency 'Yodo1FeedbackError','4.1.0'
+        ss.dependency 'Yodo1FeedbackError','4.1.1'
         ss.dependency 'Yodo1OnlineParameter','4.2.2'
         ss.dependency 'Yodo1AdvertSDK','4.2.2'
         ss.dependency 'Yodo1UDID','4.1.0'

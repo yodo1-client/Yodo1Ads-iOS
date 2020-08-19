@@ -19,6 +19,8 @@
 #import "YD1LogView.h"
 #import "Yodo1Commons.h"
 #import "Yodo1AdConfigHelper.h"
+#import "Yodo1Tool+Commons.h"
+#import "Yodo1Tool+Storage.h"
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
@@ -588,10 +590,10 @@ static NSString* yd1AppKey = @"";
         [Bugly setUserIdentifier:Bugly.buglyDeviceId];
         [Bugly setUserValue:@"appstore" forKey:@"ChannelCode"];
         [Bugly setUserValue:yd1AppKey forKey:@"GameKey"];
-        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"DeviceID"];
+        [Bugly setUserValue:Yodo1Tool.shared.keychainDeviceId forKey:@"DeviceID"];
         [Bugly setUserValue:sdkInfo forKey:@"SdkInfo"];
-        [Bugly setUserValue:[Yodo1Commons idfaString] forKey:@"IDFA"];
-        [Bugly setUserValue:[Yodo1Commons idfvString] forKey:@"IDFV"];
+        [Bugly setUserValue:Yodo1Tool.shared.idfa forKey:@"IDFA"];
+        [Bugly setUserValue:Yodo1Tool.shared.idfv forKey:@"IDFV"];
         [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
     }
 }
