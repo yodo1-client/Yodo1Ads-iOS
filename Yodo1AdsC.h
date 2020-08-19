@@ -76,9 +76,19 @@ public:
     static void SetBannerScale(float sx,float sy);
     
     /**
+     * Check if banner ad is ready to show
+     */
+    static bool BannerIsReady();
+    
+    /**
      *  Show banner
      */
     static void ShowBanner();
+    
+    /**
+     *  Show banner with placement_id
+     */
+    static void ShowBannerWithPlacement(const char* placement_id);
     
     /**
      *  Hide banner
@@ -107,6 +117,11 @@ public:
      */
     static void ShowInterstitial();
     
+    /**
+     *  Show interstitial ad with placement_id
+     */
+    static void ShowInterstitialWithPlacement(const char* placement_id);
+    
 #pragma mark- YODO1_VIDEO
     
     /**
@@ -125,6 +140,11 @@ public:
      *  Show the video ad
      */
     static void ShowVideo();
+    
+    /**
+     *  Show video ad with placement_id
+     */
+    static void ShowVideoWithPlacement(const char* placement_id);
     
     /**
      * This can be used by the integrating App to indicate if

@@ -62,8 +62,13 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //multiple sx,y axis direction multiple sy
 + (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy;
 
+//Check if banner ad is ready to show
++ (BOOL)bannerIsReady;
+
 //Show banner
 + (void)showBanner;
+
++ (void)showBanner:(NSString *)placement_id;
 
 //Hide banner
 + (void)hideBanner;
@@ -81,9 +86,13 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 
 //Show interstitial
 + (void)showInterstitial;
+//Show interstitial with placement_id
++ (void)showInterstitialWithPlacement:(NSString *)placement_id;
 
 //Show interstitial,User-controlled viewcontroller
 + (void)showInterstitial:(UIViewController*)viewcontroller;
+//Show interstitial,User-controlled viewcontroller with placement_id
++ (void)showInterstitial:(UIViewController *)viewcontroller placement:(NSString *)placement_id;
 
 #pragma mark- Video
 
@@ -96,8 +105,12 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 //Play video ad
 + (void)showVideo;
 
++ (void)showVideoWithPlacement:(NSString *)placement_id;
+
 //Play video ad,User-controlled viewcontroller
 + (void)showVideo:(UIViewController*)viewcontroller;
+
++ (void)showVideo:(UIViewController *)viewcontroller placement:(NSString *)placement_id;
 
 //This can be used by the integrating App to indicate if
 //the user falls in any of the GDPR applicable countries

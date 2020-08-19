@@ -478,9 +478,9 @@ typedef enum {
 
 @implementation Yodo1Ads
 
-static bool bYodo1AdsInited = false;
+static BOOL bYodo1AdsInited = NO;
 static NSString* yd1AppKey = @"";
-static BOOL bSensorsSwitch = false;
+//static BOOL bSensorsSwitch = NO;
 
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
@@ -488,35 +488,6 @@ static BOOL bSensorsSwitch = false;
         return;
     }
     bYodo1AdsInited = true;
-    //初始化神策数据统计
-    bSensorsSwitch = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SWITCH"]boolValue];
-    if (bSensorsSwitch) {
-        NSString* serverUrl = [NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_SERVERURL"];
-        BOOL bSensorsLogEnable = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"Y_SDK_SENSORS_LOG_ENABLE"]boolValue];
-        if (!serverUrl) {
-            serverUrl = @"https://youdaoyi.datasink.sensorsdata.cn/sa?project=default&token=7d89c1c8b84d30c8";
-        }
-        if (bSensorsLogEnable) {
-            [Yodo1SaManager initializeSdkServerURL:serverUrl debug:2];
-        }else{
-            [Yodo1SaManager initializeSdkServerURL:serverUrl debug:0];
-        }
-        
-        NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-        if (!gameName) {
-            gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
-        }
-        [Yodo1SaManager profileSetOnce:@{@"yID":@"",
-                                         @"game":bundleId,
-                                         @"channel":@"appstore"}];
-        [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
-                                                  @"gameBundleId":bundleId,
-                                                  @"sdkType":[Yodo1Ads publishType],
-                                                  @"publishChannelCode":@"appstore",
-                                                  @"masSdkVersion":[Yodo1Ads publishVersion]}
-         ];
-    }
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
     [Yd1OnlineParameter.shared initWithAppKey:appKey channelId:@"AppStore"];
@@ -554,16 +525,46 @@ static BOOL bSensorsSwitch = false;
 
 + (void)startTime {
     NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-    [Yodo1SaManager track:@"startup" properties:@{@"startTime":ti}];
+    NSMutableDictionary * dic = @{@"startTime":ti}.mutableCopy;
+    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
+    if (reportFields) {
+        [dic addEntriesFromDictionary:reportFields];
+    }
+    [Yodo1SaManager track:@"startup" properties:dic];
 }
 
 + (void)endTime {
     NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-    [Yodo1SaManager track:@"end" properties:@{@"endTime":ti}];
+    NSMutableDictionary * dic = @{@"endTime":ti}.mutableCopy;
+    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
+    if (reportFields) {
+        [dic addEntriesFromDictionary:reportFields];
+    }
+    [Yodo1SaManager track:@"end" properties:dic];
 }
 
 + (void)onlineParamete:(NSNotification *)notif {
     NSDictionary* object = [notif object];
+    //初始化神策数据统计
+    NSDictionary * sensorsConfig = Yodo1AdConfigHelper.instance.sensorsConfig;
+    BOOL bSensorsSwitch = [sensorsConfig[kSensors_Switch] isEqualToString:@"on"];
+    if (bSensorsSwitch) {
+        BOOL bSensorsLogEnable = [sensorsConfig[kSensors_Switch_DebugMode] isEqualToString:@"on"];
+        [Yodo1SaManager initializeSdkServerURL:sensorsConfig[kSensors_ServerUrl] debug:(bSensorsLogEnable ? 2 : 0)];
+        
+        
+        NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"] ? : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
+        [Yodo1SaManager profileSetOnce:@{@"yID":@"",
+                                         @"game":bundleId,
+                                         @"channel":@"appstore"}];
+        [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
+                                                  @"gameBundleId":bundleId,
+                                                  @"sdkType":[Yodo1Ads publishType],
+                                                  @"publishChannelCode":@"appstore",
+                                                  @"masSdkVersion":[Yodo1Ads publishVersion]}
+         ];
+    }
     if (object && bSensorsSwitch) {
         NSString* result = [object objectForKey:@"result"];
         int code = [[object objectForKey:@"code"]intValue];
@@ -669,9 +670,22 @@ static BOOL bSensorsSwitch = false;
 #endif
 }
 
++ (BOOL)bannerIsReady {
+#ifdef YODO1_ADS
+    return [Yodo1BannerManager.sharedInstance bannerAdReady];
+#endif
+    return NO;
+}
+
 + (void)showBanner {
 #ifdef YODO1_ADS
-    [[Yodo1BannerManager sharedInstance]showBanner];
+    [self showBanner:nil];
+#endif
+}
+
++ (void)showBanner:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [[Yodo1BannerManager sharedInstance] showBanner:placement_id];
 #endif
 }
 
@@ -709,13 +723,25 @@ static BOOL bSensorsSwitch = false;
 
 + (void)showInterstitial {
 #ifdef YODO1_ADS
-    [Yodo1Ads showInterstitial:nil];
+    [self showInterstitialWithPlacement:nil];
+#endif
+}
+
++ (void)showInterstitialWithPlacement:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [self showInterstitial:nil placement:placement_id];
 #endif
 }
 
 + (void)showInterstitial:(UIViewController*)viewcontroller {
 #ifdef YODO1_ADS
-    [[Yodo1InterstitialAdManager sharedInstance]showAd:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]];
+    [self showInterstitial:viewcontroller placement:nil];
+#endif
+}
+
++ (void)showInterstitial:(UIViewController *)viewcontroller placement:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [[Yodo1InterstitialAdManager sharedInstance]showAd:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController] placement:placement_id];
 #endif
 }
 
@@ -742,14 +768,25 @@ static BOOL bSensorsSwitch = false;
 
 + (void)showVideo {
 #ifdef YODO1_ADS
-    [Yodo1Ads showVideo:nil];
+    [self showVideoWithPlacement:nil];
+#endif
+}
+
++ (void)showVideoWithPlacement:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [self showVideo:nil placement:placement_id];
 #endif
 }
 
 + (void)showVideo:(UIViewController*)viewcontroller {
 #ifdef YODO1_ADS
-    [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController]
-                                          awardBlock:^(bool finished) {
+    [self showVideo:viewcontroller placement:nil];
+#endif
+}
+
++ (void)showVideo:(UIViewController *)viewcontroller placement:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController] placement:placement_id awardBlock:^(bool finished) {
         
     }];
 #endif
@@ -839,9 +876,18 @@ void Unity3dSetBannerScale(float sx,float sy)
     [Yodo1Ads setBannerScale:sx sy:sy];
 }
 
+bool Unity3dBannerIsReady()
+{
+    return [Yodo1Ads bannerIsReady];
+}
+
 void UnityShowBanner()
 {
     [Yodo1Ads showBanner];
+}
+
+void UnityShowBannerWithPlacement(const char* placement_id) {
+    [Yodo1Ads showBanner:Yodo1CreateNSString(placement_id)];
 }
 
 void Unity3dHideBanner()
@@ -853,7 +899,6 @@ void Unity3dRemoveBanner()
 {
     [Yodo1Ads removeBanner];
 }
-
 
 #pragma mark - Unity3dInterstitial
 
@@ -869,6 +914,10 @@ void Unity3dShowInterstitial()
     [Yodo1Ads showInterstitial];
 }
 
+void Unity3dShowInterstitialWithPlacement(const char* placement_id)
+{
+    [Yodo1Ads showInterstitialWithPlacement:Yodo1CreateNSString(placement_id)];
+}
 
 #pragma mark - Unity3dVideo
 
@@ -880,6 +929,11 @@ bool Unity3dVideoIsReady()
 void Unity3dShowVideo()
 {
     [Yodo1Ads showVideo];
+}
+
+void Unity3dShowVideoWithPlacement(const char* placement_id)
+{
+    [Yodo1Ads showVideoWithPlacement:Yodo1CreateNSString(placement_id)];
 }
 
 #pragma mark - Privacy
@@ -959,9 +1013,19 @@ void Yodo1AdsC::SetBannerScale(float sx,float sy)
     [Yodo1Ads setBannerScale:sx sy:sy];
 }
 
+bool Yodo1AdsC::BannerIsReady()
+{
+    return [Yodo1Ads bannerIsReady];
+}
+
 void Yodo1AdsC::ShowBanner()
 {
     [Yodo1Ads showBanner];
+}
+
+void Yodo1AdsC::ShowBannerWithPlacement(const char* placement_id)
+{
+    [Yodo1Ads showBanner:Yodo1CreateNSString(placement_id)];
 }
 
 void Yodo1AdsC::HideBanner()
@@ -997,6 +1061,11 @@ void Yodo1AdsC:: ShowInterstitial()
     [Yodo1Ads showInterstitial];
 }
 
+void Yodo1AdsC:: ShowInterstitialWithPlacement(const char *placement_id)
+{
+    [Yodo1Ads showInterstitialWithPlacement:Yodo1CreateNSString(placement_id)];
+}
+
 #pragma mark - C++Video
 
 void Yodo1AdsC::SetVideoCallback(Yodo1AdsEvent_Callback callback)
@@ -1015,6 +1084,11 @@ bool Yodo1AdsC::VideoIsReady()
 void Yodo1AdsC::ShowVideo()
 {
     [Yodo1Ads showVideo];
+}
+
+void Yodo1AdsC:: ShowVideoWithPlacement(const char *placement_id)
+{
+    [Yodo1Ads showVideoWithPlacement:Yodo1CreateNSString(placement_id)];
 }
 
 void Yodo1AdsC::SetUserConsent(BOOL consent)
