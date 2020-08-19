@@ -6,15 +6,23 @@ Pod::Spec.new do |s|
                             1.更新在线参数
                             2.更新UCenter
                             3.更新各渠道广告-->
-                                Applovin v6.13.0
-                                GDT v4.11.9
-                                MyTarget v5.6.3
-                                IronSource v6.17.0.0
-                                Mintegral v6.3.3
-                                Toutiao v3.0.0.2
+                                Applovin v6.13.4
+                                GDT v4.11.10
+                                MyTarget v5.7.4
+                                IronSource v7.0.0.0 [支持iOS 14]
+                                Mintegral v6.4.0
+                                Toutiao v3.1.0.9
                                 Soomla v5.11.3
-                                UnityAds v3.4.6
-                                Inmobi v9.0.7
+                                UnityAds v3.4.8 [支持iOS 14]
+                                Inmobi v9.0.7 [去掉]
+                                Tapjoy v12.6.1
+                                Admob v7.64.0 [支持iOS 14]
+                                Facebook v5.10.1
+                                AdColony v4.3.0
+                                Baidu v4.70
+                                Chartboost v8.2.1
+                                Smaato v21.5.2
+                                vungle v6.7.1 [修复冲突KTPlay]
                             4.防沉迷 【fix bug】
                             5.fix bug of Bugly
                             6.降低vungle sdk 版本v6.5.3
@@ -70,6 +78,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Bugly','4.1.1'
         ss.dependency 'Yodo1Reachability', '4.1.0'
         ss.dependency 'Yodo1AFNetworking', '4.1.0'
+        ss.dependency 'Yodo1AdsConfig','4.2.2'
 
     end
 

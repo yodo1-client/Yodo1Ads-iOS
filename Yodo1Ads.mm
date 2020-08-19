@@ -18,13 +18,13 @@
 #import <Bugly/Bugly.h>
 #import "YD1LogView.h"
 #import "Yodo1Commons.h"
+#import "Yodo1AdConfigHelper.h"
 
 #ifdef YODO1_ADS
 #import "Yodo1AdVideoManager.h"
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
-#import "Yodo1AdConfigHelper.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
@@ -49,7 +49,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.0.3";
+NSString* const kYodo1AdsVersion       = @"4.0.5";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -480,7 +480,6 @@ typedef enum {
 
 static BOOL bYodo1AdsInited = NO;
 static NSString* yd1AppKey = @"";
-//static BOOL bSensorsSwitch = NO;
 
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
