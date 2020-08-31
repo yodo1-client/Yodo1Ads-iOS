@@ -35,6 +35,7 @@ typedef void (^SwrveClipboardButtonPressedCallback)(NSString *processedText);
 typedef NSDictionary* (^SwrveMessagePersonalisationCallback) (NSDictionary* eventPayload);
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+
 @interface SwrveMessageController : NSObject<SwrveMessageDelegate, SwrveMessageEventHandler, CAAnimationDelegate>
 #else
 @interface SwrveMessageController : NSObject<SwrveCampaignsSDK, SwrveMessageDelegate, SwrveMessageEventHandler>
@@ -113,6 +114,7 @@ typedef NSDictionary* (^SwrveMessagePersonalisationCallback) (NSDictionary* even
 -(NSArray*)messageCenterCampaignsWithPersonalisation:(NSDictionary*)personalisation;
 
 #if TARGET_OS_IOS /** exclude tvOS **/
+
 /*! Get the list active Message Center campaigns targeted for this user.
  * It will exclude campaigns that have been deleted with the
  * removeCampaign method and those that do not support the given orientation.
@@ -131,6 +133,7 @@ typedef NSDictionary* (^SwrveMessagePersonalisationCallback) (NSDictionary* even
  * \returns List of active Message Center campaigns that support the given orientation.
 */
 -(NSArray*)messageCenterCampaignsThatSupportOrientation:(UIInterfaceOrientation)orientation withPersonalisation:(NSDictionary*)personalisation;
+
 #endif
 
 /*! Display the given campaign without the need to trigger an event and skipping
