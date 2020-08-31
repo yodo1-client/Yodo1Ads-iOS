@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-#define MTGBiddingSDKVersion @"6.4.0"
+#define MTGBiddingSDKVersion @"6.4.1"
 
 
 

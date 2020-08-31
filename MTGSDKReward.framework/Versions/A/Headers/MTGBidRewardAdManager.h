@@ -17,7 +17,7 @@
 /**
 * this method is used to open RewardPlus for RewardVideo
 * please set this before loadVideo
-* @param openRewardPlus default false
+* openRewardPlus default false
 */
 @property (nonatomic,assign) BOOL openRewardPlus;
 
