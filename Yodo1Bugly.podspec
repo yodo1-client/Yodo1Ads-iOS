@@ -1,7 +1,9 @@
 Pod::Spec.new do |s|
     s.name              = 'Yodo1Bugly'
-    s.version           = '4.1.1'
-    s.summary           = 'Bugly v2.5.5'
+    s.version           = '4.1.2'
+    s.summary           = 'Bugly  2.5.712020-07-31
+                            修改稳定性问题：特殊场景下遇到的死锁
+                            新增了关闭bugly监听的接口'
     s.description       = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
