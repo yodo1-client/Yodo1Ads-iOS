@@ -1,6 +1,6 @@
 //
 //  MTRGInterstitialSliderAd.h
-//  myTargetSDK 5.7.4
+//  myTargetSDK 5.7.5
 //
 // Created by Timur on 3/16/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
