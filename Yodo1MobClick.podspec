@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MobClick'
-    s.version          = '4.1.0'
-    s.summary          = 'UMAnalytics 更新 V6.0.5+G_917526b7bc_20190701161549 [大更新];
-                          6.1.0+G_0a2678de36_20191217134700
+    s.version          = '4.2.0'
+    s.summary          = 'UMAnalytics 更新 V7.1.1 
+                        1. 解决已知问题，提高SDK稳定性。
+                            升级必读：https://developer.umeng.com/docs/119267/detail/119534
                         '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -16,11 +17,13 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files = "#{s.version}" +'/UMAnalytics.framework/Versions/A/Headers/*.h',"#{s.version}" +'/UMCommon.framework/Versions/A/Headers/*.h'
+    s.source_files = "#{s.version}" +'/*.framework/Headers/*.h',"#{s.version}" +'/*.framework/Versions/A/Headers/*.h'
     
-    s.public_header_files = "#{s.version}" +'/UMAnalytics.framework/Versions/A/Headers/*.h',"#{s.version}" +'/UMCommon.framework/Versions/A/Headers/*.h'
+    s.public_header_files = "#{s.version}" +'/*.framework/Headers/*.h',"#{s.version}" +'/*.framework/Versions/A/Headers/*.h'
   
     s.vendored_frameworks = "#{s.version}" +'/*.framework'
+
+    s.resources = "#{s.version}" +'/*.bundle'
 
     s.requires_arc = true
 
