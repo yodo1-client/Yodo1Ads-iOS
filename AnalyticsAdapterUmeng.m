@@ -7,8 +7,8 @@
 
 #import "AnalyticsAdapterUmeng.h"
 #import <UMCommon/UMCommon.h>
-#import <UMAnalytics/MobClickGameAnalytics.h>
-#import <UMAnalytics/MobClick.h>
+#import <UMAnalyticsGame/MobClickGameAnalytics.h>
+#import <UMCommon/MobClick.h>
 #import "Yodo1AnalyticsManager.h"
 #import "Yodo1Registry.h"
 #import <Yodo1Commons.h>
@@ -44,7 +44,6 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
         NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
         NSAssert(appKey != nil, @"友盟 appKey 没有设置");
         [UMConfigure initWithAppkey:appKey channel:@"AppStore"];
-        [MobClick setScenarioType:E_UM_GAME];//支持游戏场景
     }
     return self;
 }
