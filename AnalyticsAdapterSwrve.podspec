@@ -40,6 +40,6 @@ TODO: Add long description of the pod here.
     s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1ThirdsAnalytics','4.2.2'
-    s.dependency 'Yodo1SwrveSDK','4.2.0'
+    s.dependency 'Yodo1SwrveSDK','4.1.2'
 
 end
