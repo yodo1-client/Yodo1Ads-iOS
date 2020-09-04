@@ -7,7 +7,7 @@
 
 #import "AnalyticsAdapterAppsFlyer.h"
 #import "Yodo1Registry.h"
-#import <AppsFlyerLib/AppsFlyerTracker.h>
+#import <AppsFlyerLib/AppsFlyerLib.h>
 #import "Yodo1Commons.h"
 #import "Yodo1KeyInfo.h"
 
@@ -34,22 +34,22 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
             NSString* appleAppId = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_APPSFLYER_APPLE_APPID];
             NSAssert(devkey != nil||appleAppId != nil, @"AppsFlyer devKey 没有设置");
             
-            [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devkey;
-            [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
+            AppsFlyerLib.shared.appsFlyerDevKey = devkey;
+            AppsFlyerLib.shared.appleAppID = appleAppId;
             
             NSString* useId = [[NSUserDefaults standardUserDefaults]objectForKey:@"YODO1_SWRVE_USEID"];
             if (useId) {
-               [AppsFlyerTracker sharedTracker].customerUserID = useId;
+               AppsFlyerLib.shared.customerUserID = useId;
             }else{
                 if (initConfig.appsflyerCustomUserId && initConfig.appsflyerCustomUserId.length > 0) {
-                    [AppsFlyerTracker sharedTracker].customerUserID = initConfig.appsflyerCustomUserId;
+                    AppsFlyerLib.shared.customerUserID = initConfig.appsflyerCustomUserId;
                 }
             }
             BOOL isGDPR = [[NSUserDefaults standardUserDefaults]boolForKey:@"gdpr_data_consent"];
             if (isGDPR) {
-                [AppsFlyerTracker sharedTracker].isStopTracking = true;
+                AppsFlyerLib.shared.isStopped = true;
             } else {
-                [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+                [AppsFlyerLib.shared start];
             }
         }
     }
@@ -63,7 +63,7 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 
 - (void)eventAdAnalyticsWithName:(NSString *)eventName eventData:(NSDictionary *)eventData
 {
-    [[AppsFlyerTracker sharedTracker]trackEvent:eventName withValues:eventData?eventData:@{}];
+    [AppsFlyerLib.shared logEvent:eventName withValues:@{}];
 }
 
 - (void)validateAndTrackInAppPurchase:(NSString*)productIdentifier
@@ -71,16 +71,16 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
                              currency:(NSString*)currency
                         transactionId:(NSString*)transactionId {
     if([[Yodo1AnalyticsManager sharedInstance]isAppsFlyerInstalled]){
-        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifier
-                                                                  price:price
-                                                               currency:currency
-                                                          transactionId:transactionId
-                                                   additionalParameters:@{}
-                                                                success:^(NSDictionary *result){
-                                                                    NSLog(@"Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
-                                                                } failure:^(NSError *error, id response) {
-                                                                    NSLog(@"response = %@", response);
-                                                                }];
+        [AppsFlyerLib.shared validateAndLogInAppPurchase:productIdentifier
+                                                   price:price
+                                                currency:currency
+                                           transactionId:transactionId
+                                    additionalParameters:@{}
+                                                 success:^(NSDictionary *result){
+            NSLog(@"Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
+        } failure:^(NSError *error, id response) {
+            NSLog(@"response = %@", response);
+        }];
     }
 }
 
