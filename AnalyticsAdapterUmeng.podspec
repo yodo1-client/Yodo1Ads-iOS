@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterUmeng'
-    s.version          = '4.2.2'
-    s.summary          = 'v6.0.5'
+    s.version          = '4.2.3'
+    s.summary          = 'v7.1.1 [支持iOS 14]'
 
     s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -38,7 +38,7 @@ TODO: Add long description of the pod here.
     # s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     # s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1MobClick','4.1.0'
+    s.dependency 'Yodo1MobClick','4.2.0'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.2'
 
 end
