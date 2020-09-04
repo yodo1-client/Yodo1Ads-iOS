@@ -1,4 +1,9 @@
 =============================================
+2020-09-04
+1.TalkingDataGA下载: http://doc.talkingdata.com/posts/93
+更新 V4.0.54
+
+=============================================
 2019-11-12
 1.TalkingDataGA下载: http://doc.talkingdata.com/posts/93
 更新 V4.0.40
