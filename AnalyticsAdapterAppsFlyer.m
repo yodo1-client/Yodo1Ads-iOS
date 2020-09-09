@@ -14,6 +14,9 @@
 NSString* const YODO1_ANALYTICS_APPSFLYER_DEV_KEY       = @"AppsFlyerDevKey";
 NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
 
+@interface AnalyticsAdapterAppsFlyer ()<AppsFlyerLibDelegate>
+
+@end
 
 @implementation AnalyticsAdapterAppsFlyer
 
@@ -36,7 +39,7 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
             
             AppsFlyerLib.shared.appsFlyerDevKey = devkey;
             AppsFlyerLib.shared.appleAppID = appleAppId;
-            
+            AppsFlyerLib.shared.delegate = self;
             NSString* useId = [[NSUserDefaults standardUserDefaults]objectForKey:@"YODO1_SWRVE_USEID"];
             if (useId) {
                AppsFlyerLib.shared.customerUserID = useId;
@@ -50,10 +53,18 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
                 AppsFlyerLib.shared.isStopped = true;
             } else {
                 [AppsFlyerLib.shared start];
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                    selector:@selector(sendLaunch:)
+                    name:UIApplicationDidBecomeActiveNotification
+                    object:nil];
             }
         }
     }
     return self;
+}
+
+-(void)sendLaunch:(UIApplication *)application {
+    [AppsFlyerLib.shared start];
 }
 
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
@@ -77,15 +88,39 @@ NSString* const YODO1_ANALYTICS_APPSFLYER_APPLE_APPID   = @"AppleAppId";
                                            transactionId:transactionId
                                     additionalParameters:@{}
                                                  success:^(NSDictionary *result){
-            NSLog(@"Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
+            NSLog(@"[ Yodo1 ] Purcahse succeeded And verified!!! response: %@",result[@"receipt"]);
         } failure:^(NSError *error, id response) {
-            NSLog(@"response = %@", response);
+            NSLog(@"[ Yodo1 ] response = %@", response);
         }];
     }
 }
 
-- (void)dealloc {
+// AppsFlyerTracker implementation
+//Handle Conversion Data (Deferred Deep Link)
+-(void)onConversionDataSuccess:(NSDictionary*) installData {
+    id status = [installData objectForKey:@"af_status"];
+    if([status isEqualToString:@"Non-organic"]) {
+        id sourceID = [installData objectForKey:@"media_source"];
+        id campaign = [installData objectForKey:@"campaign"];
+        NSLog(@"[ Yodo1 ] This is a none organic install. Media source: %@  Campaign: %@",sourceID,campaign);
+    } else if([status isEqualToString:@"Organic"]) {
+        NSLog(@"[ Yodo1 ] This is an organic install.");
+    }
+}
+-(void)onConversionDataFail:(NSError *) error {
+  NSLog(@"[ Yodo1 ] %@",error);
+}
 
+//Handle Direct Deep Link
+- (void) onAppOpenAttribution:(NSDictionary*) attributionData {
+  NSLog(@"[ Yodo1 ] %@",attributionData);
+}
+- (void) onAppOpenAttributionFailure:(NSError *)error {
+  NSLog(@"[ Yodo1 ] %@",error);
+}
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 @end
