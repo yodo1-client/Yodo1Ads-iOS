@@ -1,14 +1,12 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.0.6'
-    s.summary          = 'v4.0.6- 2020-09-04
+    s.version          = '4.1.0'
+    s.summary          = 'v4.1.0- 2020-09-10
                             ---------------------------
-                            1.更新在线参数
-                            2.更新UCenter
-                            3.更新各渠道广告-->
+                            1.更新各渠道广告-->
                                 Applovin v6.13.4
                                 GDT v4.11.10
-                                MyTarget v5.7.4
+                                MyTarget v5.7.5
                                 IronSource v7.0.0.0 [支持iOS 14]
                                 Mintegral v6.4.0
                                 Toutiao v3.1.0.9
@@ -23,13 +21,9 @@ Pod::Spec.new do |s|
                                 Chartboost v8.2.1
                                 Smaato v21.5.2
                                 vungle v6.7.1 [修复冲突KTPlay]
-                            4.防沉迷 【fix bug】
-                            5.fix bug of Bugly
-                            6.降低vungle sdk 版本v6.5.3
-                            7.修复判断中国大陆的接口
-                            8.修复防沉迷BUG
-                            9.修改Yodo1数据统计支持iOS 14
-                            10.修改错误上报支持iOS 14
+                            2.修改Yodo1数据统计支持iOS 14
+                            3.修改错误上报支持iOS 14
+
                             ---------------------------
                           '
     s.description      = <<-DESC
