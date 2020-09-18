@@ -378,18 +378,18 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
-    # s.subspec 'YD1_Inmobi' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'OTHER_LDFLAGS' => '-ObjC',
-    #         'ENABLE_BITCODE' => "NO",
-    #         "VALID_ARCHS": "armv7 arm64",
-    #         "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
-    #         "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
-    #     }
-    #     ss.dependency 'YD1Inmobi','4.1.4'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'YD1_Inmobi' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'YD1Inmobi','4.1.5'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
 
     s.subspec 'YD1_Mintegral' do |ss|
         ss.xcconfig = {
