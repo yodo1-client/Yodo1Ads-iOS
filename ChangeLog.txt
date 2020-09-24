@@ -1,4 +1,16 @@
 =============================================
+2020-09-17
+1.Vungle V6.8.0 [预发布]
+支持iOS 14
+
+SKAdNetwork IDs:
+
+GTA9LK7P23.skadnetwork
+YDX93A7ASS.skadnetwork
+3RD42EKR43.skadnetwork
+
+
+=============================================
 2020-08-14
 1.Vungle V6.7.1 
 
