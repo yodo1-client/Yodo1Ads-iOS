@@ -2,7 +2,6 @@
 //  MTGBidNativeAdManager.h
 //  MTGSDK
 //
-//  Created by ym on 2019/4/26.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
@@ -46,6 +45,12 @@
  @discussion ad current UnitId .
  */
 @property (nonatomic, readonly) NSString * _Nonnull currentUnitId;
+
+/**
+* get the id of this request ad,call  after nativeAdsLoaded.
+*/
+@property (nonatomic, readonly) NSString *_Nullable requestId;
+
 /*!
  @property
  

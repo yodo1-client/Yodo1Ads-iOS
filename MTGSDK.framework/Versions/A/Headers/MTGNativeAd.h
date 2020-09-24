@@ -2,14 +2,14 @@
 //  MTGNativeAd.h
 //  MTGSDK
 //
-//  Created by ym on 2019/4/26.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "MTGCampaign.h"
 
-#define MTGNativeAdSDKVersion @"6.4.1"
+
+#define MTGNativeAdSDKVersion @"6.6.2"
 
 
 

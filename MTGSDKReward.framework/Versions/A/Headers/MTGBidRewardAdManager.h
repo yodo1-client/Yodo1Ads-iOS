@@ -2,7 +2,6 @@
 //  MTGBidRewardAdManager.h
 //  MTGSDKReward
 //
-//  Created by Harry on 2019/4/10.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
@@ -72,6 +71,10 @@
  */
 - (void)cleanAllVideoFileCache;
 
+/**
+* get the id of this request ad,call  after onAdLoadSuccess.
+*/
+- (NSString *_Nullable)getRequestIdWithUnitId:(nonnull NSString *)unitId;
 
 /**
 *  Set  alertView text,if you want to change the alertView text.

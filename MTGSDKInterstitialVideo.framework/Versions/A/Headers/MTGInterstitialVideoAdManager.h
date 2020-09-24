@@ -2,7 +2,6 @@
 //  MTGInterstitialVideoAdManager.h
 //  MTGSDK
 //
-//  Created by CharkZhang on 2018/4/10.
 //  Copyright © 2018年 Mintegral. All rights reserved.
 //
 
@@ -15,9 +14,9 @@
 
 @property (nonatomic, weak) id  <MTGInterstitialVideoDelegate> _Nullable delegate;
 
-@property (nonatomic, readonly)   NSString * _Nonnull currentUnitId;
+@property (nonatomic,copy,readonly)   NSString * _Nonnull currentUnitId;
 
-@property (nonatomic, readonly)   NSString * _Nullable placementId;
+@property (nonatomic,copy,readonly)   NSString * _Nullable placementId;
 
 /**
  * Play the video is mute in the beginning ,defult is NO
@@ -94,4 +93,10 @@
                   content:(NSString *_Nullable)content
               confirmText:(NSString *_Nullable)confirmText
                cancelText:(NSString *_Nullable)cancelText;
+
+/**
+* get the id of this request ad,call  after onInterstitialAdLoadSuccess.
+*/
+- (NSString *_Nullable)getRequestIdWithUnitId:(nonnull NSString *)unitId;
+
 @end

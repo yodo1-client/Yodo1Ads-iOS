@@ -2,14 +2,14 @@
 //  MTGBiddingSDK.h
 //  MTGSDKBidding
 //
-//  Created by Harry on 2019/5/9.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 
-#define MTGBiddingSDKVersion @"6.4.1"
+
+#define MTGBiddingSDKVersion @"6.6.2"
 
 
 

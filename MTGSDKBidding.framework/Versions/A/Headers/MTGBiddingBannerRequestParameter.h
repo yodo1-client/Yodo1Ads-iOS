@@ -2,12 +2,15 @@
 //  MTGBiddingBannerRequestParameter.h
 //  MTGSDKBidding
 //
-//  Created by lee on 2019/10/9.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import "MTGBiddingRequestParameter.h"
-#import <MTGSDK/MTGAdSize.h>
+#if __has_include(<MTGSDK/MTGSDK.h>)
+    #import <MTGSDK/MTGAdSize.h>
+#else
+    #import "MTGAdSize.h"
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 @interface MTGBiddingBannerRequestParameter : MTGBiddingRequestParameter
@@ -31,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  Initialize an MTGBiddingBannerRequestParameter object
  @param unitId unitId
  @param basePrice The optional value provided to this method should be double,the requested bid should not be lower than this price if use this value
- @param unitSize MTGBannerSizeTypeFormat
+ @param bannerSizeType MTGBannerSizeTypeFormat
 */
 - (instancetype)initWithPlacementId:(nullable NSString *)placementId
                              unitId:(nonnull NSString *) unitId

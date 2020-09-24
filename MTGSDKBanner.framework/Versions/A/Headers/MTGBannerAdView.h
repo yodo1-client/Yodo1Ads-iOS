@@ -2,16 +2,22 @@
 //  MTGBannerAdView.h
 //  MTGSDK
 //
-//  Created by lee on 2019/7/9.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MTGSDK/MTGBool.h>
-#import <MTGSDK/MTGAdSize.h>
+#if __has_include(<MTGSDK/MTGSDK.h>)
+    #import <MTGSDK/MTGBool.h>
+    #import <MTGSDK/MTGAdSize.h>
+#else
+    #import "MTGBool.h"
+    #import "MTGAdSize.h"
+#endif
+
 #import "MTGBannerAdViewDelegate.h"
 
-#define MTGBannerSDKVersion @"6.4.1"
+
+#define MTGBannerSDKVersion @"6.6.2"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,6 +46,11 @@ placementId
  unitId
  */
 @property(nonatomic,copy,readonly) NSString * _Nonnull unitId;
+
+/**
+* get the id of this request ad,call  after adViewLoadSuccess
+*/
+@property(nonatomic,copy,readonly) NSString * _Nullable requestId;
 
 /**
  the delegate

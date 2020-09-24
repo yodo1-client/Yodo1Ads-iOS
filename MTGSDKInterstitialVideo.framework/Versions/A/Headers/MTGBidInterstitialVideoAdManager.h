@@ -2,7 +2,6 @@
 //  MTGBidInterstitialVideoAdManager.h
 //  MTGSDKInterstitialVideo
 //
-//  Created by Harry on 2019/4/24.
 //  Copyright © 2019 Mintegral. All rights reserved.
 //
 
@@ -95,6 +94,12 @@
                   content:(NSString *_Nullable)content
               confirmText:(NSString *_Nullable)confirmText
                cancelText:(NSString *_Nullable)cancelText;
+
+/**
+* get the id of this request ad,call  after onInterstitialAdLoadSuccess.
+*/
+- (NSString *_Nullable)getRequestIdWithUnitId:(nonnull NSString *)unitId;
+
 @end
 
 

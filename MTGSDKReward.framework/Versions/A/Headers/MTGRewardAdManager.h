@@ -2,8 +2,6 @@
 //  MTGRewardAdManager.h
 //  MTGSDK
 //
-//  Created by yujinping on 16/4/12.
-//
 
 #import <Foundation/Foundation.h>
 #import "MTGRewardAd.h"
@@ -69,6 +67,11 @@
  *  Clean all the video file cache from the disk.
  */
 - (void)cleanAllVideoFileCache;
+
+/**
+* get the id of this request ad,call  after onAdLoadSuccess.
+*/
+- (NSString *_Nullable)getRequestIdWithUnitId:(nonnull NSString *)unitId;
 
 
 /**
