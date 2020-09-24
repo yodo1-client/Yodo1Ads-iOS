@@ -59,6 +59,7 @@ typedef void (^networkCompletion)(BOOL success, NSError *error);
 @property (nonatomic, copy) NSString *store;
 @property (nonatomic, copy) NSString *analyticsApiKey;
 @property (nonatomic, copy) NSString *managedDeviceID;
+@property (nonatomic, copy) NSDictionary *userTokenConfig;
 @property (nonatomic, copy) NSString *customParameter;
 
 @property (nonatomic, strong) TJCCurrencyManager *currencyManager;
