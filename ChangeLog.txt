@@ -1,4 +1,22 @@
 =============================================
+2020-09-21
+1.Applovin V6.14.3
+=============================================
+2020-09-14
+1.Applovin V6.14.2
+Update copy for Report Ad button alert to indicate that IT WILL SHOW FOR BOTH DEBUG AND TESTFLIGHT BUILDS.
+
+
+=============================================
+2020-09-10
+1.Applovin V6.14.1
+Remove privacy alert that would pop up in development / TestFlight builds.
+
+=============================================
+2020-09-07
+1.Applovin V6.13.5
+
+=============================================
 2020-08-17
 1.Applovin V6.13.4
 
