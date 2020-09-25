@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files =  "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
+    s.source_files =  "#{s.version}" + '/*.framework/Headers/*.h'
 
-    s.public_header_files =  "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
+    s.public_header_files =  "#{s.version}" + '/*.framework/Headers/*.h'
 
     # s.preserve_paths = 'ChangeLog.txt',"#{s.version}" + '/FBAudienceNetwork.framework'
     
