@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1AdColony'
-    s.version          = '4.1.5'
-    s.summary          = '更新 AdColony 4.1.3,最低支持iOS 9,添加广告位 [ remove UIWebView]'
+    s.version          = '4.1.6'
+    s.summary          = '更新 AdColony 4.4.0, [ 支持iOS 14 ]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -57,5 +57,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1AdvertSDK','4.2.2'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.2'
-    s.dependency 'Yodo1AdsAdColony','4.1.3'
+    s.dependency 'Yodo1AdsAdColony','4.1.4'
 end
