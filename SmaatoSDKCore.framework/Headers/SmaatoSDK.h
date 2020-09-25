@@ -110,4 +110,7 @@ typedef NS_ENUM(NSUInteger, SMAGender) {
 /// to pass private information (such as location or IDFA) to third-party providers.
 @property (class, nonatomic, readonly, nullable) NSString *usPrivacyString;
 
+/// Id assigned to the user by publisher. The id is subject to GDPR consent if in EU.
+/// Default value is \c nil.
+@property (class, nonatomic, copy, nullable) NSString *publisherProvidedIdentifier;
 @end
