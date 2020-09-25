@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Baidu'
-    s.version          = '4.1.1'
-    s.summary          = 'Baidu v4.70,不支持https [已经支持 不明显]'
+    s.version          = '4.1.2'
+    s.summary          = 'Baidu v4.71,不支持https [已经支持 不明显]'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -59,5 +59,5 @@ Pod::Spec.new do |s|
     ] 
     s.dependency 'Yodo1AdvertSDK','4.2.2'
     s.dependency 'Yodo1ThirdsAnalytics','4.2.2'
-    s.dependency 'Yodo1AdsBaidu','4.1.1'
+    s.dependency 'Yodo1AdsBaidu','4.1.2'
 end
