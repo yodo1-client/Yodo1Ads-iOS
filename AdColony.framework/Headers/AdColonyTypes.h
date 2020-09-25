@@ -1,4 +1,4 @@
-#import "AdColonyAdSize.h"
+#import <AdColony/AdColonyAdSize.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, AdColonyZoneType) {
 
     /** Invalid zone type */
     AdColonyZoneTypeInvalid = -1,
-
+    
     /** Interstitial zone type */
     AdColonyZoneTypeInterstitial = 0,
     
