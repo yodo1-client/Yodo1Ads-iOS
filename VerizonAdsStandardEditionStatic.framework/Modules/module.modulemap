@@ -1,0 +1,9 @@
+framework module VerizonAdsStandardEditionStatic {
+  umbrella header "VerizonAdsStandardEditionStatic.h"
+  export *
+  module * { export * }
+  
+  explicit module Private {
+      header "VASAds+Private.h"
+  }
+}
