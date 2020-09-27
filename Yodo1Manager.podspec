@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '9.0'
     
     s.subspec 'Yodo1_Manager' do |ss|
-        ss.source_files = "#{s.version}" + '/*.{h,mm}'
+        ss.source_files = "#{s.version}" + '/*.{h,mm,m}'
         ss.public_header_files = "#{s.version}" + '/*.h'
 
         ss.vendored_libraries = "#{s.version}" + '/*.a'
