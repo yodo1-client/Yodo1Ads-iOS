@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1FeedbackError'
-    s.version          = '4.1.1'
+    s.version          = '4.1.2'
     s.summary          = '反馈上传错误报告'
 
     s.description      = <<-DESC
@@ -68,6 +68,6 @@ Pod::Spec.new do |s|
     s.dependency 'Yodo1AFNetworking','4.1.0'
     s.dependency 'Yodo1YYModel','4.1.0'
     s.dependency 'Yodo1Reachability','4.1.0'
-    s.dependency 'Yodo1OnlineParameter','4.2.2'
+    s.dependency 'Yodo1OnlineParameter','4.2.3'
     
 end
