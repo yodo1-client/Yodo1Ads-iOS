@@ -428,7 +428,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1UnityAds','4.1.6'
+        ss.dependency 'YD1UnityAds','4.1.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -480,7 +480,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1Facebook','4.1.5'
+        ss.dependency 'YD1Facebook','4.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
