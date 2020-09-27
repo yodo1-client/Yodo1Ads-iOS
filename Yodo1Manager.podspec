@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
                             2.修改Yodo1数据统计支持iOS 14
                             3.修改错误上报支持iOS 14
                             4.添加ApplovinMax 聚合中的Flyber,Verizon,Amazon
+                            5.添加大转盘
 
                             ---------------------------
                           '
@@ -64,12 +65,12 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Commons','4.1.0'
         ss.dependency 'Yodo1ZipArchive','4.1.0'
         ss.dependency 'Yodo1YYModel', '4.1.0'
-        ss.dependency 'Yodo1Analytics','4.2.2'
-        ss.dependency 'Yodo1ThirdsAnalytics','4.2.2'
+        ss.dependency 'Yodo1Analytics','4.2.3'
+        ss.dependency 'Yodo1ThirdsAnalytics','4.2.3'
         ss.dependency 'Yodo1Track','4.1.1'
-        ss.dependency 'Yodo1FeedbackError','4.1.1'
-        ss.dependency 'Yodo1OnlineParameter','4.2.2'
-        ss.dependency 'Yodo1AdvertSDK','4.2.2'
+        ss.dependency 'Yodo1FeedbackError','4.1.2'
+        ss.dependency 'Yodo1OnlineParameter','4.2.3'
+        ss.dependency 'Yodo1AdvertSDK','4.2.3'
         ss.dependency 'Yodo1UDID','4.1.0'
         ss.dependency 'Yodo1SaAnalytics','4.1.0'
         ss.dependency 'Yodo1Bugly','4.1.2'
