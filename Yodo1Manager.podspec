@@ -731,18 +731,19 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
-    # s.subspec 'ApplovinMax_Inmobi' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'OTHER_LDFLAGS' => '-ObjC',
-    #         'ENABLE_BITCODE' => "NO",
-    #         "VALID_ARCHS": "armv7 arm64",
-    #         "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
-    #         "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
-    #     }
-    #     ss.dependency 'ApplovinMaxInmobi','4.1.5'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'ApplovinMax_Inmobi' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ApplovinMaxInmobi','4.1.6'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
     s.subspec 'ApplovinMax_IronSource' do |ss|
         ss.xcconfig = {
             "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
