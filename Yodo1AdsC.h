@@ -37,7 +37,7 @@ public:
 };
 
 typedef void (*Yodo1AdsEvent_Callback) (Yodo1AdsCEvent event,Yodo1AdsCError* error);
-
+typedef void (*Yodo1RewardGame_Callback)(const char * reward,Yodo1AdsCError * error);
 
 class Yodo1AdsC {
     
@@ -191,6 +191,20 @@ public:
      * sell their personal information
      */
     static bool IsDoNotSell();
+    
+#pragma mark- YODO1_REWARDGAME
+    /**
+     *  Check reward game is enable or not
+     *
+     *  @return YES/NO
+     */
+    static bool RewardGameIsEnable();
+    
+    /**
+     *  Show reward game
+     */
+    static void ShowRewardGame(Yodo1RewardGame_Callback callback);
+    
 };
 
 #endif /* Yodo1AdsC_h */

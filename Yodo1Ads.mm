@@ -27,6 +27,7 @@
 #import "Yodo1InterstitialAdManager.h"
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
+#import "Yodo1RewardGameViewController.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
@@ -51,12 +52,13 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.1.0";
+NSString* const kYodo1AdsVersion       = @"4.2.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
     Yodo1AdsTypeInterstitial    = 1002,//Interstitial
     Yodo1AdsTypeVideo           = 1003,//Video
+    Yodo1AdsTypeRewardGame      = 1007,//RewardGame //与安卓一致
 }Yodo1AdsType;
 
 @interface Yodo1AdsDelegate : NSObject
@@ -524,7 +526,10 @@ static NSString* yd1AppKey = @"";
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
 }
 
+BOOL bSensorsSwitch = NO;
+
 + (void)startTime {
+    if (!bSensorsSwitch) {return;}
     NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
     NSMutableDictionary * dic = @{@"startTime":ti}.mutableCopy;
     NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
@@ -535,6 +540,7 @@ static NSString* yd1AppKey = @"";
 }
 
 + (void)endTime {
+    if (!bSensorsSwitch) {return;}
     NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
     NSMutableDictionary * dic = @{@"endTime":ti}.mutableCopy;
     NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
@@ -548,7 +554,7 @@ static NSString* yd1AppKey = @"";
     NSDictionary* object = [notif object];
     //初始化神策数据统计
     NSDictionary * sensorsConfig = Yodo1AdConfigHelper.instance.sensorsConfig;
-    BOOL bSensorsSwitch = [sensorsConfig[kSensors_Switch] isEqualToString:@"on"];
+    bSensorsSwitch = [sensorsConfig[kSensors_Switch] isEqualToString:@"on"];
     if (bSensorsSwitch) {
         BOOL bSensorsLogEnable = [sensorsConfig[kSensors_Switch_DebugMode] isEqualToString:@"on"];
         [Yodo1SaManager initializeSdkServerURL:sensorsConfig[kSensors_ServerUrl] debug:(bSensorsLogEnable ? 2 : 0)];
@@ -556,9 +562,7 @@ static NSString* yd1AppKey = @"";
         
         NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
         NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"] ? : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
-        [Yodo1SaManager profileSetOnce:@{@"yID":@"",
-                                         @"game":bundleId,
-                                         @"channel":@"appstore"}];
+        [Yodo1SaManager profileSetOnce:@{@"yID":@"",@"game":bundleId,@"channel":@"appstore"}];
         [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
                                                   @"gameBundleId":bundleId,
                                                   @"sdkType":[Yodo1Ads publishType],
@@ -628,6 +632,10 @@ static NSString* yd1AppKey = @"";
         _publishVersion = (NSString*)[_config objectForKey:@"PublishVersion"];
     }
     return _publishVersion;
+}
+
++ (NSString *)sdkVersion {
+    return [self publishVersion];
 }
 
 + (void)setLogEnable:(BOOL)enable {
@@ -788,7 +796,6 @@ static NSString* yd1AppKey = @"";
 + (void)showVideo:(UIViewController *)viewcontroller placement:(NSString *)placement_id {
 #ifdef YODO1_ADS
     [[Yodo1AdVideoManager sharedInstance]showAdVideo:viewcontroller?viewcontroller:[Yodo1AdsDelegate getRootViewController] placement:placement_id awardBlock:^(bool finished) {
-        
     }];
 #endif
 }
@@ -830,6 +837,29 @@ static NSString* yd1AppKey = @"";
     return [Yodo1AdConfigHelper.instance isDoNotSell];
 #endif
     return NO;
+}
+
+#pragma mark- OCRewardGame
+
++ (BOOL)rewardGameIsEnable {
+#ifdef YODO1_ADS
+    return [Yodo1AdConfigHelper.instance isRewardGameEnable];
+#endif
+    return NO;
+}
+
+//Show Reward Game
++ (void)showRewardGame:(Yodo1RewardGameCallback)reward {
+#ifdef YODO1_ADS
+    [[Yodo1Analytics instance]eventId:@"RewardGameShow" eventData:@{}];
+    if (![self rewardGameIsEnable]) {
+        NSError * error = [NSError errorWithDomain:@"com.yodo1.rewardgame" code:-3 userInfo:@{NSLocalizedDescriptionKey:@"Reward game is disabled."}];
+        reward(nil,error);
+        return;
+    }
+    UIViewController * vc = [Yodo1AdsDelegate getRootViewController];
+    [Yodo1RewardGameViewController presentRewardGame:vc reward:reward];
+#endif
 }
 
 @end
@@ -909,7 +939,6 @@ bool Unity3dInterstitialIsReady()
     
 }
 
-
 void Unity3dShowInterstitial()
 {
     [Yodo1Ads showInterstitial];
@@ -969,7 +998,43 @@ bool Unity3dIsDoNotSell()
     return [Yodo1Ads isDoNotSell];
 }
 
+#pragma mark - Unity3dRewardGame
 
+bool Unity3dRewardGameIsEnable()
+{
+    return [Yodo1Ads rewardGameIsEnable];
+}
+
+void Unity3dShowRewardGame()
+{
+    [Yodo1Ads showRewardGame:^(NSString *reward, NSError *error) {
+        if (!kYodo1AdsGameObject) {return;}
+        if (error) {
+            NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+            [dict setObject:[NSNumber numberWithInt:Yodo1AdsTypeRewardGame] forKey:@"resulType"];
+            NSError* parseJSONError = nil;
+            NSString* msg = [Yodo1AdsDelegate stringWithJSONObject:dict error:&parseJSONError];
+            NSString* jsonError = @"";
+            if(parseJSONError){
+                jsonError = @"Convert result to json failed!";
+            }
+            NSString* des = [error localizedDescription];
+            jsonError = [NSString stringWithFormat:@"%@,errorMsg:%@",jsonError,des];
+            [dict setObject:jsonError forKey:@"error"];
+            msg =  [Yodo1AdsDelegate stringWithJSONObject:dict error:&parseJSONError];
+            UnitySendMessage([kYodo1AdsGameObject cStringUsingEncoding:NSUTF8StringEncoding],UNITY3D_YODO1ADS_METHOD,
+                             [msg cStringUsingEncoding:NSUTF8StringEncoding] );
+        }else{
+            NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+            dict[@"resulType"] = @(Yodo1AdsTypeRewardGame);
+            dict[@"reward"] = reward;
+            NSError* parseJSONError = nil;
+            NSString* msg = [Yodo1AdsDelegate stringWithJSONObject:dict error:&parseJSONError];
+            UnitySendMessage([kYodo1AdsGameObject cStringUsingEncoding:NSUTF8StringEncoding],UNITY3D_YODO1ADS_METHOD,
+            [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+        }
+    }];
+}
 }
 #endif
 
@@ -1120,4 +1185,30 @@ void Yodo1AdsC::SetDoNotSell(BOOL doNotSell)
 bool Yodo1AdsC::IsDoNotSell()
 {
     return [Yodo1Ads isDoNotSell];
+}
+
+#pragma mark - C++RewardGame
+
+bool Yodo1AdsC::RewardGameIsEnable()
+{
+    return [Yodo1Ads rewardGameIsEnable];
+}
+
+void Yodo1AdsC::ShowRewardGame(Yodo1RewardGame_Callback callback)
+{
+    if(callback == NULL){
+        NSLog(@"Reward game callback is null");
+        return;
+    }
+    [Yodo1Ads showRewardGame:^(NSString *reward, NSError *error) {
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            callback(NULL,errorC);
+        }else{
+            callback(reward.UTF8String,NULL);
+        }
+    }];
 }

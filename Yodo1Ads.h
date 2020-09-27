@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v4.1.0
+//  v4.2.0
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -35,8 +35,16 @@ typedef enum {
  *  @param error ad event error.
  */
 typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
+/**
+*  Yodo1RewardGame call back
+*  @param reward A JSONString of reward information.
+*  @param error Reward game error.
+*/
+typedef void (^Yodo1RewardGameCallback)(NSString * reward, NSError* error);
 
 @interface Yodo1Ads : NSObject
+
++ (NSString *)sdkVersion;
 
 //Init Yodo1Ads with appkey.
 + (void)initWithAppKey:(NSString *)appKey;
@@ -143,4 +151,11 @@ typedef void (^Yodo1AdsEventCallback)(Yodo1AdsEvent adEvent,NSError* error);
 // sell their personal information
 + (BOOL)isDoNotSell;
 
+#pragma mark- RewardGame
+
+//Check reward game is enable or not
++ (BOOL)rewardGameIsEnable;
+
+//Show reward game
++ (void)showRewardGame:(Yodo1RewardGameCallback)reward;
 @end
