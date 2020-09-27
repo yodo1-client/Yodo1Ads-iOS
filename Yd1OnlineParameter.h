@@ -83,9 +83,13 @@ typedef void (^OPCachedCompletionHandler)(void);
                            type:(Yd1AdsConfigType)type;
 
 ///priority
-- (NSArray*)configPriorityType:(Yd1AdsConfigType)type;
+- (NSArray *)configPriorityType:(Yd1AdsConfigType)type;
 
-- (NSArray*)reportFields;
+- (NSArray *)reportFields;
+
+- (NSDictionary *)rewardGameConfig;
+
+- (void)rewardGameReward:(NSDictionary *)para response:(void(^)(NSDictionary * rewardData))response;
 
 ///ads is eanble
 - (BOOL)eableAdsType:(Yd1AdsConfigType)type;
