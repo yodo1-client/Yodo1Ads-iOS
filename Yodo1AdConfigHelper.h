@@ -34,10 +34,13 @@ FOUNDATION_EXPORT NSString* const kSensors_Switch;
 FOUNDATION_EXPORT NSString* const kSensors_Switch_DebugMode;
 FOUNDATION_EXPORT NSString* const kSensors_ServerUrl;
 
+FOUNDATION_EXPORT NSString* const kRewardGameMasterSwitch;
+
 typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
     Yodo1ConfigTypeBanner,
     Yodo1ConfigTypeInterstitial,
-    Yodo1ConfigTypeVideo
+    Yodo1ConfigTypeVideo,
+    Yodo1ConfigTypeRewardGame,
 };
 
 typedef NS_ENUM(NSUInteger,SDKInitType) {
@@ -121,6 +124,12 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (void)setDoNotSell:(BOOL)doNotSell;
 
 - (NSDictionary *)sensorsConfig;
+
+- (BOOL)isRewardGameEnable;
+
+- (NSDictionary *)rewardGameConfig;
+
+- (void)rewardGameReward:(NSDictionary *)para response:(void(^)(NSDictionary * rewardData))response;
 
 @end
 
