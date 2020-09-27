@@ -16,11 +16,11 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files = "#{s.version}" + '/*/*.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/*/*.framework/Headers/*.h',"#{s.version}" + '/*.framework/Headers/*.h'
 
-    s.public_header_files = "#{s.version}" + '/*/*.framework/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/*/*.framework/Headers/*.h',"#{s.version}" + '/*.framework/Headers/*.h'
 
-    s.vendored_frameworks = "#{s.version}" + '/*/*.framework'
+    s.vendored_frameworks = "#{s.version}" + '/*/*.framework',"#{s.version}" + '/*.framework'
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
 
