@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1UnityAds'
-    s.version          = '4.1.6'
+    s.version          = '4.1.7'
     s.summary          = '更新UnityAds V3.4.8'
 
     s.description      = <<-DESC
