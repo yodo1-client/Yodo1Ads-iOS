@@ -131,6 +131,10 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 
 - (void)rewardGameReward:(NSDictionary *)para response:(void(^)(NSDictionary * rewardData))response;
 
+- (BOOL)isSensorsSwitch;
+
+- (void)setSensorsSwitch:(BOOL)enabled;
+
 @end
 
 NS_ASSUME_NONNULL_END
