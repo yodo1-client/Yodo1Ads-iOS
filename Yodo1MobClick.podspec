@@ -1,9 +1,11 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1MobClick'
-    s.version          = '4.2.1'
+    s.version          = '4.3.0'
     s.summary          = 'UMAnalytics 更新 V7.1.3 
                         1. 解决已知问题，提高SDK稳定性。
                             升级必读：https://developer.umeng.com/docs/119267/detail/119534
+
+                            [ 改为海外版本 v7.1.0 ]
                         '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
