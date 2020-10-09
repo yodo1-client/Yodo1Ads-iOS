@@ -165,7 +165,7 @@ static NSString* const __status                 = @"status";
     NSString* path=[NSBundle.mainBundle pathForResource:pathName
                                                  ofType:@"plist"];
     NSDictionary* productInfo =[NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSAssert([productInfo count] > 0, @"Yodo1ProductInfo.plist 没有配置产品ID!");
+   // NSAssert([productInfo count] > 0, @"Yodo1ProductInfo.plist 没有配置产品ID!");
     for (id key in productInfo){
         NSDictionary* item = [productInfo objectForKey:key];
         Product* product = [[Product alloc] initWithDict:item productId:key];
