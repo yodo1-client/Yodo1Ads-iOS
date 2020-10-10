@@ -164,6 +164,9 @@
     [[Yodo1AntiIndulgedNet manager] GET:@"money/info" parameters:parameters success:^(NSURLSessionDataTask *task, id data) {
         Yodo1AntiIndulgedResponse *res = [Yodo1AntiIndulgedResponse yodo1_modelWithJSON:data];
         if (res && res.success && res.data) {
+            
+            /*
+            //游戏不能处理限制消费弹框提示
             if (success) {
                 id hasLimit = res.data[@"hasLimit"];
                 if (!success(hasLimit ? hasLimit : @(false)) && [hasLimit boolValue]) {
@@ -171,6 +174,26 @@
                     if (msg == nil || [msg isKindOfClass:[NSNull class]]) {
                         msg = res.message;
                     }
+                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyOverstep error:msg];
+                }
+            }
+            */
+            
+            id hasLimit = res.data[@"hasLimit"];
+            hasLimit = (hasLimit ? hasLimit : @(false));
+            if ([hasLimit boolValue]) {
+                if (success) {
+                    success(hasLimit);
+                }
+                return;
+            }
+            
+            NSString *msg = res.data[@"alertMsg"];
+            if (msg == nil || [msg isKindOfClass:[NSNull class]]) {
+                msg = res.message;
+            }
+            if (failure) {
+                if (!failure([Yodo1AntiIndulgedUtils errorWithCode:res.code msg:res.message])) {
                     [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyOverstep error:msg];
                 }
             }

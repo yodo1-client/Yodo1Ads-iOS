@@ -244,16 +244,20 @@
                         event.action = Yodo1AntiIndulgedActionEndGame;
                         event.title = @"提示";
                         event.content = rules.playingTimeMsg.message;
-                        if (![[Yodo1AntiIndulgedHelper shared] successful: event]) {
-                            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleTimeOverstep error:nil];
+                        if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
+                            if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
+                                [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleTimeOverstep error:nil];
+                            }
                         }
                     } else {
                         event.eventCode = Yodo1AntiIndulgedEventCodeGuestPlayedTime;
                         event.action = Yodo1AntiIndulgedActionEndGame;
                         event.title = @"提示";
                         event.content = rules.guestModeMsg.message;
-                        if (![[Yodo1AntiIndulgedHelper shared] successful: event]) {
-                            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleVisitorOver error:nil];
+                        if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
+                            if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
+                                [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleVisitorOver error:nil];
+                            }
                         }
                     }
                 }

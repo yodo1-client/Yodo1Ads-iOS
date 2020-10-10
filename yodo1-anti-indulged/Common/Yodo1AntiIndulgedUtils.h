@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIViewController *)getTopViewController;
 
 + (NSError *)errorWithCode:(NSInteger)code msg:(NSString *)msg;
-
++ (NSString *)stringWithJSONObject:(id)obj error:(NSError**)error;
 @end
 
 NS_ASSUME_NONNULL_END

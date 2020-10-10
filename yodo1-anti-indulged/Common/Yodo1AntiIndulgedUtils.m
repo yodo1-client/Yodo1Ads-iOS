@@ -182,4 +182,28 @@
     return [NSError errorWithDomain:@"https://api.yodo1.com" code:code userInfo:@{NSLocalizedDescriptionKey : msg ? msg : @"未知错误"}];
 }
 
+
++ (NSString *)stringWithJSONObject:(id)obj error:(NSError**)error {
+    if (obj) {
+        if (NSClassFromString(@"NSJSONSerialization")) {
+            NSData* data = nil;
+            @try {
+                data = [NSJSONSerialization dataWithJSONObject:obj options:0 error:error];
+            }
+            @catch (NSException* exception)
+            {
+                *error = [NSError errorWithDomain:[exception description] code:0 userInfo:nil];
+                return nil;
+            }
+            @finally
+            {
+            }
+            
+            if (data) {
+                return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
+        }
+    }
+    return nil;
+}
 @end
