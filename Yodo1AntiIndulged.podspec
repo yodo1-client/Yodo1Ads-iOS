@@ -14,15 +14,15 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files  = "#{s.version}" + '/*.{h,mm,m}'
+    s.source_files  = "#{s.version}" + '/*/*/*.{h,mm,m}',"#{s.version}" + '/*/*.{h,mm,m}'
 
-    s.public_header_files = "#{s.version}" + '/*.h'
+    s.public_header_files = "#{s.version}" + '/*/*/*.h',"#{s.version}" + '/*/*.h'
 
     #s.vendored_frameworks = tags + '/UCenter.framework'
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
 
-    # s.resources = "#{s.version}" + '/*.bundle'
+    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle'
 
     # s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
