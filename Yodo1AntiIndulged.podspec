@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiIndulged'
-    s.version          = '0.0.2'
+    s.version          = '0.0.3'
     s.summary          = 'beta'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
 
-    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle'
+    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle' + '/yodo1-anti-indulged/*/*.storyboard' + '/yodo1-anti-indulged/*/*.xcassets'
 
     # s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
