@@ -88,7 +88,7 @@
             }
             _iconView.image = [UIImage imageNamed:@"error"];
             _titleLabel.text = @"无可继续游戏时间";
-            _contentLabel.text = [NSString stringWithFormat:@"根据国家规定\n工作日：每天最多可玩%@分钟\n节假日：每天最多可玩%@分钟\n您今天已游戏了%@分钟，无法继续游戏", @(regularTime / 60), @(holidayTime / 60), @(record.playingTime / 60)];
+            _contentLabel.text = [NSString stringWithFormat:@"根据国家规定\n工作日：每天最多可玩%@分钟\n节假日：每天最多可玩%@分钟\n您今天已游戏了%@分钟，无法继续游戏", @((NSInteger)regularTime / 60), @((NSInteger)holidayTime / 60), @((NSInteger)record.playingTime / 60)];
             _checkButton.hidden = YES;
             [_exitButton setTitle:@"→ 退出游戏" forState:UIControlStateNormal];
             break;

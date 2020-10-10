@@ -382,7 +382,7 @@
             }
             id leftTime = res.data[@"leftTime"];
             if (leftTime) {
-                self->_record.leftTime = [leftTime integerValue] * 60;
+                self->_record.leftTime = [leftTime integerValue];
             }
             [self update:self->_record];
             NSLog(@"获取已玩时间 - %@", res.data);
@@ -403,7 +403,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"businessType"] = user.certificationStatus == UserCertificationStatusMinor ? @1 : @2;
     parameters[@"happenDate"] = date;
-    parameters[@"playingTime"] = @(time);
+    parameters[@"playingTime"] = @((NSInteger)time);
     parameters[@"sign"] = [Yodo1AntiIndulgedUtils md5String:[NSString stringWithFormat:@"anti%@", date]];
     
     postPlayRequestTime = [NSDate date].timeIntervalSince1970;
@@ -417,7 +417,7 @@
             }
             id leftTime = res.data[@"leftTime"];
             if (leftTime) {
-                self->_record.leftTime = [leftTime integerValue] * 60;
+                self->_record.leftTime = [leftTime integerValue];
             }
             [self update:self->_record];
             NSLog(@"上报已玩时间 - %@", res.data);

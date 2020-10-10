@@ -31,11 +31,19 @@ static NSString *kRESULT_CONTEXT = @"context";
 @end
 
 @implementation Yodo1U3dAntiIndulgedDelegate
-- (Yodo1U3dAntiIndulgedDelegate*)initWith:(NSString*)gameObjectName  callbackName: (NSString*)callbackName
++ (Yodo1U3dAntiIndulgedDelegate *)shared {
+    static Yodo1U3dAntiIndulgedDelegate *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[Yodo1U3dAntiIndulgedDelegate alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (void)initWith:(NSString*)gameObjectName  callbackName: (NSString*)callbackName
 {
     _gameObjectName = gameObjectName;
     _callbackName = callbackName;
-    return self;
 }
 
 /// SDK初始化回调
@@ -99,7 +107,8 @@ extern "C" {
         NSString* ocRegionCode = Yodo1CreateNSString(regionCode);
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
-        [[Yodo1AntiIndulged shared] init:ocAppKey regionCode:ocRegionCode delegate:[[Yodo1U3dAntiIndulgedDelegate new] initWith:ocGameObjName callbackName:ocMethodName]];
+        [[Yodo1U3dAntiIndulgedDelegate shared] initWith:ocGameObjName callbackName:ocMethodName];
+        [[Yodo1AntiIndulged shared] init:ocAppKey regionCode:ocRegionCode delegate:[Yodo1U3dAntiIndulgedDelegate shared]];
     }
 
     void UnityVerifyCertificationInfo(const char* accountId, const char* gameObjectName, const char* methodName)
@@ -204,7 +213,7 @@ extern "C" {
             NSLog(@"%@%s %@",kLog_TAG, __FUNCTION__, @"上报成功");
             return YES;
         } failure:^(NSError *error) {
-            NSLog(@"%@%s %@",kLog_TAG, __FUNCTION__, @"上报失败");
+            NSLog(@"%@%s : %@ : %@",kLog_TAG, __FUNCTION__, @"上报失败", error.localizedDescription);
             return YES;
         }];
     }

@@ -14,7 +14,7 @@
 @implementation Yodo1AntiIndulgedBaseVC
 
 + (instancetype)loadFromStoryboard {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AntiIndulged" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Yodo1AntiIndulgedResource.bundle/AntiIndulged" bundle:nil];
     return (Yodo1AntiIndulgedBaseVC *)[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
 }
 

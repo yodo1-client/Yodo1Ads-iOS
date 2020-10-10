@@ -99,6 +99,40 @@
     }
 }
 
++ (NSTimeInterval)convert:(NSTimeInterval)time fromUnit:(Yodo1AntiIndulgedTimeUnit)from toUnit:(Yodo1AntiIndulgedTimeUnit)to {
+    NSTimeInterval ms;
+    switch (from) {
+        case Yodo1AntiIndulgedTimeUnitSecond:
+            ms = time * 1000;
+            break;
+        case Yodo1AntiIndulgedTimeUnitMinute:
+            ms = time * 60000;
+            break;
+        case Yodo1AntiIndulgedTimeUnitHour:
+            ms = time * 3600000;
+            break;
+        case Yodo1AntiIndulgedTimeUnitDay:
+            ms = time * 86400000;
+            break;
+        default:
+            ms = time;
+            break;
+    }
+    
+    switch (to) {
+        case Yodo1AntiIndulgedTimeUnitSecond:
+            return ms / 1000;
+        case Yodo1AntiIndulgedTimeUnitMinute:
+            return ms / 60000;
+        case Yodo1AntiIndulgedTimeUnitHour:
+            return ms / 3600000;
+        case Yodo1AntiIndulgedTimeUnitDay:
+            return ms / 86400000;
+        default:
+            return ms;
+    }
+}
+
 + (UIWindow *)getTopWindow {
     UIWindow *rootWindow;
     NSArray<UIWindow *> *windows;

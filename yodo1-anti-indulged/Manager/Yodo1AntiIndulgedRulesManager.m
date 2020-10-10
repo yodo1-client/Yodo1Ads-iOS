@@ -67,7 +67,7 @@
     }
     [[Yodo1AntiIndulgedNet manager] GET:@"config/holiday" parameters:nil success:^(NSURLSessionDataTask *task, id data) {
         Yodo1AntiIndulgedResponse *res = [Yodo1AntiIndulgedResponse yodo1_modelWithJSON:data];
-        if (res.data) {
+        if (res.success && res.data) {
             Yodo1AntiIndulgedHolidayRules *rules = [Yodo1AntiIndulgedHolidayRules yodo1_modelWithJSON:res.data];
             if (rules) {
                 [Yd1OpsTools.cached setObject:rules forKey:kAntiIndulgedHolidayRules];
@@ -97,9 +97,12 @@
     
     [[Yodo1AntiIndulgedNet manager] GET:@"config/holidays" parameters:nil success:^(NSURLSessionDataTask *task, id data) {
         Yodo1AntiIndulgedResponse *res = [Yodo1AntiIndulgedResponse yodo1_modelWithJSON:data];
-        if (res.data) {
-            [Yd1OpsTools.cached setObject:res.data forKey:kAntiIndulgedHolidays];
-            NSLog(@"获取节假日列表 - %@", res.data);
+        if (res.success && res.data) {
+            NSArray *records = res.data[@"records"];
+            if (records) {
+                [Yd1OpsTools.cached setObject:records forKey:kAntiIndulgedHolidays];
+                NSLog(@"获取节假日列表 - %@", records);
+            }
         }
         if (success) {
             success(res.data);
