@@ -13,6 +13,8 @@
 #import "Yodo1Registry.h"
 #import <Yodo1Commons.h>
 #import "Yodo1KeyInfo.h"
+#import "Yd1OnlineParameter.h"
+#import "Yodo1Tool+Commons.h"
 
 NSString* const YODO1_ANALYTICS_UMENG_APPKEY  = @"UmengAnalytics";
 NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
@@ -22,6 +24,7 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
     double _currencyAmount;//现金金额
     double _virtualCurrencyAmount;//虚拟币金额
     NSString* _iapId;//物品id
+    BOOL isUSOrIN;
 }
 
 + (AnalyticsType)analyticsType
@@ -38,12 +41,36 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 {
     self = [super init];
     if (self) {
-#ifdef DEBUG
-        [UMConfigure setLogEnabled:YES];
-#endif
-        NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
-        NSAssert(appKey != nil, @"友盟 appKey 没有设置");
-        [UMConfigure initWithAppkey:appKey channel:@"AppStore"];
+        //判断是否是Mas SDK
+        if ([Yd1OnlineParameter.shared.publishType hasPrefix:@"mas_"]) {
+            NSString* umengAppKey = @"";
+            NSString* umengEnableLog = @"off";
+            umengAppKey = [Yd1OnlineParameter.shared stringConfigWithKey:@"UMENG_APPKEY" defaultValue:@""];
+            umengEnableLog = [Yd1OnlineParameter.shared stringConfigWithKey:@"UMENG_LOG_ENABLED" defaultValue:umengEnableLog];
+            
+            BOOL isLogEnabled = [umengEnableLog isEqualToString:@"on"]?YES:NO;
+            //美国 US 印度 IN
+            // && [[Yodo1Tool.shared language]isEqualToString:@"en"]
+            //&& [[Yodo1Tool.shared language]isEqualToString:@"hi"]))
+            if (([[Yodo1Tool.shared countryCode]isEqualToString:@"US"])
+                ||([[Yodo1Tool.shared countryCode]isEqualToString:@"IN"] )) {
+                //不初始化
+                isUSOrIN = true;
+            } else {
+                if (![umengAppKey isEqualToString:@""]) {
+                    [UMConfigure setLogEnabled:isLogEnabled];
+                    [UMConfigure initWithAppkey:umengAppKey channel:@"AppStore"];
+                }
+                isUSOrIN = false;
+            }
+        } else {
+    #ifdef DEBUG
+            [UMConfigure setLogEnabled:YES];
+    #endif
+            NSString* appKey = [[Yodo1KeyInfo shareInstance] configInfoForKey:YODO1_ANALYTICS_UMENG_APPKEY];
+            NSAssert(appKey != nil, @"友盟 appKey 没有设置");
+            [UMConfigure initWithAppkey:appKey channel:@"AppStore"];
+        }
     }
     return self;
 }
@@ -51,6 +78,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 - (void)eventWithAnalyticsEventName:(NSString *)eventName
                           eventData:(NSDictionary *)eventData
 {
+    if (isUSOrIN) {
+        return;
+    }
     if (eventData) {
         [MobClick event:eventName attributes:eventData];
     }
@@ -58,6 +88,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 
 - (void)startLevelAnalytics:(NSString*)level
 {
+    if (isUSOrIN) {
+        return;
+    }
     if (level) {
         [MobClickGameAnalytics startLevel:level];
     }
@@ -65,6 +98,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 
 - (void)finishLevelAnalytics:(NSString*)level
 {
+    if (isUSOrIN) {
+        return;
+    }
     if (level) {
         [MobClickGameAnalytics finishLevel:level];
     }
@@ -72,6 +108,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 
 - (void)failLevelAnalytics:(NSString*)level  failedCause:(NSString*)cause
 {
+    if (isUSOrIN) {
+        return;
+    }
     if (level) {
         [MobClickGameAnalytics failLevel:level];
     }
@@ -79,6 +118,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 
 - (void)userLevelIdAnalytics:(int)level
 {
+    if (isUSOrIN) {
+        return;
+    }
     [MobClickGameAnalytics setUserLevelId:level];
 }
 
@@ -90,6 +132,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
         virtualCurrencyAmount:(double)virtualCurrencyAmount
                   paymentType:(NSString *)paymentType
 {
+    if (isUSOrIN) {
+        return;
+    }
     _currencyAmount = currencyAmount;
     _virtualCurrencyAmount = virtualCurrencyAmount;
     _iapId = iapId;
@@ -111,6 +156,9 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 //虚拟货币交易成功
 - (void)chargeSuccessAnalytics:(NSString *)orderId source:(int)source
 {
+    if (isUSOrIN) {
+        return;
+    }
     if (orderId) {
         NSArray* arr = [[NSUserDefaults standardUserDefaults] objectForKey:kChargeRequstAnalytics];
         if ([arr count] >0) {
@@ -139,18 +187,27 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
 //玩家获虚拟币奖励
 - (void)rewardAnalytics:(double)virtualCurrencyAmount reason:(NSString *)reason source:(int)source
 {
+    if (isUSOrIN) {
+        return;
+    }
     [MobClickGameAnalytics bonus:virtualCurrencyAmount source:0];
 }
 
 //玩家支付货币购买道具.
 - (void)purchaseAnalytics:(NSString *)item itemNumber:(int)number priceInVirtualCurrency:(double)price
 {
+    if (isUSOrIN) {
+        return;
+    }
     [MobClickGameAnalytics buy:item amount:number price:price];
 }
 
 //道具消耗统计
 - (void)useAnalytics:(NSString *)item amount:(int)amount price:(double)price
 {
+    if (isUSOrIN) {
+        return;
+    }
     [MobClickGameAnalytics use:item amount:amount price:price];
 }
 
