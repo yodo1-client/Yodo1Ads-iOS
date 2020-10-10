@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.3.0'
-    s.summary          = 'v4.3.0- 2020-09-29
+    s.version          = '4.3.1'
+    s.summary          = 'v4.3.1- 2020-10-10
                             ---------------------------
                             1.更新各渠道广告-->
                                 Applovin v6.14.4
@@ -25,6 +25,8 @@ Pod::Spec.new do |s|
                             3.修改错误上报支持iOS 14
                             4.添加ApplovinMax 聚合中的Flyber,Verizon,Amazon
                             5.添加大转盘
+                            6.更新统计AF和Soomla,解决bug
+                            7.统计Umeng 使用海外版
 
                             ---------------------------
                           '
@@ -112,7 +114,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1UCenter','4.2.5'
+        ss.dependency 'Yodo1UCenter','4.2.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -261,7 +263,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1AntiAddiction','4.1.5'
+        ss.dependency 'Yodo1AntiAddiction','4.1.6'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -275,7 +277,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnalyticsAdapterAppsFlyer','4.2.4'
+        ss.dependency 'AnalyticsAdapterAppsFlyer','4.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -309,7 +311,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnalyticsAdapterUmeng','4.2.4'
+        ss.dependency 'AnalyticsAdapterUmeng','4.2.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -336,7 +338,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1Soomla','4.1.6'
+        ss.dependency 'Yodo1Soomla','4.1.7'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
