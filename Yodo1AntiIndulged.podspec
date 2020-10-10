@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
 
-    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle' + '/yodo1-anti-indulged/*/*.storyboard' + '/yodo1-anti-indulged/*/*.xcassets'
+    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle', "#{s.version}" + '/yodo1-anti-indulged/View/*.xcassets', "#{s.version}" + '/yodo1-anti-indulged/View/*.storyboard'
 
     # s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
