@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.3.1'
-    s.summary          = 'v4.3.1- 2020-10-10
+    s.version          = '4.3.2'
+    s.summary          = 'v4.3.2- 2020-10-12
                             ---------------------------
                             1.更新各渠道广告-->
                                 Applovin v6.14.4
@@ -27,6 +27,7 @@ Pod::Spec.new do |s|
                             5.添加大转盘
                             6.更新统计AF和Soomla,解决bug
                             7.统计Umeng 使用海外版
+                            8.添加ATT
 
                             ---------------------------
                           '

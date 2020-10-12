@@ -34,6 +34,8 @@
 #import "Yodo1AnalyticsManager.h"
 #endif
 
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
 ///C++
 static Yodo1AdsEvent_Callback s_banner_callback;
 
@@ -490,6 +492,11 @@ static NSString* yd1AppKey = @"";
         NSLog(@"[Yodo1 Ads] has already been initialized");
         return;
     }
+
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {}];
+    }
+
     bYodo1AdsInited = true;
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
