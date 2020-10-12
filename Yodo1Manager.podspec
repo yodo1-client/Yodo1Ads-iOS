@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
         ss.resources = "#{s.version}" + '/Yodo1Ads.bundle'
         ss.requires_arc = true
         
-        ss.frameworks = 'CoreTelephony'
+        ss.frameworks = 'CoreTelephony','AppTrackingTransparency'
 
         ss.xcconfig = {
             'OTHER_LDFLAGS' => '-ObjC',
