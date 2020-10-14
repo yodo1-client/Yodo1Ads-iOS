@@ -116,7 +116,11 @@
         }
     } failure:^(NSError *error) {
         [self setLoading:NO];
-        [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:error.localizedDescription];
+        if (error.code == -1009) {
+            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleNetError error:error.localizedDescription];
+        } else {
+            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:error.localizedDescription];
+        }
     }];
 }
 

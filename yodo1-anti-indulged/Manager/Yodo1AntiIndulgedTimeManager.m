@@ -181,17 +181,19 @@
         dispatch_async(dispatch_get_main_queue(),^{
             if (forbidden == 1) {
                 // 提醒
-                Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
-                event.eventCode = Yodo1AntiIndulgedEventCodeMinorForbiddenTime;
-                event.action = Yodo1AntiIndulgedActionResumeGame;
-                event.title = @"提示";
-                event.content = rules.antiPlayingTimeMsg.beforeMsg;
-                if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
-                    if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
-                        [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                if (self->notifyList.count == 0) {
+                    Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
+                    event.eventCode = Yodo1AntiIndulgedEventCodeMinorForbiddenTime;
+                    event.action = Yodo1AntiIndulgedActionResumeGame;
+                    event.title = @"提示";
+                    event.content = rules.antiPlayingTimeMsg.beforeMsg;
+                    if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
+                        if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
+                            [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                        }
                     }
+                    [self->notifyList addObject:event];
                 }
-                
             } else if (forbidden == 2) {
                 // 结束
                 Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
@@ -213,27 +215,30 @@
             dispatch_async(dispatch_get_main_queue(),^{
                 if (end == 1) {
                     // 提醒
-                    Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
-                    if (user.certificationStatus == UserCertificationStatusMinor) {
-                        event.eventCode = Yodo1AntiIndulgedEventCodeMinorPlayedTime;
-                        event.action = Yodo1AntiIndulgedActionResumeGame;
-                        event.title = @"提示";
-                        event.content = rules.playingTimeMsg.beforeMsg;
-                        if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
-                            if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
-                                [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                    if (self->notifyList.count == 0) {
+                        Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
+                        if (user.certificationStatus == UserCertificationStatusMinor) {
+                            event.eventCode = Yodo1AntiIndulgedEventCodeMinorPlayedTime;
+                            event.action = Yodo1AntiIndulgedActionResumeGame;
+                            event.title = @"提示";
+                            event.content = rules.playingTimeMsg.beforeMsg;
+                            if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
+                                if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
+                                    [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                                }
+                            }
+                        } else {
+                            event.eventCode = Yodo1AntiIndulgedEventCodeGuestPlayedTime;
+                            event.action = Yodo1AntiIndulgedActionResumeGame;
+                            event.title = @"提示";
+                            event.content = rules.guestModeMsg.beforeMsg;
+                            if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
+                                if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
+                                    [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                                }
                             }
                         }
-                    } else {
-                        event.eventCode = Yodo1AntiIndulgedEventCodeGuestPlayedTime;
-                        event.action = Yodo1AntiIndulgedActionResumeGame;
-                        event.title = @"提示";
-                        event.content = rules.guestModeMsg.beforeMsg;
-                        if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
-                            if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
-                                [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
-                            }
-                        }
+                        [self->notifyList addObject:event];
                     }
                 } else if (end == 2) {
                     // 结束
@@ -296,11 +301,15 @@
             // 没有匹配可玩时间，直接认为是在非可玩时段
             if (timeRange.location == 0 && timeRange.length == 0) {
                 return 2;
-            } 
-            if (NSMaxRange(timeRange) == current) {
+            }
+            if (current >= timeRange.location && current <= timeRange.location + timeRange.length) {
+                if (NSMaxRange(timeRange) == current) {
+                    return 2;
+                } else if (NSMaxRange(timeRange) - current < 10) {
+                    return 1;
+                }
+            } else {
                 return 2;
-            } else if (NSMaxRange(timeRange) - current < 600) {
-                return 1;
             }
         } else {
             // 没有匹配年龄，直接认为是在非可玩时段
@@ -313,6 +322,7 @@
 - (NSInteger)checkEndTime {
     Yodo1AntiIndulgedUser *user = [Yodo1AntiIndulgedUserManager manager].currentUser;
     Yodo1AntiIndulgedRules *rules = [Yodo1AntiIndulgedRulesManager manager].currentRules;
+    NSTimeInterval residue = 600;
     if (user.certificationStatus == UserCertificationStatusMinor) {
         // 匹配可玩时间
         NSTimeInterval holidayTime = 10800;
@@ -327,16 +337,17 @@
         NSString *today = [Yodo1AntiIndulgedUtils dateString:[self getNowDate]];
         BOOL isHoliday = [[Yodo1AntiIndulgedRulesManager manager].holidays indexOfObject:today] != NSNotFound;
         NSTimeInterval duration = isHoliday ? holidayTime : regularTime;
+        
         if (duration - _record.playingTime <= 0 || _record.leftTime <= 0) {
             return 2;
-        } else if (duration - _record.playingTime <= 600 || (_record.leftTime <= 600 && _record.leftTime > 0)) {
+        } else if (duration - _record.playingTime <= residue || (_record.leftTime <= residue && _record.leftTime > 0)) {
             return 1;
         }
     } else {
         NSTimeInterval duration = rules.guestModeConfig.playingTime;
         if (duration - _record.playingTime <= 0 || _record.leftTime <= 0) {
             return 2;
-        } else if (duration - _record.playingTime <= 600 || (_record.leftTime <= 600 && _record.leftTime > 0)) {
+        } else if (duration - _record.playingTime <= residue || (_record.leftTime <= residue && _record.leftTime > 0)) {
             return 1;
         }
     }
@@ -361,7 +372,7 @@
             NSLog(@"获取服务器时间 - %@", res.data);
         }
     } failure:^(NSURLSessionDataTask *task, NSError * error) {
-        
+
     }];
 }
 

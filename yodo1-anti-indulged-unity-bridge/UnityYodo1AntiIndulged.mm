@@ -21,7 +21,7 @@ static NSString *kRESULT_ERROR_KEY = @"error";
 static NSString *kRESULT_EVENT_ACTION = @"event_action";
 static NSString *kRESULT_EVENT_CODE = @"event_code";
 static NSString *kRESULT_TITLE = @"title";
-static NSString *kRESULT_CONTEXT = @"context";
+static NSString *kRESULT_CONTENT = @"content";
 
 @interface Yodo1U3dAntiIndulgedDelegate:NSObject <Yodo1AntiIndulgedDelegate>
 {
@@ -52,14 +52,14 @@ static NSString *kRESULT_CONTEXT = @"context";
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
     [dict setObject:[NSNumber numberWithInteger:ResulTypeInit] forKey:kRESULT_TYPE_KEY];
     [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL_KEY];
-    [dict setObject:message forKey:kRESULT_CONTEXT];
+    [dict setObject:message forKey:kRESULT_CONTENT];
     
     NSError* parseJSONError = nil;
     NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     if(parseJSONError){
         [dict setObject:[NSNumber numberWithInt:ResulTypeInit] forKey:kRESULT_TYPE_KEY];
         [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL_KEY];
-        [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+        [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
         msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     }
     UnitySendMessage([_gameObjectName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -76,7 +76,7 @@ static NSString *kRESULT_CONTEXT = @"context";
     [dict setObject:[NSNumber numberWithInteger:[event action]] forKey:kRESULT_EVENT_ACTION];
     [dict setObject:[NSNumber numberWithInteger:[event eventCode]] forKey:kRESULT_EVENT_CODE];
     [dict setObject:title forKey:kRESULT_TITLE];
-    [dict setObject:message forKey:kRESULT_CONTEXT];
+    [dict setObject:message forKey:kRESULT_CONTENT];
     
     NSError* parseJSONError = nil;
     NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
@@ -84,7 +84,7 @@ static NSString *kRESULT_CONTEXT = @"context";
         [dict setObject:[NSNumber numberWithInt:ResulTypeTimeLimit] forKey:kRESULT_TYPE_KEY];
         [dict setObject:[NSNumber numberWithInteger:[event action]] forKey:kRESULT_EVENT_ACTION];
         [dict setObject:[NSNumber numberWithInteger:[event eventCode]] forKey:kRESULT_EVENT_CODE];
-        [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+        [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
         msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     }
     UnitySendMessage([_gameObjectName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -130,7 +130,7 @@ extern "C" {
             if(parseJSONError){
                 [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
                 [dict setObject:[NSNumber numberWithInteger:YES] forKey:kRESULT_EVENT_ACTION];
-                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }
             UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -147,7 +147,7 @@ extern "C" {
             if(parseJSONError){
                 [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
                 [dict setObject:[NSNumber numberWithInteger:Yodo1AntiIndulgedActionEndGame] forKey:kRESULT_EVENT_ACTION];
-                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }
             UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -173,7 +173,7 @@ extern "C" {
             if(parseJSONError){
                 [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
                 [dict setObject:[[NSNumber alloc]initWithBool:YES] forKey:kRESULT_BOOL_KEY];
-                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }
             UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],
@@ -185,14 +185,14 @@ extern "C" {
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
             [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
             [dict setObject:[[NSNumber alloc]initWithBool:YES] forKey:kRESULT_BOOL_KEY];
-            [dict setObject:error.localizedDescription forKey:kRESULT_CONTEXT];
+            [dict setObject:error.localizedDescription forKey:kRESULT_CONTENT];
             
             NSError* parseJSONError = nil;
             NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             if(parseJSONError){
                 [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
                 [dict setObject:[[NSNumber alloc]initWithBool:NO] forKey:kRESULT_BOOL_KEY];
-                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTEXT];
+                [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }
             UnitySendMessage([ocGameObjName cStringUsingEncoding:NSUTF8StringEncoding],

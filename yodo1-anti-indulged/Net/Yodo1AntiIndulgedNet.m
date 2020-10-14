@@ -38,11 +38,11 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-//#ifdef DEBUG
+#ifdef DEBUG
         NSURL *baseURL = [NSURL URLWithString:@"https://ais-frontend.cb64eaf4841914d918c93a30369d6bbc6.cn-beijing.alicontainer.com/ais"];
-//#else
-//        NSURL *baseURL = [NSURL URLWithString:@"https://api.yodo1.com"];
-//#endif
+#else
+        NSURL *baseURL = [NSURL URLWithString:@"https://api.yodo1.com"];
+#endif
         
         Yodo1AFSecurityPolicy *security = [Yodo1AFSecurityPolicy policyWithPinningMode:Yodo1AFSSLPinningModeNone];
         [security setValidatesDomainName:NO];

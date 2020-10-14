@@ -59,7 +59,6 @@
     if (![antiUser isEqual:_currentUser]) {
         [[Yodo1AntiIndulgedHelper shared] stopTimer];
     }
-    _currentUser = antiUser;
     
     if (antiUser.yid) {
         [self getCertificationInfo:antiUser success:success failure:failure];
@@ -84,6 +83,7 @@
 
 - (void)getCertificationInfo:(Yodo1AntiIndulgedUser *)user success:(void (^)(Yodo1AntiIndulgedUser *))success failure:(void (^)(NSError *))failure {
     
+    _currentUser = user;
     [[Yodo1AntiIndulgedNet manager] GET:@"certification/info" parameters:nil success:^(NSURLSessionDataTask *task, id response) {
         
         Yodo1AntiIndulgedResponse *res = [Yodo1AntiIndulgedResponse yodo1_modelWithJSON:response];
