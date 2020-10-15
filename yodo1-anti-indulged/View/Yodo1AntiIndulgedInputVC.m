@@ -117,7 +117,7 @@
     } failure:^(NSError *error) {
         [self setLoading:NO];
         if (error.code == -1009) {
-            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleNetError error:error.localizedDescription];
+            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleNetError error:nil];
         } else {
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:error.localizedDescription];
         }
@@ -140,6 +140,8 @@
 
 // 退出游戏
 - (IBAction)onQuitClicked:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
     event.eventCode = Yodo1AntiIndulgedEventCodeNone;

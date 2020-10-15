@@ -10,6 +10,7 @@
 #import "Yodo1AntiIndulgedUserManager.h"
 #import "Yodo1AntiIndulgedDatabase.h"
 #import "Yodo1AntiIndulgedNet.h"
+#import <Yodo1Reachability/Yodo1Reachability.h>
 #import <Yodo1YYModel/Yodo1Model.h>
 #import <Toast/Toast.h>
 
@@ -42,12 +43,26 @@
     self = [super init];
     if (self) {
         notifyList = [NSMutableSet set];
+        
+        // 监听网络变化
+        __weak __typeof(self)weakSelf = self;
+        [Yodo1Reachability reachability].notifyBlock = ^(Yodo1Reachability *reachability) {
+            [weakSelf getAppTime];
+        };
+        
+        // 监听进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopTimer];
+}
+
+- (void)didBecomeActive {
+    [self getAppTime];
 }
 
 - (void)startTimer {
@@ -291,7 +306,7 @@
         }
         
         if (limtRange) {
-            NSRange timeRange = NSMakeRange(480, 840);
+            NSRange timeRange = NSMakeRange(0, 0);
             for (NSString *time in limtRange) {
                 NSRange range = [Yodo1AntiIndulgedUtils time:current inRange:time];
                 if (range.location != 0 && range.length != 0) {

@@ -157,7 +157,10 @@
     
     Yodo1AntiIndulgedUser *user = [Yodo1AntiIndulgedUserManager manager].currentUser;
     if (user.certificationStatus == UserCertificationStatusNot) {
-        [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyDisable error:nil];
+        BOOL show = success && success(@(true));
+        if (!show) {
+            [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyDisable error:nil];
+        }
         return;
     }
     
@@ -165,37 +168,19 @@
         Yodo1AntiIndulgedResponse *res = [Yodo1AntiIndulgedResponse yodo1_modelWithJSON:data];
         if (res && res.success && res.data) {
             
-            /*
-            //游戏不能处理限制消费弹框提示
-            if (success) {
-                id hasLimit = res.data[@"hasLimit"];
-                if (!success(hasLimit ? hasLimit : @(false)) && [hasLimit boolValue]) {
-                    NSString *msg = res.data[@"alertMsg"];
-                    if (msg == nil || [msg isKindOfClass:[NSNull class]]) {
-                        msg = res.message;
-                    }
-                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyOverstep error:msg];
-                }
-            }
-            */
-            
             id hasLimit = res.data[@"hasLimit"];
-            hasLimit = (hasLimit ? hasLimit : @(false));
-            if ([hasLimit boolValue]) {
-                if (success) {
-                    success(hasLimit);
-                }
-                return;
+            BOOL limit = hasLimit ? [hasLimit boolValue] : false; // 是否被限制
+    
+            id alertMsg = res.data[@"alertMsg"];
+            NSString *msg = (alertMsg && ![alertMsg isKindOfClass:[NSNull class]]) ? alertMsg : res.message;
+
+            BOOL show = false;
+            if (success) {
+                show = success(@(limit));
             }
             
-            NSString *msg = res.data[@"alertMsg"];
-            if (msg == nil || [msg isKindOfClass:[NSNull class]]) {
-                msg = res.message;
-            }
-            if (failure) {
-                if (!failure([Yodo1AntiIndulgedUtils errorWithCode:res.code msg:res.message])) {
-                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyOverstep error:msg];
-                }
+            if (!show && limit) {
+                [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyOverstep error:msg];
             }
         } else {
             if (failure) {

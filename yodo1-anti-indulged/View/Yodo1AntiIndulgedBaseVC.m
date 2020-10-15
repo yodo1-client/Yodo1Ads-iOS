@@ -43,7 +43,9 @@
 }
 
 - (void)didInitialize {
-    
+    if (@available(iOS 13.0, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
 }
 
 - (void)viewDidLoad {
