@@ -116,7 +116,7 @@
         }
     } failure:^(NSError *error) {
         [self setLoading:NO];
-        if (error.code == -1009) {
+        if (error.code == -1009 || error.code == -1001) { // -1009 没有网络 -1001 超时
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleNetError error:nil];
         } else {
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:error.localizedDescription];

@@ -11,17 +11,19 @@
 #import "Yodo1AntiIndulged.h"
 #import "Yodo1UnityTool.h"
 #import "Yodo1Model.h"
-static NSString *kLog_TAG = @"[Yodo1-AntiIndulged-SDK] ";
+static NSString *kLog_TAG             = @"[Yodo1-AntiIndulged-SDK] ";
 
 
-static NSString *kRESULT_TYPE_KEY = @"result_type";
-static NSString *kRESULT_CODE_KEY = @"code";
-static NSString *kRESULT_BOOL_KEY = @"state";
-static NSString *kRESULT_ERROR_KEY = @"error";
+static NSString *kRESULT_TYPE         = @"result_type";
+static NSString *kRESULT_CODE         = @"code";
+static NSString *kRESULT_BOOL         = @"state";
+static NSString *kRESULT_ERROR        = @"error";
 static NSString *kRESULT_EVENT_ACTION = @"event_action";
-static NSString *kRESULT_EVENT_CODE = @"event_code";
-static NSString *kRESULT_TITLE = @"title";
-static NSString *kRESULT_CONTENT = @"content";
+static NSString *kRESULT_EVENT_CODE   = @"event_code";
+static NSString *kRESULT_TITLE        = @"title";
+static NSString *kRESULT_CONTENT      = @"content";
+static NSString *kRESULT_LIMIT        = @"hasLimit";
+static NSString *kRESULT_ALERT_MSG    = @"alertMsg";
 
 @interface Yodo1U3dAntiIndulgedDelegate:NSObject <Yodo1AntiIndulgedDelegate>
 {
@@ -50,15 +52,15 @@ static NSString *kRESULT_CONTENT = @"content";
 - (void)onInitFinish:(BOOL)result message:(NSString *)message
 {
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    [dict setObject:[NSNumber numberWithInteger:ResulTypeInit] forKey:kRESULT_TYPE_KEY];
-    [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL_KEY];
+    [dict setObject:[NSNumber numberWithInteger:ResulTypeInit] forKey:kRESULT_TYPE];
+    [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL];
     [dict setObject:message forKey:kRESULT_CONTENT];
     
     NSError* parseJSONError = nil;
     NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     if(parseJSONError){
-        [dict setObject:[NSNumber numberWithInt:ResulTypeInit] forKey:kRESULT_TYPE_KEY];
-        [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL_KEY];
+        [dict setObject:[NSNumber numberWithInt:ResulTypeInit] forKey:kRESULT_TYPE];
+        [dict setObject:[[NSNumber alloc]initWithBool:result] forKey:kRESULT_BOOL];
         [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
         msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     }
@@ -72,7 +74,7 @@ static NSString *kRESULT_CONTENT = @"content";
 - (BOOL)onTimeLimitNotify:(Yodo1AntiIndulgedEvent *)event title:(NSString *)title message:(NSString *)message
 {
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    [dict setObject:[NSNumber numberWithInteger:ResulTypeTimeLimit] forKey:kRESULT_TYPE_KEY];
+    [dict setObject:[NSNumber numberWithInteger:ResulTypeTimeLimit] forKey:kRESULT_TYPE];
     [dict setObject:[NSNumber numberWithInteger:[event action]] forKey:kRESULT_EVENT_ACTION];
     [dict setObject:[NSNumber numberWithInteger:[event eventCode]] forKey:kRESULT_EVENT_CODE];
     [dict setObject:title forKey:kRESULT_TITLE];
@@ -81,7 +83,7 @@ static NSString *kRESULT_CONTENT = @"content";
     NSError* parseJSONError = nil;
     NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
     if(parseJSONError){
-        [dict setObject:[NSNumber numberWithInt:ResulTypeTimeLimit] forKey:kRESULT_TYPE_KEY];
+        [dict setObject:[NSNumber numberWithInt:ResulTypeTimeLimit] forKey:kRESULT_TYPE];
         [dict setObject:[NSNumber numberWithInteger:[event action]] forKey:kRESULT_EVENT_ACTION];
         [dict setObject:[NSNumber numberWithInteger:[event eventCode]] forKey:kRESULT_EVENT_CODE];
         [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
@@ -122,13 +124,13 @@ extern "C" {
         [[Yodo1AntiIndulged shared] verifyCertificationInfo:ocAccountId success:^BOOL(id data) {
             Yodo1AntiIndulgedEvent* event = data;
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-            [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
+            [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE];
             [dict setObject:[NSNumber numberWithInteger:event.action] forKey:kRESULT_EVENT_ACTION];
             
             NSError* parseJSONError = nil;
             NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             if(parseJSONError){
-                [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
+                [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE];
                 [dict setObject:[NSNumber numberWithInteger:event.action] forKey:kRESULT_EVENT_ACTION];
                 [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
@@ -139,13 +141,13 @@ extern "C" {
             return YES;
         } failure:^BOOL(NSError *error) {
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-            [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
+            [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE];
             [dict setObject:[NSNumber numberWithInteger:Yodo1AntiIndulgedActionEndGame] forKey:kRESULT_EVENT_ACTION];
             
             NSError* parseJSONError = nil;
             NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             if(parseJSONError){
-                [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE_KEY];
+                [dict setObject:[NSNumber numberWithInteger:ResulTypeCertification] forKey:kRESULT_TYPE];
                 [dict setObject:[NSNumber numberWithInteger:Yodo1AntiIndulgedActionEndGame] forKey:kRESULT_EVENT_ACTION];
                 [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
@@ -164,16 +166,21 @@ extern "C" {
         NSString* ocGameObjName = Yodo1CreateNSString(gameObjectName);
         NSString* ocMethodName = Yodo1CreateNSString(methodName);
         [[Yodo1AntiIndulged shared] verifyPurchase:(NSInteger)price success:^(id data) {
-            BOOL isAllow = [data boolValue] == NO;
+            id hasLimit = data[kRESULT_LIMIT];
+            id alertMsg = data[kRESULT_ALERT_MSG];
+            
+            BOOL isAllow = [hasLimit boolValue] == NO;
+            
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-            [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
-            [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL_KEY];
+            [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE];
+            [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL];
+            [dict setObject:alertMsg forKey:kRESULT_CONTENT];
             
             NSError* parseJSONError = nil;
             NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             if(parseJSONError){
-                [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
-                [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL_KEY];
+                [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE];
+                [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL];
                 [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }
@@ -185,15 +192,15 @@ extern "C" {
             BOOL isAllow = NO;
             //error.localizedDescription
             NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-            [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
-            [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL_KEY];
+            [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE];
+            [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL];
             [dict setObject:error.localizedDescription forKey:kRESULT_CONTENT];
              
             NSError* parseJSONError = nil;
             NSString* msg = [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             if(parseJSONError){
-                [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE_KEY];
-                [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL_KEY];
+                [dict setObject:[NSNumber numberWithInteger:ResulTypeVerifyPurchase] forKey:kRESULT_TYPE];
+                [dict setObject:[[NSNumber alloc]initWithBool:isAllow] forKey:kRESULT_BOOL];
                 [dict setObject:@"Convert result to json failed!" forKey:kRESULT_CONTENT];
                 msg =  [Yodo1AntiIndulgedUtils stringWithJSONObject:dict error:&parseJSONError];
             }

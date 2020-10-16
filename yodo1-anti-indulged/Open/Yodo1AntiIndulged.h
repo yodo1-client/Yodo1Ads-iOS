@@ -62,7 +62,7 @@ typedef enum: NSInteger {
 @property (nonatomic, retain) NSString *orderId; // 订单编号
 @property (nonatomic, retain) NSString *itemCode; // 商品编号
 @property (nonatomic, assign) Yodo1AntiIndulgedProductType itemType; // 商品类型
-@property (nonatomic, assign) NSInteger money; // 金额
+@property (nonatomic, assign) NSInteger money; // 金额 单位分
 @property (nonatomic, retain) NSString *region; // 区
 @property (nonatomic, retain) NSString *spendDate; // 消费时间
 @property (nonatomic, retain) NSString *currency; // 币种（大写） ,示例值(CNY)
@@ -106,9 +106,13 @@ typedef enum: NSInteger {
 - (void)verifyCertificationInfo:(NSString *)accountId success:(Yodo1AntiIndulgedSuccessful)success failure:(Yodo1AntiIndulgedFailure)failure;
 
 ///是否已限制消费
+/// money 单位: 分
+/// [data[@"hasLimit"] boolValue] == true // 已被限制消费
+/// data[@"alertMsg"]  // 提示文字
 - (void)verifyPurchase:(NSInteger)money success:(Yodo1AntiIndulgedSuccessful)success failure:(Yodo1AntiIndulgedFailure)failure;
 
 ///上报消费信息 - 支付信息&商品信息
+/// receipt.money 商品金额, 单位分
 - (void)reportProductReceipt:(Yodo1AntiIndulgedProductReceipt *)receipt success:(Yodo1AntiIndulgedSuccessful)success failure:(Yodo1AntiIndulgedFailure)failure;
 
 @end

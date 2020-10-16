@@ -152,12 +152,12 @@
 - (void)verifyPurchase:(NSInteger)money success:(Yodo1AntiIndulgedSuccessful)success failure:(Yodo1AntiIndulgedFailure)failure {
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"money"] = @(money * 100);
+    parameters[@"money"] = @(money);
     parameters[@"currency"] = @"CNY";
     
     Yodo1AntiIndulgedUser *user = [Yodo1AntiIndulgedUserManager manager].currentUser;
     if (user.certificationStatus == UserCertificationStatusNot) {
-        BOOL show = success && success(@(true));
+        BOOL show = success && success(@{@"hasLimit" : @(true), @"alertMsg": @"根据国家规定：游客体验模式无法购买物品"});
         if (!show) {
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleBuyDisable error:nil];
         }
@@ -176,7 +176,7 @@
 
             BOOL show = false;
             if (success) {
-                show = success(@(limit));
+                show = success(@{@"hasLimit": @(limit), @"alertMsg": msg});
             }
             
             if (!show && limit) {
