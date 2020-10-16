@@ -38,11 +38,11 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-#ifdef DEBUG
+//#ifdef DEBUG
         NSURL *baseURL = [NSURL URLWithString:@"https://ais-frontend.cb64eaf4841914d918c93a30369d6bbc6.cn-beijing.alicontainer.com/ais"];
-#else
-        NSURL *baseURL = [NSURL URLWithString:@"https://api.yodo1.com"];
-#endif
+//#else
+//        NSURL *baseURL = [NSURL URLWithString:@"https://api.yodo1.com"];
+//#endif
         _manager = [[Yodo1AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         _manager.requestSerializer = [Yodo1AFJSONRequestSerializer serializer];
         _manager.responseSerializer = [Yodo1AFJSONResponseSerializer serializer];
