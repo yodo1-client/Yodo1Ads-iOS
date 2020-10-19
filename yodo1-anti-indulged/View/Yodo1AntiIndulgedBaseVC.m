@@ -14,8 +14,12 @@
 @implementation Yodo1AntiIndulgedBaseVC
 
 + (instancetype)loadFromStoryboard {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Yodo1AntiIndulgedResource.bundle/AntiIndulged" bundle:nil];
-    return (Yodo1AntiIndulgedBaseVC *)[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AntiIndulged" bundle:nil];
+    return (Yodo1AntiIndulgedBaseVC *)[storyboard instantiateViewControllerWithIdentifier:[self identifier]];
+}
+
++ (NSString *)identifier {
+    return NSStringFromClass([self class]);
 }
 
 - (instancetype)init {
@@ -54,10 +58,6 @@
 
 - (BOOL)shouldAutorotate {
     return NO;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

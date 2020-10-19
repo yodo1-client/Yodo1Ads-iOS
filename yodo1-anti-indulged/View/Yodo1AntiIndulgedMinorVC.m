@@ -12,6 +12,7 @@
 
 @interface Yodo1AntiIndulgedMinorVC ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @end
@@ -72,6 +73,16 @@
 
     NSString *content = [NSString stringWithFormat:@"工作日：可玩时段 %@，每天最多可玩%@小时\n节假日：可玩时段 %@，每天最多可玩%@小时\n单笔金额不可超过%@元，每月累计不可超过%@元。", regularRange, @(regularTime / 3600), holidayRange, @(holidayTime / 3600), @(dayLimit), @(moneyLimit)];
     _contentLabel.text = content;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGFloat height = UIScreen.mainScreen.bounds.size.height / 3 * 2;
+    CGFloat max = 321.5;
+    if (@available(iOS 11.0, *)) {
+        max = max + self.view.safeAreaInsets.bottom;
+    }
+    _contentHeight.constant = height > max ? max : height;
 }
 
 #pragma mark - Event

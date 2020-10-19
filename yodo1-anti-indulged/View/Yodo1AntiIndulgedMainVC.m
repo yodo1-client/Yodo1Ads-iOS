@@ -65,6 +65,15 @@
     }
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    if (@available(iOS 11.0, *)) {
+        [_avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(_contentView).offset(-26 - _contentView.safeAreaInsets.right);
+        }];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self addRadius];
@@ -88,11 +97,7 @@
         make.top.equalTo(_contentView);
         make.leading.equalTo(_contentView);
         make.trailing.equalTo(_contentView);
-        if (@available(iOS 11.0, *)) {
-            make.bottom.equalTo(_contentView.mas_safeAreaLayoutGuideBottom);
-        } else {
-            make.bottom.equalTo(_contentView.mas_bottom);
-        }
+        make.bottom.equalTo(_contentView.mas_bottom);
     }];
     _contentView.backgroundColor = vc.view.backgroundColor;
     if (animated) {

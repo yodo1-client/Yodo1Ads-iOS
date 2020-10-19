@@ -12,6 +12,7 @@
 @interface Yodo1AntiIndulgedHelpVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 /*
  邮件内容如下：
  发送至：{xxxxx@xxxxx.com}
@@ -39,8 +40,17 @@
     [self changePartColorWithAllText:self.contentLabel.text andSpecialText:@[@"邮件内容如下：",@"邮件正文",@"邮件附件"] andfont:[UIFont boldSystemFontOfSize:18] andColor:[UIColor blackColor] andLable:self.contentLabel];
 }
 
-#pragma mark - Event
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGFloat height = UIScreen.mainScreen.bounds.size.height / 3 * 2;
+    CGFloat max = 440;
+    if (@available(iOS 11.0, *)) {
+        max = max + self.view.safeAreaInsets.bottom;
+    }
+    _contentHeight.constant = height > max ? max : height;
+}
 
+#pragma mark - Event
 - (IBAction)onBackClicked:(id)sender {
     if (_onBackClicked) {
         _onBackClicked();

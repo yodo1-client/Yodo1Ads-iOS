@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Yodo1AntiIndulgedBaseVC : UIViewController
 
 + (instancetype)loadFromStoryboard;
++ (NSString *)identifier;
 
 - (void)didInitialize;
 

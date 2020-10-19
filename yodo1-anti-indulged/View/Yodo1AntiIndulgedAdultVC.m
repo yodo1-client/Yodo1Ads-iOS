@@ -9,12 +9,24 @@
 
 @interface Yodo1AntiIndulgedAdultVC ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+
 @end
 
 @implementation Yodo1AntiIndulgedAdultVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGFloat height = UIScreen.mainScreen.bounds.size.height / 3 * 2;
+    CGFloat max = 265;
+    if (@available(iOS 11.0, *)) {
+        max = max + self.view.safeAreaInsets.bottom;
+    }
+    _contentHeight.constant = height > max ? max : height;
 }
 
 #pragma mark - Event

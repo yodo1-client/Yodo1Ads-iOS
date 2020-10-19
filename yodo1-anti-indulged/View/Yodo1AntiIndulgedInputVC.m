@@ -24,12 +24,24 @@
 @property (weak, nonatomic) IBOutlet UIButton *experienceButton;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+
 @end
 
 @implementation Yodo1AntiIndulgedInputVC
 
++ (NSString *)identifier {
+    NSString *identifier = NSStringFromClass([self class]);
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return [NSString stringWithFormat:@"%@H", identifier];
+    } else {
+        return [NSString stringWithFormat:@"%@V", identifier];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _nameField.delegate = self;
     _identifyField.delegate = self;
     
@@ -39,6 +51,33 @@
     _lineView.hidden = _hideGuest;
     
     [self setLoading:NO];
+    
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    BOOL isLandscape = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
+    
+    if ((_nameField.isEditing || _identifyField.isEditing) && isLandscape) {
+        CGFloat height = UIScreen.mainScreen.bounds.size.height - 47;
+        _contentHeight.constant = height;
+    } else {
+        CGFloat height = UIScreen.mainScreen.bounds.size.height / 3 * 2;
+        CGFloat max = isLandscape ? 271 : 523;
+        if (@available(iOS 11.0, *)) {
+            max = max + self.view.safeAreaInsets.bottom;
+        }
+        _contentHeight.constant = height > max ? max : height;
+    }
 }
 
 - (void)setLoading:(BOOL)loading {
@@ -59,6 +98,36 @@
         [_submitButton setTitle:@"提交验证" forState:UIControlStateNormal];
         [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationOptions options = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+
+    _contentHeight.constant = UIScreen.mainScreen.bounds.size.height - 47;
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationOptions options = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+
+    CGFloat height = 271;
+    if (@available(iOS 11.0, *)) {
+        height = height + self.view.safeAreaInsets.bottom;
+    }
+    _contentHeight.constant = height;
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 #pragma mark - Event
