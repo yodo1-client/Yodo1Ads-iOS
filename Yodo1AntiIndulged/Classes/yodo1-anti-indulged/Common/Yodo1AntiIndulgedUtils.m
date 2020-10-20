@@ -271,6 +271,9 @@
 + (NSBundle *)bundle {
     NSBundle *bundle = [NSBundle bundleForClass:self];
     NSString *path = [bundle pathForResource:@"Yodo1AntiIndulgedResource" ofType:@"bundle"];
+    if (path == nil) {
+        path = [[NSBundle mainBundle] pathForResource:@"Yodo1AntiIndulgedResource" ofType:@"bundle"];
+    }
     return [NSBundle bundleWithPath:path];
 }
 
