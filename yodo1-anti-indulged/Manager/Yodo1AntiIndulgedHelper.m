@@ -136,7 +136,11 @@
             }
         } failure:^(NSError *error) {
             // 发生错误一律认为未实名
-            [Yodo1AntiIndulgedUtils showVerifyUI];
+            if ([Yodo1AntiIndulgedUtils isNetError:error]) {
+                [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:[Yodo1AntiIndulgedUtils convertError:error].localizedDescription];
+            } else {
+                [Yodo1AntiIndulgedUtils showVerifyUI];
+            }
         }];
     } else {
         Yodo1AntiIndulgedEvent *event = [[Yodo1AntiIndulgedEvent alloc] init];
@@ -190,7 +194,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
-            failure(error);
+            failure([Yodo1AntiIndulgedUtils convertError:error]);
         }
     }];
 }
@@ -224,7 +228,7 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
-            failure(error);
+            failure([Yodo1AntiIndulgedUtils convertError:error]);
         }
     }];
 }

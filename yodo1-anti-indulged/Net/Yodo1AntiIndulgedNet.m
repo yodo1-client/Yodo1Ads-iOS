@@ -77,7 +77,8 @@
 }
 
 - (NSURLSessionDataTask *)request:(NSString *)method path:(NSString *)path parameters:parameters success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-        failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
+        failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
+{
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:method URLString:path parameters:parameters success:success failure:failure];
     [dataTask resume];
     return dataTask;

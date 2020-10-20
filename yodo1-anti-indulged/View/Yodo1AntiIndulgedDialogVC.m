@@ -126,7 +126,7 @@
             _iconView.image = [UIImage imageNamed:@"stop"];
             _topView.backgroundColor = [UIColor colorWithRed:227 / 255.0 green:116 / 255.0 blue:0 alpha:1];
             _titleLabel.text = @"无法继续验证";
-            _contentLabel.text = @"抱歉！已达到今日可尝试验证的最高次数 3 次，请24小时后重试。如果您确保姓名和身份证号正确，您可以尝试回到认证界面，点击“无法通过实名验证”来获得更多帮助";
+            _contentLabel.text = @"抱歉！已达到今日可尝试验证的最高次数，请24小时后重试。如果您确保姓名和身份证号正确，您可以尝试回到认证界面，点击“无法通过实名验证”来获得更多帮助。";
             _checkButton.hidden = YES;
             [_exitButton setTitle:@"→ 知道了" forState:UIControlStateNormal];
             break;

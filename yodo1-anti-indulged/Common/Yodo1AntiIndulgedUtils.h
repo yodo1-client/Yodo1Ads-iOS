@@ -41,6 +41,8 @@ typedef enum: NSInteger {
 + (UIViewController *)getTopViewController;
 
 + (NSError *)errorWithCode:(NSInteger)code msg:(NSString *)msg;
++ (BOOL)isNetError:(NSError *)error;
++ (NSError *)convertError:(NSError *)error;
 + (NSString *)stringWithJSONObject:(id)obj error:(NSError**)error;
 
 @end

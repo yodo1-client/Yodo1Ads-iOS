@@ -216,6 +216,33 @@
     return [NSError errorWithDomain:@"https://api.yodo1.com" code:code userInfo:@{NSLocalizedDescriptionKey : msg ? msg : @"未知错误"}];
 }
 
++ (BOOL)isNetError:(NSError *)error {
+    switch (error.code) {
+        case -1001:
+            return YES;
+        case -1009:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
++ (NSError *)convertError:(NSError *)error {
+    // -1009 没有网络 -1001 超时
+    NSString *msg;
+    if ([self isNetError:error]) {
+        msg = @"网络异常";
+    }
+    if (msg != nil) {
+        return [NSError errorWithDomain:error.domain code:error.code userInfo:@{
+            NSLocalizedDescriptionKey : msg,
+            NSLocalizedFailureReasonErrorKey: msg
+        }];
+    } else {
+        return error;
+    }
+}
+
 
 + (NSString *)stringWithJSONObject:(id)obj error:(NSError**)error {
     if (obj) {

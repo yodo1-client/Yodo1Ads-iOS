@@ -178,14 +178,13 @@
                     NSString *msg = [NSString stringWithFormat:@"请核对您的身份证是否输入正确或姓名和身份证是否匹配，然后重试。\n今日还剩有 %@  次核查机会", @(retryTimes)];
                     [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleCheckUnable error:msg];
                 } else {
-                    NSString *msg = [NSString stringWithFormat:@"抱歉！已达到今日可尝试验证的最高次数 %@ 次，请24小时后重试。如果您确保姓名和身份证号正确，您可以尝试回到认证界面，点击“无法通过实名验证”来获得更多帮助", @(retryTimes)];
-                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleCheckDisable error:msg];
+                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleCheckDisable error:nil];
                 }
             }
         }
     } failure:^(NSError *error) {
         [self setLoading:NO];
-        if (error.code == -1009 || error.code == -1001) { // -1009 没有网络 -1001 超时
+        if ([Yodo1AntiIndulgedUtils isNetError:error]) { // -1009 没有网络 -1001 超时
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleNetError error:nil];
         } else {
             [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleError error:error.localizedDescription];
