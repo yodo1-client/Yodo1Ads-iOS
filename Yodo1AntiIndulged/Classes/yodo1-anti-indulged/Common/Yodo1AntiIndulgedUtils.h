@@ -45,6 +45,8 @@ typedef enum: NSInteger {
 + (NSError *)convertError:(NSError *)error;
 + (NSString *)stringWithJSONObject:(id)obj error:(NSError**)error;
 
++ (NSBundle *)bundle;
+
 @end
 
 NS_ASSUME_NONNULL_END

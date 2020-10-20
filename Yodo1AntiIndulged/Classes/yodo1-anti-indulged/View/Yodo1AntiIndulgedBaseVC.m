@@ -6,6 +6,7 @@
 //
 
 #import "Yodo1AntiIndulgedBaseVC.h"
+#import "Yodo1AntiIndulgedUtils.h"
 
 @interface Yodo1AntiIndulgedBaseVC ()
 
@@ -14,7 +15,7 @@
 @implementation Yodo1AntiIndulgedBaseVC
 
 + (instancetype)loadFromStoryboard {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AntiIndulged" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AntiIndulged" bundle:[Yodo1AntiIndulgedUtils bundle]];
     return (Yodo1AntiIndulgedBaseVC *)[storyboard instantiateViewControllerWithIdentifier:[self identifier]];
 }
 

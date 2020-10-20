@@ -11,6 +11,7 @@
 #import <Yodo1OnlineParameter/Yodo1Tool.h>
 #import <Yodo1OnlineParameter/Yodo1Tool+Commons.h>
 #import <Yodo1OnlineParameter/Yodo1Tool+Storage.h>
+#import "Yodo1AntiIndulgedUtils.h"
 
 #define kAntiIndulgedRules @"Yodo1AntiIndulgedRules" // 规则
 #define kAntiIndulgedHolidays @"Yodo1AntiIndulgedHolidays" // 节假日列表
@@ -31,8 +32,7 @@
     
     _currentRules = (Yodo1AntiIndulgedRules *)[Yd1OpsTools.cached objectForKey:kAntiIndulgedRules];
     if (!_currentRules) {
-        NSString *pathName = @"Yodo1AntiIndulgedConfig.bundle/Yodo1AntiIndulgedRules";
-        NSString *path = [NSBundle.mainBundle pathForResource:pathName ofType:@"plist"];
+        NSString *path = [[Yodo1AntiIndulgedUtils bundle] pathForResource:@"Yodo1AntiIndulgedRules" ofType:@"plist"];
         NSDictionary *data = [NSDictionary dictionaryWithContentsOfFile:path];
         _currentRules = [Yodo1AntiIndulgedRules yodo1_modelWithDictionary:data];
     }
@@ -60,8 +60,7 @@
     
     _holidayRules = (Yodo1AntiIndulgedHolidayRules *)[Yd1OpsTools.cached objectForKey:kAntiIndulgedHolidayRules];
     if (!_holidayRules) {
-        NSString *pathName = @"Yodo1AntiIndulgedConfig.bundle/Yodo1AntiIndulgedHolidayRules";
-        NSString *path = [NSBundle.mainBundle pathForResource:pathName ofType:@"plist"];
+        NSString *path = [[Yodo1AntiIndulgedUtils bundle] pathForResource:@"Yodo1AntiIndulgedHolidayRules" ofType:@"plist"];
         NSDictionary *data = [NSDictionary dictionaryWithContentsOfFile:path];
         _holidayRules = [Yodo1AntiIndulgedHolidayRules yodo1_modelWithDictionary:data];
     }
@@ -90,8 +89,7 @@
     
     _holidays = (NSArray *)[Yd1OpsTools.cached objectForKey:kAntiIndulgedHolidays];
     if (!_holidays) {
-        NSString *pathName = @"Yodo1AntiIndulgedConfig.bundle/Yodo1AntiIndulgedHolidays";
-        NSString *path = [NSBundle.mainBundle pathForResource:pathName ofType:@"plist"];
+        NSString *path = [[Yodo1AntiIndulgedUtils bundle] pathForResource:@"Yodo1AntiIndulgedHolidays" ofType:@"plist"];
         _holidays = [NSArray arrayWithContentsOfFile:path];
     }
     

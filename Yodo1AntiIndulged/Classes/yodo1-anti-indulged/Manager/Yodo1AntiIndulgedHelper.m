@@ -63,8 +63,7 @@
 
 - (NSString *)getSdkVersion {
     if (!_version) {
-        NSString *pathName = @"Yodo1AntiIndulgedConfig.bundle/Yodo1AntiIndulgedInfo";
-        NSString *path = [NSBundle.mainBundle pathForResource:pathName ofType:@"plist"];
+        NSString *path = [[Yodo1AntiIndulgedUtils bundle] pathForResource:@"Yodo1AntiIndulgedInfo" ofType:@"plist"];
         NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:path];
         _version = info[@"version"];
         if (!_version) {

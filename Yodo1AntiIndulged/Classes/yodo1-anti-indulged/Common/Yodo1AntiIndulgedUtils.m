@@ -267,4 +267,11 @@
     }
     return nil;
 }
+
++ (NSBundle *)bundle {
+    NSBundle *bundle = [NSBundle bundleForClass:self];
+    NSString *path = [bundle pathForResource:@"Yodo1AntiIndulgedResource" ofType:@"bundle"];
+    return [NSBundle bundleWithPath:path];
+}
+
 @end

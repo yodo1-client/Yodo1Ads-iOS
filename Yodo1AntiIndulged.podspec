@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiIndulged'
-    s.version          = '0.0.15'
+    s.version          = '0.0.16'
     s.summary          = 'beta'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -13,18 +13,21 @@ Pod::Spec.new do |s|
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '9.0'
+    s.source_files = "#{s.version}" + '/Yodo1AntiIndulged/Classes/**/*'
+    s.public_header_files = "#{s.version}" + 'Yodo1AntiIndulged/Classes/**/*.h'
 
-    s.source_files  = "#{s.version}" + '/*/*/*.{h,mm,m}',"#{s.version}" + '/*/*.{h,mm,m}'
+    # 用于解决Unity2019.3.0(包含2019.3.0)以上无法读取问题，Unity会添加CCopy资源脚本
+    s.resource_bundles = {
+        'Yodo1AntiIndulgedResource' => ["#{s.version}" + 'Yodo1AntiIndulged/Assets/*']
+    }
 
-    s.public_header_files = "#{s.version}" + '/*/*/*.h',"#{s.version}" + '/*/*.h'
+    # 用于解决Unity2019.3.0(不包含2019.3.0)以下以及native原生资源无法读取问题
+    s.resources = "#{s.version}" + 'Yodo1AntiIndulged/Assets/*.png'
 
-    #s.vendored_frameworks = tags + '/UCenter.framework'
+    # s.source_files  = "#{s.version}" + '/*/*/*.{h,mm,m}',"#{s.version}" + '/*/*.{h,mm,m}'
+    # s.public_header_files = "#{s.version}" + '/*/*/*.h',"#{s.version}" + '/*/*.h'
     
-    # s.vendored_libraries = "#{s.version}" + '/*.a'
-
-    s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle', "#{s.version}" + '/yodo1-anti-indulged/View/*.{storyboard,xib,xcassets,json,png}', "#{s.version}" + '/yodo1-anti-indulged/View/*.storyboard'
-
-    # s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
+    # s.resources = "#{s.version}" + '/yodo1-anti-indulged/*.bundle', "#{s.version}" + '/yodo1-anti-indulged/View/*.{storyboard,xib,xcassets,json,png}', "#{s.version}" + '/yodo1-anti-indulged/View/*.storyboard'
     
     s.requires_arc = true
 
@@ -37,9 +40,7 @@ Pod::Spec.new do |s|
     }
 
     s.frameworks = 'Accounts', 'AssetsLibrary','AVFoundation', 'CoreTelephony','CoreLocation', 'CoreMotion' ,'CoreMedia', 'EventKit','EventKitUI', 'iAd', 'ImageIO','MobileCoreServices', 'MediaPlayer' ,'MessageUI','MapKit','Social','StoreKit','Twitter','WebKit','SystemConfiguration','AudioToolbox','Security','CoreBluetooth'
-
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
-
     s.libraries = 'sqlite3', 'z'
     s.compiler_flags = '-Dunix'
     
