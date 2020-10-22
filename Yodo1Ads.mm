@@ -34,7 +34,7 @@
 #import "Yodo1AnalyticsManager.h"
 #endif
 
-#import <AppTrackingTransparency/AppTrackingTransparency.h>
+// #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 ///C++
 static Yodo1AdsEvent_Callback s_banner_callback;
@@ -54,7 +54,7 @@ static Yodo1AdsEventCallback s_videoCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.3.1";
+NSString* const kYodo1AdsVersion       = @"4.3.3";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -493,9 +493,9 @@ static NSString* yd1AppKey = @"";
         return;
     }
 
-    if (@available(iOS 14, *)) {
-        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {}];
-    }
+    // if (@available(iOS 14, *)) {
+    //     [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {}];
+    // }
 
     bYodo1AdsInited = true;
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
