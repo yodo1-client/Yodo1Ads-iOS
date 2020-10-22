@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSTimeInterval)getNowTime;
 - (NSDate *)getNowDate;
-- (void)postPlayTime:(NSTimeInterval)time;
+- (void)postPlayTime:(BOOL)start time:(NSTimeInterval)time success:(void (^)(void))success failure:(void (^)(void))failure;
 
 @end
 
