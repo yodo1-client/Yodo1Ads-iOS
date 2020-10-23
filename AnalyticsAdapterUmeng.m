@@ -11,7 +11,7 @@
 #import <UMCommon/MobClick.h>
 #import "Yodo1AnalyticsManager.h"
 #import "Yodo1Registry.h"
-#import <Yodo1Commons.h>
+#import "Yodo1Commons.h"
 #import "Yodo1KeyInfo.h"
 #import "Yd1OnlineParameter.h"
 #import "Yodo1Tool+Commons.h"
@@ -209,6 +209,20 @@ NSString* const kChargeRequstAnalytics = @"kChargeRequstAnalytics";
         return;
     }
     [MobClickGameAnalytics use:item amount:amount price:price];
+}
+
+- (void)beginEvent:(NSString *)eventId {
+    if (isUSOrIN) {
+        return;
+    }
+    [MobClick beginEvent:eventId];
+}
+
+- (void)endEvent:(NSString *)eventId {
+    if (isUSOrIN) {
+        return;
+    }
+    [MobClick endEvent:eventId];
 }
 
 #pragma mark- DplusMobClick
