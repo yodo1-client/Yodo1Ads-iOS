@@ -10,6 +10,7 @@
 #import "Yodo1VideoDelegate.h"
 
 @interface Yodo1AdVideoManager : NSObject
+@property(nonatomic,assign,class,readonly,getter=isInitialized) BOOL initialized;
 
 /**
  *  返回Yodo1AdVideoManager的实例

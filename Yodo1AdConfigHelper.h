@@ -41,6 +41,7 @@ typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
     Yodo1ConfigTypeInterstitial,
     Yodo1ConfigTypeVideo,
     Yodo1ConfigTypeRewardGame,
+    Yodo1ConfigTypeSplash,
 };
 
 typedef NS_ENUM(NSUInteger,SDKInitType) {
@@ -54,6 +55,7 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
     SDKInitTypeUnityAds,
     SDKInitTypeOneWay,
     SDKInitTypeSmaato,
+    SDKInitTypeTopon,
 };
 
 @interface Yodo1AdConfigHelper : NSObject
@@ -103,24 +105,21 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 
 - (BOOL)isInitedWithInitType:(SDKInitType)type;
 
-- (void)setInitedWithInitType:(SDKInitType)type
-                     isInited:(BOOL)isInited;
+- (void)setInitedWithInitType:(SDKInitType)type isInited:(BOOL)isInited;
 
-
-
-/// return YES 同意收集数据,默认是收集数据
+/// return YES 同意收集数据,默认是收集数据 【GDPR】
 - (BOOL)isUserConsent;
-/// consent is YES 是同意收集数据，NO 不同意收集数据
+/// consent is YES 是同意收集数据，NO 不同意收集数据【GDPR】
 - (void)setUserConsent:(BOOL)consent;
 
-/// consent is YES 是16岁以下，NO 默认是16岁以上
+/// consent is YES 是16岁以下，NO 默认是16岁以上 【COPPA】
 - (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
-/// return true 表示16岁以下
+/// return true 表示16岁以下【COPPA】
 - (BOOL)isTagForUnderAgeOfConsent;
 
-/// return true 表示用户选择不出售其个人信息
+/// return true 表示用户选择不出售其个人信息【CCPA】
 - (BOOL)isDoNotSell;
-/// 如果用户选择不出售其个人信息，请将以下标记设置为true。
+/// 如果用户选择不出售其个人信息，请将以下标记设置为true。【CCPA】
 - (void)setDoNotSell:(BOOL)doNotSell;
 
 - (NSDictionary *)sensorsConfig;
@@ -134,6 +133,30 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (BOOL)isSensorsSwitch;
 
 - (void)setSensorsSwitch:(BOOL)enabled;
+
+- (BOOL)isATTMasterSwitch;
+
+- (void)setShowATTDialogEnabled:(BOOL)enabled;
+
+- (BOOL)showATTDialogEnabled;
+
+- (void)setShowATTDialogAgree:(BOOL)Agree;
+
+- (BOOL)ShowATTDialogAgree;
+
+- (void)setShenCeATTDialogRunOneTimes:(BOOL)runed;
+
+- (BOOL)ShenCeATTDialogRunOneTimes;
+
+- (void)setUmengATTDialogRunOneTimes:(BOOL)runed;
+
+- (BOOL)UmengATTDialogRunOneTimes;
+
+- (void)setRuntimesATT:(BOOL)runed;
+
+- (BOOL)RuntimesATT;
+
++ (NSInteger)splashFirstShowTime;
 
 @end
 
