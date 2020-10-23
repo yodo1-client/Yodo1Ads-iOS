@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
 };
 
 @interface Yodo1AnalyticsManager : NSObject
+@property(nonatomic,class,assign,readonly,getter=isEnable) BOOL enable;
 
 /**
  *  Yodo1AnalyticsManager单例
@@ -151,6 +152,12 @@ typedef NS_ENUM(NSInteger, AnalyticsType) {
  *  @param price  道具单价
  */
 - (void)useAnalytics:(NSString *)item amount:(int)amount price:(double)price;
+
+#pragma mark- 友盟计时事件
+
+- (void)beginEvent:(NSString *)eventId;
+
+- (void)endEvent:(NSString *)eventId;
 
 #pragma mark- DplusMobClick接口
 

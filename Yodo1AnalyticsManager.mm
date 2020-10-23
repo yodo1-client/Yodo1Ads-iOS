@@ -40,6 +40,12 @@
 
 @implementation Yodo1AnalyticsManager
 
+static BOOL _enable = NO;
+
++(BOOL)isEnable {
+    return _enable;
+}
+
 + (Yodo1AnalyticsManager *)sharedInstance
 {
     static Yodo1AnalyticsManager* _instance = nil;
@@ -167,6 +173,7 @@
             [self.analyticsDict setObject:advideoAdapter forKey:adVideoOrder];
         }
     }
+    _enable = self.analyticsDict.count;
 }
 
 - (void)eventAnalytics:(NSString *)eventName
@@ -193,6 +200,25 @@
         if ([key integerValue]==AnalyticsTypeAppsFlyer){
             AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
             [adapter eventAdAnalyticsWithName:eventName eventData:eventData];
+            break;
+        }
+    }
+}
+- (void)beginEvent:(NSString *)eventId {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeAppsFlyer){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter beginEvent:eventId];
+            break;
+        }
+    }
+}
+
+- (void)endEvent:(NSString *)eventId {
+    for (id key in [self.analyticsDict allKeys]) {
+        if ([key integerValue]==AnalyticsTypeAppsFlyer){
+            AnalyticsAdapter* adapter = [self.analyticsDict objectForKey:key];
+            [adapter endEvent:eventId];
             break;
         }
     }

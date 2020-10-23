@@ -62,6 +62,10 @@
 
 - (NSString*)talkingDataDeviceId{return nil;}
 
+- (void)beginEvent:(NSString *)eventId{}
+
+- (void)endEvent:(NSString *)eventId{}
+
 - (void)track:(NSString *)eventName{}
 - (void)track:(NSString *)eventName
      property:(NSDictionary *) property{}
