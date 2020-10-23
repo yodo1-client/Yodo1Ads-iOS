@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsAdmob'
-    s.version          = '4.1.5'
-    s.summary          = 'Admob sdk v7.65.0 支持iOS 14'
+    s.version          = '4.1.6'
+    s.summary          = 'Admob sdk v7.65.0 支持iOS 14 [新添加库]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -20,7 +20,8 @@ Pod::Spec.new do |s|
     s.preserve_path = "#{s.version}" + '/ChangeLog.txt'
     
     # s.vendored_libraries = "#{s.version}" + '/*.a'
-
+    s.resources = "#{s.version}" + '/*.bundle'
+    
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
 
     s.frameworks = 'AudioToolbox', 'AVFoundation','CoreGraphics', 'CoreMedia','CoreMotion', 'CoreTelephony' ,'CoreVideo', 'GLKit','MediaPlayer', 'MessageUI', 'MobileCoreServices','OpenGLES','Security','StoreKit' ,'SystemConfiguration'
