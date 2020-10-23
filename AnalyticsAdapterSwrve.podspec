@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterSwrve'
-    s.version          = '4.2.4'
+    s.version          = '4.2.5'
     s.summary          = 'A short description of AnalyticsAdapterSwrve.'
 
     s.description      = <<-DESC
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.3'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.4'
     s.dependency 'Yodo1SwrveSDK','4.1.2'
 
 end
