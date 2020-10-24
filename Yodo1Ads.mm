@@ -32,9 +32,11 @@
 
 #ifdef YODO1_ANALYTICS
 #import "Yodo1AnalyticsManager.h"
+#endif
+
+
 #import <Yodo1SaAnalyticsSDK/Yodo1SensorsAnalyticsSDK.h>
 #import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
-#endif
 
 // #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
