@@ -43,7 +43,7 @@ Pod::Spec.new do |s|
                     "SystemConfiguration",
                     "MobileCoreServices",
                     "CoreMotion",
-                    "Accelerate"
+                    "SafariServices"
                     ]
                     
     # s.weak_frameworks = 'AdSupport'
