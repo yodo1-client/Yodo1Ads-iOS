@@ -38,7 +38,7 @@
 #import <Yodo1SaAnalyticsSDK/Yodo1SensorsAnalyticsSDK.h>
 #import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 
-// #import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 ///C++
 static Yodo1AdsEvent_Callback s_banner_callback;
