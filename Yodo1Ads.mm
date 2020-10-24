@@ -14,7 +14,6 @@
 #import "Yd1OnlineParameter.h"
 #import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
-#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 #import <Bugly/Bugly.h>
 #import "YD1LogView.h"
 #import "Yodo1Commons.h"
@@ -28,10 +27,13 @@
 #import "Yodo1BannerManager.h"
 #import "Yodo1BannerDelegate.h"
 #import "Yodo1RewardGameViewController.h"
+#import "Yodo1SplashManager.h"
 #endif
 
 #ifdef YODO1_ANALYTICS
 #import "Yodo1AnalyticsManager.h"
+#import <Yodo1SaAnalyticsSDK/Yodo1SensorsAnalyticsSDK.h>
+#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 #endif
 
 // #import <AppTrackingTransparency/AppTrackingTransparency.h>
@@ -43,6 +45,8 @@ static Yodo1AdsEvent_Callback s_interstitial_callback;
 
 static Yodo1AdsEvent_Callback s_video_callback;
 
+static Yodo1AdsEvent_Callback s_splash_callback;
+
 //OC
 static Yodo1AdsEventCallback s_bannerCallback;
 
@@ -50,16 +54,19 @@ static Yodo1AdsEventCallback s_interstitialCallback;
 
 static Yodo1AdsEventCallback s_videoCallback;
 
+static Yodo1AdsEventCallback s_splashCallback;
+
 //Unity3d
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.3.3";
+NSString* const kYodo1AdsVersion       = @"4.4.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
     Yodo1AdsTypeInterstitial    = 1002,//Interstitial
     Yodo1AdsTypeVideo           = 1003,//Video
+    Yodo1AdsTypeSplash          = 1006,//Splash
     Yodo1AdsTypeRewardGame      = 1007,//RewardGame //与安卓一致
 }Yodo1AdsType;
 
@@ -190,6 +197,86 @@ typedef enum {
 @end
 
 #ifdef YODO1_ADS
+
+@interface Yodo1adsSplashDelegate : NSObject<Yodo1SplashDelegate>
++ (instancetype)instance;
+@end
+
+@implementation Yodo1adsSplashDelegate
+
++ (instancetype)instance {
+    static Yodo1adsSplashDelegate *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[Yodo1adsSplashDelegate alloc] init];
+    });
+    
+    return sharedInstance;
+}
+
+-(void)splashDidLoad {
+    if(s_splash_callback){
+        s_splash_callback(Yodo1AdsCEventLoaded,nil);
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventLoaded,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventLoaded error:nil];
+}
+
+-(void)splashDidFailToLoadWithError:(NSError *)error {
+    if(s_splash_callback){
+        if (error) {
+            Yodo1AdsCError* errorC = new Yodo1AdsCError();
+            errorC->errorCode = (int)[error code];
+            NSString* des = [error localizedDescription];
+            errorC->errorDescription = des?des.UTF8String:"";
+            s_splash_callback(Yodo1AdsCEventLoadFail,errorC);
+        }else{
+            s_splash_callback(Yodo1AdsCEventLoadFail,nil);
+        }
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventLoadFail,error);
+    }
+    NSString* errorMsg = nil;
+    if (error) {
+        errorMsg = [error localizedDescription];
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventLoadFail error:errorMsg];
+}
+
+-(void)splashDidShow {
+    if(s_splash_callback){
+        s_splash_callback(Yodo1AdsCEventShowSuccess,nil);
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventShowSuccess,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventShowSuccess error:nil];
+}
+
+-(void)splashDidClick {
+    if(s_splash_callback){
+        s_splash_callback(Yodo1AdsCEventClick,nil);
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventClick,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventShowSuccess error:nil];
+}
+
+-(void)splashDidClose {
+    if(s_splash_callback){
+        s_splash_callback(Yodo1AdsCEventClose,nil);
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventClose,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventShowSuccess error:nil];
+}
+
+@end
 
 @interface Yodo1AdsVideoDelegate : NSObject<Yodo1VideoDelegate>
 
@@ -487,16 +574,12 @@ typedef enum {
 static BOOL bYodo1AdsInited = NO;
 static NSString* yd1AppKey = @"";
 
+
 + (void)initWithAppKey:(NSString *)appKey {
     if (bYodo1AdsInited) {
         NSLog(@"[Yodo1 Ads] has already been initialized");
         return;
     }
-
-    // if (@available(iOS 14, *)) {
-    //     [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {}];
-    // }
-
     bYodo1AdsInited = true;
     [NSNotificationCenter.defaultCenter addObserver:[Yodo1Ads class] selector:@selector(onlineParamete:) name:kYodo1OnlineConfigFinishedNotification object:nil];
     //初始化在线参数
@@ -522,67 +605,109 @@ static NSString* yd1AppKey = @"";
     [[Yodo1InterstitialAdManager sharedInstance]initInterstitalSDK:[Yodo1AdsInterstitialDelegate instance]];
     //初始化Video
     [Yodo1AdVideoManager setDelegate:[Yodo1AdsVideoDelegate instance]];
+    [[Yodo1SplashManager sharedInstance] setDelegate:[Yodo1adsSplashDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
     if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
     
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationDidEnterBackgroundNotification object:nil];
+//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
+//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
 }
 
-BOOL bSensorsSwitch = NO;
 
 + (void)startTime {
-    if (!bSensorsSwitch) {return;}
-    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-    NSMutableDictionary * dic = @{@"startTime":ti}.mutableCopy;
-    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
-    if (reportFields) {
-        [dic addEntriesFromDictionary:reportFields];
+//    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
+//    NSMutableDictionary * dic = @{@"startTime":ti}.mutableCopy;
+//    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
+//    if (reportFields) {
+//        [dic addEntriesFromDictionary:reportFields];
+//    }
+    if ([Yodo1AdConfigHelper.instance isSensorsSwitch]) {
+//        [Yodo1SaManager track:@"startup" properties:dic];
+        [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerStart:@"startup"];
     }
-    [Yodo1SaManager track:@"startup" properties:dic];
+    if (Yodo1AnalyticsManager.enable) {
+//        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"startup" eventData:dic];
+        [Yodo1AnalyticsManager.sharedInstance beginEvent:@"startup"];
+    }
 }
 
 + (void)endTime {
-    if (!bSensorsSwitch) {return;}
-    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-    NSMutableDictionary * dic = @{@"endTime":ti}.mutableCopy;
-    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
-    if (reportFields) {
-        [dic addEntriesFromDictionary:reportFields];
+//    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
+//    NSMutableDictionary * dic = @{@"endTime":ti}.mutableCopy;
+//    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
+//    if (reportFields) {
+//        [dic addEntriesFromDictionary:reportFields];
+//    }
+    if ([Yodo1AdConfigHelper.instance isSensorsSwitch]) {
+//        [Yodo1SaManager track:@"end" properties:dic];
+        [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerEnd:@"end"];
     }
-    [Yodo1SaManager track:@"end" properties:dic];
+    if (Yodo1AnalyticsManager.enable) {
+//        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"end" eventData:dic];
+        [Yodo1AnalyticsManager.sharedInstance endEvent:@"end"];
+    }
 }
 
 + (void)onlineParamete:(NSNotification *)notif {
     NSDictionary* object = [notif object];
+    //在线参数控制ATT是否弹出
+    if (@available(iOS 14, *)) {
+        if ([Yodo1AdConfigHelper.instance isATTMasterSwitch]) {
+            [Yodo1AdConfigHelper.instance setShowATTDialogEnabled:YES];
+            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+                if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                    [Yodo1AdConfigHelper.instance setShowATTDialogAgree:YES];
+                } else {
+                    [Yodo1AdConfigHelper.instance setShowATTDialogAgree:NO];
+                }
+                [Yodo1AdConfigHelper.instance setRuntimesATT:YES];
+            }];
+        }
+    }
+    
     //初始化神策数据统计
     NSDictionary * sensorsConfig = Yodo1AdConfigHelper.instance.sensorsConfig;
-    bSensorsSwitch = [sensorsConfig[kSensors_Switch] isEqualToString:@"on"];
+    NSString* sensorSwitch = sensorsConfig[kSensors_Switch];
+    BOOL bSensorsSwitch = true;
+    if (sensorSwitch && [sensorSwitch isEqualToString:@"off"]) {
+        bSensorsSwitch = false;
+    }
+    [Yodo1AdConfigHelper.instance setSensorsSwitch:bSensorsSwitch];
+
     if (bSensorsSwitch) {
+        NSString* serverURL = sensorsConfig[kSensors_ServerUrl];
+        if (!serverURL) {
+            serverURL = @"https://sensors.yodo1api.com/sa?project=production";
+        }
         BOOL bSensorsLogEnable = [sensorsConfig[kSensors_Switch_DebugMode] isEqualToString:@"on"];
-        [Yodo1SaManager initializeSdkServerURL:sensorsConfig[kSensors_ServerUrl] debug:(bSensorsLogEnable ? 2 : 0)];
-        
-        
+        [Yodo1SaManager initializeSdkServerURL: serverURL debug:(bSensorsLogEnable ? 2 : 0)];
         NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"] ? : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
+//        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"] ? : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
         [Yodo1SaManager profileSetOnce:@{@"yID":@"",@"game":bundleId,@"channel":@"appstore"}];
-        [Yodo1SaManager registerSuperProperties:@{@"gameName":gameName,
+        [Yodo1SaManager registerSuperProperties:@{@"gameKey":yd1AppKey,
                                                   @"gameBundleId":bundleId,
                                                   @"sdkType":[Yodo1Ads publishType],
                                                   @"publishChannelCode":@"appstore",
-                                                  @"masSdkVersion":[Yodo1Ads publishVersion]}
+                                                  @"sdkVersion":[Yodo1Ads publishVersion]}
          ];
+        [Yodo1SaManager track:@"setCCPA"
+                   properties:@{@"result":[Yodo1AdConfigHelper.instance isDoNotSell]?@"No":@"Yes"}];
+        
+        [Yodo1SaManager track:@"setGDPR"
+                   properties:@{@"result":[Yodo1AdConfigHelper.instance isUserConsent]?@"Yes":@"No"}];
+        
+        [Yodo1SaManager track:@"setCOPPA"
+                   properties:@{@"result":[Yodo1AdConfigHelper.instance isTagForUnderAgeOfConsent]?@"Yes":@"No"}];
     }
     if (object && bSensorsSwitch) {
         NSString* result = [object objectForKey:@"result"];
         int code = [[object objectForKey:@"code"]intValue];
-        [Yodo1SaManager track:@"onlineParameter"
-                   properties:@{@"result":result,
-                                @"errorCode":[NSNumber numberWithInt:code]}];
+        [Yodo1SaManager track:@"onlineParameter" properties:@{@"result":result, @"errorCode":[NSNumber numberWithInt:code]}];
+        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"onlineParameter" eventData:@{@"result":result,@"errorCode":[NSNumber numberWithInt:code]}];
     }
     [NSNotificationCenter.defaultCenter removeObserver:[Yodo1Ads class] name:kYodo1OnlineConfigFinishedNotification object:nil];
     ///Bugly
@@ -607,20 +732,59 @@ BOOL bSensorsSwitch = NO;
         [Bugly setUserValue:Yodo1Tool.shared.idfv forKey:@"IDFV"];
         [Bugly setUserValue:[Yodo1Commons territory] forKey:@"CountryCode"];
     }
+    
+    //初始化第三方统计 mas sdk 才初始化
+    if ([Yd1OnlineParameter.shared.publishType hasPrefix:@"mas_"]) {
+        [Yodo1AnalyticsManager.sharedInstance initializeAnalyticsWithConfig:nil];
+    }
+    if (@available(iOS 14, *)) {
+        if ([Yodo1AdConfigHelper.instance RuntimesATT]) {
+            //神策
+            if (bSensorsSwitch) {
+                if ([Yodo1AdConfigHelper.instance showATTDialogEnabled]) {
+                    [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"active"}];
+                }
+                if (![Yodo1AdConfigHelper.instance ShenCeATTDialogRunOneTimes]) {
+                    if ([Yodo1AdConfigHelper.instance ShowATTDialogAgree]) {
+                        [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"agree"}];
+                    } else {
+                        [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"disagree"}];
+                    }
+                    [Yodo1AdConfigHelper.instance setShenCeATTDialogRunOneTimes:YES];
+                }
+            }
+            //友盟统计
+            if ([Yodo1AdConfigHelper.instance showATTDialogEnabled]) {
+                [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"active"}];
+            }
+            if (![Yodo1AdConfigHelper.instance UmengATTDialogRunOneTimes]) {
+                if ([Yodo1AdConfigHelper.instance ShowATTDialogAgree]) {
+                    [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"agree"}];
+                } else {
+                    [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"disagree"}];
+                }
+                [Yodo1AdConfigHelper.instance setUmengATTDialogRunOneTimes:YES];
+            }
+        }
+    }
+    if (Yodo1AnalyticsManager.enable) {
+        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"setCOPPA"
+                                                   eventData:@{@"result":[Yodo1AdConfigHelper.instance isTagForUnderAgeOfConsent]?@"Yes":@"No"}];
+        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"setGDPR"
+                                                   eventData:@{@"result":[Yodo1AdConfigHelper.instance isUserConsent]?@"Yes":@"No"}];
+       [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"setCCPA"
+                                                  eventData:@{@"result":[Yodo1AdConfigHelper.instance isDoNotSell]?@"No":@"Yes"}];
+    }
+    //启动统计
+    [Yodo1Ads startTime];
 }
 
 + (NSDictionary*)config {
-    NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle]
-                                                       pathForResource:@"Yodo1Ads"
-                                                       ofType:@"bundle"]];
-    if (bundle) {
+    NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle]pathForResource:@"Yodo1Ads" ofType:@"bundle"]];
+    if (!bundle) {return nil;}
         NSString *configPath = [bundle pathForResource:@"config" ofType:@"plist"];
-        if (configPath) {
-            NSDictionary *config =[NSDictionary dictionaryWithContentsOfFile:configPath];
-            return config;
-        }
-    }
-    return nil;
+    if (configPath.length) {return nil;}
+    return [NSDictionary dictionaryWithContentsOfFile:configPath];
 }
 
 + (NSString*)publishType {
@@ -869,6 +1033,30 @@ BOOL bSensorsSwitch = NO;
 #endif
 }
 
+#pragma mark- OCSplash
+
++ (void)setSplashCallback:(Yodo1AdsEventCallback)callback {
+    if (callback == nil) {
+        return;
+    }
+    if (s_splashCallback) {
+        s_splashCallback = nil;
+    }
+    s_splashCallback = callback;
+}
+
++ (void)showSplash:(UIWindow *)window {
+#ifdef YODO1_ADS
+    [self showSplash:window placement:nil];
+#endif
+}
+
++ (void)showSplash:(UIWindow *)window placement:(NSString *)placement_id {
+#ifdef YODO1_ADS
+    [[Yodo1SplashManager sharedInstance] showSplash:window placement:placement_id];
+#endif
+}
+
 @end
 
 
@@ -1042,6 +1230,19 @@ void Unity3dShowRewardGame()
         }
     }];
 }
+
+#pragma mark - Unity3dSplash
+
+void UnityShowSplashAd()
+{
+    [[Yodo1SplashManager sharedInstance] showSplash:nil placement:nil];
+}
+
+void UnityShowSplashAdWithPlacement(const char* placement_id)
+{
+    [[Yodo1SplashManager sharedInstance] showSplash:nil placement:Yodo1CreateNSString(placement_id)];
+}
+
 }
 #endif
 
@@ -1218,4 +1419,24 @@ void Yodo1AdsC::ShowRewardGame(Yodo1RewardGame_Callback callback)
             callback(reward.UTF8String,NULL);
         }
     }];
+}
+
+#pragma mark - C++Splash
+
+void Yodo1AdsC::SetSplashCallback(Yodo1AdsEvent_Callback callback)
+{
+    if (callback == NULL) {
+        NSLog(@"splash callback is null");
+    }
+    s_splash_callback = callback;
+}
+
+void Yodo1AdsC::ShowSplash()
+{
+    [Yodo1Ads showSplash:nil];
+}
+
+void Yodo1AdsC::ShowSplashWithPlacement(const char* placement_id)
+{
+    [Yodo1Ads showSplash:nil placement:Yodo1CreateNSString(placement_id)];
 }

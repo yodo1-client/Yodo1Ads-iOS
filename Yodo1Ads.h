@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v4.3.3
+//  v4.4.0
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -158,4 +158,13 @@ typedef void (^Yodo1RewardGameCallback)(NSString * reward, NSError* error);
 
 //Show reward game
 + (void)showRewardGame:(Yodo1RewardGameCallback)reward;
+
+#pragma mark- Splash
+//Set splash's callback
++ (void)setSplashCallback:(Yodo1AdsEventCallback)callback;
+//Show splash ad
+//Show splash ad,App main window
++ (void)showSplash:(UIWindow *)window;
++ (void)showSplash:(UIWindow *)window placement:(NSString *)placement_id;
+
 @end

@@ -205,6 +205,17 @@ public:
      */
     static void ShowRewardGame(Yodo1RewardGame_Callback callback);
     
+#pragma mark- YODO1_SPLASH
+    /**
+     *  Set video's callback
+     */
+    static void SetSplashCallback(Yodo1AdsEvent_Callback callback);
+    
+    /**
+     *  Show splash ad
+     */
+    static void ShowSplash();
+    static void ShowSplashWithPlacement(const char* placement_id);
 };
 
 #endif /* Yodo1AdsC_h */
