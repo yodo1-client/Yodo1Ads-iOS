@@ -30,9 +30,9 @@
 #import "Yodo1SplashManager.h"
 #endif
 
-#ifdef YODO1_ANALYTICS
+// #ifdef YODO1_ANALYTICS
 #import "Yodo1AnalyticsManager.h"
-#endif
+// #endif
 
 
 #import <Yodo1SaAnalyticsSDK/Yodo1SensorsAnalyticsSDK.h>
