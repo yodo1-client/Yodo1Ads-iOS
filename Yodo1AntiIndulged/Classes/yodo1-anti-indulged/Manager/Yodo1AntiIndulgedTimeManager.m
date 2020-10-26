@@ -229,13 +229,11 @@ typedef enum: NSInteger {
                 event.action = Yodo1AntiIndulgedActionEndGame;
                 event.title = @"提示";
                 event.content = rules.antiPlayingTimeMsg.message;
-//                if (![[Yodo1AntiIndulgedHelper shared] successful: event]) {
-//                    [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleTimeDisable error:nil];
-//                }
+                
                 // 禁玩时段的通知 通过onTimeLimitNotify接口返回
                 if (delegate && [delegate respondsToSelector:@selector(onTimeLimitNotify:title:message:)]) {
                     if (![delegate onTimeLimitNotify:event title:event.title message:event.content]) {
-                        [[Yodo1AntiIndulgedUtils getTopWindow] makeToast:event.content duration:0.2 position:CSToastPositionTop];
+                        [Yodo1AntiIndulgedDialogVC showDialog:Yodo1AntiIndulgedDialogStyleTimeDisable error:nil];
                     }
                 }
             }

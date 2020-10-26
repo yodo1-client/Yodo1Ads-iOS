@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiIndulged'
-    s.version          = '0.0.19'
-    s.summary          = 'beta'
+    s.version          = '2.0.0'
+    s.summary          = 'release'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
