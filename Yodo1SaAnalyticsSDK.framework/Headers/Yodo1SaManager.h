@@ -14,13 +14,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1SaManager : NSObject
+/**
+ 为track:properties:方法单独添加字段
+ */
++ (void)add_track_public_properties:(NSDictionary *)dic;
 
++ (void)remove_track_public_properties:(NSArray *)properties;
 /**
  init Sa SDK,debugMode:0 close debug,
  1 is debug,2 is debug and data import
  */
-+ (void)initializeSdkServerURL:(NSString *)serverURL
-                         debug:(int) debugMode;
++ (void)initializeSdkServerURL:(NSString *)serverURL debug:(int) debugMode;
 
 /**
  Super properties
