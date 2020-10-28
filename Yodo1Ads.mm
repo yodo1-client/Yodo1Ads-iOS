@@ -625,10 +625,12 @@ static NSString* yd1AppKey = @"";
         [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerStart:@"end"];
         [Yodo1SaManager track:@"startup" properties:@{}];
     }
+    #ifdef YODO1_ANALYTICS
     if (Yodo1AnalyticsManager.enable) {
         [Yodo1AnalyticsManager.sharedInstance beginEvent:@"end"];
         [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"startup" eventData:@{}];
     }
+    #endif
 }
 
 + (void)endTime {
