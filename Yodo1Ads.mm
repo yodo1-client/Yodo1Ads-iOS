@@ -12,7 +12,7 @@
 #import "Yodo1UnityTool.h"
 
 #import "Yd1OnlineParameter.h"
-#import "Yodo1Analytics.h"
+//#import "Yodo1Analytics.h"
 #import "Yodo1ReportError.h"
 #import <Bugly/Bugly.h>
 #import "YD1LogView.h"
@@ -809,7 +809,7 @@ static NSString* yd1AppKey = @"";
 }
 
 + (void)setLogEnable:(BOOL)enable {
-    [[Yodo1Analytics instance]setDebugMode:enable];
+    // [[Yodo1Analytics instance]setDebugMode:enable];
 }
 
 #pragma mark- OCBanner
@@ -1020,8 +1020,10 @@ static NSString* yd1AppKey = @"";
 
 //Show Reward Game
 + (void)showRewardGame:(Yodo1RewardGameCallback)reward {
+#ifdef YODO1_ANALYTICS
+    [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"RewardGameShow" eventData:@{}];
+#endif
 #ifdef YODO1_ADS
-    [[Yodo1Analytics instance]eventId:@"RewardGameShow" eventData:@{}];
     if (![self rewardGameIsEnable]) {
         NSError * error = [NSError errorWithDomain:@"com.yodo1.rewardgame" code:-3 userInfo:@{NSLocalizedDescriptionKey:@"Reward game is disabled."}];
         reward(nil,error);
