@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.4.0'
-    s.summary          = 'v4.4.0- 2020-10-24
+    s.version          = '4.4.1'
+    s.summary          = 'v4.4.1- 2020-10-28
                             ---------------------------
                             1.更新各渠道广告-->
                                 Applovin v6.14.4
@@ -28,6 +28,7 @@ Pod::Spec.new do |s|
                             6.更新统计AF和Soomla,解决bug
                             7.统计Umeng 使用海外版
                             8.添加ATT [去掉暂时]
+                            9.添加开屏广告
 
                             ---------------------------
                           '
@@ -75,7 +76,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Yodo1OnlineParameter','4.2.3'
         ss.dependency 'Yodo1AdvertSDK','4.2.4'
         ss.dependency 'Yodo1UDID','4.1.0'
-        ss.dependency 'Yodo1SaAnalytics','4.1.0'
+        ss.dependency 'Yodo1SaAnalytics','4.1.1'
         ss.dependency 'Yodo1Bugly','4.1.2'
         ss.dependency 'Yodo1Reachability', '4.1.0'
         ss.dependency 'Yodo1AFNetworking', '4.1.0'
@@ -115,7 +116,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1UCenter','4.2.7'
+        ss.dependency 'Yodo1UCenter','4.2.8'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     

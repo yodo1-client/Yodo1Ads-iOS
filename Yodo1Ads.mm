@@ -63,7 +63,7 @@ static Yodo1AdsEventCallback s_splashCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.4.0";
+NSString* const kYodo1AdsVersion       = @"4.4.1";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -614,46 +614,29 @@ static NSString* yd1AppKey = @"";
     if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
-    
-//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
-//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
+//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
 + (void)startTime {
-//    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-//    NSMutableDictionary * dic = @{@"startTime":ti}.mutableCopy;
-//    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
-//    if (reportFields) {
-//        [dic addEntriesFromDictionary:reportFields];
-//    }
     if ([Yodo1AdConfigHelper.instance isSensorsSwitch]) {
-//        [Yodo1SaManager track:@"startup" properties:dic];
-        [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerStart:@"startup"];
+        [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerStart:@"end"];
+        [Yodo1SaManager track:@"startup" properties:@{}];
     }
-    #ifdef YODO1_ANALYTICS
     if (Yodo1AnalyticsManager.enable) {
-//        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"startup" eventData:dic];
-        [Yodo1AnalyticsManager.sharedInstance beginEvent:@"startup"];
+        [Yodo1AnalyticsManager.sharedInstance beginEvent:@"end"];
+        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"startup" eventData:@{}];
     }
-    #endif
 }
 
 + (void)endTime {
-//    NSString * ti = [NSString stringWithFormat:@"%llu",[Yodo1Commons timeNowAsMilliSeconds]];
-//    NSMutableDictionary * dic = @{@"endTime":ti}.mutableCopy;
-//    NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
-//    if (reportFields) {
-//        [dic addEntriesFromDictionary:reportFields];
-//    }
     if ([Yodo1AdConfigHelper.instance isSensorsSwitch]) {
-//        [Yodo1SaManager track:@"end" properties:dic];
         [Yodo1SensorsAnalyticsSDK.sharedInstance trackTimerEnd:@"end"];
     }
     #ifdef YODO1_ANALYTICS
     if (Yodo1AnalyticsManager.enable) {
-//        [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"end" eventData:dic];
         [Yodo1AnalyticsManager.sharedInstance endEvent:@"end"];
     }
     #endif
@@ -687,20 +670,19 @@ static NSString* yd1AppKey = @"";
 
     if (bSensorsSwitch) {
         NSString* serverURL = sensorsConfig[kSensors_ServerUrl];
-        if (!serverURL) {
-            serverURL = @"https://sensors.yodo1api.com/sa?project=production";
-        }
         BOOL bSensorsLogEnable = [sensorsConfig[kSensors_Switch_DebugMode] isEqualToString:@"on"];
         [Yodo1SaManager initializeSdkServerURL: serverURL debug:(bSensorsLogEnable ? 2 : 0)];
         NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-//        NSString* gameName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"] ? : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleName"];
         [Yodo1SaManager profileSetOnce:@{@"yID":@"",@"game":bundleId,@"channel":@"appstore"}];
         [Yodo1SaManager registerSuperProperties:@{@"gameKey":yd1AppKey,
                                                   @"gameBundleId":bundleId,
                                                   @"sdkType":[Yodo1Ads publishType],
                                                   @"publishChannelCode":@"appstore",
-                                                  @"sdkVersion":[Yodo1Ads publishVersion]}
-         ];
+                                                  @"sdkVersion":[Yodo1Ads publishVersion]}];
+        NSDictionary * reportFields = [Yodo1AdConfigHelper instance].report_fields;
+        if (reportFields) {
+            [Yodo1SaManager add_track_public_properties:reportFields];
+        }
         [Yodo1SaManager track:@"setCCPA"
                    properties:@{@"result":[Yodo1AdConfigHelper.instance isDoNotSell]?@"No":@"Yes"}];
         
