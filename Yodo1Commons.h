@@ -79,6 +79,13 @@ typedef void (^Yodo1CommonsUIBlockerTouchBlock)(Yodo1CommonsUIBlockerTouchEvent 
 + (BOOL)fileCRCVerifyWithFileName:(NSString*)filename referenceCrc:(const unsigned long)referenceCrc;
 
 /**
+ *  获取最上层可用的Window
+ *
+ *  @return TopWindow
+ */
++ (UIWindow *)getTopWindow;
+
+/**
  *  获取RootViewController
  *
  *  @return RootViewController
