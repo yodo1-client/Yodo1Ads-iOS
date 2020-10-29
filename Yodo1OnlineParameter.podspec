@@ -43,4 +43,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'Yodo1YYCache','4.1.0'
     s.dependency 'Yodo1Reachability','4.1.0'
+    s.dependency 'Yodo1SaAnalytics',''
 end
