@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiAddiction'
-    s.version          = '4.1.8'
+    s.version          = '4.1.9'
     s.summary          = '灵活使用在线配置,fix bug/ 转换为元'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -43,9 +43,9 @@ Pod::Spec.new do |s|
     s.libraries = 'sqlite3', 'z'
     s.compiler_flags = '-Dunix'
     
-    s.dependency 'Yodo1OnlineParameter','4.2.3'
-    s.dependency 'Yodo1UCenter', '4.2.8'
+    s.dependency 'Yodo1OnlineParameter','4.2.4'
+    s.dependency 'Yodo1UCenter', '4.2.9'
     s.dependency 'Yodo1AFNetworking','4.1.0'
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
 
 end
