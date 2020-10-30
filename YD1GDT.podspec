@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1GDT'
-    s.version          = '4.1.7'
+    s.version          = '4.1.8'
     s.summary          = 'GDTMob[广点通] v4.11.11,fix bug'
 
     s.description      = <<-DESC
@@ -58,7 +58,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdvertSDK','4.2.4'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.4'
+    s.dependency 'Yodo1AdvertSDK','4.2.5'
     s.dependency 'Yodo1AdsGDT','4.1.5'
 end
