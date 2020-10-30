@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Topon'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'YD1Topon V3.5.0'
 
     s.description      = <<-DESC
@@ -37,7 +37,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'Yodo1AdvertSDK','4.2.4'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.4'
+    s.dependency 'Yodo1AdvertSDK','4.2.5'
     s.dependency 'Yodo1AdsTopon','4.0.0'
 end
