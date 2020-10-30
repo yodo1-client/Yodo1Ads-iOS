@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Track'
-    s.version          = '4.1.1'
+    s.version          = '4.1.2'
     s.summary          = 'A short description of Yodo1Track.'
 
     s.description      = <<-DESC
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
     s.dependency 'Yodo1TalkingData','4.2.0'
     s.dependency 'Yodo1AFNetworking','4.1.0'
 end
