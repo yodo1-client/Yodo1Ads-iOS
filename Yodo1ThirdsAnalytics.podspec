@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1ThirdsAnalytics'
-    s.version          = '4.2.4'
+    s.version          = '4.2.5'
     s.summary          = '拆分单独模块.'
 
     s.description      = <<-DESC
@@ -69,8 +69,8 @@ TODO: Add long description of the pod here.
     ]
     s.libraries = ['sqlite3', 'z']
     
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
     s.dependency 'Yodo1KeyInfo','4.1.0'
-    s.dependency 'Yodo1OnlineParameter','4.2.3'
+    s.dependency 'Yodo1OnlineParameter','4.2.4'
 
 end
