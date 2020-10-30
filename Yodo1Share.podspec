@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Share'
-    s.version          = '4.1.2'
+    s.version          = '4.1.3'
     s.summary          = '移除Twitter'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
     s.dependency 'Yodo1YYModel','4.1.0'
     s.dependency 'Yodo1Reachability', '4.1.0'
     s.dependency 'Yodo1Qrencode', '4.1.0'
