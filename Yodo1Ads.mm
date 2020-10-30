@@ -63,7 +63,7 @@ static Yodo1AdsEventCallback s_splashCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.4.1";
+NSString* const kYodo1AdsVersion       = @"4.4.2";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -611,6 +611,7 @@ static NSString* yd1AppKey = @"";
     [[Yodo1SplashManager sharedInstance] setDelegate:[Yodo1adsSplashDelegate instance]];
     [[Yodo1AdVideoManager sharedInstance]initAdVideoSDK];
 #endif
+    
     if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
@@ -646,20 +647,6 @@ static NSString* yd1AppKey = @"";
 
 + (void)onlineParamete:(NSNotification *)notif {
     NSDictionary* object = [notif object];
-    //在线参数控制ATT是否弹出
-    if (@available(iOS 14, *)) {
-        if ([Yodo1AdConfigHelper.instance isATTMasterSwitch]) {
-            [Yodo1AdConfigHelper.instance setShowATTDialogEnabled:YES];
-            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-                if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
-                    [Yodo1AdConfigHelper.instance setShowATTDialogAgree:YES];
-                } else {
-                    [Yodo1AdConfigHelper.instance setShowATTDialogAgree:NO];
-                }
-                [Yodo1AdConfigHelper.instance setRuntimesATT:YES];
-            }];
-        }
-    }
     
     //初始化神策数据统计
     NSDictionary * sensorsConfig = Yodo1AdConfigHelper.instance.sensorsConfig;
@@ -695,9 +682,9 @@ static NSString* yd1AppKey = @"";
                    properties:@{@"result":[Yodo1AdConfigHelper.instance isTagForUnderAgeOfConsent]?@"Yes":@"No"}];
     }
     if (object && bSensorsSwitch) {
-        NSString* result = [object objectForKey:@"result"];
         int code = [[object objectForKey:@"code"]intValue];
-        [Yodo1SaManager track:@"onlineParameter" properties:@{@"result":result, @"errorCode":[NSNumber numberWithInt:code]}];
+        NSString * result = (code == 0 || code == 10) ? @"success" : @"fail";
+        [Yodo1SaManager track:@"onlineParameter" properties:@{@"result":result,@"errorCode":[NSString stringWithFormat:@"%d",code ? : 10]}];
         #ifdef YODO1_ANALYTICS
         [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"onlineParameter" eventData:@{@"result":result,@"errorCode":[NSNumber numberWithInt:code]}];
         #endif
@@ -727,41 +714,54 @@ static NSString* yd1AppKey = @"";
     }
     
     //初始化第三方统计 mas sdk 才初始化
+#ifdef YODO1_ANALYTICS
     if ([Yd1OnlineParameter.shared.publishType hasPrefix:@"mas_"]) {
-        #ifdef YODO1_ANALYTICS
         [Yodo1AnalyticsManager.sharedInstance initializeAnalyticsWithConfig:nil];
-        #endif
     }
+#endif
+    
+    //在线参数控制ATT是否弹出
     if (@available(iOS 14, *)) {
-        if ([Yodo1AdConfigHelper.instance RuntimesATT]) {
+        if ([Yodo1AdConfigHelper.instance isATTMasterSwitch]) {
+            if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManagerAuthorizationStatusNotDetermined) {
+                [Yodo1AdConfigHelper.instance setShowATTDialogEnabled:YES];
+                [[Yodo1Tool.shared cached]setObject:[NSNumber numberWithBool:YES] forKey:@"ShenCeShowATTDialogEnabled"];
+                [[Yodo1Tool.shared cached]setObject:[NSNumber numberWithBool:YES] forKey:@"UmengShowATTDialogEnabled"];
+            }
+            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
             //神策
             if (bSensorsSwitch) {
-                if ([Yodo1AdConfigHelper.instance showATTDialogEnabled]) {
+                    if (![Yodo1AdConfigHelper.instance ShenCeATTDialogRunOneTimes]) {
+                        NSNumber* bRunOneTimes = (NSNumber *)[[Yodo1Tool.shared cached]objectForKey:@"ShenCeShowATTDialogEnabled"];
+                        if ([bRunOneTimes boolValue]) {
                     [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"active"}];
                 }
-                if (![Yodo1AdConfigHelper.instance ShenCeATTDialogRunOneTimes]) {
-                    if ([Yodo1AdConfigHelper.instance ShowATTDialogAgree]) {
+                        if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
                         [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"agree"}];
                     } else {
                         [Yodo1SaManager track:@"showATTDialog" properties:@{@"result":@"disagree"}];
                     }
                     [Yodo1AdConfigHelper.instance setShenCeATTDialogRunOneTimes:YES];
+                        [[Yodo1Tool.shared cached]setObject:[NSNumber numberWithBool:NO] forKey:@"ShenCeShowATTDialogEnabled"];
                 }
             }
             #ifdef YODO1_ANALYTICS
             //友盟统计
-            if ([Yodo1AdConfigHelper.instance showATTDialogEnabled]) {
+                if (![Yodo1AdConfigHelper.instance UmengATTDialogRunOneTimes]) {
+                    NSNumber* bRunOneTimes = (NSNumber *)[[Yodo1Tool.shared cached]objectForKey:@"UmengShowATTDialogEnabled"];
+                    if ([bRunOneTimes boolValue]) {
                 [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"active"}];
             }
-            if (![Yodo1AdConfigHelper.instance UmengATTDialogRunOneTimes]) {
-                if ([Yodo1AdConfigHelper.instance ShowATTDialogAgree]) {
+                    if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
                     [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"agree"}];
                 } else {
                     [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"showATTDialog" eventData:@{@"result":@"disagree"}];
                 }
                 [Yodo1AdConfigHelper.instance setUmengATTDialogRunOneTimes:YES];
+                    [[Yodo1Tool.shared cached]setObject:[NSNumber numberWithBool:NO] forKey:@"UmengShowATTDialogEnabled"];
             }
             #endif
+            }];
         }
     }
     #ifdef YODO1_ANALYTICS
@@ -782,7 +782,7 @@ static NSString* yd1AppKey = @"";
     NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle]pathForResource:@"Yodo1Ads" ofType:@"bundle"]];
     if (!bundle) {return nil;}
         NSString *configPath = [bundle pathForResource:@"config" ofType:@"plist"];
-    if (configPath.length) {return nil;}
+    if (!configPath.length) {return nil;}
     return [NSDictionary dictionaryWithContentsOfFile:configPath];
 }
 
@@ -1020,9 +1020,11 @@ static NSString* yd1AppKey = @"";
 
 //Show Reward Game
 + (void)showRewardGame:(Yodo1RewardGameCallback)reward {
+    
 #ifdef YODO1_ANALYTICS
     [Yodo1AnalyticsManager.sharedInstance eventAnalytics:@"RewardGameShow" eventData:@{}];
 #endif
+    
 #ifdef YODO1_ADS
     if (![self rewardGameIsEnable]) {
         NSError * error = [NSError errorWithDomain:@"com.yodo1.rewardgame" code:-3 userInfo:@{NSLocalizedDescriptionKey:@"Reward game is disabled."}];
