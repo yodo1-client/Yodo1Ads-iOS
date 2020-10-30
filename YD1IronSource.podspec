@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1IronSource'
-    s.version          = '4.1.8'
+    s.version          = '4.1.9'
     s.summary          = 'IronSource sdk v7.0.1.0'
 
     s.description      = <<-DESC
@@ -35,7 +35,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1AdvertSDK','4.2.4'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.4'
+    s.dependency 'Yodo1AdvertSDK','4.2.5'
     s.dependency 'Yodo1AdsIronSource','4.1.6'
 end
