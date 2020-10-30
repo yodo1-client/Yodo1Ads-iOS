@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1iCloud'
-    s.version          = '4.1.0'
+    s.version          = '4.1.1'
     s.summary          = '更新到v3.0.1'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
         "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
     }
     s.frameworks = 'UIKit', 'CloudKit'
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
 end
