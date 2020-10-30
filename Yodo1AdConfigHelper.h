@@ -56,7 +56,6 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
     SDKInitTypeOneWay,
     SDKInitTypeSmaato,
     SDKInitTypeTopon,
-    SDKInitTypeOhayoo,
 };
 
 @interface Yodo1AdConfigHelper : NSObject
