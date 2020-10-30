@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnyThinkVungle'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'v'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -58,6 +58,6 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
 
-    s.dependency 'YD1Topon','4.0.0'
+    s.dependency 'YD1Topon','4.0.1'
     s.dependency 'Yodo1AdsVungle','4.1.6'
 end
