@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiIndulged'
-    s.version          = '2.0.1'
+    s.version          = '2.0.2'
     s.summary          = 'release'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -45,9 +45,9 @@ Pod::Spec.new do |s|
     s.compiler_flags = '-Dunix'
     
     s.dependency 'Yodo1OnlineParameter','4.2.4'
-    s.dependency 'Yodo1UCenter'
+    s.dependency 'Yodo1UCenter', '4.2.9'
     s.dependency 'Yodo1AFNetworking','4.1.0'
-    s.dependency 'Yodo1Commons','4.1.0'
+    s.dependency 'Yodo1Commons','4.1.1'
     s.dependency 'FMDB'
     s.dependency 'Masonry'
     s.dependency 'Toast'
