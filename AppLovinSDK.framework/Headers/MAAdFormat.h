@@ -53,6 +53,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) CGSize size;
 
+/**
+ * @return @c YES if the ad format is an interstitial, rewarded, or rewarded interstitial.
+ */
+@property (nonatomic, assign, readonly, getter=isFullscreenAd) BOOL fullscreenAd;
+
+/**
+ * @return @c YES if the ad format is a banner, leader, or MREC.
+ */
+@property (nonatomic, assign, readonly, getter=isAdViewAd) BOOL adViewAd;
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)new NS_UNAVAILABLE;
 

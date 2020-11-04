@@ -72,14 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ALAdService *adService;
 
 /**
- * Get an instance of AppLovin Native Ad service. This service is
- * used to fetch and display native ads from AppLovin servers.
- *
- * @return Native ad service. Guaranteed not to be null.
- */
-@property (nonatomic, strong, readonly) ALNativeAdService *nativeAdService;
-
-/**
  * Get an instance of the AppLovin postback service. This service is used to dispatch HTTP GET postbacks to arbitrary URLs.
  *
  * @return Postback service. Guaranteed not to be null.
@@ -200,6 +192,10 @@ typedef void (^ALSdkInitializationCompletionHandler)(ALSdkConfiguration *configu
 - (instancetype)init __attribute__((unavailable("Use +[ALSdk shared], +[ALSdk sharedWithKey:], or +[ALSdk sharedWithKey:settings:].")));
 + (instancetype)new NS_UNAVAILABLE;
 
+@end
+
+@interface ALSdk(ALDeprecated)
+@property (nonatomic, strong, readonly) ALNativeAdService *nativeAdService  __deprecated_msg("Native ads have been deprecated and will be removed in a future SDK version.");
 @end
 
 NS_ASSUME_NONNULL_END
