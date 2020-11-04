@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AdsFyber'
-    s.version          = '4.0.0'
-    s.summary          = 'v7.6.4'
+    s.version          = '4.0.1'
+    s.summary          = 'v7.7.2'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
