@@ -63,7 +63,7 @@ static Yodo1AdsEventCallback s_splashCallback;
 const char* UNITY3D_YODO1ADS_METHOD     = "Yodo1U3dSDKCallBackResult";
 static NSString* kYodo1AdsGameObject    = @"Yodo1Ads";//默认
 
-NSString* const kYodo1AdsVersion       = @"4.4.2";
+NSString* const kYodo1AdsVersion       = @"4.5.0";
 
 typedef enum {
     Yodo1AdsTypeBanner          = 1001,//Banner
@@ -275,6 +275,16 @@ typedef enum {
     }
     if(s_splashCallback){
         s_splashCallback(Yodo1AdsEventClose,nil);
+    }
+    [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventShowSuccess error:nil];
+}
+
+-(void)splashDidSkip {
+    if(s_splash_callback){
+        s_splash_callback(Yodo1AdsCEventSkip,nil);
+    }
+    if(s_splashCallback){
+        s_splashCallback(Yodo1AdsEventSkip,nil);
     }
     [Yodo1AdsDelegate unitySendMessageResulTypeWithCode:Yodo1AdsTypeSplash code:Yodo1AdsEventShowSuccess error:nil];
 }

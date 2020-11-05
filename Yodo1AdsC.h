@@ -17,6 +17,7 @@ typedef enum {
     Yodo1AdsCEventLoaded    = 3,//Ad load finish
     Yodo1AdsCEventShowSuccess    = 4,   //Display success
     Yodo1AdsCEventShowFail       = 5,   //display fail
+    Yodo1AdsCEventSkip           = 6,   //skip
     Yodo1AdsCEventLoadFail       = -1,  //Load of Error
 }Yodo1AdsCEvent;
 

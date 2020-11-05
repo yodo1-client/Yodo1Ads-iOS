@@ -3,7 +3,7 @@
 //
 //
 //  Created by hyx on 17/7/14.
-//  v4.4.2
+//  v4.5.0
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -17,6 +17,7 @@ typedef enum {
     Yodo1AdsEventLoaded     = 3,//Ad load finish
     Yodo1AdsEventShowSuccess    = 4,   //Display success
     Yodo1AdsEventShowFail       = 5,   //display fail
+    Yodo1AdsEventSkip           = 6,   //skip
     Yodo1AdsEventLoadFail       = -1,  //Load of Error
 }Yodo1AdsEvent;
 
