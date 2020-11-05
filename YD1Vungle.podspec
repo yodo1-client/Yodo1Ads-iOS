@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Vungle'
-    s.version          = '4.1.10'
-    s.summary          = '更新VungleSDk 6.8.0,[ 支持iOS 14 ]'
+    s.version          = '4.1.11'
+    s.summary          = '更新VungleSDk 6.8.1,[ 支持iOS 14 ]'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -55,6 +55,6 @@ Pod::Spec.new do |s|
         'Security'
     ]
 
-    s.dependency 'Yodo1AdvertSDK','4.2.5'
-    s.dependency 'Yodo1AdsVungle','4.1.6'
+    s.dependency 'Yodo1AdvertSDK','4.2.6'
+    s.dependency 'Yodo1AdsVungle','4.1.7'
 end
