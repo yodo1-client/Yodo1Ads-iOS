@@ -25,14 +25,19 @@
 - (void)splashDidFailToLoadWithError:(NSError *)error;
 
 /**
+ Called after an splash has been displayed on the screen.
+ */
+- (void)splashDidShow;
+
+/**
  Called after an splash has been dismissed.
  */
 - (void)splashDidClose;
 
 /**
- Called after an splash has been displayed on the screen.
+ Called after an splash has been skipped.
  */
-- (void)splashDidShow;
+- (void)splashDidSkip;
 
 /**
  Called after an splash has been clicked.
