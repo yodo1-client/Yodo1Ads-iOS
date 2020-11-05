@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Inmobi'
-    s.version          = '4.1.8'
-    s.summary          = '更新Inmobi SDK 9.0.7 修复UIWebView的问题'
+    s.version          = '4.1.9'
+    s.summary          = '更新Inmobi SDK 9.1.0 修复UIWebView的问题'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
                        DESC
@@ -58,7 +58,7 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
     
-    s.dependency 'Yodo1AdvertSDK','4.2.5'
+    s.dependency 'Yodo1AdvertSDK','4.2.6'
     s.dependency 'Yodo1AdsInmobi','4.1.3'
 
 end
