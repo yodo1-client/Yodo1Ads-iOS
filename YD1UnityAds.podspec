@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1UnityAds'
-    s.version          = '4.1.9'
+    s.version          = '4.1.10'
     s.summary          = '更新UnityAds V3.5.0'
 
     s.description      = <<-DESC
@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
     
-    s.dependency 'Yodo1AdvertSDK','4.2.5'
-    s.dependency 'Yodo1AdsUnityAds','4.1.6'
+    s.dependency 'Yodo1AdvertSDK','4.2.6'
+    s.dependency 'Yodo1AdsUnityAds','4.1.7'
 end
