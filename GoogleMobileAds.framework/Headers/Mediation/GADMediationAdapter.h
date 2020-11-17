@@ -68,7 +68,7 @@ typedef void (^GADMediationAdapterSetUpCompletionBlock)(NSError *_Nullable error
 /// Returns Nil if the network doesn't have publisher provided extras.
 + (nullable Class<GADAdNetworkExtras>)networkExtrasClass;
 
-/// Returns an initalized mediation adapter.
+/// Returns an initialized mediation adapter.
 - (nonnull instancetype)init;
 
 @optional

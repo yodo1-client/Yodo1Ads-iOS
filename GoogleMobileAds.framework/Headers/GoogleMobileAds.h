@@ -81,9 +81,9 @@ FOUNDATION_EXPORT const unsigned char GoogleMobileAdsVersionString[];
 #import <GoogleMobileAds/GADRewardBasedVideoAd.h>
 #import <GoogleMobileAds/GADRewardBasedVideoAdDelegate.h>
 #import <GoogleMobileAds/GADRewardedAd.h>
+#import <GoogleMobileAds/GADRewardedAdBeta.h>
 #import <GoogleMobileAds/GADRewardedAdDelegate.h>
 #import <GoogleMobileAds/GADRewardedAdMetadataDelegate.h>
-#import <GoogleMobileAds/GADRewardedAdBeta.h>
 #import <GoogleMobileAds/GADRewardedInterstitialAd.h>
 #import <GoogleMobileAds/GADSearchBannerView.h>
 #import <GoogleMobileAds/GADServerSideVerificationOptions.h>

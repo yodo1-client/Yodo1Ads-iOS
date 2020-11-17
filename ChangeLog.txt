@@ -1,6 +1,14 @@
 =============================================
-2020-11-04
-v7.67.0
+2020-11-17
+v7.68.0
+Updated the SDK from a .framework to a .xcframework. CocoaPods 1.9.0 or higher is now required for CocoaPod installations.
+Removed arm64e from the distribution. Local testing on arm64e will no longer be available.
+Added Ad Inspector Beta.
+Fixed a bug where the rootViewController of GADNativeCustomTemplateAd retains a strong pointer to the ad.
+
+=============================================
+2020-11-16
+v7.66.0
 
 =============================================
 2020-09-10
