@@ -5,7 +5,7 @@
 
 
 
-#define MTGInterstitialSDKVersion @"6.6.5"
+#define MTGInterstitialSDKVersion @"6.6.8"
 
 
 #import <UIKit/UIKit.h>

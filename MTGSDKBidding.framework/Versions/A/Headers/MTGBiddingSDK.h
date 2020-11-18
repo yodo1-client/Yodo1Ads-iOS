@@ -9,7 +9,7 @@
 
 
 
-#define MTGBiddingSDKVersion @"6.6.5"
+#define MTGBiddingSDKVersion @"6.6.8"
 
 
 

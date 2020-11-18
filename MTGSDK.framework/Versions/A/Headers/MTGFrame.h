@@ -13,28 +13,28 @@ __deprecated_msg("Class is deprecated.")
 /*!
  @property
  
- @abstract The dataTemplate of the frame
+ @abstract The dataTemplate of the frame.
  */
 @property (nonatomic, assign) MTGAdTemplateType templateType;
 
 /*!
  @property
  
- @abstract The ad source of the frame
+ @abstract The ad source of the frame.
  */
 @property (nonatomic, assign) MTGAdSourceType sourceType;
 
 /*!
  @property
  
- @abstract The timestap of the frame
+ @abstract The timestap of the frame.
  */
 @property (nonatomic, assign) double      timestamp;
 
 /*!
  @property
  
- @abstract The id of the frame
+ @abstract The id of the frame.
  */
 @property (nonatomic, strong) NSString      *frameId;
 
