@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnyThinkAdmob'
-    s.version          = '4.0.2'
+    s.version          = '4.0.3'
     s.summary          = 'v'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -59,5 +59,5 @@ Pod::Spec.new do |s|
     ]
 
     s.dependency 'YD1Topon','4.0.2'
-    s.dependency 'Yodo1AdsAdmob','4.1.7'
+    s.dependency 'Yodo1AdsAdmob','4.1.8'
 end
