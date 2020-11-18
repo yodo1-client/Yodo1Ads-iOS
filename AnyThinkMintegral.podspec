@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnyThinkMintegral'
-    s.version          = '4.0.2'
+    s.version          = '4.0.3'
     s.summary          = 'v'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -59,5 +59,5 @@ Pod::Spec.new do |s|
     ]
 
     s.dependency 'YD1Topon','4.0.2'
-    s.dependency 'Yodo1AdsMintegral','4.1.9'
+    s.dependency 'Yodo1AdsMintegral','4.1.10'
 end
