@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdmobIronSource'
-    s.version          = '4.1.10'
-    s.summary          = 'Admob 更新v7.65.0'
+    s.version          = '4.1.11'
+    s.summary          = 'Admob 更新v7.68.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here 测试.
                        DESC
@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '9.0'
 
-    s.source_files = "#{s.version}" + '/*.framework/Headers/*.h'
+    s.source_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
     s.vendored_frameworks = "#{s.version}" + '/*.framework'
-    s.public_header_files = "#{s.version}" + '/*.framework/Headers/*.h'
+    s.public_header_files = "#{s.version}" + '/*.framework/Versions/A/Headers/*.h'
     
     s.requires_arc = true
 
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation','AVFoundation','CoreMedia','CoreVideo','QuartzCore','SystemConfiguration','CoreGraphics','CFNetwork','MobileCoreServices','StoreKit','AdSupport','CoreLocation','CoreTelephony','Security','WebKit'
     s.libraries = 'z'
     
-    s.dependency 'YD1Admob','4.1.10'
+    s.dependency 'YD1Admob','4.1.11'
     s.dependency 'Yodo1AdsIronSource','4.1.7'
 
 end
