@@ -1,26 +1,26 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.5.0'
-    s.summary          = 'v4.5.0- 2020-11-5
+    s.version          = '4.6.0'
+    s.summary          = 'v4.6.0- 2020-11-19
                             ---------------------------
                             1.更新各渠道广告-->
-                                Applovin v6.14.4
-                                GDT v4.11.11
-                                MyTarget v5.8.0
-                                IronSource v7.0.1.0 [支持iOS 14]
-                                Mintegral v6.6.0
-                                Toutiao v3.2.6.2
-                                Soomla v5.11.3
-                                UnityAds v3.4.8 [支持iOS 14]
-                                Inmobi v9.1.0 [去掉]
-                                Tapjoy v12.7.0
-                                Admob v7.65.0 [支持iOS 14]
-                                Facebook v5.10.1
-                                AdColony v4.4.0
+                                Applovin v6.14.8
+                                GDT v4.11.12
+                                MyTarget v5.9.5
+                                IronSource v7.0.3.0
+                                Mintegral v6.6.8
+                                Toutiao v3.3.0.5
+                                Soomla v5.13.9
+                                UnityAds v3.5.1  
+                                Inmobi v9.1.0  
+                                Tapjoy v12.7.1
+                                Admob v7.68.0  
+                                Facebook v6.2.0
+                                AdColony v4.4.1
                                 Baidu v4.71
                                 Chartboost v8.3.1
                                 Smaato v21.6.2
-                                vungle v6.8.0 [修复冲突KTPlay]
+                                vungle v6.8.1 
                             2.修改Yodo1数据统计支持iOS 14
                             3.修改错误上报支持iOS 14
                             4.添加ApplovinMax 聚合中的Flyber,Verizon,Amazon
@@ -29,6 +29,7 @@ Pod::Spec.new do |s|
                             7.统计Umeng 使用海外版
                             8.添加ATT [去掉暂时]
                             9.添加开屏广告
+                            10.添加IronSource聚合
 
                             ---------------------------
                           '
@@ -340,7 +341,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'Yodo1Soomla','4.1.9'
+        ss.dependency 'Yodo1Soomla','4.1.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -354,7 +355,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1Admob','4.1.10'
+        ss.dependency 'YD1Admob','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -367,7 +368,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1Applovin','4.1.10'
+        ss.dependency 'YD1Applovin','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -406,7 +407,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1Mintegral','4.1.11'
+        ss.dependency 'YD1Mintegral','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -432,7 +433,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1UnityAds','4.1.10'
+        ss.dependency 'YD1UnityAds','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -497,7 +498,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1GDT','4.1.9'
+        ss.dependency 'YD1GDT','4.1.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -510,7 +511,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1ApplovinMax','4.1.10'
+        ss.dependency 'YD1ApplovinMax','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -549,7 +550,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'YD1MyTarget','4.1.11'
+        ss.dependency 'YD1MyTarget','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -601,7 +602,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobFacebook','4.1.10'
+        ss.dependency 'AdmobFacebook','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_IronSource' do |ss|
@@ -613,7 +614,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobIronSource','4.1.10'
+        ss.dependency 'AdmobIronSource','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_Tapjoy' do |ss|
@@ -625,7 +626,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobTapjoy','4.1.10'
+        ss.dependency 'AdmobTapjoy','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'Admob_Vungle' do |ss|
@@ -637,7 +638,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobVungle','4.1.11'
+        ss.dependency 'AdmobVungle','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -650,7 +651,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobInmobi','4.1.9'
+        ss.dependency 'AdmobInmobi','4.1.10'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -663,7 +664,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobUnityAds','4.1.10'
+        ss.dependency 'AdmobUnityAds','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -676,7 +677,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobChartboost','4.1.10'
+        ss.dependency 'AdmobChartboost','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -689,7 +690,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobAppLovin','4.1.10'
+        ss.dependency 'AdmobAppLovin','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -702,7 +703,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobAdColony','4.1.10'
+        ss.dependency 'AdmobAdColony','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -715,7 +716,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AdmobMyTarget','4.0.4'
+        ss.dependency 'AdmobMyTarget','4.0.5'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -730,7 +731,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxFacebook','4.1.10'
+        ss.dependency 'ApplovinMaxFacebook','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -743,7 +744,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxAdmob','4.1.10'
+        ss.dependency 'ApplovinMaxAdmob','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -756,7 +757,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxInmobi','4.1.10'
+        ss.dependency 'ApplovinMaxInmobi','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -769,7 +770,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxIronSource','4.1.10'
+        ss.dependency 'ApplovinMaxIronSource','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Mintegral' do |ss|
@@ -781,7 +782,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxMintegral','4.1.11'
+        ss.dependency 'ApplovinMaxMintegral','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -794,7 +795,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxTapjoy','4.1.10'
+        ss.dependency 'ApplovinMaxTapjoy','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_UnityAds' do |ss|
@@ -806,7 +807,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxUnityAds','4.1.10'
+        ss.dependency 'ApplovinMaxUnityAds','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Vungle' do |ss|
@@ -818,7 +819,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxVungle','4.1.11'
+        ss.dependency 'ApplovinMaxVungle','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -831,7 +832,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxToutiao','4.1.11'
+        ss.dependency 'ApplovinMaxToutiao','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -844,7 +845,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxChartboost','4.1.10'
+        ss.dependency 'ApplovinMaxChartboost','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -857,7 +858,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxAdColony','4.1.10'
+        ss.dependency 'ApplovinMaxAdColony','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -870,7 +871,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxMyTarget','4.1.11'
+        ss.dependency 'ApplovinMaxMyTarget','4.1.12'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     
@@ -883,7 +884,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxYandex','4.1.10'
+        ss.dependency 'ApplovinMaxYandex','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'ApplovinMax_Smaato' do |ss|
@@ -895,7 +896,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxSmaato','4.1.10'
+        ss.dependency 'ApplovinMaxSmaato','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -908,7 +909,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxGDT','4.1.10'
+        ss.dependency 'ApplovinMaxGDT','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -921,7 +922,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxAmazon','4.1.10'
+        ss.dependency 'ApplovinMaxAmazon','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -934,7 +935,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxVerizon','4.1.10'
+        ss.dependency 'ApplovinMaxVerizon','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -947,7 +948,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ApplovinMaxFyber','4.1.10'
+        ss.dependency 'ApplovinMaxFyber','4.1.11'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     ######## YD1Topon ########
@@ -972,7 +973,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnyThinkMintegral','4.0.2'
+        ss.dependency 'AnyThinkMintegral','4.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
     s.subspec 'AnyThink_Sigmob' do |ss|
@@ -997,7 +998,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnyThinkUnityAds','4.0.2'
+        ss.dependency 'AnyThinkUnityAds','4.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -1010,7 +1011,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnyThinkGDT','4.0.2'
+        ss.dependency 'AnyThinkGDT','4.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -1023,7 +1024,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'AnyThinkAdmob','4.0.2'
+        ss.dependency 'AnyThinkAdmob','4.0.3'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
@@ -1054,59 +1055,135 @@ Pod::Spec.new do |s|
     end
     ######## YD1ISource ########
 
-    ##已经启用IronSource聚合
-    # s.subspec 'IS_Facebook' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISFacebook','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    #已经启用IronSource聚合
+    s.subspec 'IS_Facebook' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISFacebook','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     
-    # s.subspec 'IS_Admob' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISAdmob','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'IS_Admob' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISAdmob','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     
-    # s.subspec 'IS_Vungle' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISVungle','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'IS_Vungle' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISVungle','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     
-    # s.subspec 'IS_UnityAds' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISUnityAds','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'IS_UnityAds' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISUnityAds','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
 
-    # s.subspec 'IS_Tapjoy' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISTapjoy','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'IS_Tapjoy' do |ss|
+        ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISTapjoy','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
     
-    # s.subspec 'IS_AppLovin' do |ss|
-    #     ss.xcconfig = {
-    #         "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
-    #         'VALID_ARCHS' =>  valid_archs.join(' '),
-    #     }
-    #     ss.dependency 'ISAppLovin','3.3.0'
-    #     ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
-    # end
+    s.subspec 'IS_AppLovin' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISAppLovin','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+    
+    s.subspec 'IS_Inmobi' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISInmobi','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'IS_Pangle' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISPangle','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'IS_Chartboost' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISChartboost','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
+
+    s.subspec 'IS_AdColony' do |ss|
+         ss.xcconfig = {
+            "GCC_PREPROCESSOR_DEFINITIONS" => 'YODO1_ADS',
+            'OTHER_LDFLAGS' => '-ObjC',
+            'ENABLE_BITCODE' => "NO",
+            "VALID_ARCHS": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
+            "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+        }
+        ss.dependency 'ISAdColony','4.0.0'
+        ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
+    end
 
 end
