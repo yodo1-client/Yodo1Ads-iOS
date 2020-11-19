@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISVungle'
-    s.version          = '3.3.0'
+    s.version          = '4.0.0'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.source           = { :http => "https://cocoapods.yodo1api.com/advert/YD1ISource/" + "#{s.name}" + "/"+ "#{s.version}" + ".zip" }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
 
     # s.source_files = "#{s.version}" + '/ISVungleAdapter.framework/Versions/A/Headers/*.h'
 
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ] 
-    s.dependency 'YD1IronSource','3.2.4'
+    s.dependency 'YD1IronSource','4.1.10'
 
-    s.dependency 'Yodo1AdsVungle','3.1.1'
+    s.dependency 'Yodo1AdsVungle','4.1.7'
 end
