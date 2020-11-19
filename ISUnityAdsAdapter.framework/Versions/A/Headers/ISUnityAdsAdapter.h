@@ -1,17 +1,18 @@
 //
-//  Copyright (c) 2015 IronSource. All rights reserved.
+//  Copyright (c) 2020 IronSource. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "IronSource/ISBaseAdapter+Internal.h"
 
-static NSString * const UnityAdsAdapterVersion     = @"4.1.2";
+static NSString * const UnityAdsAdapterVersion = @"4.3.6";
+static NSString * GitHash = @"b47f845d6";
 
 //System Frameworks For UnityAds Adapter
 
 @import AdSupport;
-@import StoreKit;
 @import CoreTelephony;
+@import StoreKit;
 
 @interface ISUnityAdsAdapter : ISBaseAdapter
 
