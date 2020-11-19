@@ -56,6 +56,6 @@ Pod::Spec.new do |s|
         'Security'
     ]
 
-    s.dependency 'Yodo1AdvertSDK','4.2.6'
+    s.dependency 'Yodo1AdvertSDK','4.2.7'
     s.dependency 'Yodo1AdsMyTarget','4.1.8'
 end
