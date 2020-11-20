@@ -58,7 +58,7 @@ Pod::Spec.new do |s|
     ]
     s.libraries = 'sqlite3', 'z'
     
-    s.dependency 'YD1IronSource','4.1.10'
+    s.dependency 'YD1IronSource','4.1.11'
 
     s.dependency 'Yodo1AdsFacebook','4.1.4'
     
