@@ -58,6 +58,6 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
 
-    s.dependency 'YD1Topon','4.0.2'
+    s.dependency 'YD1Topon','4.0.3'
     s.dependency 'Yodo1AdsGDT','4.1.6'
 end
