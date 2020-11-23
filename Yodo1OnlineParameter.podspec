@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1OnlineParameter'
-    s.version          = '4.2.4'
-    s.summary          = '最新版本v4.0.0'
+    s.version          = '4.2.5'
+    s.summary          = '最新版本v4.0.0，修复多语言本地化方法'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.

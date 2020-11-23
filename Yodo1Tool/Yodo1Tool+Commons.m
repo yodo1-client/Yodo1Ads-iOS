@@ -247,6 +247,9 @@
     static NSBundle *bundle = nil;
     if (bundle == nil) {
         NSString *bundlePath = [[NSBundle bundleForClass:[self class]] pathForResource:bundleName ofType:@"bundle"];
+        if (bundlePath == nil) {
+            bundlePath = [NSBundle.mainBundle pathForResource:bundleName ofType:@"bundle"];
+        }
         bundle = [NSBundle bundleWithPath:bundlePath];
         NSString *language = [NSBundle mainBundle].preferredLocalizations.firstObject;
         if ([[bundle localizations] containsObject:language]) {
