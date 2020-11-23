@@ -208,11 +208,11 @@ static NSString* const __status                 = @"status";
         [self.itemProperty removeAllObjects];
     }
     __block Product* product = [productInfos objectForKey:uniformProductId];
-    [self.itemProperty setObject:product.channelProductId forKey:__itemCode];
-    [self.itemProperty setObject:product.productName forKey:__itemName];
+    [self.itemProperty setObject:product.channelProductId ? :@"" forKey:__itemCode];
+    [self.itemProperty setObject:product.productName ? :@"" forKey:__itemName];
     [self.itemProperty setObject:[NSString stringWithFormat:@"%d",product.productType]  forKey:__itemType];
-    [self.itemProperty setObject:product.productPrice forKey:__itemPrice];
-    [self.itemProperty setObject:product.currency forKey:__itemCurrency];
+    [self.itemProperty setObject:product.productPrice ? :@"" forKey:__itemPrice];
+    [self.itemProperty setObject:product.currency ? :@"" forKey:__itemCurrency];
     [self.itemProperty setObject:@"" forKey:__channelItemCode];
     
     if (!uniformProductId) {
