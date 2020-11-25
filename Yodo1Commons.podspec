@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Commons'
-    s.version          = '4.1.1'
+    s.version          = '4.1.2'
     s.summary          = '去掉多语言依赖[移到Yodo1UCenter里面]'
 
     s.description      = <<-DESC
