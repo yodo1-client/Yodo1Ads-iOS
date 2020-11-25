@@ -69,7 +69,7 @@ TODO: Add long description of the pod here.
     ]
     s.libraries = ['sqlite3', 'z']
     
-    s.dependency 'Yodo1Commons','4.1.1'
+    s.dependency 'Yodo1Commons','4.1.2'
     s.dependency 'Yodo1KeyInfo','4.1.0'
     s.dependency 'Yodo1OnlineParameter','4.2.5'
 
