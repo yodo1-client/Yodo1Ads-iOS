@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AnalyticsAdapterUmeng'
-    s.version          = '4.2.7'
+    s.version          = '4.2.8'
     s.summary          = 'v7.1.3 G [支持iOS 14] 海外版本'
 
     s.description      = <<-DESC
@@ -39,6 +39,6 @@ TODO: Add long description of the pod here.
     # s.libraries = 'sqlite3', 'z'
     
     s.dependency 'Yodo1MobClick','4.3.0'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.5'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.6'
 
 end
