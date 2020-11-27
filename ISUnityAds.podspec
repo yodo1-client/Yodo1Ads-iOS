@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISUnityAds'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'Adapter和SDK分离,更新UnityAds v3.4.0'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'YD1IronSource','4.1.11'
+    s.dependency 'YD1IronSource','4.1.12'
     s.dependency 'Yodo1AdsUnityAds','4.1.8'
 
 end
