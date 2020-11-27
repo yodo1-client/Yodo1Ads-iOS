@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAdColony'
-    s.version          = '4.0.0'
+    s.version          = '4.0.1'
     s.summary          = 'Adapter和Vungle SDK 分离'
 
     s.description      = <<-DESC
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ] 
-    s.dependency 'YD1IronSource','4.1.11'
+    s.dependency 'YD1IronSource','4.1.12'
 
     s.dependency 'Yodo1AdsAdColony','4.1.5'
 end
