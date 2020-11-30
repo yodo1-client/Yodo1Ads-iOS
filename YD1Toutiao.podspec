@@ -58,5 +58,5 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
     s.dependency 'Yodo1AdvertSDK','4.2.8'
-    s.dependency 'Yodo1AdsToutiao','4.1.7'
+    s.dependency 'Yodo1AdsToutiao','4.1.8'
 end
