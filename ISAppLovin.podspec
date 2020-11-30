@@ -58,5 +58,5 @@ Pod::Spec.new do |s|
         'CoreBluetooth'
     ]
     s.dependency 'YD1IronSource','4.1.12'
-    s.dependency 'Yodo1AdsApplovin','4.1.8'
+    s.dependency 'Yodo1AdsApplovin','4.1.9'
 end
