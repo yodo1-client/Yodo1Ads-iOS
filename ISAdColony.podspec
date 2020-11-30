@@ -58,5 +58,5 @@ Pod::Spec.new do |s|
     ] 
     s.dependency 'YD1IronSource','4.1.12'
 
-    s.dependency 'Yodo1AdsAdColony','4.1.5'
+    s.dependency 'Yodo1AdsAdColony','4.1.6'
 end
