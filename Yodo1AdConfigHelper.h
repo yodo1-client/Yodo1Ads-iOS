@@ -36,6 +36,8 @@ FOUNDATION_EXPORT NSString* const kSensors_ServerUrl;
 
 FOUNDATION_EXPORT NSString* const kRewardGameMasterSwitch;
 
+FOUNDATION_EXPORT NSString* const kVerifyBundleidSwitch;
+
 typedef NS_ENUM(NSUInteger, Yodo1ConfigType) {
     Yodo1ConfigTypeBanner,
     Yodo1ConfigTypeInterstitial,
@@ -133,6 +135,9 @@ typedef NS_ENUM(NSUInteger,SDKInitType) {
 - (BOOL)isSensorsSwitch;
 
 - (void)setSensorsSwitch:(BOOL)enabled;
+
+- (BOOL)isVerifyBundleidSwitch;
+- (NSString *)verifyBundleid;
 
 - (BOOL)isATTMasterSwitch;
 
