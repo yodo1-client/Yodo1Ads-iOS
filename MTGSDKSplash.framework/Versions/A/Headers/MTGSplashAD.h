@@ -12,7 +12,7 @@
     #import "MTGBool.h"
 #endif
 
-#define MTGSplashSDKVersion @"6.6.8"
+#define MTGSplashSDKVersion @"6.6.9"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UIColor *backgroundColor;
 
 /* get the id of this request ad,call after splashADPreloadSuccess || splashADLoadSuccess*/
-@property (nonatomic, readonly, copy) NSString *requestID;
+@property (nonatomic, readonly, copy,nullable) NSString *requestID;
 
 /********************** Normal Request ***************************/
 

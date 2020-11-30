@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  This method is called when ad failed to load.
  */
-- (void)nativeAdvancedAdLoadFailed:(MTGNativeAdvancedAd *)nativeAd error:(NSError *)error;
+- (void)nativeAdvancedAdLoadFailed:(MTGNativeAdvancedAd *)nativeAd error:(NSError * __nullable)error;
 
 /**
  Sent immediately before the impression of an MTGNativeAdvancedAd object will be logged.

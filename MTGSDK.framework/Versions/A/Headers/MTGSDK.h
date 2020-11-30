@@ -14,7 +14,7 @@
 #import "MTGMediaView.h"
 #import "MTGUserInfo.h"
 
-#define MTGSDKVersion @"6.6.8"
+#define MTGSDKVersion @"6.6.9"
 
 
 

@@ -10,7 +10,7 @@
 #import "MTGNativeAdvancedAdDelegate.h"
 
 
-#define MTGNativeAdvancedSDKVersion @"6.6.8"
+#define MTGNativeAdvancedSDKVersion @"6.6.9"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -66,7 +66,7 @@ This is a method to initialize.
 - (nonnull instancetype)initWithPlacementID:(nullable NSString *)placementID
                                  unitID:(nonnull NSString *)unitID
                                  adSize:(CGSize)adSize
-                     rootViewController:(nullable UIViewController *)rootViewController NS_DESIGNATED_INITIALIZER;
+                     rootViewController:(nullable UIViewController *)rootViewController;
 
 
 /**

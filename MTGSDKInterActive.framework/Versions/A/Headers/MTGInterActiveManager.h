@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 
-#define MTGInterActiveSDKVersion @"6.6.8"
+#define MTGInterActiveSDKVersion @"6.6.9"
 
 
 
