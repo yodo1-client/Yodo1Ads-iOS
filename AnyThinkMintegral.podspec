@@ -59,5 +59,5 @@ Pod::Spec.new do |s|
     ]
 
     s.dependency 'YD1Topon','4.0.4'
-    s.dependency 'Yodo1AdsMintegral','4.1.10'
+    s.dependency 'Yodo1AdsMintegral','4.1.11'
 end
