@@ -625,7 +625,6 @@ static NSString* yd1AppKey = @"";
     if (Yd1OnlineParameter.shared.bTestDevice && Yd1OnlineParameter.shared.bFromPA) {
         [YD1LogView startLog:appKey];
     }
-//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillTerminateNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(startTime) name:UIApplicationDidBecomeActiveNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(endTime) name:UIApplicationWillResignActiveNotification object:nil];
 }
@@ -657,6 +656,19 @@ static NSString* yd1AppKey = @"";
 
 + (void)onlineParamete:(NSNotification *)notif {
     NSDictionary* object = [notif object];
+    BOOL isVerifyBundleidSwitch = Yodo1AdConfigHelper.instance.isVerifyBundleidSwitch;
+    NSString * bid = Yodo1AdConfigHelper.instance.verifyBundleid;
+    if (isVerifyBundleidSwitch && bid.length) {
+        NSString * bundle_id = [Yodo1Commons appBundleId];
+        if (![bid isEqualToString:bundle_id]) {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"App Bundle id does not match appkey! Please check your appkey or bundle id, You can find them at the MAS Developer's website." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }]];
+            [[Yodo1Commons getRootViewController] presentViewController:alert animated:YES completion:nil];
+            return;
+        }
+    }
     
     //初始化神策数据统计
     NSDictionary * sensorsConfig = Yodo1AdConfigHelper.instance.sensorsConfig;

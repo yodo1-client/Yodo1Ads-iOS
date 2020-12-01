@@ -4,23 +4,28 @@ Pod::Spec.new do |s|
     s.summary          = 'v4.7.0- 2020-11-27
                             ---------------------------
                             1.更新各渠道广告-->
-                                Applovin v6.14.8
+                                Applovin v6.14.9
                                 GDT v4.11.12
-                                MyTarget v5.9.5
+                                MyTarget v5.9.6
                                 IronSource v7.0.3.0
-                                Mintegral v6.6.8
-                                Toutiao v3.3.0.5
-                                Soomla v5.13.9
+                                Mintegral v6.6.9
+                                Toutiao v3.3.1.5
+                                Soomla v5.13.10
                                 UnityAds v3.5.1  
-                                Inmobi v9.1.0  
+                                Inmobi v9.1.1  
                                 Tapjoy v12.7.1
                                 Admob v7.68.0  
                                 Facebook v6.2.0
-                                AdColony v4.4.1
+                                AdColony v4.4.1.1
                                 Baidu v4.71
-                                Chartboost v8.3.1
+                                Chartboost v8.4.0
                                 Smaato v21.6.2
-                                vungle v6.8.1 
+                                Vungle v6.8.1 
+                                Yandex v2.19.0
+                                Sigmob v
+                                Topon v
+                                Verizon v1.8.1
+
                             2.修改Yodo1数据统计支持iOS 14
                             3.修改错误上报支持iOS 14
                             4.添加ApplovinMax 聚合中的Flyber,Verizon,Amazon
