@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1Manager'
-    s.version          = '4.7.0'
-    s.summary          = 'v4.7.0- 2020-11-27
+    s.version          = '4.8.0'
+    s.summary          = 'v4.8.0- 2020-12-07
                             ---------------------------
                             1.更新各渠道广告-->
                                 Applovin v6.14.9
@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
                             9.添加开屏广告
                             10.添加IronSource聚合
                             11.修复bug 多语言 订阅
+                            12.更新IronSource聚合中Pangle的adapter
 
                             ---------------------------
                           '
@@ -1176,7 +1177,7 @@ Pod::Spec.new do |s|
             "VALID_ARCHS[sdk=iphoneos*]": "armv7 arm64",
             "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
         }
-        ss.dependency 'ISPangle','4.0.1'
+        ss.dependency 'ISPangle','4.0.2'
         ss.dependency 'Yodo1Manager/Yodo1_Manager',"#{s.version}"
     end
 
