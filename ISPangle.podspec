@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISPangle'
-    s.version          = '4.0.2'
+    s.version          = '4.0.3'
     s.summary          = 'Adapter和Vungle SDK 分离 v4.1.11'
 
     s.description      = <<-DESC
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ] 
-    s.dependency 'YD1IronSource','4.1.12'
+    s.dependency 'YD1IronSource','4.1.13'
 
     s.dependency 'Yodo1AdsToutiao','4.1.8'
 end
