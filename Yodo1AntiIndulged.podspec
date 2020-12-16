@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1AntiIndulged'
-    s.version          = '2.0.3'
+    s.version          = '2.0.4'
     s.summary          = 'release'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -44,8 +44,8 @@ Pod::Spec.new do |s|
     s.libraries = 'sqlite3', 'z'
     s.compiler_flags = '-Dunix'
     
-    s.dependency 'Yodo1OnlineParameter','4.2.5'
-    s.dependency 'Yodo1UCenter', '4.2.10'
+    s.dependency 'Yodo1OnlineParameter','4.2.6'
+    s.dependency 'Yodo1UCenter', '4.2.11'
     s.dependency 'Yodo1AFNetworking','4.1.0'
     s.dependency 'Yodo1Commons','4.1.2'
     s.dependency 'FMDB'
