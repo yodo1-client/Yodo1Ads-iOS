@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAppLovin'
-    s.version          = '4.0.1'
+    s.version          = '4.0.2'
     s.summary          = 'Applovin SDK 和 adapter 分离(更新Applovin 6.9.3)'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -57,6 +57,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'YD1IronSource','4.1.12'
+    s.dependency 'YD1IronSource','4.1.13'
     s.dependency 'Yodo1AdsApplovin','4.1.9'
 end
