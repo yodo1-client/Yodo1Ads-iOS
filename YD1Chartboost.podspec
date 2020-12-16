@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Chartboost'
-    s.version          = '4.1.12'
+    s.version          = '4.1.13'
     s.summary          = ' sdk v8.4.0 '
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -57,6 +57,6 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'Yodo1AdvertSDK','4.2.8'
+    s.dependency 'Yodo1AdvertSDK','4.2.9'
     s.dependency 'Yodo1AdsChartboost','4.1.7'
 end
