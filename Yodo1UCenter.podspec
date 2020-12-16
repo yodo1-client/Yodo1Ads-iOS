@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Yodo1UCenter'
-    s.version          = '4.2.10'
+    s.version          = '4.2.11'
     s.summary          = '全新重构的UCenter,添加Yodo1Tool+OpsParameters引用,fix bug!'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -45,8 +45,8 @@ Pod::Spec.new do |s|
     
     s.dependency 'Yodo1Commons','4.1.2'
     s.dependency 'Yodo1YYModel','4.1.0'
-    s.dependency 'Yodo1OnlineParameter','4.2.5'
-    s.dependency 'Yodo1ThirdsAnalytics','4.2.6'
+    s.dependency 'Yodo1OnlineParameter','4.2.6'
+    s.dependency 'Yodo1ThirdsAnalytics','4.2.7'
     s.dependency 'Yodo1SaAnalytics', '4.1.1'
 
 end
