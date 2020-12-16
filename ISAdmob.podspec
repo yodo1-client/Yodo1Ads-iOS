@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'ISAdmob'
-    s.version          = '4.0.1'
+    s.version          = '4.0.2'
     s.summary          = 'Adapter 和 Admob SDK 分离'
 
     s.description      = <<-DESC
@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
         'Security',
         'CoreBluetooth'
     ]
-    s.dependency 'YD1IronSource','4.1.12'
+    s.dependency 'YD1IronSource','4.1.13'
     
     s.dependency 'Yodo1AdsAdmob','4.1.8'
 end
