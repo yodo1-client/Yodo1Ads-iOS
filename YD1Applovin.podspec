@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'YD1Applovin'
-    s.version          = '4.1.12'
+    s.version          = '4.1.13'
     s.summary          = 'sdk v6.14.8'
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -36,6 +36,6 @@ Pod::Spec.new do |s|
 
     s.weak_frameworks = 'AdSupport','SafariServices','ReplayKit','CloudKit','GameKit'
 
-    s.dependency 'Yodo1AdvertSDK','4.2.8'
+    s.dependency 'Yodo1AdvertSDK','4.2.9'
     s.dependency 'Yodo1AdsApplovin','4.1.9'
 end
