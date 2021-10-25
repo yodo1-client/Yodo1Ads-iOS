@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name             = 'Yodo1AdsGDT'
-    s.version          = '7.0.0'
+    s.name             = 'AdsGDT'
+    s.version          = '1.0.0'
     s.summary          = 'v4.13.10 测试版本统计'
 
     s.description      = <<-DESC
