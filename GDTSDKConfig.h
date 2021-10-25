@@ -8,8 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "GDTSDKDefines.h"
+#import "GDTAdTestSetting.h"
 
 @interface GDTSDKConfig : NSObject
+
+/**
+ SDK 注册接口，请在 app 初始化时调用。
+ @param appId - 媒体ID
+ 
+ @return 注册是否成功。
+*/
++ (BOOL)registerAppId:(NSString *)appId;
+
 /**
  * 提供给聚合平台用来设定SDK 流量分类
  */
@@ -19,8 +29,6 @@
  * 查看SDK流量来源
  */
 + (NSString *)sdkSrc;
-
-
 
 /**
  * 获取 SDK 版本
@@ -60,6 +68,20 @@
  SDK设置的category为AVAudioSessionCategoryAmbient，options为AVAudioSessionCategoryOptionDuckOthers
  */
 + (void)enableDefaultAudioSessionSetting:(BOOL)enabled;
+
++ (GDTAdTestSetting *)debugSetting;
+
+/**
+ 设置开发阶段调试相关的配置
+ */
++ (void)setDebugSetting:(GDTAdTestSetting *)debugSetting;
+
++ (void)forbiddenIDFA:(BOOL)forbiddened;
+
+/**
+ 获取 buyerId 用于 Server Bidding 请求获取 token, 建议每次请求前调用一次, 并使用最新值请求
+ */
++ (NSString *)getBuyerId;
 
 @end
 

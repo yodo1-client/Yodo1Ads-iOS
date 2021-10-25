@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GDTBaseAdNetworkAdapterProtocol.h"
+#import "GDTServerSideVerificationOptions.h"
 
 @protocol GDTRewardVideoAdNetworkConnectorProtocol;
 
@@ -17,14 +18,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadAd;
 
+@optional
+
+@property (nonatomic, strong) GDTServerSideVerificationOptions *serverSideVerificationOptions;
+
+@property (nonatomic) BOOL videoMuted;
+
 - (BOOL)showAdFromRootViewController:(UIViewController *)viewController;
 
 - (BOOL)isAdValid;
 
 - (NSInteger)expiredTimestamp;
 
-@optional
-@property (nonatomic) BOOL videoMuted;
+- (CGFloat)videoDuration;
+
 
 @end
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "GDTVideoConfig.h"
+#import "GDTSDKDefines.h"
 
 typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
     GDTVastAdEventTypeUnknow,
@@ -37,11 +38,6 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
 @property (nonatomic, copy, readonly) NSString *desc;
 
 /**
- 广告大图Url
- */
-@property (nonatomic, copy, readonly) NSString *imageUrl;
-
-/**
  素材宽度，单图广告代表大图 imageUrl 宽度、多图广告代表小图 mediaUrlList 宽度
  */
 @property (nonatomic, readonly) NSInteger imageWidth;
@@ -57,7 +53,12 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
 @property (nonatomic, copy, readonly) NSString *iconUrl;
 
 /**
- 三小图广告的图片Url集合
+ 广告大图Url, 建议使用 bindImageViews:placeholder: 方法替代
+ */
+@property (nonatomic, copy, readonly) NSString *imageUrl;
+
+/**
+ 三小图广告的图片Url集合, 建议使用 bindImageViews:placeholder: 方法替代
  */
 @property (nonatomic, copy, readonly) NSArray *mediaUrlList;
 
@@ -87,6 +88,11 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
 @property (nonatomic, readonly) BOOL isThreeImgsAd;
 
 /**
+ 是否为微信原生页广告 (可针对此广告类型来控制按钮展示文案为"去微信看看")
+ */
+@property (nonatomic, readonly) BOOL isWechatCanvasAd;
+
+/**
  返回广告的eCPM，单位：分
  
  @return 成功返回一个大于等于0的值，-1表示无权限或后台出现异常
@@ -99,6 +105,12 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
  @return 成功返回一个包含数字的string，@""或nil表示无权限或后台异常
  */
 @property (nonatomic, readonly) NSString *eCPMLevel;
+
+/**
+ 广告对应的按钮展示文案
+ 此字段可能为空
+ */
+@property (nonatomic, readonly) NSString *buttonText;
 
 /**
  广告对应的CTA文案，自定义CTA视图时建议使用此字段
@@ -148,13 +160,12 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
  */
 - (BOOL)equalsAdData:(GDTUnifiedNativeAdDataObject *)dataObject;
 
-#pragma mark - DEPRECATED
 /**
- 可选方法，请根据场景酌情上报，用于提高广告预估准确性，提高 ecpm。
- 使用场景：当广告为视频广告，且开发者自行渲染视频广告封面图，开发者点击封面进入下一页才展示视频广告容器时，其他场景无需使用。
- 上报时机：开发者自行渲染的视频广告封面图展示给用户时。
-*/
-- (void)videoCoverExpose DEPRECATED_MSG_ATTRIBUTE("该接口已经废弃");
-
+ * 绑定展示的图片视图
+ *
+ * @param imageViews     进行渲染的 imageView
+ * @param placeholder     图片加载过程中的占位图
+ */
+- (void)bindImageViews:(NSArray<UIImageView *> *)imageViews placeholder:(UIImage *)placeholder;
 
 @end

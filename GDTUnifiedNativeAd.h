@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GDTUnifiedNativeAdDataObject.h"
 #import "GDTUnifiedNativeAdView.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol GDTUnifiedNativeAdDelegate <NSObject>
@@ -26,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<GDTUnifiedNativeAdDelegate> delegate;
 
 /**
- 请求视频的时长下限，视频时长有效值范围为[5,60]。
- 以下两种情况会使用系统默认的最小值设置，1:不设置  2:minVideoDuration大于maxVideoDuration
+ 请求视频的时长下限。
+ 以下两种情况会使用 0，1:不设置  2:minVideoDuration大于maxVideoDuration
 */
 @property (nonatomic) NSInteger minVideoDuration;
 
 /**
- 请求视频的最大时长，视频时长有效值范围为[5,60]。
+ 请求视频的时长上限，视频时长有效值范围为[5,180]。
  */
 @property (nonatomic) NSInteger maxVideoDuration;
 
@@ -61,11 +62,33 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  构造方法
 
+ @param placementId 广告位ID
+ @return GDTUnifiedNativeAd 实例
+ */
+- (instancetype)initWithPlacementId:(NSString *)placementId;
+
+/**
+ *  构造方法, S2S bidding 后获取到 token 再调用此方法
+ *  @param placementId  广告位 ID
+ *  @param token  通过 Server Bidding 请求回来的 token
+ */
+- (instancetype)initWithPlacementId:(NSString *)placementId token:(NSString *)token;
+
+/**
+ 构造方法
+
  @param appId 媒体ID
  @param placementId 广告位ID
  @return GDTUnifiedNativeAd 实例
  */
-- (instancetype)initWithAppId:(NSString *)appId placementId:(NSString *)placementId;
+- (instancetype)initWithAppId:(NSString *)appId placementId:(NSString *)placementId GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃，请使用 initWithPlacementId:");
+
+/**
+ *  S2S bidding 竟胜之后调用, 需要在调用广告 show 之前调用
+ *  @param eCPM - 曝光扣费, 单位分，若优量汇竞胜，在广告曝光时回传，必传
+ *  针对本次曝光的媒体期望扣费，常用扣费逻辑包括一价扣费与二价扣费，当采用一价扣费时，胜者出价即为本次扣费价格；当采用二价扣费时，第二名出价为本次扣费价格.
+ */
+- (void)setBidECPM:(NSInteger)eCPM;
 
 /**
  加载广告
@@ -78,6 +101,20 @@ NS_ASSUME_NONNULL_BEGIN
  @param adCount 加载条数
  */
 - (void)loadAdWithAdCount:(NSInteger)adCount;
+
+/**
+ *  竟胜之后调用, 需要在调用广告 show 之前调用
+ *  @param price - 竟胜价格 (单位: 分)
+ */
+- (void)sendWinNotificationWithPrice:(NSInteger)price;
+
+/**
+ *  竟败之后调用
+ *  @param price - 竟胜价格 (单位: 分)
+ *  @param reason - 优量汇广告竟败原因
+ *  @param adnID - adnID
+ */
+- (void)sendLossNotificationWithWinnerPrice:(NSInteger)price lossReason:(GDTAdBiddingLossReason)reason winnerAdnID:(NSString *)adnID;
 
 /**
  返回广告平台名称
