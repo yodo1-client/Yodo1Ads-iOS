@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = 'AdsGDT'
-    s.version          = '1.0.0'
-    s.summary          = 'v4.13.10 测试版本统计'
+    s.version          = '1.0.1'
+    s.summary          = 'v4.13.41 测试版本统计'
 
     s.description      = <<-DESC
     TODO: Add long description of the pod here.
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     s.public_header_files = [ "*.h"]
 
     s.vendored_libraries = [ "*.a" ]
-    
+    s.swift_version = '4.2'
     s.requires_arc = true
 
     s.xcconfig = {

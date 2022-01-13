@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GDTLoadAdParams.h"
+#import "GDTAdProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,12 +65,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  banner2.0被用户关闭时调用
+ *  会立即关闭当前banner广告，若启用轮播，（刷新间隔 - 当前广告已展示时间）后会展示新的广告
+ *  若未启用轮播或不需要再展示，需在回调中将unifiedBannerView从父view移除置nil
  */
 - (void)unifiedBannerViewWillClose:(GDTUnifiedBannerView *)unifiedBannerView;
 
 @end
 
-@interface GDTUnifiedBannerView : UIView
+@interface GDTUnifiedBannerView : UIView <GDTAdProtocol>
 /**
  *  委托 [可选]
  */
@@ -89,6 +92,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  QQ小游戏SDK字段透传
 */
 @property (nonatomic, strong) GDTLoadAdParams *loadAdParams;
+
+/**
+ *  广告是否有效，以下情况会返回NO，建议在展示广告之前判断，否则会影响计费或展示失败
+ *  a.广告未拉取成功
+ *  b.广告过期
+ */
+@property (nonatomic, readonly) BOOL isAdValid;
 
 /**
  *  构造方法
@@ -119,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
                      viewController:(UIViewController *)viewController;
 
 /**
- *  S2S bidding 竟胜之后调用, 需要在调用广告 show 之前调用
+ *  S2S bidding 竞胜之后调用, 需要在调用广告 show 之前调用
  *  @param eCPM - 曝光扣费, 单位分，若优量汇竞胜，在广告曝光时回传，必传
  *  针对本次曝光的媒体期望扣费，常用扣费逻辑包括一价扣费与二价扣费，当采用一价扣费时，胜者出价即为本次扣费价格；当采用二价扣费时，第二名出价为本次扣费价格.
  */
@@ -152,14 +162,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)adNetworkName;
 
 /**
- *  竟胜之后调用, 需要在调用广告 show 之前调用
- *  @param price - 竟胜价格 (单位: 分)
+ *  竞胜之后调用, 需要在调用广告 show 之前调用
+ *  @param price - 竞胜价格 (单位: 分)
  */
 - (void)sendWinNotificationWithPrice:(NSInteger)price;
 /**
- *  竟败之后调用
- *  @param price - 竟胜价格 (单位: 分)
- *  @param reason - 优量汇广告竟败原因
+ *  竞败之后调用
+ *  @param price - 竞胜价格 (单位: 分)
+ *  @param reason - 优量汇广告竞败原因
  *  @param adnID - adnID
  */
 - (void)sendLossNotificationWithWinnerPrice:(NSInteger)price lossReason:(GDTAdBiddingLossReason)reason winnerAdnID:(NSString *)adnID;

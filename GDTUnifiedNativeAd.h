@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  需要在 loadAd 前设置此属性。
  */
-@property (nonatomic, assign) GDTVideoPlayPolicy videoPlayPolicy;
+@property (nonatomic, assign) GDTVideoPlayPolicy videoPlayPolicy GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃");
 
 /**
  可选属性，设置本次拉取的视频广告封面是由SDK渲染还是开发者自行渲染。
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  开发者自行渲染，指开发者获取到广告对象后，先用封面图字段在 feed 流中先渲染出一个封面图入口，用户点击封面图，再进入一个有 conainterView 的详细页，播放视频。Demo 工程中的 "竖版 Feed 视频" 就是开发者渲染的场景。
  */
-@property (nonatomic, assign) GDTVideoRenderType videoRenderType;
+@property (nonatomic, assign) GDTVideoRenderType videoRenderType GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃");
 
 /**
  构造方法
@@ -75,16 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlacementId:(NSString *)placementId token:(NSString *)token;
 
 /**
- 构造方法
-
- @param appId 媒体ID
- @param placementId 广告位ID
- @return GDTUnifiedNativeAd 实例
- */
-- (instancetype)initWithAppId:(NSString *)appId placementId:(NSString *)placementId GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃，请使用 initWithPlacementId:");
-
-/**
- *  S2S bidding 竟胜之后调用, 需要在调用广告 show 之前调用
+ *  S2S bidding 竞胜之后调用, 需要在调用广告 show 之前调用
  *  @param eCPM - 曝光扣费, 单位分，若优量汇竞胜，在广告曝光时回传，必传
  *  针对本次曝光的媒体期望扣费，常用扣费逻辑包括一价扣费与二价扣费，当采用一价扣费时，胜者出价即为本次扣费价格；当采用二价扣费时，第二名出价为本次扣费价格.
  */
@@ -103,15 +94,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadAdWithAdCount:(NSInteger)adCount;
 
 /**
- *  竟胜之后调用, 需要在调用广告 show 之前调用
- *  @param price - 竟胜价格 (单位: 分)
+ *  竞胜之后调用, 需要在调用广告 show 之前调用
+ *  @param price - 竞胜价格 (单位: 分)
  */
 - (void)sendWinNotificationWithPrice:(NSInteger)price;
 
 /**
- *  竟败之后调用
- *  @param price - 竟胜价格 (单位: 分)
- *  @param reason - 优量汇广告竟败原因
+ *  竞败之后调用
+ *  @param price - 竞胜价格 (单位: 分)
+ *  @param reason - 优量汇广告竞败原因
  *  @param adnID - adnID
  */
 - (void)sendLossNotificationWithWinnerPrice:(NSInteger)price lossReason:(GDTAdBiddingLossReason)reason winnerAdnID:(NSString *)adnID;
