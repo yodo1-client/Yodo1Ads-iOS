@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #if defined(__has_attribute)
 #if __has_attribute(deprecated)
