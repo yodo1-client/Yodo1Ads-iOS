@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'AdsGDT'
-    s.version          = '1.0.1'
+    s.version          = '1.0.2'
     s.summary          = 'v4.13.41 测试版本统计'
 
     s.description      = <<-DESC
